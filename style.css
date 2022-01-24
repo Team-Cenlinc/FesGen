@@ -10,18 +10,18 @@ html {
 
 body {
     margin: 0;
-    background-color: #ececec;
+    background-color: #f3f3f3;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 header {
-    background-color: #2f2f2f;
-    color: #ececec;
+    background-color: #a5ddf0;
+    color: #1f1f1f;
     padding: 10px 20px;
     margin:  0;
-    box-shadow: 0 0 20px #212121;
+    /*box-shadow: 0 5px 10px #707070*/
     flex: 0 0 auto;
 
 }
@@ -40,7 +40,7 @@ header .header-flex {
 header h1 {
     height: 50px;
     padding: 0 1em;
-    color: #ececec;
+    color: #4f4f4f;
     line-height: 50px;
     display: flex;
 }
@@ -49,7 +49,7 @@ header a {
     display: flex;
     padding: 0 1em;
     line-height: 50px;
-    color: #ececec;
+    color: #4f4f4f;
     text-decoration: none;
     position: relative;
     transition: 225ms;
@@ -63,16 +63,18 @@ header a:hover {
     flex: 1 0 auto;
 }
 .canvas {
+    margin: 20px;
     padding: 20px;
+    border: 2px solid #7a7a7a;
     max-height: 40vh;
-    background-color: #424242;
+    background-color: #E3E2E2;
+    box-shadow: 7px 7px 7px #707070;
 }
 
 footer {
-    background-color: #2f2f2f;
-    color: #ececec;
+    background-color: #e3e2e2;
     padding: 10px 20px;
-    box-shadow: 0 0 20px #212121;
+    box-shadow: 0 0 14px #484848;
     flex: 0 0 auto;
 }
 
@@ -90,12 +92,12 @@ footer .footer-flex {
 footer h2 {
     height: 45px;
     padding: 0 1em;
-    color: #ececec;
+    color: #4f4f4f;
     line-height: 45px;
     display: flex;
 }
 
 footer span {
     font-size: 14px;
-    color: #adadad;
+    color: #919191;
 }
