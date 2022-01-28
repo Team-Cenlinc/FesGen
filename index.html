@@ -19,7 +19,77 @@
             canvas
             <canvas id="canvas-main">canvas</canvas>
         </section>
-        TODO
+        <br>
+        <section class="form">
+            <section id="general" class="row">
+                <section>
+                    <h2>站牌大小</h2>
+                    <label>
+                        <div class="label-text">宽度</div>
+                        <div class="input">
+                            <input data-bind="width" type="number">mm
+                        </div>
+                    </label>
+                    <label>
+                        <div class="label-text">高度</div>
+                        <div class="input">
+                            <input data-bind="height" type="number">mm
+                        </div>
+                    </label>
+                </section>
+            </section>
+            <section id="generator" class="row">
+                <section>
+                    <h2>站牌整体</h2>
+                    <label>
+                        <div class="label-text">灯光效果</div>
+                        <select data-bind="boardType">
+                            <option value="none">无</option>
+                            <option value="fluore">荧光灯</option>
+                            <option value="led">LED</option>
+                        </select>
+                    </label>
+                    <label>
+                        <input data-bind="boardLighting" data-prop="boardLighting" type="checkbox">
+                        <span class="toggle"></span>
+                        开启光照
+                    </label>
+                </section>
+                <section>
+                    <h2>站名</h2>
+                    <label>
+                        <div class="label-text">站名 日文汉字</div>
+                        <div class="input">
+                            <input data-bind="staNameKanji" type="text">
+                        </div>
+                    </label>
+                    <label>
+                        <div class="label-text">站名 英语</div>
+                        <div class="input">
+                            <input data-bind="staNameEnglish" type="text">
+                        </div>
+                    </label>
+                    <label>
+                        <div class="label-text">站名 假名</div>
+                        <div class="input">
+                            <input data-bind="staNameKana" type="text">
+                        </div>
+                    </label>
+                    <label>
+                        <div class="label-text">站名 中文</div>
+                        <div class="input">
+                            <input data-bind="staNameChinese" type="text">
+                        </div>
+                    </label>
+                    <label>
+                        <div class="label-text">站名 上浦语</div>
+                        <div class="input">
+                            <input data-bind="staNameSyapolish" type="text">
+                        </div>
+                    </label>
+                </section>
+            </section>
+        </section>
     </section>
     <footer>
         <div class="footer-flex">

@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', '源ノ角ゴシック JP', 'Noto Sans', 'M+ 1c', 游ゴシック体, 'Yu Gothic', YuGothic, メイリオ, Meiryo, sans-serif;
+    font-family: 'source-han-sans', 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', '源ノ角ゴシック JP', 'Noto Sans', 'M+ 1c', 游ゴシック体, 'Yu Gothic', YuGothic, メイリオ, Meiryo, sans-serif;
 }
 
 html {
@@ -66,9 +66,49 @@ header a:hover {
     margin: 20px;
     padding: 20px;
     border: 2px solid #7a7a7a;
-    max-height: 40vh;
+    max-height: 50vh;
     background-color: #E3E2E2;
     box-shadow: 7px 7px 7px #707070;
+}
+
+@media screen and (min-width: 720px){
+    .canvas {
+        width: 600px;
+        height: 200px;
+        margin: 40px auto 20px;
+    }
+}
+
+.form {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+}
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid #9E9E9E;
+}
+
+.row section {
+    margin: 10px;
+    padding: 10px 10px 25px 10px;
+}
+
+.row h2{
+    border-bottom: 8px solid #a0d4e8;
+    width: fit-content;
+    height: 27px;
+}
+
+label, .label {
+    margin: 10px 0;
+    display: block;
+    cursor: pointer;
+}
+.label-text {
+    font-size: .8em;
+    margin-bottom: 2px;
 }
 
 footer {
