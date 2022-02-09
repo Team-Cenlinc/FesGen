@@ -47,7 +47,7 @@ header h1 {
 
 header a {
     display: flex;
-    align-item: right;
+    text-align: right;
     padding: 0 1em;
     line-height: 50px;
     color: #4f4f4f;
