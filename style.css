@@ -60,7 +60,7 @@ header a.header-nav{
 
 header a.header-nav:hover {
     background-color: rgba(79, 79, 79, .65);
-    background-color: #f3f3f3;
+    color: #f3f3f3;
 }
 
 .main {
