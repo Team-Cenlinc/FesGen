@@ -37,32 +37,29 @@ header .header-flex {
     justify-content: space-between;
 }
 
-header h1 {
-    height: 50px;
-    padding: 0 1em;
-    color: #4f4f4f;
-    line-height: 50px;
+header a.header-nav-return {
     display: flex;
+    padding: 0 1em;
+    line-height: 50px;
+    color: #4f4f4f;
+    text-decoration: none;
+    position: relative;
+    float: right;
 }
 
-header a {
+header a.header-nav{
     display: flex;
     padding: 0 1em;
-    text-align: center;
     line-height: 50px;
     color: #4f4f4f;
     text-decoration: none;
     position: relative;
     transition: 225ms;
-}
-
-header a.header-nav {
     float: right;
 }
 
-header a:hover {
+header a.header-nav:hover {
     background-color: rgba(79, 79, 79, .65);
-    color: #f3f3f3;
 }
 
 .main {
