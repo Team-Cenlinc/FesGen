@@ -47,8 +47,8 @@ header h1 {
 
 header a {
     display: flex;
-    text-align: right;
     padding: 0 1em;
+    text-align: center;
     line-height: 50px;
     color: #4f4f4f;
     text-decoration: none;
@@ -56,8 +56,13 @@ header a {
     transition: 225ms;
 }
 
+header a.header-nav {
+    float: right;
+}
+
 header a:hover {
-    background-color: rgba(79, 79, 79, .25);
+    background-color: rgba(79, 79, 79, .65);
+    color: #f3f3f3;
 }
 
 .main {
