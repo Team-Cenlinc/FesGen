@@ -15,16 +15,18 @@
     <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="EX" filter="url(#filter-1)" transform="translate(10.000000, 10.000000)">
             <rect id="background" stroke="#4D4D4D" stroke-width="2" fill="#ECECEC" x="1" y="1" width="598" height="198"></rect>
-            <g id="Main" transform="translate(90.000000, 24.000000)" fill="#383838" font-weight="normal">
-                <text id="MID-eng" font-family="Helvetica" font-size="23.328">
-                    <tspan x="258" y="54">Kaihin-Shukukai</tspan>
-                </text>
-                <text id="MID-kana" font-family=".PingFangSC-Regular, .PingFang SC" font-size="20.736">
-                    <tspan x="258" y="24">かいひんしゅくかい</tspan>
-                </text>
-                <text id="MID-kanji" font-family=".PingFangSC-Regular, .PingFang SC" font-size="62.208">
-                    <tspan x="0" y="60">海浜宿海</tspan>
-                </text>
+            <g id="Main" transform="translate(70.000000, 14.000000)" fill="#383838" font-weight="normal">
+                <g id="编组-9">
+                    <text id="MID-eng" font-family="Helvetica" font-size="23.328">
+                        <tspan x="291" y="62">Kaihin-Shukukai</tspan>
+                    </text>
+                    <text id="MID-kana" font-family=".PingFangSC-Regular, .PingFang SC" font-size="20.736">
+                        <tspan x="273" y="31">かいひんしゅくかい</tspan>
+                    </text>
+                    <text id="MID-kanji" font-family=".PingFangSC-Regular, .PingFang SC" font-size="62.208">
+                        <tspan x="0" y="60">海浜宿海</tspan>
+                    </text>
+                </g>
             </g>
             <line x1="2" y1="177.846485" x2="598.003562" y2="177.846485" id="line" stroke="#7297DD" stroke-width="15"></line>
             <g id="Right" transform="translate(472.000000, 120.000000)">
@@ -68,7 +70,7 @@
                     </text>
                     <path d="M7.77,2.08 L7.77,25.77 L2.8740096,25.77 C2.37860753,25.77 1.93010513,25.5691986 1.60545325,25.2445468 C1.28080136,24.9198949 1.08,24.4713925 1.08,23.9759904 L1.08,23.9759904 L1.08,3.8740096 C1.08,3.37860753 1.28080136,2.93010513 1.60545325,2.60545325 C1.93010513,2.28080136 2.37860753,2.08 2.8740096,2.08 L2.8740096,2.08 L7.77,2.08 Z" id="rec1" stroke="#565656" stroke-width="2.16" fill="#565656"></path>
                 </g>
-                <g id="line-icon">
+                <g id="line-icon" transform="translate(0.000000, 2.000000)">
                     <rect id="rec" stroke="#565656" stroke-width="1.14960384" fill="#565656" x="0.57480192" y="1.14960384" width="18.3936614" height="18.3936614" rx="2.8740096"></rect>
                     <text id="line-abbr" font-family="PingFangSC-Regular, PingFang SC" font-size="14.8988658" font-weight="normal" fill="#ECECEC">
                         <tspan x="5.17321728" y="16">T</tspan>
