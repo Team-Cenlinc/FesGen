@@ -19,10 +19,10 @@
 </header>
 <div id="main" class="main">
     <div class="canvas">
-        <embed id="sign" v-bind:src="'/signs/' + tempURL"
+        <embed id="sign" :src="'/signs/' + sign.type + '.svg'"
+               :style="{ height: size.height + 'px', width: size.width+ 'px'}"
                type="image/svg+xml"
                pluginspage="http://www.adobe.com/svg/viewer/install/" />
-        <span>{{tempURL}}</span>
     </div>
     <br>
     <div class="form">
@@ -31,11 +31,11 @@
                 <h2>整体调整</h2>
                 <label>
                     <div class="label-text">站牌样式</div>
-                    <select v-model.lazy="tempURL">
-                        <option value ="signs/test-sign.svg">测试用</option>
-                        <option value ="signs/sign.svg">北宿电铁</option>
+                    <select v-model.lazy="sign.type">
+                        <option disabled value="">请选择</option>
+                        <option value="test-sign">测试用</option>
+                        <option value="sign">北宿电铁</option>
                     </select>
-                    <span>{{tempURL}}</span>
                 </label>
                 <label>
                     <div class="label-text">灯光效果</div>
@@ -51,13 +51,13 @@
                 <label>
                     <div class="label-text">宽度</div>
                     <div class="input">
-                        <input data-bind="width" type="number">mm
+                        <input v-model.lazy="size.width" type="number" value="2160">px
                     </div>
                 </label>
                 <label>
                     <div class="label-text">高度</div>
                     <div class="input">
-                        <input data-bind="height" type="number">mm
+                        <input v-model.lazy="size.height" type="number" value="720">px
                     </div>
                 </label>
             </div>
@@ -102,6 +102,6 @@
     </div>
 </footer>
 <script src="https://unpkg.com/vue@3"></script>
-<script src="main.js"  defer></script>
+<script src="main.js"></script>
 </body>
 </html>
