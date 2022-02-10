@@ -135,21 +135,62 @@ footer .footer-flex {
     display: -webkit-flex; /* Safari */
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: start;
     justify-content: space-between;
 }
 
-footer h2, p {
-    height: 45px;
+footer h2 {
+    padding-top: 1rem;
+    height: 3rem;
     color: #4f4f4f;
-    line-height: 45px;
+    line-height: 1rem;
     display: flex;
 }
 
+footer #footer-description p {
+    height: 70px;
+    color: #4f4f4f;
+    line-height: 2rem;
+    display: flex;
+}
+
+footer #link-forward{
+    padding-top: 1rem;
+    height: 3.5rem;
+    line-height: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+footer div #link-forward p {
+    color: #4f4f4f;
+}
+
+footer div #link-forward embed {
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 40%;
+}
+
+footer div #link-forward a{
+    padding-top: 1.25rem;
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+}
+
 footer span {
+    padding-top: 1rem;
+    height: 2.25rem;
     font-size: 14px;
     color: #919191;
     float: right;
+    line-height: 1.25rem;
 }
 

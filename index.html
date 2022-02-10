@@ -12,14 +12,15 @@
     <div class="header-flex">
         <h1><small><a href="index.html" class="header-nav-return">FesGen - Beta</a></small></h1>
         <span>
-                <a href="about.html" class="header-nav">About</a>
-                <a href="index.html" class="header-nav">Help</a>
-            </span>
+            <a href="about.html" class="header-nav">About</a>
+            <a href="index.html" class="header-nav">Help</a>
+            <a href="https://www.fetarute.org/wiki/index.php/FesGen" class="header-nav">Wiki</a>
+        </span>
     </div>
 </header>
 <div id="main" class="main">
     <div class="canvas">
-        <embed id="sign" :src="'./signs/' + sign.type + '.svg'"
+        <embed id="sign" :src="'./resources/signs/' + sign.style + '.svg'"
                :style="{ height: size.height + 'px', width: size.width+ 'px'}"
                type="image/svg+xml"
                pluginspage="http://www.adobe.com/svg/viewer/install/" />
@@ -31,10 +32,10 @@
                 <h2>整体调整</h2>
                 <label>
                     <div class="label-text">站牌样式</div>
-                    <select v-model.lazy="sign.type">
+                    <select v-model.lazy="sign.style">
                         <option disabled value="">请选择</option>
                         <option value="test-sign">测试用</option>
-                        <option value="sign">北宿电铁</option>
+                        <option value="kitajuku-dentetsu">北宿电铁</option>
                     </select>
                 </label>
                 <label>
@@ -96,9 +97,21 @@
 <footer>
     <div id="footer-content" class="footer-flex">
         <h2 id="footer-subtitle"><small>FesGen - Beta</small></h2>
-        <p id="footer-description">Description</p>
-        <div id="link-forward"></div>
-        <span>© 2022 Team Cenlinc</span>
+        <div id="footer-description">
+            <p>
+                由Cenlinc Studio开发的导视牌生成器。<br>
+                由Fetarute Community进行维护。
+            </p>
+        </div>
+        <div id="link-forward">
+            <p>保持联系，关注我们的社交媒体!</p>
+            <embed src="./resources/link-icons/twitter.svg" type="image/svg+xml" href="https://twitter.com/Fetarute"/>
+            <a class="footer-icon-link" href="https://twitter.com/Fetarute"></a>
+        </div>
+        <span>
+            Powered by Fetarute Community<br>
+            © 2022 Team Cenlinc
+        </span>
     </div>
 </footer>
 <script src="https://unpkg.com/vue@3"></script>

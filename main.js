@@ -3,7 +3,7 @@ const main = Vue.createApp({
     data(){
         return {
             sign: {
-                type: 'sign',
+                style: 'kitajuku-dentetsu',
                 light: ''
             },
             size: {
