@@ -33,7 +33,6 @@ header .header-flex {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
 }
 
@@ -54,7 +53,7 @@ header a.header-nav{
     color: #4f4f4f;
     text-decoration: none;
     position: relative;
-    transition: 225ms;
+    transition: 225ms ease-out;
     float: right;
 }
 
@@ -137,15 +136,14 @@ footer .footer-flex {
     height: 100%;
     display: -webkit-flex; /* Safari */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
 }
 
-footer h2 {
+footer h2, p {
     height: 45px;
-    padding: 0 1em;
     color: #4f4f4f;
     line-height: 45px;
     display: flex;
@@ -154,4 +152,6 @@ footer h2 {
 footer span {
     font-size: 14px;
     color: #919191;
+    float: right;
 }
+
