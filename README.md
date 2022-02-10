@@ -5,4 +5,13 @@ Still Developing...
 
 
 ### For Dev
-Install node.js and type ```npx serve```.
+```
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+```
