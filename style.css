@@ -103,7 +103,7 @@ header a.header-nav:hover {
     border-top: 1px solid #9E9E9E;
 }
 
-.row section {
+.row div {
     margin: 10px;
     padding: 10px 10px 10px 10px;
 }

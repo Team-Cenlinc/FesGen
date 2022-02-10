@@ -17,16 +17,36 @@
             </span>
     </div>
 </header>
-<section class="main">
-    <section class="canvas">
-        <embed id="sign" src="test-sign.svg"
+<div id="main" class="main">
+    <div class="canvas">
+        <embed id="sign" v-bind:src="'/signs/' + tempURL"
                type="image/svg+xml"
                pluginspage="http://www.adobe.com/svg/viewer/install/" />
-    </section>
+        <span>{{tempURL}}</span>
+    </div>
     <br>
-    <section class="form">
-        <section id="general" class="row">
-            <section>
+    <div class="form">
+        <div id="general" class="row">
+            <div>
+                <h2>整体调整</h2>
+                <label>
+                    <div class="label-text">站牌样式</div>
+                    <select v-model.lazy="tempURL">
+                        <option value ="signs/test-sign.svg">测试用</option>
+                        <option value ="signs/sign.svg">北宿电铁</option>
+                    </select>
+                    <span>{{tempURL}}</span>
+                </label>
+                <label>
+                    <div class="label-text">灯光效果</div>
+                    <select >
+                        <option value="none">无</option>
+                        <option value="fluore">荧光灯</option>
+                        <option value="led">LED</option>
+                    </select>
+                </label>
+            </div>
+            <div>
                 <h2>站牌大小</h2>
                 <label>
                     <div class="label-text">宽度</div>
@@ -40,25 +60,10 @@
                         <input data-bind="height" type="number">mm
                     </div>
                 </label>
-            </section>
-        </section>
-        <section id="generator" class="row">
-            <section>
-                <h2>站牌整体</h2>
-                <label>
-                    <div class="label-text">灯光效果</div>
-                    <select data-bind="boardType">
-                        <option value="none">无</option>
-                        <option value="fluore">荧光灯</option>
-                        <option value="led">LED</option>
-                    </select>
-                </label>
-                <label>
-                    <input data-bind="boardLighting" data-prop="boardLighting" type="checkbox">
-                    <span class="toggle">开启光照</span>
-                </label>
-            </section>
-            <section>
+            </div>
+        </div>
+        <div id="generator" class="row">
+            <div>
                 <h2>站名</h2>
                 <label>
                     <div class="label-text">站名 中文</div>
@@ -84,10 +89,10 @@
                         <input data-bind="staNameSyapolenus" type="text">
                     </div>
                 </label>
-            </section>
-        </section>
-    </section>
-</section>
+            </div>
+        </div>
+    </div>
+</div>
 <footer>
     <div id="footer-content" class="footer-flex">
         <h2 id="footer-subtitle"><small>FesGen - Beta</small></h2>
@@ -96,7 +101,7 @@
         <span>© 2022 Team Cenlinc</span>
     </div>
 </footer>
-
+<script src="https://unpkg.com/vue@3"></script>
+<script src="main.js"  defer></script>
 </body>
-<script src="https://unpkg.com/vue@next"></script>
 </html>
