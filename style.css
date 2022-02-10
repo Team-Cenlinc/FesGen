@@ -134,9 +134,9 @@ footer .footer-flex {
     height: 100%;
     display: -webkit-flex; /* Safari */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
 }
 
