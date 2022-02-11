@@ -65,6 +65,7 @@ header a.header-nav:hover {
 .main {
     flex: 1 0 auto;
 }
+
 .canvas {
     margin: 10px auto auto 5px;
     padding: 0;
