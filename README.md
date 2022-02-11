@@ -1,24 +1,17 @@
 # FesGen
+A next-gen sign generator.
+Beta version referenced from [Sigene](https://github.com/TR246/Sigene).
+Still Developing...
 
-## Project setup
-```
-yarn install
-```
 
-### Compiles and hot-reloads for development
+### For Dev
 ```
+# install dependencies
+yarn
+
+# serve with hot reload at localhost:8080
 yarn serve
-```
 
-### Compiles and minifies for production
-```
+# build for production with minification
 yarn build
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
