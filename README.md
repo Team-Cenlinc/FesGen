@@ -1,4 +1,4 @@
-# untitled
+# FesGen
 
 ## Project setup
 ```
