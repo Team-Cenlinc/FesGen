@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="620px" height="220px" viewBox="0 0 620 220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>E</title>
+    <defs>
+        <filter x="-2.2%" y="-6.8%" width="104.5%" height="113.5%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="3" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+        <g id="E" filter="url(#filter-1)" transform="translate(10.000000, 10.000000)">
+            <rect id="background" stroke="#4D4D4D" stroke-width="2" fill="#ECECEC" x="1" y="1" width="598" height="198"></rect>
+            <text id="MID-kanji" font-family=".PingFangSC-Regular, .PingFang SC" font-size="62.208" font-weight="normal" fill="#383838">
+                <tspan x="176" y="100">海浜宿海</tspan>
+            </text>
+            <line x1="2" y1="177.846485" x2="598.003562" y2="177.846485" id="line" stroke="#7297DD" stroke-width="15"></line>
+        </g>
+</svg>

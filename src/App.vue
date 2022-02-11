@@ -1,28 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HeaderFlex :title="title"/>
+    <Signs/>
+    <Editor/>
+    <FooterFlex :title="title"/>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import HeaderFlex from './components/header'
+import FooterFlex from './components/footer'
+import Signs from "./components/sign"
+import Editor from "@/components/editor";
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: {HeaderFlex, FooterFlex, Signs, Editor},
+  data()  {
+    return{
+      title: "FesGen"
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+
 </style>
