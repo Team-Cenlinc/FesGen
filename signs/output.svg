@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="720px" height="240px" version="1.1" viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg">
+ <title>E</title>
+ <defs>
+  <filter id="filter-1" x="-2.2%" y="-6.8%" width="104.5%" height="113.5%">
+   <feOffset dx="3" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"/>
+   <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+   <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0"/>
+   <feMerge>
+    <feMergeNode in="shadowMatrixOuter1"/>
+    <feMergeNode in="SourceGraphic"/>
+   </feMerge>
+  </filter>
+ </defs>
+ <g id="E" transform="translate(10 10)" filter="url(#filter-1)">
+  <rect id="background" x="1" y="1" width="598" height="198" fill="#ECECEC" stroke="#4D4D4D" stroke-width="2"/>
+  <text id="MID-kanji" fill="#383838" font-family=".PingFangSC-Regular, .PingFang SC" font-size="62.208"><tspan x="176" y="100">海浜宿海</tspan></text>
+  <line id="line" x1="2" x2="598" y1="177.85" y2="177.85" stroke="#7297DD" stroke-width="15"/>
+ </g>
+</svg>
