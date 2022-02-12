@@ -3,14 +3,16 @@
     <div class="row">
     <div>
       <h2>整体调整</h2>
-      <div class="form-min-row">站牌样式
+      <div class="form-min-row">
+        <p>站牌样式</p>
         <select>
           <option disabled value="">请选择</option>
           <option value="test-sign">测试用</option>
           <option value="kitajuku-dentetsu">北宿电铁</option>
         </select>
       </div>
-      <div class="form-min-row">灯光效果
+      <div class="form-min-row">
+        <p>灯光效果</p>
         <select>
           <option value="none">无</option>
           <option value="fluore">荧光灯</option>
@@ -20,27 +22,35 @@
     </div>
     <div>
       <h2>站牌大小</h2>
-        <div class="form-min-row">宽度
-          <input type="number" value="2160">px
+        <div class="form-min-row">
+          <p>宽度</p>
+          <div><input type="number" value="2160"> px</div>
+
         </div>
-        <div class="form-min-row">高度
-          <input type="number" value="720">px
+        <div class="form-min-row">
+          <p>高度</p>
+          <div><input type="number" value="720"> px</div>
+
         </div>
     </div>
     </div>
     <div class="row">
     <div>
       <h2>站名</h2>
-        <div class="form-min-row">站名 中文
+        <div class="form-min-row">
+          <p>站名 中文</p>
           <input data-bind="staNameChinese" type="text">
         </div>
-        <div class="form-min-row">站名 英语
+        <div class="form-min-row">
+          <p>站名 英语</p>
           <input data-bind="staNameEnglish" type="text">
         </div>
-        <div class="form-min-row">站名 假名
+        <div class="form-min-row">
+          <p>站名 假名</p>
           <input data-bind="staNameKana" type="text">
         </div>
-        <div class="form-min-row">站名 上浦语
+        <div class="form-min-row">
+          <p>站名 上浦语</p>
           <input data-bind="staNameSyapolenus" type="text">
         </div>
     </div>
@@ -84,5 +94,8 @@ export default {
   padding: 0;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
