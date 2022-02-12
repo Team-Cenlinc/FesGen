@@ -20,10 +20,10 @@
     </div>
     <div>
       <h2>站牌大小</h2>
-        <div class="form-min-column">宽度
+        <div class="form-min-row">宽度
           <input type="number" value="2160">px
         </div>
-        <div class="form-min-column">高度
+        <div class="form-min-row">高度
           <input type="number" value="720">px
         </div>
     </div>
@@ -31,16 +31,16 @@
     <div class="row">
     <div>
       <h2>站名</h2>
-        <div class="form-min-column">站名 中文
+        <div class="form-min-row">站名 中文
           <input data-bind="staNameChinese" type="text">
         </div>
-        <div class="form-min-column">站名 英语
+        <div class="form-min-row">站名 英语
           <input data-bind="staNameEnglish" type="text">
         </div>
-        <div class="form-min-column">站名 假名
+        <div class="form-min-row">站名 假名
           <input data-bind="staNameKana" type="text">
         </div>
-        <div class="form-min-column">站名 上浦语
+        <div class="form-min-row">站名 上浦语
           <input data-bind="staNameSyapolenus" type="text">
         </div>
     </div>
@@ -82,5 +82,7 @@ export default {
 .form-min-row {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: row;
 }
 </style>
