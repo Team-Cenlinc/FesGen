@@ -5,7 +5,7 @@
       <span>
             <a href="/" class="header-nav">About</a>
             <a href="/" class="header-nav">Help</a>
-            <a href="https://www.fetarute.org/wiki/index.php/FesGen" class="header-nav">Wiki</a>
+            <a href="https://www.fetarute.net/wiki/index.php/FesGen" class="header-nav">Wiki</a>
       </span>
     </div>
   </header>
