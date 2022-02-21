@@ -5,11 +5,12 @@
       <h2>整体调整</h2>
       <div class="form-min-row">
         <p>站牌样式</p>
-        <select v-model="signStyle" @input="sendData">
+        <select v-model="signStyle" @change="sendData">
           <option disabled value="">请选择</option>
           <option value="test-sign">测试用</option>
           <option value="kitajuku-dentetsu">北宿电铁</option>
         </select>
+        {{ signStyle }}
       </div>
       <div class="form-min-row">
         <p>灯光效果</p>
@@ -61,12 +62,14 @@
 <script>
 export default {
   name: "editor",
-  prop: {
-    signStyle: ''
+  data()  {
+    return{
+      signStyle: ''
+    }
   },
   methods :{
     sendData(){
-      this.$emit('styleChanged', this.signStyle)
+      this.$emit('someChanged', this.signStyle)
     }
   }
 

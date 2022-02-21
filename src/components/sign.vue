@@ -1,6 +1,7 @@
 <template>
   <div id="canvas">
     <ShowSign />
+    {{ signStyle }}
   </div>
 </template>
 
@@ -11,6 +12,9 @@ export default {
   components: {
     ShowSign,
   },
+  prop: {
+    signStyle: ''
+  }
 }
 </script>
 

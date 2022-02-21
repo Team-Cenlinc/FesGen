@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <HeaderFlex :title="title"/>
-    <Signs/>
-    <Editor @someChanged='updateData'/>
+    <HeaderFlex :title="titles"/>
+    <Signs :signStyle="signStyle"/>
     {{ signStyle }}
-    <FooterFlex :title="title"/>
+    <Editor @someChanged="updateData"/>
+    <FooterFlex :title="titles"/>
   </div>
 </template>
 
-<script setup>
+<script>
 import HeaderFlex from './components/header'
 import FooterFlex from './components/footer'
 import Signs from "./components/sign"
@@ -17,19 +17,16 @@ import Editor from "@/components/editor";
 export default {
   name: 'App',
   components: {HeaderFlex, FooterFlex, Signs, Editor},
-  prop: {
-    title: '',
-    signStyle: '',
-  },
   data()  {
     return{
-      title: 'FesGen',
-      signStyle: ''
+      titles: 'FesGen',
+      signStyle: '',
     }
   },
   methods: {
     updateData(signS){
-      this.signStyle = signS
+     this.signStyle = signS
+      console.log(this.signStyle)
     }
   }
 }
