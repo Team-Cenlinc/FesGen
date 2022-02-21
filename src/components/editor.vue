@@ -5,7 +5,7 @@
       <h2>整体调整</h2>
       <div class="form-min-row">
         <p>站牌样式</p>
-        <select @change="$emit('someChanged')">
+        <select v-model="signStyle" @input="sendData">
           <option disabled value="">请选择</option>
           <option value="test-sign">测试用</option>
           <option value="kitajuku-dentetsu">北宿电铁</option>
@@ -13,7 +13,7 @@
       </div>
       <div class="form-min-row">
         <p>灯光效果</p>
-        <select @change="$emit('someChanged')">
+        <select @change="sendData">
           <option value="none">无</option>
           <option value="fluore">荧光灯</option>
           <option value="led">LED</option>
@@ -60,7 +60,16 @@
 
 <script>
 export default {
-  name: "editor"
+  name: "editor",
+  prop: {
+    signStyle: ''
+  },
+  methods :{
+    sendData(){
+      this.$emit('styleChanged', this.signStyle)
+    }
+  }
+
 }
 </script>
 

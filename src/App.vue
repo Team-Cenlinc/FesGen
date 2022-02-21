@@ -2,7 +2,8 @@
   <div id="app">
     <HeaderFlex :title="title"/>
     <Signs/>
-    <Editor/>
+    <Editor @someChanged='updateData'/>
+    {{ signStyle }}
     <FooterFlex :title="title"/>
   </div>
 </template>
@@ -16,9 +17,19 @@ import Editor from "@/components/editor";
 export default {
   name: 'App',
   components: {HeaderFlex, FooterFlex, Signs, Editor},
+  prop: {
+    title: '',
+    signStyle: '',
+  },
   data()  {
     return{
-      title: "FesGen"
+      title: 'FesGen',
+      signStyle: ''
+    }
+  },
+  methods: {
+    updateData(signS){
+      this.signStyle = signS
     }
   }
 }
