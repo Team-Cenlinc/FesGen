@@ -1,7 +1,9 @@
 <template>
   <div id="canvas">
     <ShowSign />
-    {{ signStyle }}
+    <h3>Data from editor.vue -> App.vue -> sign.vue :</h3>
+    <p>{{ signStyles || '你尚未选择'}}</p>
+    <hr/>
   </div>
 </template>
 
@@ -12,8 +14,8 @@ export default {
   components: {
     ShowSign,
   },
-  prop: {
-    signStyle: ''
+  props: {
+    signStyles: String,
   }
 }
 </script>
@@ -25,6 +27,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+hr{
+  width: 600px;
 }
 
 </style>

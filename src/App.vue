@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <HeaderFlex :title="titles"/>
-    <Signs :signStyle="signStyle"/>
-    {{ signStyle }}
+    <Signs :signStyles="signStyle"/>
+      <h3>Data from editor.vue -> App.vue:</h3>
+      <p>{{ signStyle || '你尚未选择'}}
+    </p>
     <Editor @someChanged="updateData"/>
     <FooterFlex :title="titles"/>
   </div>
@@ -20,8 +22,10 @@ export default {
   data()  {
     return{
       titles: 'FesGen',
-      signStyle: '',
     }
+  },
+  props: {
+      signStyle: String
   },
   methods: {
     updateData(signS){
@@ -33,5 +37,9 @@ export default {
 </script>
 
 <style scoped>
-
+p, h3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>
