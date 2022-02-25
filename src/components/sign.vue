@@ -4,7 +4,7 @@
     <h3>Data from editor.vue -> App.vue -> sign.vue :</h3>
     <p>{{ signStyles || '你尚未选择'}}</p>
     <input type="text" value="EkiName" v-model.lazy="ekiName" @change="svgChangeTest"/>
-    <p></p>
+    <p>Data above is entered in sign.vue. And the next step is to modify the offset and pass the data from editor.vue to svg</p>
     <hr/>
 
   </div>
