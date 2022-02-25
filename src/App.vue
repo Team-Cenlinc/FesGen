@@ -14,7 +14,7 @@
 import HeaderFlex from './components/header'
 import FooterFlex from './components/footer'
 import Signs from "./components/sign"
-import Editor from "@/components/editor";
+import Editor from "@/components/editor"
 
 export default {
   name: 'App',

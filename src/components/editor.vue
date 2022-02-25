@@ -10,7 +10,6 @@
           <option value="test-sign">测试用</option>
           <option value="kitajuku-dentetsu">北宿电铁</option>
         </select>
-        {{ signStyle }}
       </div>
       <div class="form-min-row">
         <p>灯光效果</p>

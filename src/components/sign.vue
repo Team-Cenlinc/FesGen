@@ -1,22 +1,43 @@
 <template>
   <div id="canvas">
-    <ShowSign />
+    <component :is="signStyles" ref="svg"></component>
     <h3>Data from editor.vue -> App.vue -> sign.vue :</h3>
     <p>{{ signStyles || '你尚未选择'}}</p>
+    <input type="text" value="EkiName" v-model.lazy="ekiName" @change="svgChangeTest"/>
+    <p></p>
     <hr/>
+
   </div>
 </template>
 
 <script>
-import ShowSign from '../assets/signs/kitajuku-dentetsu.svg'
+import KitajukuDentetsu from '../assets/signs/kitajuku-dentetsu.svg'
+import TestSign from '../assets/signs/test-sign.svg'
+window.componentsConfig = {    //左边是key值，右边是组件的引入路径
+  'kitajuku-dentetsu': '../assets/signs/kitajuku-dentetsu.svg',
+  'test-sign': '../assets/signs/test-sign.svg',
+  'test3': './test3.vue',
+  'test4': './test4.vue',
+}
 export default {
   name: 'Sign',
   components: {
-    ShowSign,
+    KitajukuDentetsu, TestSign
+  },
+  methods: {
+    svgChangeTest() {
+      const dom = this.$refs.svg.querySelector("#MID-kanji-text");
+      dom.innerHTML = this.ekiName;
+    },
+  },
+  data(){
+    return{
+      ekiName: "EkiNameHere",
+    }
   },
   props: {
     signStyles: String,
-  }
+  },
 }
 </script>
 

@@ -24,7 +24,7 @@
                         <tspan x="273" y="31">かいひんしゅくかい</tspan>
                     </text>
                     <text id="MID-kanji" font-family=".PingFangSC-Regular, .PingFang SC" font-size="62.208">
-                        <tspan x="0" y="60">海浜宿海</tspan>
+                        <tspan id="MID-kanji-text" x="0" y="60">海浜宿海</tspan>
                     </text>
                 </g>
             </g>
