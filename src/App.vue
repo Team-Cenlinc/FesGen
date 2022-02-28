@@ -3,9 +3,13 @@
     <HeaderFlex :title="titles"/>
     <Signs :signStyles="signStyle" :sign="sign"/>
       <h3>Data from editor.vue -> App.vue:</h3>
+    <div class="data">
       <p>{{ signStyle || '你尚未选择'}}</p>
-      <p>{{ sign || '你尚未输入有关标识信息'}}</p>
-      <p>{{ output || '你尚未输入有关输出信息'}}</p>
+      <p>{{ output || ''}}</p>
+    </div>
+    <div class="data">
+      <p>{{ signInfo || ''}}</p>
+    </div>
     <Editor @someChanged="updateData"/>
     <FooterFlex :title="titles"/>
   </div>
@@ -32,7 +36,7 @@ export default {
         outputHeight: Number,
         lightStyle: String,
       },
-      sign:{
+      signInfo:{
         main: {
           staNameEnglish: String,
           staNameChinese: String,
@@ -61,7 +65,7 @@ export default {
   methods: {
     updateData(signStyle, signInfo, signScale){
       this.signStyle = signStyle
-      this.sign = signInfo
+      this.signInfo = signInfo
       this.output = signScale
       console.log(this.signStyle)
     }

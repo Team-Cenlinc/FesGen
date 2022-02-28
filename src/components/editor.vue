@@ -24,12 +24,12 @@
       <h2>站牌大小</h2>
         <div class="form-min-row">
           <p>宽度</p>
-          <div><input v-model="output.width" @change="sendData" type="number" value="2160"> px</div>
+          <div><input v-model="output.outputWidth" @change="sendData" type="number" value="2160"> px</div>
 
         </div>
         <div class="form-min-row">
           <p>高度</p>
-          <div><input v-model="output.height" @change="sendData" type="number" value="720"> px</div>
+          <div><input v-model="output.outputHeight" @change="sendData" type="number" value="720"> px</div>
 
         </div>
     </div>
@@ -39,34 +39,38 @@
         <h2>本站名</h2>
           <div class="form-min-row">
             <p>站名 中文</p>
-            <input v-model="staNameChinese" type="text">
+            <input v-model="signInfo.main.staNameChinese" type="text">
           </div>
           <div class="form-min-row">
             <p>站名 英语</p>
-            <input v-model="staNameEnglish" type="text">
+            <input v-model="signInfo.main.staNameEnglish" type="text">
           </div>
           <div class="form-min-row">
             <p>站名 假名</p>
-            <input v-model="staNameKana" type="text">
+            <input v-model="signInfo.main.staNameKana" type="text">
           </div>
       </div>
       <div>
-        <h2>中部主要信息</h2>
+        <h2>主要信息</h2>
         <div class="form-min-row">
           <p>线路颜色</p>
-          <input v-model="lineColor" type="number">
+          <input v-model="signInfo.lineColor" type="color">
+        </div>
+        <div class="form-min-row">
+          <p>背景颜色</p>
+          <input v-model="signInfo.backgroundColor" type="color">
         </div>
         <div class="form-min-row">
           <p>线路名称</p>
-          <input v-model="lineName" type="text">
+          <input v-model="signInfo.middle.lineName" type="text">
         </div>
         <div class="form-min-row">
           <p>线路缩写</p>
-          <input v-model="lineAbbr" type="text">
+          <input v-model="signInfo.middle.lineAbbr" type="text">
         </div>
         <div class="form-min-row">
           <p>本站编号</p>
-          <input v-model="middleStaNumber" type="Number">
+          <input v-model="signInfo.middle.middleStaNumber" type="Number">
         </div>
       </div>
     </div>
@@ -75,30 +79,30 @@
         <h2>左侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
-          <input v-model="sign.left.leftStaNameChinese" @change="sendData" type="text">
+          <input v-model="signInfo.left.leftStaNameChinese" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站名 英语</p>
-          <input v-model="sign.left.leftStaNameEnglish" @change="sendData" type="text">
+          <input v-model="signInfo.left.leftStaNameEnglish" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站点编号</p>
-          <input v-model="sign.left.leftStaNumber" @change="sendData" type="number">
+          <input v-model="signInfo.left.leftStaNumber" @change="sendData" type="number">
         </div>
       </div>
       <div>
         <h2>右侧侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
-          <input v-model="sign.right.rightStaNameChinese" @change="sendData" type="text">
+          <input v-model="signInfo.right.rightStaNameChinese" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站名 英语</p>
-          <input v-model="sign.right.rightStaNameEnglish" @change="sendData" type="text">
+          <input v-model="signInfo.right.rightStaNameEnglish" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站点编号</p>
-          <input v-model="sign.right.rightStaNumber" @change="sendData" type="number">
+          <input v-model="signInfo.right.rightStaNumber" @change="sendData" type="number">
         </div>
       </div>
     </div>
@@ -116,7 +120,7 @@ export default {
         outputHeight: '',
         lightStyle: '',
       },
-      sign:{
+      signInfo:{
         main: {
           staNameEnglish: '',
           staNameChinese: '',
@@ -145,7 +149,7 @@ export default {
   },
   methods :{
     sendData(){
-      this.$emit('someChanged', this.signStyle, this.sign, this.output)
+      this.$emit('someChanged', this.signStyle, this.signInfo, this.output)
     }
   }
 
