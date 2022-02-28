@@ -13,7 +13,7 @@
       </div>
       <div class="form-min-row">
         <p>灯光效果</p>
-        <select v-model="output.lightStyle" @change="sendData">
+        <select v-model="lightStyle" @change="sendData">
           <option value="none">无</option>
           <option value="fluore">荧光灯</option>
           <option value="led">LED</option>
@@ -39,34 +39,34 @@
         <h2>本站名</h2>
           <div class="form-min-row">
             <p>站名 中文</p>
-            <input v-model="signInfo.main.staNameChinese" type="text">
+            <input v-model="signInfo.main.staNameChinese" @change="sendData" type="text">
           </div>
           <div class="form-min-row">
             <p>站名 英语</p>
-            <input v-model="signInfo.main.staNameEnglish" type="text">
+            <input v-model="signInfo.main.staNameEnglish" @change="sendData" type="text">
           </div>
           <div class="form-min-row">
             <p>站名 假名</p>
-            <input v-model="signInfo.main.staNameKana" type="text">
+            <input v-model="signInfo.main.staNameKana" @change="sendData" type="text">
           </div>
       </div>
       <div>
         <h2>主要信息</h2>
         <div class="form-min-row">
           <p>线路颜色</p>
-          <input v-model="signInfo.lineColor" type="color">
+          <input v-model="signInfo.lineColor" @change="sendData" type="color">
         </div>
         <div class="form-min-row">
           <p>背景颜色</p>
-          <input v-model="signInfo.backgroundColor" type="color">
+          <input v-model="signInfo.backgroundColor" @change="sendData" type="color">
         </div>
         <div class="form-min-row">
           <p>线路名称</p>
-          <input v-model="signInfo.middle.lineName" type="text">
+          <input v-model="signInfo.middle.lineName" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>线路缩写</p>
-          <input v-model="signInfo.middle.lineAbbr" type="text">
+          <input v-model="signInfo.middle.lineAbbr" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>本站编号</p>
@@ -115,10 +115,10 @@ export default {
   data()  {
     return{
       signStyle: '',
+      lightStyle: '',
       output: {
         outputWidth: '',
         outputHeight: '',
-        lightStyle: '',
       },
       signInfo:{
         main: {
@@ -149,7 +149,7 @@ export default {
   },
   methods :{
     sendData(){
-      this.$emit('someChanged', this.signStyle, this.signInfo, this.output)
+      this.$emit('someChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
     }
   }
 

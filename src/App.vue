@@ -1,16 +1,9 @@
 <template>
   <div id="app">
     <HeaderFlex :title="titles"/>
-    <Signs :signStyles="signStyle" :sign="sign"/>
+    <Signs ref="signs" :signStyle="signStyle" :signInfo="signInfo"/>
       <h3>Data from editor.vue -> App.vue:</h3>
-    <div class="data">
-      <p>{{ signStyle || '你尚未选择'}}</p>
-      <p>{{ output || ''}}</p>
-    </div>
-    <div class="data">
-      <p>{{ signInfo || ''}}</p>
-    </div>
-    <Editor @someChanged="updateData"/>
+    <Editor @someChanged="UpdateData"/>
     <FooterFlex :title="titles"/>
   </div>
 </template>
@@ -31,10 +24,10 @@ export default {
   },
   props: {
       signStyle: String,
+      lightStyle: String,
       output: {
         outputWidth: Number,
         outputHeight: Number,
-        lightStyle: String,
       },
       signInfo:{
         main: {
@@ -63,11 +56,13 @@ export default {
       },
   },
   methods: {
-    updateData(signStyle, signInfo, signScale){
+    UpdateData(signStyle, lightStyle, signInfo, signScale){
       this.signStyle = signStyle
+      this.lightStyle = lightStyle
       this.signInfo = signInfo
       this.output = signScale
       console.log(this.signStyle)
+      this.$refs.signs.UpdateSign(signStyle, signInfo)
     }
   }
 }

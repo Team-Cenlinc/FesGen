@@ -1,10 +1,13 @@
 <template>
   <div id="canvas">
-    <component :is="signStyles" ref="svg"></component>
+    <component :is="signStyle" ref="svg"></component>
     <h3>Data from editor.vue -> App.vue -> sign.vue :</h3>
-    <p>{{ signStyles || '你尚未选择'}}</p>
-    <h3>Data from sign.vue :</h3>
-    <input type="text" value="EkiName" v-model.lazy="ekiName" @change="svgChangeTest"/>
+    <div class="data">
+      <p>{{ signStyle || '你尚未选择'}}</p>
+    </div>
+    <div class="data">
+      <p>{{ signInfo || 'aa'}}</p>
+    </div>
     <hr/>
 
   </div>
@@ -24,19 +27,52 @@ export default {
   components: {
     KitajukuDentetsu, TestSign
   },
-  methods: {
-    svgChangeTest() {
-      const dom = this.$refs.svg.querySelector("#MID-kanji-text");
-      dom.innerHTML = this.ekiName;
-    },
-  },
   data(){
     return{
       ekiName: "EkiNameHere",
     }
   },
   props: {
-    signStyles: String,
+    signStyle: String,
+    output: {
+      outputWidth: Number,
+      outputHeight: Number,
+      lightStyle: String,
+    },
+    signInfo:{
+      main: {
+        staNameEnglish: String,
+        staNameChinese: String,
+        staNameKana: String,
+      },
+      left: {
+        leftStaNumber: Number,
+        leftStaNameEnglish: String,
+        leftStaNameChinese: String,
+      },
+      middle: {
+        lineName: String,
+        lineAbbr: String,
+        middleStaNumber: Number,
+      },
+      right: {
+        rightStaNumber: Number,
+        rightStaNameEnglish: String,
+        rightStaNameChinese: String,
+
+      },
+      lineColor: Number,
+      backgroundColor: Number,
+    },
+  },
+  methods: {
+    UpdateSign(signStyle, signInfo){
+      let dom = this.$refs.svg.querySelector("#MID-kanji-text");
+      dom.innerHTML = this.ekiName;
+      dom = this.$refs.svg.getElementById("line");
+      this.$refs.svg.getElementById("line").attributes.stroke.value = signInfo.lineColor;
+      console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
+    },
   },
 }
 </script>
