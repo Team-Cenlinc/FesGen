@@ -29,7 +29,6 @@ export default {
   },
   data(){
     return{
-      signStyle: "kitajuku-dentetsu",
     }
   },
   props: {
