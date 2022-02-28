@@ -13,7 +13,7 @@
       </div>
       <div class="form-min-row">
         <p>灯光效果</p>
-        <select @change="sendData">
+        <select v-model="output.lightStyle" @change="sendData">
           <option value="none">无</option>
           <option value="fluore">荧光灯</option>
           <option value="led">LED</option>
@@ -24,36 +24,83 @@
       <h2>站牌大小</h2>
         <div class="form-min-row">
           <p>宽度</p>
-          <div><input type="number" value="2160"> px</div>
+          <div><input v-model="output.width" @change="sendData" type="number" value="2160"> px</div>
 
         </div>
         <div class="form-min-row">
           <p>高度</p>
-          <div><input type="number" value="720"> px</div>
+          <div><input v-model="output.height" @change="sendData" type="number" value="720"> px</div>
 
         </div>
     </div>
     </div>
     <div class="row">
-    <div>
-      <h2>站名</h2>
+      <div>
+        <h2>本站名</h2>
+          <div class="form-min-row">
+            <p>站名 中文</p>
+            <input v-model="staNameChinese" type="text">
+          </div>
+          <div class="form-min-row">
+            <p>站名 英语</p>
+            <input v-model="staNameEnglish" type="text">
+          </div>
+          <div class="form-min-row">
+            <p>站名 假名</p>
+            <input v-model="staNameKana" type="text">
+          </div>
+      </div>
+      <div>
+        <h2>中部主要信息</h2>
+        <div class="form-min-row">
+          <p>线路颜色</p>
+          <input v-model="lineColor" type="number">
+        </div>
+        <div class="form-min-row">
+          <p>线路名称</p>
+          <input v-model="lineName" type="text">
+        </div>
+        <div class="form-min-row">
+          <p>线路缩写</p>
+          <input v-model="lineAbbr" type="text">
+        </div>
+        <div class="form-min-row">
+          <p>本站编号</p>
+          <input v-model="middleStaNumber" type="Number">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <h2>左侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
-          <input data-bind="staNameChinese" type="text">
+          <input v-model="sign.left.leftStaNameChinese" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站名 英语</p>
-          <input data-bind="staNameEnglish" type="text">
+          <input v-model="sign.left.leftStaNameEnglish" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
-          <p>站名 假名</p>
-          <input data-bind="staNameKana" type="text">
+          <p>站点编号</p>
+          <input v-model="sign.left.leftStaNumber" @change="sendData" type="number">
+        </div>
+      </div>
+      <div>
+        <h2>右侧侧站点信息</h2>
+        <div class="form-min-row">
+          <p>站名 中文</p>
+          <input v-model="sign.right.rightStaNameChinese" @change="sendData" type="text">
         </div>
         <div class="form-min-row">
-          <p>站名 上浦语</p>
-          <input data-bind="staNameSyapolenus" type="text">
+          <p>站名 英语</p>
+          <input v-model="sign.right.rightStaNameEnglish" @change="sendData" type="text">
         </div>
-    </div>
+        <div class="form-min-row">
+          <p>站点编号</p>
+          <input v-model="sign.right.rightStaNumber" @change="sendData" type="number">
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -63,12 +110,42 @@ export default {
   name: "editor",
   data()  {
     return{
-      signStyle: ''
+      signStyle: '',
+      output: {
+        outputWidth: '',
+        outputHeight: '',
+        lightStyle: '',
+      },
+      sign:{
+        main: {
+          staNameEnglish: '',
+          staNameChinese: '',
+          staNameKana: '',
+        },
+        left: {
+          leftStaNumber: '',
+          leftStaNameEnglish: '',
+          leftStaNameChinese: '',
+        },
+        middle: {
+          lineName: '',
+          lineAbbr: '',
+          middleStaNumber: '',
+        },
+        right: {
+          rightStaNumber: '',
+          rightStaNameEnglish: '',
+          rightStaNameChinese: '',
+
+        },
+        lineColor: '',
+        backgroundColor: '',
+      },
     }
   },
   methods :{
     sendData(){
-      this.$emit('someChanged', this.signStyle)
+      this.$emit('someChanged', this.signStyle, this.sign, this.output)
     }
   }
 
