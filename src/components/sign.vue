@@ -6,7 +6,7 @@
       <p>{{ signStyle || '你尚未选择'}}</p>
     </div>
     <div class="data">
-      <p>{{ signInfo || 'aa'}}</p>
+      <p>{{ signInfo || ''}}</p>
     </div>
     <hr/>
 
@@ -68,7 +68,7 @@ export default {
   methods: {
     UpdateSign(signStyle, signInfo){
       let dom = this.$refs.svg.querySelector("#MID-kanji-text");
-      dom.innerHTML = this.ekiName;
+      dom.innerHTML = signInfo.main.staNameChinese;
       dom = this.$refs.svg.getElementById("line");
       this.$refs.svg.getElementById("line").attributes.stroke.value = signInfo.lineColor;
       console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
