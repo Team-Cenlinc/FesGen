@@ -2,7 +2,6 @@
   <div id="app">
     <HeaderFlex :title="titles"/>
     <Signs ref="signs" :signStyle="signStyle" :signInfo="signInfo"/>
-      <h3>Data from editor.vue -> App.vue:</h3>
     <Editor @someChanged="UpdateData"/>
     <FooterFlex :title="titles"/>
   </div>
