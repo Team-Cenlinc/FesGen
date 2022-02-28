@@ -29,7 +29,7 @@ export default {
   },
   data(){
     return{
-      ekiName: "EkiNameHere",
+      ekiName: "",
     }
   },
   props: {
@@ -70,7 +70,8 @@ export default {
       let dom = this.$refs.svg.querySelector("#MID-kanji-text");
       dom.innerHTML = signInfo.main.staNameChinese;
       dom = this.$refs.svg.getElementById("line");
-      this.$refs.svg.getElementById("line").attributes.stroke.value = signInfo.lineColor;
+      if(signInfo.lineColor)
+        this.$refs.svg.getElementById("line").attributes.stroke.value = signInfo.lineColor;
       console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
     },
   },
