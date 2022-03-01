@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderFlex :title="titles"/>
-    <Signs ref="signs" :signStyle="signStyle" :signInfo="signInfo"/>
+    <Signs ref="signs"/>
       <h3>Data from editor.vue -> App.vue:</h3>
     <Editor @someChanged="UpdateData"/>
     <FooterFlex :title="titles"/>
@@ -62,7 +62,7 @@ export default {
       this.signInfo = signInfo
       this.output = signScale
       console.log(this.signStyle)
-      this.$refs.signs.UpdateSign(signStyle, signInfo)
+      this.$refs.signs.UpdateSign(signStyle, signInfo, lightStyle, signScale)
     }
   }
 }

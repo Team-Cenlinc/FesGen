@@ -29,49 +29,52 @@ export default {
   },
   data(){
     return{
-      ekiName: "EkiNameHere",
+      signStyle: String,
+      output: {
+        outputWidth: Number,
+        outputHeight: Number,
+        lightStyle: String,
+      },
+      signInfo:{
+        main: {
+          staNameEnglish: String,
+          staNameChinese: String,
+          staNameKana: String,
+        },
+        left: {
+          leftStaNumber: Number,
+          leftStaNameEnglish: String,
+          leftStaNameChinese: String,
+        },
+        middle: {
+          lineName: String,
+          lineAbbr: String,
+          middleStaNumber: Number,
+        },
+        right: {
+          rightStaNumber: Number,
+          rightStaNameEnglish: String,
+          rightStaNameChinese: String,
+
+        },
+        lineColor: Number,
+        backgroundColor: Number,
+      },
     }
   },
-  props: {
-    signStyle: String,
-    output: {
-      outputWidth: Number,
-      outputHeight: Number,
-      lightStyle: String,
-    },
-    signInfo:{
-      main: {
-        staNameEnglish: String,
-        staNameChinese: String,
-        staNameKana: String,
-      },
-      left: {
-        leftStaNumber: Number,
-        leftStaNameEnglish: String,
-        leftStaNameChinese: String,
-      },
-      middle: {
-        lineName: String,
-        lineAbbr: String,
-        middleStaNumber: Number,
-      },
-      right: {
-        rightStaNumber: Number,
-        rightStaNameEnglish: String,
-        rightStaNameChinese: String,
-
-      },
-      lineColor: Number,
-      backgroundColor: Number,
-    },
-  },
   methods: {
-    UpdateSign(signStyle, signInfo){
+    UpdateSign(signStyle, signInfo, lightStyle, signScale){
+      console.log("1")
+      this.signStyle = signStyle
+      this.lightStyle = lightStyle
+      this.signInfo = signInfo
+      this.output = signScale
       let dom = this.$refs.svg.querySelector("#MID-kanji-text");
       dom.innerHTML = signInfo.main.staNameChinese;
       dom = this.$refs.svg.getElementById("line");
       this.$refs.svg.getElementById("line").attributes.stroke.value = signInfo.lineColor;
       console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
+      console.log("2")
     },
   },
 }
