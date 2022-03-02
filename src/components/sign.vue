@@ -63,9 +63,8 @@ export default {
     }
   },
   methods: {
-    UpdateSign(signStyle, signInfo, lightStyle, signScale){
-      console.log("1")
-      this.signStyle = signStyle
+    UpdateData(signInfo, lightStyle, signScale){
+      //console.log("1")
       this.lightStyle = lightStyle
       this.signInfo = signInfo
       this.output = signScale
@@ -73,9 +72,12 @@ export default {
       dom.innerHTML = signInfo.main.staNameChinese;
       dom = this.$refs.svg.getElementById("line");
       this.$refs.svg.getElementById("line").attributes.stroke.value = signInfo.lineColor;
-      console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
-      console.log("2")
+      //console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
+      //console.log("2")
     },
+    UpdateSign(signStyle){
+      this.signStyle = signStyle
+    }
   },
 }
 </script>

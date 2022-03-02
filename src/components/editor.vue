@@ -5,7 +5,7 @@
       <h2>整体调整</h2>
       <div class="form-min-row">
         <p>站牌样式</p>
-        <select v-model="signStyle" @change="sendData">
+        <select v-model="signStyle" @change="sendSign">
           <option disabled value="">请选择</option>
           <option value="test-sign">测试用</option>
           <option value="kitajuku-dentetsu">北宿电铁</option>
@@ -39,7 +39,7 @@
         <h2>本站名</h2>
           <div class="form-min-row">
             <p>站名 中文</p>
-            <input v-model="signInfo.main.staNameChinese" @change="sendData" type="text">
+            <input v-model.lazy="signInfo.main.staNameChinese" @change="sendData" type="text">
           </div>
           <div class="form-min-row">
             <p>站名 英语</p>
@@ -149,7 +149,10 @@ export default {
   },
   methods :{
     sendData(){
-      this.$emit('someChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
+      this.$emit('someChanged', this.lightStyle, this.signInfo, this.output)
+    },
+    sendSign(){
+      this.$emit('signChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
     }
   }
 

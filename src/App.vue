@@ -3,7 +3,7 @@
     <HeaderFlex :title="titles"/>
     <Signs ref="signs"/>
       <h3>Data from editor.vue -> App.vue:</h3>
-    <Editor @someChanged="UpdateData"/>
+    <Editor @someChanged="UpdateData" @signChanged="UpdateSign"/>
     <FooterFlex :title="titles"/>
   </div>
 </template>
@@ -22,48 +22,15 @@ export default {
       titles: 'FesGen',
     }
   },
-  props: {
-      signStyle: String,
-      lightStyle: String,
-      output: {
-        outputWidth: Number,
-        outputHeight: Number,
-      },
-      signInfo:{
-        main: {
-          staNameEnglish: String,
-          staNameChinese: String,
-          staNameKana: String,
-        },
-        left: {
-          leftStaNumber: Number,
-          leftStaNameEnglish: String,
-          leftStaNameChinese: String,
-        },
-        middle: {
-          lineName: String,
-          lineAbbr: String,
-          middleStaNumber: Number,
-        },
-        right: {
-          rightStaNumber: Number,
-          rightStaNameEnglish: String,
-          rightStaNameChinese: String,
-
-        },
-        lineColor: Number,
-        backgroundColor: Number,
-      },
-  },
   methods: {
-    UpdateData(signStyle, lightStyle, signInfo, signScale){
-      this.signStyle = signStyle
-      this.lightStyle = lightStyle
-      this.signInfo = signInfo
-      this.output = signScale
-      console.log(this.signStyle)
-      this.$refs.signs.UpdateSign(signStyle, signInfo, lightStyle, signScale)
-    }
+    UpdateSign(signStyle, lightStyle, signInfo, signScale){
+      this.$refs.signs.UpdateSign(signStyle)
+      this.UpdateData(lightStyle, signInfo, signScale)
+    },
+    UpdateData(lightStyle, signInfo, signScale){
+
+      this.$refs.signs.UpdateData(signInfo, lightStyle, signScale)
+    },
   }
 }
 </script>
