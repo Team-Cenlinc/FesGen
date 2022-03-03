@@ -18,3 +18,6 @@ yarn serve
 # build for production with minification
 yarn build
 ```
+
+### About Fetarute
+Twitter:[@Fetarute](https://twitter.com/fetarute)
