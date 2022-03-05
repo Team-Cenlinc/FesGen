@@ -25,7 +25,9 @@ export default {
   methods: {
     UpdateSign(signStyle, lightStyle, signInfo, signScale){
       this.$refs.signs.UpdateSign(signStyle)
-      this.UpdateData(lightStyle, signInfo, signScale)
+      console.log('changed')
+      this.$refs.signs.UpdateData(lightStyle, signInfo, signScale)
+      console.log('changed')
     },
     UpdateData(lightStyle, signInfo, signScale){
 

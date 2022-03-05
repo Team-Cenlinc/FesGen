@@ -3,10 +3,10 @@
     <component :is="signStyle" ref="svg"></component>
     <h3>Data from editor.vue -> App.vue -> sign.vue :</h3>
     <div class="data">
-      <p>{{ signStyle || '你尚未选择'}}</p>
+      <p>{{ this.signStyle || '你尚未选择'}}</p>
     </div>
     <div class="data">
-      <p>{{ signInfo || ''}}</p>
+      <p>{{ this.signInfo || 'NO'}}</p>
     </div>
     <hr/>
 
@@ -68,15 +68,19 @@ export default {
       this.lightStyle = lightStyle
       this.signInfo = signInfo
       this.output = signScale
-      let dom = this.$refs.svg.querySelector("#MID-kanji-text");
-      dom.innerHTML = signInfo.main.staNameChinese;
-      dom = this.$refs.svg.getElementById("line");
+      //let dom = this.$refs.svg.querySelector("#MID-kanji-text");
+      //dom.innerHTML = this.signInfo.main.staNameChinese;
+      //let dom = this.$refs.svg.getElementById("line");
       this.$refs.svg.getElementById("line").attributes.stroke.value = signInfo.lineColor;
-      //console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
+      console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
       //console.log("2")
     },
     UpdateSign(signStyle){
       this.signStyle = signStyle
+      let dom = this.$refs.svg.querySelector("#MID-kanji-text");
+      dom.innerHTML = this.signInfo.main.staNameChinese;
+      dom = this.$refs.svg.getElementById("line");
+      this.$refs.svg.getElementById("line").attributes.stroke.value = this.signInfo.lineColor;
     }
   },
 }

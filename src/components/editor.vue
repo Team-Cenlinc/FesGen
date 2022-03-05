@@ -91,7 +91,7 @@
         </div>
       </div>
       <div>
-        <h2>右侧侧站点信息</h2>
+        <h2>右侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
           <input v-model="signInfo.right.rightStaNameChinese" @change="sendData" type="text">
@@ -172,21 +172,17 @@ export default {
   margin: 30px auto 30px;
 }
 
-.row div {
-  margin: 0;
-  padding: 10px 10px 10px 10px;
-}
 
 .row h2 {
   border-bottom: 8px solid #a0d4e8;
   width: fit-content;
   height: 27px;
-  margin: 0 10px 20px;
+  margin: 20px 0 10px 10px;
 }
 
 .form-min-row {
   margin: 0;
-  padding: 0;
+  padding: 10px 20px 10px 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
