@@ -3,7 +3,7 @@
     <HeaderFlex :title="titles"/>
     <Signs ref="signs"/>
       <h3>Data from editor.vue -> App.vue:</h3>
-    <Editor @someChanged="UpdateData" @signChanged="UpdateSign"/>
+    <Editor @someChanged="UpdateData" @signChanged="UpdateSignStyle"/>
     <FooterFlex :title="titles"/>
   </div>
 </template>
@@ -23,14 +23,10 @@ export default {
     }
   },
   methods: {
-    UpdateSign(signStyle, lightStyle, signInfo, signScale){
-      this.$refs.signs.UpdateSign(signStyle)
-      console.log('changed')
-      this.$refs.signs.UpdateData(lightStyle, signInfo, signScale)
-      console.log('changed')
+    UpdateSignStyle(signStyle){
+      this.$refs.signs.UpdateSignStyle(signStyle)
     },
     UpdateData(lightStyle, signInfo, signScale){
-
       this.$refs.signs.UpdateData(signInfo, lightStyle, signScale)
     },
   }

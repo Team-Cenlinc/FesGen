@@ -79,30 +79,30 @@
         <h2>左侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
-          <input v-model="signInfo.left.leftStaNameChinese" @change="sendData" type="text">
+          <input v-model="signInfo.left.leftStaNameChinese" value='锦冈' @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站名 英语</p>
-          <input v-model="signInfo.left.leftStaNameEnglish" @change="sendData" type="text">
+          <input v-model="signInfo.left.leftStaNameEnglish" value='Nishikioka' @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站点编号</p>
-          <input v-model="signInfo.left.leftStaNumber" @change="sendData" type="number">
+          <input v-model="signInfo.left.leftStaNumber" value='04' @change="sendData" type="number">
         </div>
       </div>
       <div>
         <h2>右侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
-          <input v-model="signInfo.right.rightStaNameChinese" @change="sendData" type="text">
+          <input v-model="signInfo.right.rightStaNameChinese" value='北宿' @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站名 英语</p>
-          <input v-model="signInfo.right.rightStaNameEnglish" @change="sendData" type="text">
+          <input v-model="signInfo.right.rightStaNameEnglish" value='Hokuriku' @change="sendData" type="text">
         </div>
         <div class="form-min-row">
           <p>站点编号</p>
-          <input v-model="signInfo.right.rightStaNumber" @change="sendData" type="number">
+          <input v-model="signInfo.right.rightStaNumber" value='02' @change="sendData" type="number">
         </div>
       </div>
     </div>
@@ -114,36 +114,36 @@ export default {
   name: "editor",
   data()  {
     return{
-      signStyle: '',
-      lightStyle: '',
+      signStyle: 'kitajuku-dentetsu',
+      lightStyle: 'fluore',
       output: {
-        outputWidth: '',
-        outputHeight: '',
+        outputWidth: 620,
+        outputHeight: 220,
       },
       signInfo:{
         main: {
-          staNameEnglish: '',
-          staNameChinese: '',
-          staNameKana: '',
+          staNameEnglish: 'Kaihin-Shukukai',
+          staNameChinese: '海浜宿海',
+          staNameKana: 'かいひんしゅくかい',
         },
         left: {
-          leftStaNumber: '',
-          leftStaNameEnglish: '',
-          leftStaNameChinese: '',
+          leftStaNumber: '04',
+          leftStaNameEnglish: 'Nishikioka',
+          leftStaNameChinese: '錦岡',
         },
         middle: {
-          lineName: '',
-          lineAbbr: '',
-          middleStaNumber: '',
+          lineName: '東海岸本線',
+          lineAbbr: 'T',
+          middleStaNumber: '03',
         },
         right: {
-          rightStaNumber: '',
-          rightStaNameEnglish: '',
-          rightStaNameChinese: '',
+          rightStaNumber: '02',
+          rightStaNameEnglish: '北宿',
+          rightStaNameChinese: 'Hokuriku',
 
         },
-        lineColor: '',
-        backgroundColor: '',
+        lineColor: '#7297DD',
+        backgroundColor: '#4D4D4D',
       },
     }
   },

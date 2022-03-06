@@ -1,6 +1,8 @@
 <template>
   <div id="canvas">
-    <component :is="signStyle" ref="svg"></component>
+    <keep-alive>
+      <component :is="this.signStyle" ref="svg"></component>
+    </keep-alive>
     <h3>Data from editor.vue -> App.vue -> sign.vue :</h3>
     <div class="data">
       <p>{{ this.signStyle || '你尚未选择'}}</p>
@@ -29,7 +31,7 @@ export default {
   },
   data(){
     return{
-      signStyle: String,
+      signStyle: 'kitajuku-dentetsu',
       output: {
         outputWidth: Number,
         outputHeight: Number,
@@ -62,26 +64,27 @@ export default {
       },
     }
   },
+  updated() {
+    this.UpdateSignData()
+  },
   methods: {
     UpdateData(signInfo, lightStyle, signScale){
-      //console.log("1")
       this.lightStyle = lightStyle
       this.signInfo = signInfo
       this.output = signScale
-      //let dom = this.$refs.svg.querySelector("#MID-kanji-text");
-      //dom.innerHTML = this.signInfo.main.staNameChinese;
-      //let dom = this.$refs.svg.getElementById("line");
-      this.$refs.svg.getElementById("line").attributes.stroke.value = signInfo.lineColor;
-      console.log(this.$refs.svg.getElementById("line").attributes.getNamedItem("stroke").value);
-      //console.log("2")
     },
-    UpdateSign(signStyle){
+    UpdateSignStyle(signStyle){
       this.signStyle = signStyle
-      let dom = this.$refs.svg.querySelector("#MID-kanji-text");
-      dom.innerHTML = this.signInfo.main.staNameChinese;
-      dom = this.$refs.svg.getElementById("line");
-      this.$refs.svg.getElementById("line").attributes.stroke.value = this.signInfo.lineColor;
-    }
+    },
+    UpdateSignData(){
+      let dom = this.$refs.svg.getElementById("MID-kanji-text")
+      dom.innerHTML = this.signInfo.main.staNameChinese
+
+      dom = this.$refs.svg.getElementById("line")
+      dom.attributes.stroke.value = this.signInfo.lineColor
+
+
+    },
   },
 }
 </script>
