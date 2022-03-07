@@ -3,15 +3,14 @@
     <keep-alive>
       <component :is="this.signStyle" ref="svg"></component>
     </keep-alive>
-    <h3>Data from editor.vue -> App.vue -> sign.vue :</h3>
     <div class="data">
+      <h4>SignStyle: </h4>
       <p>{{ this.signStyle || '你尚未选择'}}</p>
     </div>
-    <div class="data">
-      <p>{{ this.signInfo || 'NO'}}</p>
-    </div>
     <hr/>
-
+    <div class="data">
+      <p v-show="false">{{ this.signInfo || 'NO'}}</p>
+    </div>
   </div>
 </template>
 
@@ -149,6 +148,15 @@ export default {
 }
 hr{
   width: 600px;
+}
+.data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.data h4 {
+  margin-right: 20px;
+  color: #333333;
 }
 
 </style>
