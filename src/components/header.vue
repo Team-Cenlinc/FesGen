@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "header",
+  name: "flex-header",
   props: [
       'title'
   ]
@@ -26,7 +26,7 @@ header {
   color: #1f1f1f;
   padding: 10px 20px;
   margin:  0;
-  /*box-shadow: 0 5px 10px #707070*/
+  box-shadow: 0 0 5px #484848;
   flex: 0 0 auto;
 }
 

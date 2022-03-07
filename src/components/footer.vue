@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "footer",
+  name: "flex-footer",
   props: [
       "title"
   ]
@@ -30,7 +30,7 @@ footer {
   margin: 0;
   background-color: #e3e2e2;
   padding: 20px 30px 20px 30px;
-  box-shadow: 0 0 14px #484848;
+  box-shadow: 0 0 7px #484848;
   flex: 0 0 auto;
 }
 

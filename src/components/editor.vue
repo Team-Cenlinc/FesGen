@@ -138,8 +138,8 @@ export default {
         },
         right: {
           rightStaNumber: '02',
-          rightStaNameEnglish: '北宿',
-          rightStaNameChinese: 'Hokuriku',
+          rightStaNameEnglish: 'Hokuriku',
+          rightStaNameChinese: '北宿',
 
         },
         lineColor: '#7297DD',

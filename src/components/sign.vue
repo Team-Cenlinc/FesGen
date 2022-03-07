@@ -32,35 +32,35 @@ export default {
   data(){
     return{
       signStyle: 'kitajuku-dentetsu',
+      lightStyle: 'fluore',
       output: {
-        outputWidth: Number,
-        outputHeight: Number,
-        lightStyle: String,
+        outputWidth: 620,
+        outputHeight: 220,
       },
       signInfo:{
         main: {
-          staNameEnglish: String,
-          staNameChinese: String,
-          staNameKana: String,
+          staNameEnglish: 'Kaihin-Shukukai',
+          staNameChinese: '海浜宿海',
+          staNameKana: 'かいひんしゅくかい',
         },
         left: {
-          leftStaNumber: Number,
-          leftStaNameEnglish: String,
-          leftStaNameChinese: String,
+          leftStaNumber: '04',
+          leftStaNameEnglish: 'Nishikioka',
+          leftStaNameChinese: '錦岡',
         },
         middle: {
-          lineName: String,
-          lineAbbr: String,
-          middleStaNumber: Number,
+          lineName: '東海岸本線',
+          lineAbbr: 'T',
+          middleStaNumber: '03',
         },
         right: {
-          rightStaNumber: Number,
-          rightStaNameEnglish: String,
-          rightStaNameChinese: String,
+          rightStaNumber: '02',
+          rightStaNameEnglish: 'Hokuriku',
+          rightStaNameChinese: '北宿',
 
         },
-        lineColor: Number,
-        backgroundColor: Number,
+        lineColor: '#7297DD',
+        backgroundColor: '#4D4D4D',
       },
     }
   },
@@ -77,11 +77,55 @@ export default {
       this.signStyle = signStyle
     },
     UpdateSignData(){
-      let dom = this.$refs.svg.getElementById("MID-kanji-text")
-      dom.innerHTML = this.signInfo.main.staNameChinese
+      //signInfo.main
+      let dom = this.$refs.svg.getElementById("staNameChinese")
+      dom.childNodes[0].innerHTML = this.signInfo.main.staNameChinese
+
+      dom = this.$refs.svg.getElementById("staNameKana")
+      dom.childNodes[0].innerHTML = this.signInfo.main.staNameKana
+
+      dom = this.$refs.svg.getElementById("staNameEnglish")
+      dom.childNodes[0].innerHTML = this.signInfo.main.staNameEnglish
+      //signInfo.left
+      dom = this.$refs.svg.getElementById("leftStaNameChinese")
+      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNameChinese
+
+      dom = this.$refs.svg.getElementById("leftStaNameEnglish")
+      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNameEnglish
+
+      dom = this.$refs.svg.getElementById("leftStaNumber")
+      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNumber
+      //signInfo.right
+      dom = this.$refs.svg.getElementById("rightStaNameChinese")
+      dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNameChinese
+
+      dom = this.$refs.svg.getElementById("rightStaNameEnglish")
+      dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNameEnglish
+
+      dom = this.$refs.svg.getElementById("rightStaNumber")
+      dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNumber
+
+      //signInfo.middle
+      dom = this.$refs.svg.getElementById("lineAbbr")
+      dom.childNodes[0].innerHTML = this.signInfo.middle.lineAbbr
+
+      dom = this.$refs.svg.getElementById("lineName")
+      dom.childNodes[0].innerHTML = this.signInfo.middle.lineName
+
+      dom = this.$refs.svg.getElementById("middleStaNumber")
+      dom.childNodes[0].innerHTML = this.signInfo.middle.middleStaNumber
+
+
+
+
+      console.log(dom.childNodes[0].innerHTML)
+      //dom.innerHTML = this.signInfo.main.staNameChinese
 
       dom = this.$refs.svg.getElementById("line")
       dom.attributes.stroke.value = this.signInfo.lineColor
+
+      dom = this.$refs.svg.getElementById("background")
+      dom.attributes.fill.value = this.signInfo.backgroundColor
 
 
     },
