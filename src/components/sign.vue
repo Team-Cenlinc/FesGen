@@ -60,7 +60,7 @@ export default {
 
         },
         lineColor: '#7297DD',
-        backgroundColor: '#4D4D4D',
+        backgroundColor: '#ECECEC',
       },
     }
   },
@@ -125,6 +125,12 @@ export default {
       dom.attributes.stroke.value = this.signInfo.lineColor
 
       dom = this.$refs.svg.getElementById("background")
+      dom.attributes.fill.value = this.signInfo.backgroundColor
+      dom = this.$refs.svg.getElementById("leftEpli")
+      dom.attributes.fill.value = this.signInfo.backgroundColor
+      dom = this.$refs.svg.getElementById("rightEpli")
+      dom.attributes.fill.value = this.signInfo.backgroundColor
+      dom = this.$refs.svg.getElementById("middleEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
 
 

@@ -143,7 +143,7 @@ export default {
 
         },
         lineColor: '#7297DD',
-        backgroundColor: '#4D4D4D',
+        backgroundColor: '#ECECEC',
       },
     }
   },
