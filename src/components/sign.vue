@@ -8,6 +8,7 @@
       <p>{{ this.signStyle || '你尚未选择'}}</p>
     </div>
     <hr/>
+    <button>下载</button>
     <div class="data">
       <p v-show="false">{{ this.signInfo || 'NO'}}</p>
     </div>
