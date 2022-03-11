@@ -160,4 +160,13 @@ hr{
   color: #333333;
 }
 
+button {
+  font-size: 30px;
+  background-color: #a5ddf0;
+  color: #ffffff;
+  margin: 10px;
+  padding: 5px 20px;
+  border: #000000 10px;
+}
+
 </style>
