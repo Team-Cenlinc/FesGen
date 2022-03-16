@@ -1,38 +1,41 @@
 <template>
   <div id="editor" class="form">
     <div class="row">
-    <div>
-      <h2>整体调整</h2>
-      <div class="form-min-row">
-        <p>站牌样式</p>
-        <select v-model="signStyle" @change="sendSign">
-          <option disabled value="">请选择</option>
-          <option value="test-sign">测试用</option>
-          <option value="kitajuku-dentetsu">北宿电铁</option>
-        </select>
-      </div>
-      <div class="form-min-row">
-        <p>灯光效果</p>
-        <select v-model="lightStyle" @change="sendData">
-          <option value="none">无</option>
-          <option value="fluore">荧光灯</option>
-          <option value="led">LED</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <h2>站牌大小</h2>
+      <div>
+        <h2>整体调整</h2>
         <div class="form-min-row">
-          <p>宽度</p>
-          <div><input v-model="output.outputWidth" @change="sendData" type="number" value="2160"> px</div>
-
+          <p>站牌样式</p>
+          <select v-model="signStyle" @change="sendSign">
+            <option disabled value="">请选择</option>
+            <option value="test-sign">测试用</option>
+            <option value="kitajuku-dentetsu">北宿电铁</option>
+          </select>
         </div>
         <div class="form-min-row">
-          <p>高度</p>
-          <div><input v-model="output.outputHeight" @change="sendData" type="number" value="720"> px</div>
-
+          <p>灯光效果</p>
+          <select v-model="lightStyle" @change="sendData">
+            <option value="none">无</option>
+            <option value="fluore">荧光灯</option>
+            <option value="led">LED</option>
+          </select>
         </div>
-    </div>
+        <div class="form-min-row">
+          <p>反转方向</p>
+        </div>
+      </div>
+      <div>
+        <h2>站牌大小</h2>
+          <div class="form-min-row">
+            <p>宽度</p>
+            <div><input v-model="output.outputWidth" @change="sendData" type="number" value="2160"> px</div>
+
+          </div>
+          <div class="form-min-row">
+            <p>高度</p>
+            <div><input v-model="output.outputHeight" @change="sendData" type="number" value="720"> px</div>
+
+          </div>
+      </div>
     </div>
     <div class="row">
       <div>

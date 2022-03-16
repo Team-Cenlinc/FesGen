@@ -161,12 +161,18 @@ hr{
 }
 
 button {
-  font-size: 30px;
-  background-color: #a5ddf0;
-  color: #ffffff;
+  font-size: 24px;
+  background-color: #a0d4e7;
+  color: #4e4e4e;
   margin: 10px;
   padding: 5px 20px;
   border: #000000 10px;
+  transition: 225ms ease-out;
+}
+
+button:hover {
+  background-color: rgba(79, 79, 79, .65);
+  color: #f3f3f3;
 }
 
 </style>
