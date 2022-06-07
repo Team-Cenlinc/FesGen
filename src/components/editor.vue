@@ -24,7 +24,7 @@
           <input v-model="signInfo.frameThickness" value='2' @change="sendData" type="number">
         </div>
         <div class="form-min-row">
-          <p>显示方向牌</p>
+          <p>显示行进方向箭头</p>
           <input v-model="signInfo.displayForwardArrow" checked="checked" value=true @change="sendData" type="checkbox">
         </div>
         <div class="form-min-row">
