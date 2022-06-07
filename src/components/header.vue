@@ -6,7 +6,8 @@
             <a href="public/about.html" class="header-nav">About</a>
             <a href="public/help.html" class="header-nav">Help</a>
             <a href="https://github.com/Team-Cenlinc/FesGen/tree/main" class="header-nav">GitHub</a>
-            <a href="https://www.fetarute.net/wiki/index.php/FesGen" class="header-nav">Wiki</a>
+            <a href="https://www.fetarute.org/wiki/index.php/FesGen" class="header-nav">Wiki</a>
+            <a href="/" class="header-nav">Home Page</a>
       </span>
     </div>
   </header>

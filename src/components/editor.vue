@@ -25,7 +25,7 @@
         </div>
         <div class="form-min-row">
           <p>显示行进方向箭头</p>
-          <input v-model="signInfo.displayForwardArrow" checked="checked" value=true @change="sendData" type="checkbox">
+          <input checked="checked" value=true @change="sendData" type="checkbox">
         </div>
         <div class="form-min-row">
           <p>反转左右信息</p>
@@ -171,7 +171,6 @@ export default {
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
         frameThickness: '2',
-        displayForwardArrow: true,
         // direction: 'left',
       },
     }
@@ -204,9 +203,8 @@ export default {
       this.signInfo.right.textColor = tempL
 
       this.$emit("someChanged", this.signInfo, this.output)
-    }
-  }
-
+    },
+  },
 }
 </script>
 
