@@ -24,12 +24,12 @@
           <input v-model="signInfo.frameThickness" value='2' @change="sendData" type="number">
         </div>
         <div class="form-min-row">
-          <p>显示方向牌</p>
+          <p>显示行进方向箭头</p>
           <input v-model="signInfo.displayForwardArrow" checked="checked" value=true @change="sendData" type="checkbox">
         </div>
         <div class="form-min-row">
           <p>反转左右信息</p>
-          <input @change="reverseLeftRight" type="button">
+          <input value="反转" @change="reverseLeftRight" type="button">
         </div>
       </div>
       <div>
@@ -105,6 +105,10 @@
           <p>站点编号</p>
           <input v-model="signInfo.left.leftStaNumber" value='04' @change="sendData" type="number">
         </div>
+        <div class="form-min-row">
+          <p>字体颜色</p>
+          <input v-model="signInfo.left.textColor" @change="sendData" type="color">
+        </div>
       </div>
       <div>
         <h2>右侧站点信息</h2>
@@ -119,6 +123,10 @@
         <div class="form-min-row">
           <p>站点编号</p>
           <input v-model="signInfo.right.rightStaNumber" value='02' @change="sendData" type="number">
+        </div>
+        <div class="form-min-row">
+          <p>字体颜色</p>
+          <input v-model="signInfo.right.textColor" @change="sendData" type="color">
         </div>
       </div>
     </div>
