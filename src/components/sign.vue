@@ -42,11 +42,13 @@ export default {
           staNameEnglish: 'Kaihin-Shukukai',
           staNameChinese: '海浜宿海',
           staNameKana: 'かいひんしゅくかい',
+          textColor: '#383838',
         },
         left: {
           leftStaNumber: '04',
           leftStaNameEnglish: 'Nishikioka',
           leftStaNameChinese: '錦岡',
+          textColor: '#383838',
         },
         middle: {
           lineName: '東海岸本線',
@@ -57,10 +59,12 @@ export default {
           rightStaNumber: '02',
           rightStaNameEnglish: 'Hokuriku',
           rightStaNameChinese: '北宿',
-
+          textColor: '#7a7a7a',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
+        frameThickness: '2',
+        displayForwardArrow: true,
       },
     }
   },
@@ -77,8 +81,13 @@ export default {
       this.signStyle = signStyle
     },
     UpdateSignData(){
+
       //signInfo.main
-      let dom = this.$refs.svg.getElementById("staNameChinese")
+
+      let dom = this.$ref.svg.getElementById("Main")
+      dom.attributes.fill.value = this.signInfo.main.textColor
+
+      dom = this.$refs.svg.getElementById("staNameChinese")
       dom.childNodes[0].innerHTML = this.signInfo.main.staNameChinese
 
       dom = this.$refs.svg.getElementById("staNameKana")
@@ -86,45 +95,62 @@ export default {
 
       dom = this.$refs.svg.getElementById("staNameEnglish")
       dom.childNodes[0].innerHTML = this.signInfo.main.staNameEnglish
-      //signInfo.left
-      dom = this.$refs.svg.getElementById("leftStaNameChinese")
-      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNameChinese
 
-      dom = this.$refs.svg.getElementById("leftStaNameEnglish")
-      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNameEnglish
-
-      dom = this.$refs.svg.getElementById("leftStaNumber")
-      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNumber
       //signInfo.right
+
       dom = this.$refs.svg.getElementById("rightStaNameChinese")
       dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNameChinese
+      dom.attributes.fill.value = this.signInfo.right.textColor
 
       dom = this.$refs.svg.getElementById("rightStaNameEnglish")
       dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNameEnglish
+      dom.attributes.fill.value = this.signInfo.right.textColor
 
       dom = this.$refs.svg.getElementById("rightStaNumber")
       dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNumber
+      dom.attributes.fill.value = this.signInfo.right.textColor
 
-      //signInfo.middle
+      //signInfo.left
+
+      dom = this.$refs.svg.getElementById("leftStaNameChinese")
+      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNameChinese
+      dom.attributes.fill.value = this.signInfo.left.textColor
+
+      dom = this.$refs.svg.getElementById("leftStaNameEnglish")
+      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNameEnglish
+      dom.attributes.fill.value = this.signInfo.left.textColor
+
+      dom = this.$refs.svg.getElementById("leftStaNumber")
+      dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNumber
+      dom.attributes.fill.value = this.signInfo.left.textColor
+
+      // signInfo.middle
+
       dom = this.$refs.svg.getElementById("lineAbbr")
       dom.childNodes[0].innerHTML = this.signInfo.middle.lineAbbr
 
+      // Line Abbr. Color is same as background.
+      dom.attributes.fill.value = this.signInfo.backgroundColor
+
+      // Other sections are same as the "main" part.
+
       dom = this.$refs.svg.getElementById("lineName")
       dom.childNodes[0].innerHTML = this.signInfo.middle.lineName
+      dom.attributes.fill.value = this.signInfo.main.textColor
 
       dom = this.$refs.svg.getElementById("middleStaNumber")
       dom.childNodes[0].innerHTML = this.signInfo.middle.middleStaNumber
+      dom.attributes.fill.value = this.signInfo.main.textColor
 
-
-
-
+      // --
       console.log(dom.childNodes[0].innerHTML)
-      //dom.innerHTML = this.signInfo.main.staNameChinese
+
+      // dom.innerHTML = this.signInfo.main.staNameChinese
 
       dom = this.$refs.svg.getElementById("line")
       dom.attributes.stroke.value = this.signInfo.lineColor
-
       dom = this.$refs.svg.getElementById("background")
+      dom.attributes.strokeWidth.value = this.signInfo.frameThickness
       dom.attributes.fill.value = this.signInfo.backgroundColor
       dom = this.$refs.svg.getElementById("leftEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
@@ -133,7 +159,17 @@ export default {
       dom = this.$refs.svg.getElementById("middleEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
 
+      if (this.signInfo.displayForwardArrow){
+        dom = this.$refs.svg.getElementById("Toward")
+        dom.hidden
+      }
 
+    },
+    changeLeftRight(){
+      //Change left and right
+    },
+    changeForwardingDirection(){
+      //Change forward direction
     },
   },
 }

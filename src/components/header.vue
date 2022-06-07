@@ -3,8 +3,9 @@
     <div class="header-flex">
       <h1><small><a href="/" class="header-nav-home">{{ title }}</a></small></h1>
       <span>
-            <a href="/" class="header-nav">About</a>
-            <a href="/" class="header-nav">Help</a>
+            <a href="public/about.html" class="header-nav">About</a>
+            <a href="public/help.html" class="header-nav">Help</a>
+            <a href="https://github.com/Team-Cenlinc/FesGen/tree/main" class="header-nav">GitHub</a>
             <a href="https://www.fetarute.net/wiki/index.php/FesGen" class="header-nav">Wiki</a>
       </span>
     </div>

@@ -20,7 +20,16 @@
           </select>
         </div>
         <div class="form-min-row">
-          <p>反转方向</p>
+          <p>边框大小</p>
+          <input v-model="signInfo.frameThickness" value='2' @change="sendData" type="number">
+        </div>
+        <div class="form-min-row">
+          <p>显示方向牌</p>
+          <input v-model="signInfo.displayForwardArrow" checked="checked" value=true @change="sendData" type="checkbox">
+        </div>
+        <div class="form-min-row">
+          <p>反转左右信息</p>
+          <input @change="reverseLeftRight" type="button">
         </div>
       </div>
       <div>
@@ -51,6 +60,10 @@
           <div class="form-min-row">
             <p>站名 假名</p>
             <input v-model="signInfo.main.staNameKana" @change="sendData" type="text">
+          </div>
+          <div class="form-min-row">
+            <p>字体颜色</p>
+            <input v-model="signInfo.main.textColor" @change="sendData" type="color">
           </div>
       </div>
       <div>
@@ -128,11 +141,13 @@ export default {
           staNameEnglish: 'Kaihin-Shukukai',
           staNameChinese: '海浜宿海',
           staNameKana: 'かいひんしゅくかい',
+          textColor: '#383838',
         },
         left: {
           leftStaNumber: '04',
           leftStaNameEnglish: 'Nishikioka',
           leftStaNameChinese: '錦岡',
+          textColor: '#383838',
         },
         middle: {
           lineName: '東海岸本線',
@@ -143,10 +158,13 @@ export default {
           rightStaNumber: '02',
           rightStaNameEnglish: 'Hokuriku',
           rightStaNameChinese: '北宿',
-
+          textColor: '#7a7a7a',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
+        frameThickness: '2',
+        displayForwardArrow: true,
+        // direction: 'left',
       },
     }
   },
@@ -156,6 +174,28 @@ export default {
     },
     sendSign(){
       this.$emit('signChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
+    },
+    reverseLeftRight(){
+      let tempL = null
+      let tempR = null
+      tempL = this.signInfo.left.leftStaNameChinese
+      tempR = this.signInfo.right.rightStaNameChinese
+      this.signInfo.left.leftStaNameChinese = tempR
+      this.signInfo.right.rightStaNameChinese = tempL
+      tempL = this.signInfo.left.leftStaNameEnglish
+      tempR = this.signInfo.right.rightStaNameEnglish
+      this.signInfo.left.leftStaNameEnglish = tempR
+      this.signInfo.right.rightStaNameEnglish = tempL
+      tempL = this.signInfo.left.leftStaNumber
+      tempR = this.signInfo.right.rightStaNumber
+      this.signInfo.left.leftStaNumber = tempR
+      this.signInfo.right.rightStaNumber = tempL
+      tempL = this.signInfo.left.textColor
+      tempR = this.signInfo.right.textColor
+      this.signInfo.left.textColor = tempR
+      this.signInfo.right.textColor = tempL
+
+      this.$emit("someChanged", this.signInfo, this.output)
     }
   }
 
