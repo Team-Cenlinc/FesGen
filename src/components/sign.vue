@@ -64,6 +64,7 @@ export default {
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
         frameThickness: '2',
+        displayForwardArrow: true,
       },
     }
   },
@@ -158,12 +159,10 @@ export default {
       dom = this.$refs.svg.getElementById("middleEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
 
-      /**
       if (this.signInfo.displayForwardArrow){
         dom = this.$refs.svg.getElementById("Toward")
         dom.hidden
       }
-       **/
 
     },
   },

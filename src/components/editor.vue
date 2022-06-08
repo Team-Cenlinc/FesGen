@@ -170,10 +170,14 @@ export default {
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
-        frameThickness: '2',
+        frameThickness: 2,
+        displayForwardArrow: true,
         // direction: 'left',
       },
     }
+  },
+  computed: {
+
   },
   methods :{
     sendData(){
@@ -183,26 +187,26 @@ export default {
       this.$emit('signChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
     },
     reverseLeftRight(){
-      let tempL = null
-      let tempR = null
-      tempL = this.signInfo.left.leftStaNameChinese
-      tempR = this.signInfo.right.rightStaNameChinese
-      this.signInfo.left.leftStaNameChinese = tempR
-      this.signInfo.right.rightStaNameChinese = tempL
-      tempL = this.signInfo.left.leftStaNameEnglish
-      tempR = this.signInfo.right.rightStaNameEnglish
-      this.signInfo.left.leftStaNameEnglish = tempR
-      this.signInfo.right.rightStaNameEnglish = tempL
-      tempL = this.signInfo.left.leftStaNumber
-      tempR = this.signInfo.right.rightStaNumber
-      this.signInfo.left.leftStaNumber = tempR
-      this.signInfo.right.rightStaNumber = tempL
-      tempL = this.signInfo.left.textColor
-      tempR = this.signInfo.right.textColor
-      this.signInfo.left.textColor = tempR
-      this.signInfo.right.textColor = tempL
+      let tempL = null;
+      let tempR = null;
+      tempL = this.signInfo.left.leftStaNameChinese;
+      tempR = this.signInfo.right.rightStaNameChinese;
+      this.signInfo.left.leftStaNameChinese = tempR;
+      this.signInfo.right.rightStaNameChinese = tempL;
+      tempL = this.signInfo.left.leftStaNameEnglish;
+      tempR = this.signInfo.right.rightStaNameEnglish;
+      this.signInfo.left.leftStaNameEnglish = tempR;
+      this.signInfo.right.rightStaNameEnglish = tempL;
+      tempL = this.signInfo.left.leftStaNumber;
+      tempR = this.signInfo.right.rightStaNumber;
+      this.signInfo.left.leftStaNumber = tempR;
+      this.signInfo.right.rightStaNumber = tempL;
+      tempL = this.signInfo.left.textColor;
+      tempR = this.signInfo.right.textColor;
+      this.signInfo.left.textColor = tempR;
+      this.signInfo.right.textColor = tempL;
 
-      this.$emit("someChanged", this.signInfo, this.output)
+      this.$emit("someChanged", this.signInfo, this.output);
     },
   },
 }
