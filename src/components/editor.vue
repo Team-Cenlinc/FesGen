@@ -25,11 +25,11 @@
         </div>
         <div class="form-min-row">
           <p>显示行进方向箭头</p>
-          <input checked="checked" value=true @change="sendData" type="checkbox">
+          <input checked="checked" @change="sendData" type="checkbox">
         </div>
         <div class="form-min-row">
           <p>反转左右信息</p>
-          <input value="反转" @change="reverseLeftRight" type="button">
+          <input v-on:click="reverseLeftRight" type="button">
         </div>
       </div>
       <div>
@@ -86,7 +86,7 @@
         </div>
         <div class="form-min-row">
           <p>本站编号</p>
-          <input v-model="signInfo.middle.middleStaNumber" type="Number">
+          <input v-model="signInfo.middle.middleStaNumber" type="number">
         </div>
       </div>
     </div>
