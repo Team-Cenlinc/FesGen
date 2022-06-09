@@ -84,7 +84,7 @@ export default {
 
       //signInfo.main
 
-      let dom = this.$ref.svg.getElementById("Main")
+      let dom = this.$refs.svg.getElementById("Main")
       dom.attributes.fill.value = this.signInfo.main.textColor
 
       dom = this.$refs.svg.getElementById("staNameChinese")
@@ -150,7 +150,8 @@ export default {
       dom = this.$refs.svg.getElementById("line")
       dom.attributes.stroke.value = this.signInfo.lineColor
       dom = this.$refs.svg.getElementById("background")
-      dom.attributes.strokeWidth.value = this.signInfo.frameThickness
+      dom.attributes[3].value = this.signInfo.frameThickness
+      //console.log(dom.attributes[3])
       dom.attributes.fill.value = this.signInfo.backgroundColor
       dom = this.$refs.svg.getElementById("leftEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
