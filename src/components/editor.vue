@@ -29,7 +29,7 @@
         </div>
         <div class="form-min-row">
           <p>反转左右信息</p>
-          <input v-on:click="reverseLeftRight" type="button">
+          <input v-on:click="reverseLeftRight" value="反转左右信息" type="button">
         </div>
       </div>
       <div>

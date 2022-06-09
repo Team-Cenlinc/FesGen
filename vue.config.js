@@ -11,7 +11,7 @@ module.exports = {
                 svgo: false,
             });
     },
-    publicPath: process.env.NODE_ENV === 'development'
+    publicPath: process.env.NODE_ENV === 'production'
         ? '/FesGen/'
         : '/'
 };
