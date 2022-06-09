@@ -14,41 +14,41 @@
     </defs>
     <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Output" filter="url(#filter-1)" transform="translate(10.000000, 10.000000)">
-            <rect id="background" stroke="#4D4D4D" stroke-width="3" fill="#ECECEC" x="1" y="1" width="598" height="198"></rect>
-            <g id="Main" transform="translate(67.000000, 15.000000)" fill="#383838" font-weight="normal">
-                <text id="staNameEnglish" font-family="Helvetica" font-size="23.328">
-                    <tspan x="296" y="62">Kaihin-Shukukai</tspan>
+            <rect id="background" stroke="#4D4D4D" stroke-width="2" fill="#ECECEC" x="1" y="1" width="598" height="198"></rect>
+            <g id="Main" transform="translate(65.000000, 15.000000)" fill="#383838" font-weight="normal">
+                <text id="staNameEnglish" font-family="Helvetica" font-size="22">
+                    <tspan x="290" y="62">Kaihin-Shukukai</tspan>
                 </text>
-                <text id="staNameKana" font-family=".PingFangSC-Regular, .PingFang SC" font-size="20.736">
-                    <tspan x="278" y="31">かいひんしゅくかい</tspan>
+                <text id="staNameKana" font-family=".PingFangSC-Regular, .PingFang SC" font-size="22">
+                    <tspan x="290" y="30">かいひんしゅくかい</tspan>
                 </text>
-                <text id="staNameChinese" font-family=".PingFangSC-Regular, .PingFang SC" font-size="62.208">
-                    <tspan x="0" y="60">海浜宿海</tspan>
+                <text id="staNameChinese" font-family=".PingFangSC-Regular, .PingFang SC" font-size="60">
+                    <tspan x="5" y="60">海浜宿海</tspan>
                 </text>
             </g>
-            <line x1="2" y1="177.846485" x2="598.003562" y2="177.846485" id="line" stroke="#7297DD" stroke-width="15"></line>
+            <line x1="2" y1="180" x2="598" y2="180" id="line" stroke="#7297DD" stroke-width="15"></line>
             <g id="Right" transform="translate(472.000000, 120.000000)">
                 <text id="rightStaNameChinese" font-family="PingFangSC-Regular, PingFang SC" font-size="24.8832" font-weight="normal" fill="#737373">
-                    <tspan x="0" y="26">北宿</tspan>
+                    <tspan x="0" y="25">北宿</tspan>
                 </text>
-                <g id="icon" transform="translate(53.100000, 5.000000)">
-                    <path d="M5.508,2.052 L5.508,20.484 L2.88,20.484 C2.24376797,20.484 1.66776797,20.226116 1.25082598,19.809174 C0.833883984,19.392232 0.576,18.816232 0.576,18.18 L0.576,18.18 L0.576,4.356 C0.576,3.71976797 0.833883984,3.14376797 1.25082598,2.72682598 C1.66776797,2.30988398 2.24376797,2.052 2.88,2.052 L2.88,2.052 L5.508,2.052 Z" id="rec1" stroke="#7A7A7A" stroke-width="1.152" fill="#7A7A7A"></path>
+                <g id="rightIcon" transform="translate(57.000000, 5.000000)">
+                    <path d="M5.508,2.052 L5.508,20.484 L2.88,20.484 C2.24376797,20.484 1.66776797,20.226116 1.25082598,19.809174 C0.833883984,19.392232 0.576,18.816232 0.576,18.18 L0.576,18.18 L0.576,4.356 C0.576,3.71976797 0.833883984,3.14376797 1.25082598,2.72682598 C1.66776797,2.30988398 2.24376797,2.052 2.88,2.052 L2.88,2.052 L5.508,2.052 Z" id="rec1" fill="#7A7A7A" stroke-width="1.152"></path>
                     <path d="M30.852,2.276 C31.4263761,2.276 31.9463761,2.50881193 32.3227821,2.8852179 C32.6991881,3.26162386 32.932,3.78162386 32.932,4.356 L32.932,4.356 L32.932,18.18 C32.932,18.7543761 32.6991881,19.2743761 32.3227821,19.6507821 C31.9463761,20.0271881 31.4263761,20.26 30.852,20.26 L30.852,20.26 L5.732,20.26 L5.732,2.276 Z" id="rec2" stroke="#7A7A7A" stroke-width="1.6"></path>
-                    <text id="rightStaNumber" font-family="PingFangSC-Medium, PingFang SC" font-size="14.92992" font-weight="400" fill="#7A7A7A">
-                        <tspan x="10.116" y="16">02</tspan>
+                    <text id="rightStaNumber" font-family="PingFangSC-Medium, PingFang SC" font-size="14.92992" font-weight="400" fill="#737373">
+                        <tspan x="10" y="16.5">02</tspan>
                     </text>
                 </g>
                 <path d="M44.4403628,56.6376551 C46.6495018,56.6376551 48.0481869,54.6838124 49.4403628,52.6376551 C50.147638,51.598134 50.0067802,50.7516832 51.2432808,49.752862 C51.6064123,49.4595314 52.234694,49.3128661 53.128126,49.3128661 L56.5755452,49.3128661 C49.3722921,46.437622 45.2699895,45 44.2686375,45 C43.3037763,45 39.2142305,46.437622 32,49.3128661 L35.5930172,49.3128661 C36.0291578,49.3264432 36.4428059,49.4295662 36.8339617,49.622235 C37.8503086,50.12285 38.870861,52.2054812 39.0504228,52.4841404 C40.3787559,54.5455602 42.2312238,56.6376551 44.4403628,56.6376551 Z" id="rightEpli" fill="#ECECEC"></path>
-                <text id="rightStaNameEnglish" font-family="Helvetica" font-size="18.6624" font-weight="normal" fill="#6C6C6C">
-                    <tspan x="7" y="44">Hokuriku</tspan>
+                <text id="rightStaNameEnglish" font-family="Helvetica" font-size="18.6624" font-weight="normal" fill="#737373">
+                    <tspan x="1" y="45">Hokuriku</tspan>
                 </text>
             </g>
-            <g id="Left" transform="translate(29.000000, 121.000000)">
-                <g id="icon" transform="translate(55.000000, 4.000000)">
+            <g id="Left" transform="translate(29.000000, 120.000000)">
+                <g id="leftIcon" transform="translate(60.000000, 5.000000)">
                     <path d="M5.508,2.052 L5.508,20.484 L2.88,20.484 C2.24376797,20.484 1.66776797,20.226116 1.25082598,19.809174 C0.833883984,19.392232 0.576,18.816232 0.576,18.18 L0.576,18.18 L0.576,4.356 C0.576,3.71976797 0.833883984,3.14376797 1.25082598,2.72682598 C1.66776797,2.30988398 2.24376797,2.052 2.88,2.052 L2.88,2.052 L5.508,2.052 Z" id="rec1" stroke="#565656" stroke-width="1.152" fill="#565656"></path>
                     <path d="M30.852,2.276 C31.4263761,2.276 31.9463761,2.50881193 32.3227821,2.8852179 C32.6991881,3.26162386 32.932,3.78162386 32.932,4.356 L32.932,4.356 L32.932,18.18 C32.932,18.7543761 32.6991881,19.2743761 32.3227821,19.6507821 C31.9463761,20.0271881 31.4263761,20.26 30.852,20.26 L30.852,20.26 L5.732,20.26 L5.732,2.276 Z" id="rec2" stroke="#565656" stroke-width="1.6"></path>
-                    <text id="leftStaNumber" font-family="PingFangSC-Medium, PingFang SC" font-size="14.92992" font-weight="400" fill="#565656">
-                        <tspan x="10.116" y="16">04</tspan>
+                    <text id="leftStaNumber" font-family="PingFangSC-Medium, PingFang SC" font-size="14.92992" font-weight="400" fill="#383838">
+                        <tspan x="10" y="16.5">04</tspan>
                     </text>
                 </g>
                 <path d="M45.3406106,56.6376551 C47.5497496,56.6376551 48.9484347,54.6838124 50.3406106,52.6376551 C51.0478858,51.598134 50.9070279,50.7516832 52.1435285,49.752862 C52.50666,49.4595314 53.1349418,49.3128661 54.0283738,49.3128661 L57.475793,49.3128661 C50.2725399,46.437622 46.1702373,45 45.1688852,45 C44.2040241,45 40.1144782,46.437622 32.9002478,49.3128661 L36.493265,49.3128661 C36.9294055,49.3264432 37.3430537,49.4295662 37.7342095,49.622235 C38.7505564,50.12285 39.7711088,52.2054812 39.9506706,52.4841404 C41.2790036,54.5455602 43.1314716,56.6376551 45.3406106,56.6376551 Z" id="leftEpli" fill="#ECECEC"></path>
@@ -56,22 +56,22 @@
                     <tspan x="0" y="24">錦岡</tspan>
                     <tspan x="50.4133632" y="24" font-family=".AppleSystemUIFont"></tspan>
                 </text>
-                <text id="leftStaNameEnglish" font-family="Helvetica" font-size="18.6624" font-weight="normal" fill="#383838">
-                    <tspan x="1" y="43">Nishikioka</tspan>
+                <text id="leftStaNameEnglish" font-family="Helvetica" font-size="18" font-weight="normal" fill="#383838">
+                    <tspan x="1" y="45">Nishikioka</tspan>
                 </text>
             </g>
             <g id="Middle" transform="translate(235.000000, 100.000000)">
-                <g id="icon" transform="translate(43.000000, 33.000000)">
+                <g id="middleIcon" transform="translate(45.000000, 35.000000)">
                     <path d="M39.2144,2.08 C39.9659491,2.08 40.6463491,2.38462546 41.1388618,2.87713818 C41.6313745,3.36965091 41.936,4.05005091 41.936,4.8016 L41.936,4.8016 L41.936,23.04928 C41.936,23.8008291 41.6313745,24.4812291 41.1388618,24.9737418 C40.6463491,25.4662545 39.9659491,25.77088 39.2144,25.77088 L39.2144,25.77088 L8.8016,25.77088 C8.05005091,25.77088 7.36965091,25.4662545 6.87713818,24.9737418 C6.38462546,24.4812291 6.08,23.8008291 6.08,23.04928 L6.08,23.04928 L6.08,4.8016 C6.08,4.05005091 6.38462546,3.36965091 6.87713818,2.87713818 C7.36965091,2.38462546 8.05005091,2.08 8.8016,2.08 L8.8016,2.08 Z" id="rec2" stroke="#565656" stroke-width="2.16"></path>
-                    <text id="middleStaNumber" font-family="PingFangSC-Medium, PingFang SC" font-size="19.7074944" font-weight="400" fill="#565656">
-                        <tspan x="12.17312" y="21">03</tspan>
+                    <text id="middleStaNumber" font-family="PingFangSC-Medium, PingFang SC" font-size="19.7074944" font-weight="400" fill="#383838">
+                        <tspan x="12" y="21">03</tspan>
                     </text>
                     <path d="M7.77,2.08 L7.77,25.77 L2.8740096,25.77 C2.37860753,25.77 1.93010513,25.5691986 1.60545325,25.2445468 C1.28080136,24.9198949 1.08,24.4713925 1.08,23.9759904 L1.08,23.9759904 L1.08,3.8740096 C1.08,3.37860753 1.28080136,2.93010513 1.60545325,2.60545325 C1.93010513,2.28080136 2.37860753,2.08 2.8740096,2.08 L2.8740096,2.08 L7.77,2.08 Z" id="rec1" stroke="#565656" stroke-width="2.16" fill="#565656"></path>
                 </g>
                 <g id="lineIcon" transform="translate(0.000000, 2.000000)">
                     <rect id="rec" stroke="#565656" stroke-width="1.14960384" fill="#565656" x="0.57480192" y="1.14960384" width="18.3936614" height="18.3936614" rx="2.8740096"></rect>
                     <text id="lineAbbr" font-family="PingFangSC-Regular, PingFang SC" font-size="14.8988658" font-weight="normal" fill="#ECECEC">
-                        <tspan x="5.17321728" y="16">T</tspan>
+                        <tspan x="5" y="16">T</tspan>
                     </text>
                 </g>
                 <path d="M65.6924798,79.1587931 C68.4791244,79.1587931 70.2434489,76.6941835 71.9995627,74.1131268 C72.8917314,72.8018576 72.7140509,71.7341305 74.2737932,70.4742009 C74.7318533,70.1041888 75.5243783,69.9191828 76.6513682,69.9191828 L81,69.9191828 C71.9136972,66.2923023 66.7389847,64.4788621 65.4758626,64.4788621 C64.2587707,64.4788621 59.1001498,66.2923023 50,69.9191828 L54.5322914,69.9191828 C55.0824464,69.9363092 55.604229,70.0663902 56.0976394,70.3094259 C57.3796762,70.9409099 58.667018,73.5679754 58.8935202,73.9194808 C60.5691015,76.5197899 62.9058353,79.1587931 65.6924798,79.1587931 Z" id="middleEpli" fill="#ECECEC"></path>
