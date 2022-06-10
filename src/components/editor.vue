@@ -63,7 +63,7 @@
           </div>
           <div class="form-min-row">
             <p>字体颜色</p>
-            <input v-model="signInfo.main.textColor" @change="sendData" type="color">
+            <input v-model="signInfo.main.mainTextColor" @change="sendData" type="color">
           </div>
       </div>
       <div>
@@ -107,7 +107,7 @@
         </div>
         <div class="form-min-row">
           <p>字体颜色</p>
-          <input v-model="signInfo.left.textColor" @change="sendData" type="color">
+          <input v-model="signInfo.left.leftTextColor" @change="sendData" type="color">
         </div>
       </div>
       <div>
@@ -126,7 +126,7 @@
         </div>
         <div class="form-min-row">
           <p>字体颜色</p>
-          <input v-model="signInfo.right.textColor" @change="sendData" type="color">
+          <input v-model="signInfo.right.rightTextColor" @change="sendData" type="color">
         </div>
       </div>
     </div>
