@@ -186,6 +186,9 @@ export default {
     sendSign(){
       this.$emit('signChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
     },
+    requestRearrange(){
+      this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
+    },
     reverseLeftRight(){
       let tempL = null;
       let tempR = null;
@@ -206,7 +209,8 @@ export default {
       this.signInfo.left.textColor = tempR;
       this.signInfo.right.textColor = tempL;
 
-      this.$emit("someChanged", this.signInfo, this.output);
+      this.$emit("someChanged", this.lightStyle, this.signInfo, this.output);
+      this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     },
   },
 }

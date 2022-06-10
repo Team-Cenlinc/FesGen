@@ -96,6 +96,8 @@ export default {
       dom = this.$refs.svg.getElementById("staNameEnglish")
       dom.childNodes[0].innerHTML = this.signInfo.main.staNameEnglish
 
+      dom = this.$refs.svg.getElementsByTagName("path")
+
       //signInfo.right
 
       dom = this.$refs.svg.getElementById("rightStaNameChinese")
@@ -130,6 +132,7 @@ export default {
       dom.childNodes[0].innerHTML = this.signInfo.middle.lineAbbr
 
       // Line Abbr. Color is same as background.
+
       dom.attributes.fill.value = this.signInfo.backgroundColor
 
       // Other sections are same as the "main" part.
@@ -164,8 +167,25 @@ export default {
         dom = this.$refs.svg.getElementById("Toward")
         dom.hidden
       }
-
     },
+    RequireRearrange(lightStyle, signInfo, signScale) {
+
+      this.lightStyle = lightStyle
+      this.signInfo = signInfo
+      this.output = signScale
+
+      // Calculation Zone
+
+      /** Rearrange Accept list (For Dev)
+       * midStaCHN(/Kanji) (Ref Pt. Toward Left)
+       * midLineAbbr
+       * midLineAbbrIcon
+       * midLineName
+       * midLine
+       */
+
+      // Reference Size
+    }
   },
 }
 </script>

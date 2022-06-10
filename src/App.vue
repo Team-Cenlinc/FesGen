@@ -2,7 +2,7 @@
   <div id="app">
     <HeaderFlex :title="titles"/>
     <Signs ref="signs"/>
-    <Editor @someChanged="UpdateData" @signChanged="UpdateSignStyle"/>
+    <Editor @someChanged="UpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="RequireRearrange"/>
     <FooterFlex :title="titles"/>
   </div>
 </template>
@@ -28,6 +28,9 @@ export default {
     UpdateData(lightStyle, signInfo, signScale){
       this.$refs.signs.UpdateData(signInfo, lightStyle, signScale)
     },
+    RequireRearrange(lightStyle, signInfo, signScale){
+      this.$refs.signs.RequireRearrange(lightStyle, signInfo, signScale)
+    }
   }
 }
 </script>
