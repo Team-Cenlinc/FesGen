@@ -36,12 +36,12 @@
         <h2>站牌大小</h2>
           <div class="form-min-row">
             <p>宽度</p>
-            <div><input v-model="output.outputWidth" @change="sendData" type="number" value="2160"> px</div>
+            <div><input v-model="output.outputWidth" @change="requestRearrange" type="number" value="620"> px</div>
 
           </div>
           <div class="form-min-row">
             <p>高度</p>
-            <div><input v-model="output.outputHeight" @change="sendData" type="number" value="720"> px</div>
+            <div><input v-model="output.outputHeight" @change="requestRearrange" type="number" value="220"> px</div>
 
           </div>
       </div>
@@ -51,7 +51,7 @@
         <h2>本站名</h2>
           <div class="form-min-row">
             <p>站名 中文</p>
-            <input v-model.lazy="signInfo.main.staNameChinese" @change="sendData" type="text">
+            <input v-model.lazy="signInfo.main.staNameChinese" @change="requestRearrange" type="text">
           </div>
           <div class="form-min-row">
             <p>站名 英语</p>
@@ -78,15 +78,15 @@
         </div>
         <div class="form-min-row">
           <p>线路名称</p>
-          <input v-model="signInfo.middle.lineName" @change="sendData" type="text">
+          <input v-model="signInfo.middle.lineName" @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
           <p>线路缩写</p>
-          <input v-model="signInfo.middle.lineAbbr" @change="sendData" type="text">
+          <input v-model="signInfo.middle.lineAbbr" @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
           <p>本站编号</p>
-          <input v-model="signInfo.middle.middleStaNumber" type="number">
+          <input v-model="signInfo.middle.middleStaNumber" @change="sendData" type="number">
         </div>
       </div>
     </div>
@@ -95,11 +95,11 @@
         <h2>左侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
-          <input v-model="signInfo.left.leftStaNameChinese" value='锦冈' @change="sendData" type="text">
+          <input v-model="signInfo.left.leftStaNameChinese" value='锦冈' @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
           <p>站名 英语</p>
-          <input v-model="signInfo.left.leftStaNameEnglish" value='Nishikioka' @change="sendData" type="text">
+          <input v-model="signInfo.left.leftStaNameEnglish" value='Nishikioka' @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
           <p>站点编号</p>
@@ -114,11 +114,11 @@
         <h2>右侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
-          <input v-model="signInfo.right.rightStaNameChinese" value='北宿' @change="sendData" type="text">
+          <input v-model="signInfo.right.rightStaNameChinese" value='北宿' @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
           <p>站名 英语</p>
-          <input v-model="signInfo.right.rightStaNameEnglish" value='Hokuriku' @change="sendData" type="text">
+          <input v-model="signInfo.right.rightStaNameEnglish" value='Hokuriku' @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
           <p>站点编号</p>
@@ -149,13 +149,13 @@ export default {
           staNameEnglish: 'Kaihin-Shukukai',
           staNameChinese: '海浜宿海',
           staNameKana: 'かいひんしゅくかい',
-          textColor: '#383838',
+          mainTextColor: '#383838',
         },
         left: {
           leftStaNumber: '04',
           leftStaNameEnglish: 'Nishikioka',
           leftStaNameChinese: '錦岡',
-          textColor: '#383838',
+          leftTextColor: '#383838',
         },
         middle: {
           lineName: '東海岸本線',
@@ -166,7 +166,7 @@ export default {
           rightStaNumber: '02',
           rightStaNameEnglish: 'Hokuriku',
           rightStaNameChinese: '北宿',
-          textColor: '#7a7a7a',
+          rightTextColor: '#7a7a7a',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
@@ -190,24 +190,24 @@ export default {
       this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     },
     reverseLeftRight(){
-      let tempL = null;
-      let tempR = null;
-      tempL = this.signInfo.left.leftStaNameChinese;
-      tempR = this.signInfo.right.rightStaNameChinese;
-      this.signInfo.left.leftStaNameChinese = tempR;
-      this.signInfo.right.rightStaNameChinese = tempL;
-      tempL = this.signInfo.left.leftStaNameEnglish;
-      tempR = this.signInfo.right.rightStaNameEnglish;
-      this.signInfo.left.leftStaNameEnglish = tempR;
-      this.signInfo.right.rightStaNameEnglish = tempL;
-      tempL = this.signInfo.left.leftStaNumber;
-      tempR = this.signInfo.right.rightStaNumber;
-      this.signInfo.left.leftStaNumber = tempR;
-      this.signInfo.right.rightStaNumber = tempL;
-      tempL = this.signInfo.left.textColor;
-      tempR = this.signInfo.right.textColor;
-      this.signInfo.left.textColor = tempR;
-      this.signInfo.right.textColor = tempL;
+      let tempL = null
+      let tempR = null
+      tempL = this.signInfo.left.leftStaNameChinese
+      tempR = this.signInfo.right.rightStaNameChinese
+      this.signInfo.left.leftStaNameChinese = tempR
+      this.signInfo.right.rightStaNameChinese = tempL
+      tempL = this.signInfo.left.leftStaNameEnglish
+      tempR = this.signInfo.right.rightStaNameEnglish
+      this.signInfo.left.leftStaNameEnglish = tempR
+      this.signInfo.right.rightStaNameEnglish = tempL
+      tempL = this.signInfo.left.leftStaNumber
+      tempR = this.signInfo.right.rightStaNumber
+      this.signInfo.left.leftStaNumber = tempR
+      this.signInfo.right.rightStaNumber = tempL
+      tempL = this.signInfo.left.leftTextColor
+      tempR = this.signInfo.right.leftTextColor
+      this.signInfo.left.leftTextColor = tempR
+      this.signInfo.right.rightTextColor = tempL
 
       this.$emit("someChanged", this.lightStyle, this.signInfo, this.output);
       this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)

@@ -42,13 +42,13 @@ export default {
           staNameEnglish: 'Kaihin-Shukukai',
           staNameChinese: '海浜宿海',
           staNameKana: 'かいひんしゅくかい',
-          textColor: '#383838',
+          mainTextColor: '#383838',
         },
         left: {
           leftStaNumber: '04',
           leftStaNameEnglish: 'Nishikioka',
           leftStaNameChinese: '錦岡',
-          textColor: '#383838',
+          leftTextColor: '#383838',
         },
         middle: {
           lineName: '東海岸本線',
@@ -59,7 +59,7 @@ export default {
           rightStaNumber: '02',
           rightStaNameEnglish: 'Hokuriku',
           rightStaNameChinese: '北宿',
-          textColor: '#7a7a7a',
+          rightTextColor: '#7a7a7a',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
@@ -85,7 +85,7 @@ export default {
       //signInfo.main
 
       let dom = this.$refs.svg.getElementById("Main")
-      dom.attributes.fill.value = this.signInfo.main.textColor
+      dom.attributes.fill.value = this.signInfo.main.mainTextColor
 
       dom = this.$refs.svg.getElementById("staNameChinese")
       dom.childNodes[0].innerHTML = this.signInfo.main.staNameChinese
@@ -96,35 +96,40 @@ export default {
       dom = this.$refs.svg.getElementById("staNameEnglish")
       dom.childNodes[0].innerHTML = this.signInfo.main.staNameEnglish
 
-      dom = this.$refs.svg.getElementsByTagName("path")
+      dom = this.$refs.svg.getElementById("middleIconOuter")
+      dom.attributes.stroke.value = this.signInfo.main.mainTextColor
+      dom.attributes.fill.value = this.signInfo.main.mainTextColor
+
+      dom = this.$refs.svg.getElementById("middleIconInner")
+      dom.attributes.stroke.value = this.signInfo.main.mainTextColor
 
       //signInfo.right
 
       dom = this.$refs.svg.getElementById("rightStaNameChinese")
       dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNameChinese
-      dom.attributes.fill.value = this.signInfo.right.textColor
+      dom.attributes.fill.value = this.signInfo.right.rightTextColor
 
       dom = this.$refs.svg.getElementById("rightStaNameEnglish")
       dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNameEnglish
-      dom.attributes.fill.value = this.signInfo.right.textColor
+      dom.attributes.fill.value = this.signInfo.right.rightTextColor
 
       dom = this.$refs.svg.getElementById("rightStaNumber")
       dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNumber
-      dom.attributes.fill.value = this.signInfo.right.textColor
+      dom.attributes.fill.value = this.signInfo.right.rightTextColor
 
       //signInfo.left
 
       dom = this.$refs.svg.getElementById("leftStaNameChinese")
       dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNameChinese
-      dom.attributes.fill.value = this.signInfo.left.textColor
+      dom.attributes.fill.value = this.signInfo.left.leftTextColor
 
       dom = this.$refs.svg.getElementById("leftStaNameEnglish")
       dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNameEnglish
-      dom.attributes.fill.value = this.signInfo.left.textColor
+      dom.attributes.fill.value = this.signInfo.left.leftTextColor
 
       dom = this.$refs.svg.getElementById("leftStaNumber")
       dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNumber
-      dom.attributes.fill.value = this.signInfo.left.textColor
+      dom.attributes.fill.value = this.signInfo.left.leftTextColor
 
       // signInfo.middle
 
@@ -139,33 +144,35 @@ export default {
 
       dom = this.$refs.svg.getElementById("lineName")
       dom.childNodes[0].innerHTML = this.signInfo.middle.lineName
-      dom.attributes.fill.value = this.signInfo.main.textColor
+      dom.attributes.fill.value = this.signInfo.main.mainTextColor
 
       dom = this.$refs.svg.getElementById("middleStaNumber")
       dom.childNodes[0].innerHTML = this.signInfo.middle.middleStaNumber
-      dom.attributes.fill.value = this.signInfo.main.textColor
+      dom.attributes.fill.value = this.signInfo.main.mainTextColor
 
-      // --
-      console.log(dom.childNodes[0].innerHTML)
+      // console.log(dom.childNodes[0].innerHTML)
 
       // dom.innerHTML = this.signInfo.main.staNameChinese
 
-      dom = this.$refs.svg.getElementById("line")
+      dom = this.$refs.svg.getElementById("lineColorBelt")
       dom.attributes.stroke.value = this.signInfo.lineColor
+
       dom = this.$refs.svg.getElementById("background")
-      dom.attributes[3].value = this.signInfo.frameThickness
-      //console.log(dom.attributes[3])
+      dom.attributes.stroke.width.value = this.signInfo.frameThickness
       dom.attributes.fill.value = this.signInfo.backgroundColor
+
       dom = this.$refs.svg.getElementById("leftEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
+
       dom = this.$refs.svg.getElementById("rightEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
+
       dom = this.$refs.svg.getElementById("middleEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
 
       if (this.signInfo.displayForwardArrow){
         dom = this.$refs.svg.getElementById("Toward")
-        dom.hidden
+        dom.attributes.visibility.value = "visible"
       }
     },
     RequireRearrange(lightStyle, signInfo, signScale) {
@@ -177,14 +184,78 @@ export default {
       // Calculation Zone
 
       /** Rearrange Accept list (For Dev)
-       * midStaCHN(/Kanji) (Ref Pt. Toward Left)
-       * midLineAbbr
-       * midLineAbbrIcon
-       * midLineName
-       * midLine
+       * mainStaCHN(/Kanji) (Ref. Pt. Depend)
+       * midLineAbbrIcon (Ref. Pt. Depend)
+       * midLineName (Ref. Pt. Depend)
+       *
+       * leftStaIcon (Ref. Pt. Depend)
+       *
+       * rightStaNameCHN (Ref. Pt. Depend)
+       * rightStaNameEng (Ref. Pt. Depend)
        */
 
       // Reference Size
+      let weightBorderX
+      let weightBorderY
+      let contentLength
+      let xValueFin
+      let yValueFin
+      let xRefPoint
+      let yRefPoint
+      let dom
+
+      // X value + 100%; Y value + 50%
+      // signInfo.output · 第一次偏差值求值
+      weightBorderX = this.output.outputWidth + 20
+      weightBorderY = this.output.outputHeight + 20
+
+      // 牌子viewBox与画板大小
+      dom = this.$refs.svg.getElementById("canvasGlobal")
+      dom.attributes.width.value = weightBorderX.toString() + "px"
+      dom.attributes.height.value = weightBorderY.toString() + "px"
+
+      // 第二次偏差值求值
+
+      weightBorderX = this.output.outputWidth - 600
+      weightBorderY = this.output.outputHeight - 200
+
+      // 非计算元素 - 直接加值
+
+      dom = this.$refs.svg.getElementById("staNameEnglish")
+      xRefPoint = 255
+      yRefPoint = 65
+      xValueFin = xRefPoint + weightBorderX
+      yValueFin = yRefPoint + weightBorderY
+      dom.childNodes[0].innerHTML.attributes.x.value = xValueFin
+      dom.childNodes[0].innerHTML.attributes.y.value = yValueFin
+
+      dom = this.$refs.svg.getElementById("staNameKana")
+      xRefPoint = 255
+      yRefPoint = 30
+      xValueFin = xRefPoint + weightBorderX
+      yValueFin = yRefPoint + weightBorderY
+      dom.childNodes[0].innerHTML.attributes.x.value = xValueFin
+      dom.childNodes[0].innerHTML.attributes.y.value = yValueFin
+
+
+      // signInfo.main
+
+      contentLength = this.signInfo.main.staNameChinese.length
+
+      xRefPoint = 240
+      yRefPoint = 60
+      xValueFin = xRefPoint + (contentLength * 60) + weightBorderX
+      yValueFin = yRefPoint + (weightBorderY / 4)
+      dom = this.$refs.svg.getElementById("staNameChinese")
+      dom.childNodes[0].innerHTML.attributes.x.value = xValueFin
+      dom.childNodes[0].innerHTML.attributes.y.value = yValueFin
+
+      // signInfo.middle - Abbr Icon bind with signInfo.main in position
+
+
+
+
+
     }
   },
 }
