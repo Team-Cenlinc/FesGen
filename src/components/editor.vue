@@ -29,7 +29,7 @@
         </div>
         <div class="form-min-row">
           <p>反转左右信息</p>
-          <input v-on:click="reverseLeftRight" value="反转左右信息" type="button">
+          <input @click="reverseLeftRight" value="反转左右信息" type="button">
         </div>
       </div>
       <div>
@@ -190,8 +190,8 @@ export default {
       this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     },
     reverseLeftRight(){
-      let tempL = null
-      let tempR = null
+      let tempL
+      let tempR
       tempL = this.signInfo.left.leftStaNameChinese
       tempR = this.signInfo.right.rightStaNameChinese
       this.signInfo.left.leftStaNameChinese = tempR
@@ -209,7 +209,6 @@ export default {
       this.signInfo.left.leftTextColor = tempR
       this.signInfo.right.rightTextColor = tempL
 
-      this.$emit("someChanged", this.lightStyle, this.signInfo, this.output);
       this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     },
   },

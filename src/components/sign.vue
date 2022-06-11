@@ -98,10 +98,10 @@ export default {
 
       dom = this.$refs.svg.getElementById("middleIconOuter")
       dom.attributes.stroke.value = this.signInfo.main.mainTextColor
-      dom.attributes.fill.value = this.signInfo.main.mainTextColor
 
       dom = this.$refs.svg.getElementById("middleIconInner")
       dom.attributes.stroke.value = this.signInfo.main.mainTextColor
+      dom.attributes.fill.value = this.signInfo.main.mainTextColor
 
       //signInfo.right
 
@@ -142,6 +142,10 @@ export default {
 
       // Other sections are same as the "main" part.
 
+      dom = this.$refs.svg.getElementById("abbrIcon")
+      dom.attributes.fill.value = this.signInfo.main.mainTextColor
+      dom.attributes.stroke.value = this.signInfo.main.mainTextColor
+
       dom = this.$refs.svg.getElementById("lineName")
       dom.childNodes[0].innerHTML = this.signInfo.middle.lineName
       dom.attributes.fill.value = this.signInfo.main.mainTextColor
@@ -158,7 +162,7 @@ export default {
       dom.attributes.stroke.value = this.signInfo.lineColor
 
       dom = this.$refs.svg.getElementById("background")
-      dom.attributes.stroke.width.value = this.signInfo.frameThickness
+      dom.attributes[3].value = this.signInfo.frameThickness
       dom.attributes.fill.value = this.signInfo.backgroundColor
 
       dom = this.$refs.svg.getElementById("leftEpli")
@@ -170,6 +174,7 @@ export default {
       dom = this.$refs.svg.getElementById("middleEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
 
+      console.log(this.signInfo.displayForwardArrow)
       if (this.signInfo.displayForwardArrow){
         dom = this.$refs.svg.getElementById("Toward")
         dom.attributes.visibility.value = "visible"
@@ -204,15 +209,11 @@ export default {
       let yRefPoint
       let dom
 
-      // X value + 100%; Y value + 50%
-      // signInfo.output · 第一次偏差值求值
-      weightBorderX = this.output.outputWidth + 20
-      weightBorderY = this.output.outputHeight + 20
-
-      // 牌子viewBox与画板大小
-      dom = this.$refs.svg.getElementById("canvasGlobal")
-      dom.attributes.width.value = weightBorderX.toString() + "px"
-      dom.attributes.height.value = weightBorderY.toString() + "px"
+      /** X value + 100%; Y value + 50%
+       * signInfo.output · 第一次偏差值求值
+       * weightBorderX = this.output.outputWidth + 20
+       * weightBorderY = this.output.outputHeight + 20
+       */
 
       // 第二次偏差值求值
 
@@ -226,16 +227,16 @@ export default {
       yRefPoint = 65
       xValueFin = xRefPoint + weightBorderX
       yValueFin = yRefPoint + weightBorderY
-      dom.childNodes[0].innerHTML.attributes.x.value = xValueFin
-      dom.childNodes[0].innerHTML.attributes.y.value = yValueFin
+      dom.attributes.x.value = xValueFin
+      dom.attributes.y.value = yValueFin
 
       dom = this.$refs.svg.getElementById("staNameKana")
       xRefPoint = 255
       yRefPoint = 30
       xValueFin = xRefPoint + weightBorderX
       yValueFin = yRefPoint + weightBorderY
-      dom.childNodes[0].innerHTML.attributes.x.value = xValueFin
-      dom.childNodes[0].innerHTML.attributes.y.value = yValueFin
+      dom.attributes.x.value = xValueFin
+      dom.attributes.y.value = yValueFin
 
 
       // signInfo.main
@@ -244,11 +245,11 @@ export default {
 
       xRefPoint = 240
       yRefPoint = 60
-      xValueFin = xRefPoint + (contentLength * 60) + weightBorderX
+      xValueFin = xRefPoint - (contentLength * 60) + weightBorderX
       yValueFin = yRefPoint + (weightBorderY / 4)
       dom = this.$refs.svg.getElementById("staNameChinese")
-      dom.childNodes[0].innerHTML.attributes.x.value = xValueFin
-      dom.childNodes[0].innerHTML.attributes.y.value = yValueFin
+      dom.attributes.x.value = xValueFin
+      dom.attributes.y.value = yValueFin
 
       // signInfo.middle - Abbr Icon bind with signInfo.main in position
 

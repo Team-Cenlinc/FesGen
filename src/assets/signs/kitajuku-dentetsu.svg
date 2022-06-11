@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="canvasGlobal" width="3360px" height="220px" viewBox="0 0 600 220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="canvasGlobal" width="3360" height="220" viewBox="0 0 600 220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Output</title>
     <defs>
         <filter x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" id="filter-1">
@@ -17,24 +17,24 @@
         <g id="Output" filter="url(#filter-1)" transform="translate(0.000000, 0.000000)">
             <rect id="background" stroke="#4D4D4D" stroke-width="4" fill="#ECECEC" x="0" y="0" width="600" height="200"></rect>
             <g id="Main" transform="translate(65.000000, 15.000000)" fill="#383838" font-weight="normal">
-                <text id="staNameEnglish" font-family="Helvetica" font-size="22">
+                <text id="staNameEnglish" x="255" y="65" font-family="Helvetica" font-size="22">
                     <!-- Origin 255, 65 -->
-                    <tspan x="255" y="65">Kaihin-Shukukai</tspan>
+                    <tspan>Kaihin-Shukukai</tspan>
                 </text>
-                <text id="staNameKana" font-family=".PingFangSC-Regular, .PingFang SC" font-size="22">
+                <text id="staNameKana" x="255" y="30" font-family=".PingFangSC-Regular, .PingFang SC" font-size="22">
                     <!-- Origin 255, 30 -->
-                    <tspan x="255" y="30">かいひんしゅくかい</tspan>
+                    <tspan>かいひんしゅくかい</tspan>
                 </text>
-                <text id="staNameChinese" font-family=".PingFangSC-Regular, .PingFang SC" font-size="60">
+                <text id="staNameChinese" x="0" y="60" font-family=".PingFangSC-Regular, .PingFang SC" font-size="60">
                     <!-- Origin 0, 60 -->
-                    <tspan x="0" y="60">海浜宿海</tspan>
+                    <tspan>海浜宿海</tspan>
                 </text>
             </g>
             <line x1="2" y1="180" x2="598" y2="180" id="lineColorBelt" stroke="#7297DD" stroke-width="15"></line>
             <g id="Right" transform="translate(472.000000, 120.000000)">
-                <text id="rightStaNameChinese" font-family="PingFangSC-Regular, PingFang SC" font-size="25" font-weight="normal" fill="#737373">
+                <text id="rightStaNameChinese" x="0" y="25" font-family="PingFangSC-Regular, PingFang SC" font-size="25" font-weight="normal" fill="#737373">
                     <!-- Origin 0, 25 -->
-                    <tspan x="0" y="25">北宿</tspan>
+                    <tspan>北宿</tspan>
                 </text>
                 <g id="rightIcon" transform="translate(60.000000, 5.000000)">
                     <path id="rightIconOuter" d="M5.508,2.052 L5.508,20.484 L2.88,20.484 C2.24376797,20.484 1.66776797,20.226116 1.25082598,19.809174 C0.833883984,19.392232 0.576,18.816232 0.576,18.18 L0.576,18.18 L0.576,4.356 C0.576,3.71976797 0.833883984,3.14376797 1.25082598,2.72682598 C1.66776797,2.30988398 2.24376797,2.052 2.88,2.052 L2.88,2.052 L5.508,2.052 Z" stroke="#737373" stroke-width="1.152" fill="#737373"></path>
