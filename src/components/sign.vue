@@ -17,7 +17,6 @@
 
 <script>
 import KitajukuDentetsu from '../assets/signs/kitajuku-dentetsu.svg'
-import TestSign from '../assets/signs/test-sign.svg'
 window.componentsConfig = {    //左边是key值，右边是组件的引入路径
   'kitajuku-dentetsu': '../assets/signs/kitajuku-dentetsu.svg',
   'test-sign': '../assets/signs/test-sign.svg',
@@ -27,7 +26,7 @@ window.componentsConfig = {    //左边是key值，右边是组件的引入路�
 export default {
   name: 'Sign',
   components: {
-    KitajukuDentetsu, TestSign
+    KitajukuDentetsu
   },
   data(){
     return{

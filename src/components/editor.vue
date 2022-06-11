@@ -249,9 +249,8 @@ export default {
 }
 
 input {
-  border-radius: 2px;
-  border-width: 1px;
-  background: #efefef;
+  border-style: none;
+  background: #ffffff;
 }
 
 .form-min-row {
