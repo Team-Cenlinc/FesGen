@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <HeaderFlex :title="titles"/>
+    <div>
+
+    </div>
     <Signs ref="signs"/>
     <Editor @someChanged="UpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="RequireRearrange"/>
     <FooterFlex :title="titles"/>
@@ -19,7 +22,8 @@ export default {
   data()  {
     return{
       titles: 'FesGen',
-    }
+      signStyle: "kitajuku-dentetsu"
+      }
   },
   methods: {
     UpdateSignStyle(signStyle){

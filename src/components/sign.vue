@@ -34,8 +34,8 @@ export default {
       signStyle: 'kitajuku-dentetsu',
       lightStyle: 'fluore',
       output: {
-        outputWidth: 620,
-        outputHeight: 220,
+        outputWidth: 600,
+        outputHeight: 200,
       },
       signInfo:{
         main: {
@@ -59,13 +59,16 @@ export default {
           rightStaNumber: '02',
           rightStaNameEnglish: 'Hokuriku',
           rightStaNameChinese: '北宿',
-          rightTextColor: '#7a7a7a',
+          rightTextColor: '#7A7A7A',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
-        frameThickness: '2',
+        frameThickness: 4,
         displayForwardArrow: true,
+        chnCharacterBold: false,
+        direction: 'left',
       },
+      downloadOption: "svg"
     }
   },
   updated() {
@@ -117,6 +120,13 @@ export default {
       dom.childNodes[0].innerHTML = this.signInfo.right.rightStaNumber
       dom.attributes.fill.value = this.signInfo.right.rightTextColor
 
+      dom = this.$refs.svg.getElementById("rightIconOuter")
+      dom.attributes.stroke.value = this.signInfo.right.rightTextColor
+
+      dom = this.$refs.svg.getElementById("rightIconInner")
+      dom.attributes.stroke.value = this.signInfo.right.rightTextColor
+      dom.attributes.fill.value = this.signInfo.right.rightTextColor
+
       //signInfo.left
 
       dom = this.$refs.svg.getElementById("leftStaNameChinese")
@@ -129,6 +139,13 @@ export default {
 
       dom = this.$refs.svg.getElementById("leftStaNumber")
       dom.childNodes[0].innerHTML = this.signInfo.left.leftStaNumber
+      dom.attributes.fill.value = this.signInfo.left.leftTextColor
+
+      dom = this.$refs.svg.getElementById("leftIconOuter")
+      dom.attributes.stroke.value = this.signInfo.left.leftTextColor
+
+      dom = this.$refs.svg.getElementById("leftIconInner")
+      dom.attributes.stroke.value = this.signInfo.left.leftTextColor
       dom.attributes.fill.value = this.signInfo.left.leftTextColor
 
       // signInfo.middle
@@ -154,10 +171,6 @@ export default {
       dom.childNodes[0].innerHTML = this.signInfo.middle.middleStaNumber
       dom.attributes.fill.value = this.signInfo.main.mainTextColor
 
-      // console.log(dom.childNodes[0].innerHTML)
-
-      // dom.innerHTML = this.signInfo.main.staNameChinese
-
       dom = this.$refs.svg.getElementById("lineColorBelt")
       dom.attributes.stroke.value = this.signInfo.lineColor
 
@@ -174,10 +187,30 @@ export default {
       dom = this.$refs.svg.getElementById("middleEpli")
       dom.attributes.fill.value = this.signInfo.backgroundColor
 
-      console.log(this.signInfo.displayForwardArrow)
+      dom = this.$refs.svg.getElementById("towardArrow")
       if (this.signInfo.displayForwardArrow){
-        dom = this.$refs.svg.getElementById("Toward")
         dom.attributes.visibility.value = "visible"
+      } else {
+        dom.attributes.visibility.value = "hidden"
+      }
+
+      dom = this.$refs.svg.getElementById("Toward")
+      dom.attributes.fill.value = this.signInfo.main.mainTextColor
+
+      if (this.signInfo.chnCharacterBold) {
+        dom = this.$refs.svg.getElementById("staNameChinese")
+        dom.attributes[5].value = "bold"
+        dom = this.$refs.svg.getElementById("rightStaNameChinese")
+        dom.attributes[6].value = "bold"
+        dom = this.$refs.svg.getElementById("leftStaNameChinese")
+        dom.attributes[4].value = "bold"
+      } else {
+        dom = this.$refs.svg.getElementById("staNameChinese")
+        dom.attributes[5].value = "normal"
+        dom = this.$refs.svg.getElementById("rightStaNameChinese")
+        dom.attributes[6].value = "normal"
+        dom = this.$refs.svg.getElementById("leftStaNameChinese")
+        dom.attributes[4].value = "normal"
       }
     },
     RequireRearrange(lightStyle, signInfo, signScale) {
@@ -203,6 +236,7 @@ export default {
       let weightBorderX
       let weightBorderY
       let contentLength
+      let contentCompareLength
       let xValueFin
       let yValueFin
       let xRefPoint
@@ -213,6 +247,12 @@ export default {
        * signInfo.output · 第一次偏差值求值
        * weightBorderX = this.output.outputWidth + 20
        * weightBorderY = this.output.outputHeight + 20
+       *
+       * @@@ Note @@@
+       *
+       * Left:
+       * Middle:
+       *  x / 2 (+), y / 4 (-)
        */
 
       // 第二次偏差值求值
@@ -220,24 +260,16 @@ export default {
       weightBorderX = this.output.outputWidth - 600
       weightBorderY = this.output.outputHeight - 200
 
-      // 非计算元素 - 直接加值
+      // signInfo.output - Line
 
-      dom = this.$refs.svg.getElementById("staNameEnglish")
-      xRefPoint = 255
-      yRefPoint = 65
-      xValueFin = xRefPoint + weightBorderX
-      yValueFin = yRefPoint + weightBorderY
-      dom.attributes.x.value = xValueFin
-      dom.attributes.y.value = yValueFin
-
-      dom = this.$refs.svg.getElementById("staNameKana")
-      xRefPoint = 255
-      yRefPoint = 30
-      xValueFin = xRefPoint + weightBorderX
-      yValueFin = yRefPoint + weightBorderY
-      dom.attributes.x.value = xValueFin
-      dom.attributes.y.value = yValueFin
-
+      xRefPoint = this.signInfo.frameThickness / 2
+      xValueFin = this.output.outputWidth - (this.signInfo.frameThickness / 2)
+      yValueFin = weightBorderY / 4 + 180
+      dom = this.$refs.svg.getElementById("lineColorBelt")
+      dom.attributes[1].value = xRefPoint
+      dom.attributes[3].value = xValueFin
+      dom.attributes[2].value = yValueFin
+      dom.attributes[4].value = yValueFin
 
       // signInfo.main
 
@@ -245,18 +277,117 @@ export default {
 
       xRefPoint = 240
       yRefPoint = 60
-      xValueFin = xRefPoint - (contentLength * 60) + weightBorderX
-      yValueFin = yRefPoint + (weightBorderY / 4)
+      xValueFin = xRefPoint - (contentLength * 60) + (weightBorderX / 2)
+      yValueFin = yRefPoint - (weightBorderY / 4)
       dom = this.$refs.svg.getElementById("staNameChinese")
+      dom.attributes.x.value = xValueFin
+      dom.attributes.y.value = yValueFin
+
+      dom = this.$refs.svg.getElementById("staNameEnglish")
+      xRefPoint = 255
+      yRefPoint = 65
+      xValueFin = xRefPoint + (weightBorderX / 2)
+      yValueFin = yRefPoint - (weightBorderY / 4)
+      dom.attributes.x.value = xValueFin
+      dom.attributes.y.value = yValueFin
+
+      dom = this.$refs.svg.getElementById("staNameKana")
+      xRefPoint = 255
+      yRefPoint = 30
+      xValueFin = xRefPoint + (weightBorderX / 2)
+      yValueFin = yRefPoint - (weightBorderY / 4)
       dom.attributes.x.value = xValueFin
       dom.attributes.y.value = yValueFin
 
       // signInfo.middle - Abbr Icon bind with signInfo.main in position
 
+      // Middle Icon - Pos
+
+      xRefPoint = 45
+      yRefPoint = 35
+      xValueFin = xRefPoint + (weightBorderX / 2)
+      yValueFin = yRefPoint + (weightBorderY / 4)
+      dom = this.$refs.svg.getElementById("middleIcon")
+      dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
+
+      xRefPoint = 0
+      yRefPoint = 0
+      xValueFin = xRefPoint + (weightBorderX / 2)
+      yValueFin = yRefPoint + (weightBorderY / 4)
+      dom = this.$refs.svg.getElementById("middleEpli")
+      dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
 
 
+      // lineIcon (Abbr), Original length 130px
 
+      xRefPoint = 0
+      yRefPoint = 0
+      yValueFin = yRefPoint + (weightBorderY / 4)
+      contentLength = (this.signInfo.middle.lineAbbr.length * 10.57)
+      contentCompareLength = (this.signInfo.middle.lineName.length * 21)
 
+      dom = this.$refs.svg.getElementById("abbrIcon")
+      dom.attributes[7].value = this.signInfo.middle.lineAbbr.length * 10.2 + 10
+
+      xValueFin = this.signInfo.middle.lineAbbr.length * 10.57 - 12
+      dom = this.$refs.svg.getElementById("lineName")
+      dom.attributes[2].value = xValueFin + 90
+
+      xValueFin = xValueFin = (contentLength + contentCompareLength + 5 - weightBorderX) / 2
+      dom = this.$refs.svg.getElementById("lineInfo")
+      if (contentLength + contentCompareLength === 0){
+        xValueFin = 8 + weightBorderX / 2
+      }
+      dom.attributes.transform.value = "translate(" + (xRefPoint - xValueFin).toString() + ", " + yValueFin.toString() +")"
+
+      // signInfo.left - Change Icon
+
+      xRefPoint = 60
+      yRefPoint = 5
+      contentLength = this.signInfo.left.leftStaNameChinese.length * 25
+      yValueFin = yRefPoint + (weightBorderY / 4)
+      xValueFin = contentLength + 10
+      if (contentLength === 0){
+        xValueFin = 0
+      }
+
+      dom = this.$refs.svg.getElementById("leftIcon")
+      dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
+
+      // signInfo.right - Change Text Start Point
+
+      // Global group
+
+      xRefPoint = 472
+      yRefPoint = 120
+      xValueFin = xRefPoint + weightBorderX
+      yValueFin = yRefPoint + (weightBorderY / 4)
+      dom = this.$refs.svg.getElementById("Right")
+      dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
+
+      // Modify start point of text.
+
+      xRefPoint = 0
+      contentLength = this.signInfo.right.rightStaNameChinese.length * 25 - 50
+      xValueFin = xRefPoint - contentLength
+      dom = this.$refs.svg.getElementById("rightStaNameChinese")
+      dom.attributes[2].value = xValueFin
+
+      dom = this.$refs.svg.getElementById("rightStaNameEnglish")
+      dom.attributes[2].value = xValueFin
+
+      // signInfo.direction
+
+      xRefPoint = 595
+      yRefPoint = 200
+      xValueFin = xRefPoint + weightBorderX
+      yValueFin = yRefPoint + (weightBorderY / 4)
+      dom = this.$refs.svg.getElementById("towardArrow")
+      if (this.signInfo.direction === "right") {
+        dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +") rotate(180)"
+      } else if (this.signInfo.direction === "left") {
+        dom.attributes.transform.value = "translate(0, 0) rotate(0)"
+      }
     }
   },
 }

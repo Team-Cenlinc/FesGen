@@ -2,7 +2,7 @@
   <div id="editor" class="form">
     <div class="row">
       <div>
-        <h2>整体调整</h2>
+        <h2>FesGen编辑器设置</h2>
         <div class="form-min-row">
           <p>站牌样式</p>
           <select v-model="signStyle" @change="sendSign">
@@ -20,30 +20,34 @@
           </select>
         </div>
         <div class="form-min-row">
+          <p>[测试] 站名汉字字符强调</p>
+          <input v-model="signInfo.chnCharacterBold" @change="sendData" type="checkbox">
+        </div>
+      </div>
+      <div>
+        <h2>「北宿电铁-站牌」全局设置</h2>
+          <div class="form-min-row">
+            <p>宽度</p>
+            <div><input v-model="output.outputWidth" placeholder="600" @change="requestRearrange" type="number" value="600"> px</div>
+          </div>
+          <div class="form-min-row">
+            <p>高度</p>
+            <div><input v-model="output.outputHeight" placeholder="200" @change="requestRearrange" type="number" value="200"> px</div>
+          </div>
+        <div class="form-min-row">
           <p>边框大小</p>
-          <input v-model="signInfo.frameThickness" value='2' @change="sendData" type="number">
+          <div><input v-model="signInfo.frameThickness" placeholder="4" value='4' @change="requestRearrange" type="number"> px</div>
         </div>
         <div class="form-min-row">
           <p>显示行进方向箭头</p>
-          <input checked="checked" @change="sendData" type="checkbox">
+          <input v-model="signInfo.displayForwardArrow" checked="checked" @change="sendData" type="checkbox">
         </div>
         <div class="form-min-row">
           <p>反转左右信息</p>
           <input @click="reverseLeftRight" value="反转左右信息" type="button">
+          <p>改变行进方向</p>
+          <input @click="changeDirection" value="改变行进方向" type="button">
         </div>
-      </div>
-      <div>
-        <h2>站牌大小</h2>
-          <div class="form-min-row">
-            <p>宽度</p>
-            <div><input v-model="output.outputWidth" @change="requestRearrange" type="number" value="620"> px</div>
-
-          </div>
-          <div class="form-min-row">
-            <p>高度</p>
-            <div><input v-model="output.outputHeight" @change="requestRearrange" type="number" value="220"> px</div>
-
-          </div>
       </div>
     </div>
     <div class="row">
@@ -141,8 +145,8 @@ export default {
       signStyle: 'kitajuku-dentetsu',
       lightStyle: 'fluore',
       output: {
-        outputWidth: 620,
-        outputHeight: 220,
+        outputWidth: 600,
+        outputHeight: 200,
       },
       signInfo:{
         main: {
@@ -166,18 +170,16 @@ export default {
           rightStaNumber: '02',
           rightStaNameEnglish: 'Hokuriku',
           rightStaNameChinese: '北宿',
-          rightTextColor: '#7a7a7a',
+          rightTextColor: '#7A7A7A',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
-        frameThickness: 2,
+        frameThickness: 4,
         displayForwardArrow: true,
-        // direction: 'left',
+        chnCharacterBold: false,
+        direction: 'left',
       },
     }
-  },
-  computed: {
-
   },
   methods :{
     sendData(){
@@ -188,6 +190,17 @@ export default {
     },
     requestRearrange(){
       this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
+    },
+    changeDirection(){
+      if (this.signInfo.direction === "left") {
+        this.signInfo.direction = "right"
+      } else if (this.signInfo.direction === "right") {
+        this.signInfo.direction = "left"
+      } else {
+        this.signInfo.direction = "left"
+      }
+
+      this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
     },
     reverseLeftRight(){
       let tempL
@@ -205,7 +218,7 @@ export default {
       this.signInfo.left.leftStaNumber = tempR
       this.signInfo.right.rightStaNumber = tempL
       tempL = this.signInfo.left.leftTextColor
-      tempR = this.signInfo.right.leftTextColor
+      tempR = this.signInfo.right.rightTextColor
       this.signInfo.left.leftTextColor = tempR
       this.signInfo.right.rightTextColor = tempL
 
@@ -228,12 +241,17 @@ export default {
   margin: 30px auto 30px;
 }
 
-
 .row h2 {
   border-bottom: 8px solid #a0d4e8;
   width: fit-content;
   height: 27px;
   margin: 20px 0 10px 10px;
+}
+
+input {
+  border-radius: 2px;
+  border-width: 1px;
+  background: #efefef;
 }
 
 .form-min-row {
