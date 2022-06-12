@@ -439,7 +439,8 @@ button:hover {
 }
 
 .sign{
-  transform: scale(50%, 50%);
+  margin: -140px auto;
+  transform: scale(35%, 35%);
 }
 
 </style>
