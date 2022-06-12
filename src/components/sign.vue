@@ -1,7 +1,7 @@
 <template>
   <div id="canvas">
     <keep-alive>
-      <component :is="this.signStyle" ref="svg"></component>
+      <component :is="this.signStyle" ref="svg" class="sign"></component>
     </keep-alive>
     <div class="data">
       <h4>SignStyle: </h4>
@@ -263,12 +263,16 @@ export default {
 
       xRefPoint = this.signInfo.frameThickness / 2
       xValueFin = this.output.outputWidth - (this.signInfo.frameThickness / 2)
-      yValueFin = weightBorderY / 4 + 180
+      yValueFin = weightBorderY / 2 + 180
       dom = this.$refs.svg.getElementById("lineColorBelt")
       dom.attributes[1].value = xRefPoint
       dom.attributes[3].value = xValueFin
       dom.attributes[2].value = yValueFin
       dom.attributes[4].value = yValueFin
+
+      dom = this.$refs.svg.getElementById("background")
+      dom.attributes.width.value = this.output.outputWidth
+      dom.attributes.height.value = this.output.outputHeight
 
       // signInfo.main
 
@@ -277,7 +281,7 @@ export default {
       xRefPoint = 240
       yRefPoint = 60
       xValueFin = xRefPoint - (contentLength * 60) + (weightBorderX / 2)
-      yValueFin = yRefPoint - (weightBorderY / 4)
+      yValueFin = yRefPoint + (weightBorderY / 4)
       dom = this.$refs.svg.getElementById("staNameChinese")
       dom.attributes.x.value = xValueFin
       dom.attributes.y.value = yValueFin
@@ -286,7 +290,7 @@ export default {
       xRefPoint = 255
       yRefPoint = 65
       xValueFin = xRefPoint + (weightBorderX / 2)
-      yValueFin = yRefPoint - (weightBorderY / 4)
+      yValueFin = yRefPoint + (weightBorderY / 4)
       dom.attributes.x.value = xValueFin
       dom.attributes.y.value = yValueFin
 
@@ -294,7 +298,7 @@ export default {
       xRefPoint = 255
       yRefPoint = 30
       xValueFin = xRefPoint + (weightBorderX / 2)
-      yValueFin = yRefPoint - (weightBorderY / 4)
+      yValueFin = yRefPoint + (weightBorderY / 4)
       dom.attributes.x.value = xValueFin
       dom.attributes.y.value = yValueFin
 
@@ -305,14 +309,14 @@ export default {
       xRefPoint = 45
       yRefPoint = 35
       xValueFin = xRefPoint + (weightBorderX / 2)
-      yValueFin = yRefPoint + (weightBorderY / 4)
+      yValueFin = yRefPoint + (weightBorderY / 2)
       dom = this.$refs.svg.getElementById("middleIcon")
       dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
 
       xRefPoint = 0
       yRefPoint = 0
       xValueFin = xRefPoint + (weightBorderX / 2)
-      yValueFin = yRefPoint + (weightBorderY / 4)
+      yValueFin = yRefPoint + (weightBorderY / 2)
       dom = this.$refs.svg.getElementById("middleEpli")
       dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
 
@@ -321,14 +325,14 @@ export default {
 
       xRefPoint = 0
       yRefPoint = 0
-      yValueFin = yRefPoint + (weightBorderY / 4)
-      contentLength = (this.signInfo.middle.lineAbbr.length * 10.57)
+      yValueFin = yRefPoint + (weightBorderY / 2)
+      contentLength = (this.signInfo.middle.lineAbbr.length * 11)
       contentCompareLength = (this.signInfo.middle.lineName.length * 21)
 
       dom = this.$refs.svg.getElementById("abbrIcon")
-      dom.attributes[7].value = this.signInfo.middle.lineAbbr.length * 10.2 + 10
+      dom.attributes[7].value = this.signInfo.middle.lineAbbr.length * 10.7 + 10
 
-      xValueFin = this.signInfo.middle.lineAbbr.length * 10.57 - 12
+      xValueFin = this.signInfo.middle.lineAbbr.length * 11 - 12
       dom = this.$refs.svg.getElementById("lineName")
       dom.attributes[2].value = xValueFin + 90
 
@@ -341,17 +345,22 @@ export default {
 
       // signInfo.left - Change Icon
 
+      xRefPoint = 29
+      yRefPoint = 120
+      yValueFin = yRefPoint + (weightBorderY / 2)
+      dom = this.$refs.svg.getElementById("Left")
+      dom.attributes.transform.value = "translate(" + xRefPoint.toString() + ", " + yValueFin.toString() +")"
+
       xRefPoint = 60
       yRefPoint = 5
       contentLength = this.signInfo.left.leftStaNameChinese.length * 25
-      yValueFin = yRefPoint + (weightBorderY / 4)
       xValueFin = contentLength + 10
       if (contentLength === 0){
         xValueFin = 0
       }
 
       dom = this.$refs.svg.getElementById("leftIcon")
-      dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
+      dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yRefPoint.toString() +")"
 
       // signInfo.right - Change Text Start Point
 
@@ -360,7 +369,7 @@ export default {
       xRefPoint = 472
       yRefPoint = 120
       xValueFin = xRefPoint + weightBorderX
-      yValueFin = yRefPoint + (weightBorderY / 4)
+      yValueFin = yRefPoint + (weightBorderY / 2)
       dom = this.$refs.svg.getElementById("Right")
       dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
 
@@ -380,12 +389,13 @@ export default {
       xRefPoint = 595
       yRefPoint = 200
       xValueFin = xRefPoint + weightBorderX
-      yValueFin = yRefPoint + (weightBorderY / 4)
+      yValueFin = yRefPoint - (weightBorderY / 4)
       dom = this.$refs.svg.getElementById("towardArrow")
       if (this.signInfo.direction === "right") {
         dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +") rotate(180)"
       } else if (this.signInfo.direction === "left") {
-        dom.attributes.transform.value = "translate(0, 0) rotate(0)"
+        yValueFin = weightBorderY / 2
+        dom.attributes.transform.value = "translate(0" + yValueFin.toString() +") rotate(0)"
       }
     }
   },
@@ -426,6 +436,10 @@ button {
 button:hover {
   background-color: rgba(79, 79, 79, .65);
   color: #f3f3f3;
+}
+
+.sign{
+  transform: scale(50%, 50%);
 }
 
 </style>

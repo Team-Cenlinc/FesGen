@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="canvasGlobal" width="700" height="220" viewBox="0 0 600 220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="canvasGlobal" viewBox="0 0 600 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Output</title>
     <defs>
         <filter x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" id="filter-1">
@@ -33,7 +33,7 @@
                     <tspan>海浜宿海</tspan>
                 </text>
             </g>
-            <line x1="2" y1="180" x2="598" y2="180" id="lineColorBelt" stroke="#7297DD" stroke-width="15"></line>
+            <line x1="2" y1="180" x2="598" y2="180"  transform="translate(0, 0)" id="lineColorBelt" stroke="#7297DD" stroke-width="15"></line>
             <g id="Right" transform="translate(472.000000, 120.000000)">
                 <text id="rightStaNameChinese" x="0" y="25" font-family="PingFangSC-Regular, PingFang SC" font-size="25" font-weight="normal" fill="#737373">
                     <!-- Origin 0, 25 -->
@@ -85,9 +85,9 @@
                 <g id="lineInfo" transform="translate(0.000000,0.000000)">
                     <g id="lineIcon" transform="translate(65.000000,0.000000)">
                         <rect id="abbrIcon" stroke="#565656" stroke-width="1.14960384" fill="#565656" x="0" y="0" width="20" height="20" rx="2.8740096"></rect>
-                        <text id="lineAbbr" x="5" y="16" font-family="PingFangSC-Regular, PingFang SC" font-size="15" font-weight="normal" fill="#ECECEC">
+                        <text id="lineAbbr" x="5" y="16" font-family="Arial-Medium, Arial" font-size="15" font-weight="normal" fill="#ECECEC">
                             <!-- Origin 5, 16 -->
-                            <tspan></tspan>
+                            <tspan font-family="Arial-Medium, Arial"></tspan>
                         </text>
                     </g>
                     <text id="lineName" x="90" y="18" font-family=".PingFangSC-Regular, .PingFang SC" font-size="21" font-weight="normal" fill="#383838">
