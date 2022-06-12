@@ -2,7 +2,7 @@
   <div id="editor" class="form">
     <div class="row">
       <div>
-        <h2>FesGen编辑器设置</h2>
+        <h2><span class="material-symbols-outlined icon-editor">palette</span> FesGen编辑器设置</h2>
         <div class="form-min-row">
           <p>站牌样式</p>
           <select v-model="signStyle" @change="sendSign">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div>
-        <h2>「北宿电铁-站牌」全局设置</h2>
+        <h2><span class="material-symbols-outlined icon-editor">tune</span>「北宿电铁-站牌」全局设置</h2>
           <div class="form-min-row">
             <p>宽度</p>
             <div><input v-model="output.outputWidth" placeholder="600" @change="requestRearrange" type="number" value="600"> px</div>
@@ -44,15 +44,15 @@
         </div>
         <div class="form-min-row">
           <p>反转左右信息</p>
-          <input @click="reverseLeftRight" value="反转左右信息" type="button">
+          <input class="button" @click="reverseLeftRight" value="  反转左右信息  " type="button">
           <p>改变行进方向</p>
-          <input @click="changeDirection" value="改变行进方向" type="button">
+          <input class="button" @click="changeDirection" value="  改变行进方向  " type="button">
         </div>
       </div>
     </div>
     <div class="row">
       <div>
-        <h2>本站名</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span> 本站名</h2>
           <div class="form-min-row">
             <p>站名 中文</p>
             <input v-model.lazy="signInfo.main.staNameChinese" @change="requestRearrange" type="text">
@@ -71,7 +71,7 @@
           </div>
       </div>
       <div>
-        <h2>主要信息</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span> 主要信息</h2>
         <div class="form-min-row">
           <p>线路颜色</p>
           <input v-model="signInfo.lineColor" @change="sendData" type="color">
@@ -96,7 +96,7 @@
     </div>
     <div class="row">
       <div>
-        <h2>左侧站点信息</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span> 左侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
           <input v-model="signInfo.left.leftStaNameChinese" value='锦冈' @change="requestRearrange" type="text">
@@ -115,7 +115,7 @@
         </div>
       </div>
       <div>
-        <h2>右侧站点信息</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span> 右侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
           <input v-model="signInfo.right.rightStaNameChinese" value='北宿' @change="requestRearrange" type="text">
@@ -249,8 +249,16 @@ export default {
 }
 
 input {
-  border-style: none;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-width: 2px;
+  border-bottom: #4e4e4e;
   background: #ffffff;
+}
+
+.button{
+  border-radius: 30px;
 }
 
 .form-min-row {
@@ -262,4 +270,13 @@ input {
   justify-content: space-between;
   align-items: center;
 }
+
+.material-symbols-outlined{
+   font-variation-settings:
+       'FILL' 0,
+       'wght' 400,
+       'GRAD' 0,
+       'opsz' 48
+}
+
 </style>
