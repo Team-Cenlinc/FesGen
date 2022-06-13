@@ -17,6 +17,7 @@
 
 <script>
 import KitajukuDentetsu from '../assets/signs/kitajuku-dentetsu.svg'
+
 window.componentsConfig = {    //左边是key值，右边是组件的引入路径
   'kitajuku-dentetsu': '../assets/signs/kitajuku-dentetsu.svg',
   'test-sign': '../assets/signs/test-sign.svg',
@@ -322,17 +323,18 @@ export default {
 
 
       // lineIcon (Abbr), Original length 130px
+      let domHelp = this.$refs.svg.getElementById("lineAbbr");
 
       xRefPoint = 0
       yRefPoint = 0
       yValueFin = yRefPoint + (weightBorderY / 2)
-      contentLength = (this.signInfo.middle.lineAbbr.length * 11)
+      contentLength = domHelp.getBBox().width
       contentCompareLength = (this.signInfo.middle.lineName.length * 21)
 
       dom = this.$refs.svg.getElementById("abbrIcon")
-      dom.attributes[7].value = this.signInfo.middle.lineAbbr.length * 10.7 + 10
+      dom.attributes[7].value = (domHelp.getBBox().width) + 10
 
-      xValueFin = this.signInfo.middle.lineAbbr.length * 11 - 12
+      xValueFin = domHelp.getBBox().width - 10
       dom = this.$refs.svg.getElementById("lineName")
       dom.attributes[2].value = xValueFin + 90
 
