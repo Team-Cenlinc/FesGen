@@ -61,6 +61,10 @@ export default {
           rightStaNameChinese: '北宿',
           rightTextColor: '#7A7A7A',
         },
+        secondLine: {
+          enable: false,
+          color: '#7297DD',
+        },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
         frameThickness: 4,
@@ -171,7 +175,7 @@ export default {
       dom.childNodes[0].innerHTML = this.signInfo.middle.middleStaNumber
       dom.attributes.fill.value = this.signInfo.main.mainTextColor
 
-      dom = this.$refs.svg.getElementById("lineColorBelt")
+      dom = this.$refs.svg.getElementById("lineColorBelt1")
       dom.attributes.stroke.value = this.signInfo.lineColor
 
       dom = this.$refs.svg.getElementById("background")
@@ -265,7 +269,7 @@ export default {
       xRefPoint = this.signInfo.frameThickness / 2
       xValueFin = this.output.outputWidth - (this.signInfo.frameThickness / 2)
       yValueFin = weightBorderY / 2 + 180
-      dom = this.$refs.svg.getElementById("lineColorBelt")
+      dom = this.$refs.svg.getElementById("lineColorBelt1")
       dom.attributes[1].value = xRefPoint
       dom.attributes[3].value = xValueFin
       dom.attributes[2].value = yValueFin
@@ -391,7 +395,7 @@ export default {
       xRefPoint = 595
       yRefPoint = 200
       xValueFin = xRefPoint + weightBorderX
-      yValueFin = yRefPoint - (weightBorderY / 4)
+      yValueFin = yRefPoint - (weightBorderY / 2)
       dom = this.$refs.svg.getElementById("towardArrow")
       if (this.signInfo.direction === "right") {
         dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +") rotate(180)"

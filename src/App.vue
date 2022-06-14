@@ -4,7 +4,7 @@
     <div>
 
     </div>
-    <SideTools/>
+    <SideTools @contentNeedRearrange="RequireRearrange"/>
     <Signs v-if="signStyle === 'kitajuku-dentetsu'" ref="signs"/>
     <EntranceGuideSign v-if="signStyle === 'test-sign'" ref="entrancesSign"/>
     <Editor v-if="signStyle === 'kitajuku-dentetsu'" @someChanged="UpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="RequireRearrange"/>
@@ -24,7 +24,7 @@ import EntranceGuideEditor from "@/components/entranceGuideEditor";
 
 export default {
   name: 'App',
-  components: {HeaderFlex, SideTools, FooterFlex, Signs, EntranceGuideSign, EntranceGuideEditor, Editor},
+  components: {HeaderFlex, FooterFlex, Signs, EntranceGuideSign, EntranceGuideEditor, SideTools, Editor},
   data()  {
     return{
       titles: 'FesGen',

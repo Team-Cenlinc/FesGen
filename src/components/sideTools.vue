@@ -1,20 +1,24 @@
 <template>
   <div class="side-tools" v-bind:class="{solid: isSolid}">
-    <div class="to-header">
-      <button v-bind:class="{visible: isVisible}" class="material-symbols-outlined side-tools-topic">keyboard_double_arrow_up</button>
+    <div class="to-header" v-bind:class="{visible: isVisible}" >
+      <button @click="scrollToTop" class="material-symbols-outlined side-tools-topic" title="返回标题">keyboard_double_arrow_up</button>
     </div>
-    <div class="files" v-bind:class="{position: !isVisible}">
-      <button @click="hiddenTrigger" class="material-symbols-outlined side-tools-topic">folder_open</button>
-
+    <div class="sync" v-bind:class="{position: !isVisible}">
+      <button @click="requestRearrange" class="material-symbols-outlined side-tools-topic" title="同步信息">sync</button>
+    </div>
+    <div class="files">
+      <button @click="hiddenTrigger" class="material-symbols-outlined side-tools-topic" title="文件管理">folder_open</button>
       <ul v-bind:class="{visible: status_clicked}">
-        <li><button class="material-symbols-outlined side-tools-content">download</button></li>
-        <li><button class="material-symbols-outlined side-tools-content">upload</button></li>
+        <li><button class="material-symbols-outlined side-tools-content" title="下载文件">download</button></li>
+        <li><button class="material-symbols-outlined side-tools-content" title="上传文件">upload</button></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import Editor from "@/components/editor"
+
 export default {
   name: "sideTools",
   data() {
@@ -28,14 +32,13 @@ export default {
     window.addEventListener("scroll", this.handleScroll)
   },
   methods: {
-    handleScroll(){
+    handleScroll() {
       let scrollOffset = window.scrollY
       let flag
-      // eslint-disable-next-line no-empty
-      if (scrollOffset >= 70){
+      if (scrollOffset >= 70) {
         flag = "on"
         this.solidTrigger(flag)
-      } else if (scrollOffset < 70){
+      } else if (scrollOffset < 70) {
         flag = "off"
         this.solidTrigger(flag)
       }
@@ -50,9 +53,26 @@ export default {
         this.isSolid = false
       }
     },
-    hiddenTrigger(){
+    hiddenTrigger() {
       console.log("triggered")
       this.status_clicked = !this.status_clicked;
+    },
+    requestRearrange() {
+      this.$emit("contentNeedRearrange", Editor.data().lightStyle, Editor.data().signInfo, Editor.data().output)
+    },
+    scrollToTop() {
+      let time;
+      let step = document.documentElement.scrollTop;
+      time = window.setInterval(function () {
+        // 每次30px
+        step -= 30;
+        if (step <= 0) {
+          window.clearInterval(time);
+        }
+        window.scrollTo(0, step);
+      }, 10);
+    },
+    imageToSvg() {
     }
   },
   beforeDestroy() {
@@ -64,7 +84,7 @@ export default {
 <style scoped>
 
 .side-tools{
-  float: left;
+  float: right;
   margin: 15px;
   display: -webkit-flex; /* Safari */
   display: flex;

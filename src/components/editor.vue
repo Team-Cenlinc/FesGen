@@ -20,7 +20,7 @@
           </select>
         </div>
         <div class="form-min-row">
-          <p>[测试] 站名汉字字符强调</p>
+          <p>站名汉字字符强调</p>
           <input v-model="signInfo.chnCharacterBold" @change="sendData" type="checkbox">
         </div>
       </div>
@@ -52,7 +52,7 @@
     </div>
     <div class="row">
       <div>
-        <h2><span class="material-symbols-outlined icon-editor">info</span> 本站名</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span> 本站信息</h2>
           <div class="form-min-row">
             <p>站名 中文</p>
             <input v-model.lazy="signInfo.main.staNameChinese" @change="requestRearrange" type="text">
@@ -65,6 +65,10 @@
             <p>站名 假名</p>
             <input v-model="signInfo.main.staNameKana" @change="sendData" type="text">
           </div>
+        <div class="form-min-row">
+          <p>本站编号</p>
+          <input v-model="signInfo.middle.middleStaNumber" @change="sendData" type="number">
+        </div>
           <div class="form-min-row">
             <p>字体颜色</p>
             <input v-model="signInfo.main.mainTextColor" @change="sendData" type="color">
@@ -89,8 +93,12 @@
           <input v-model="signInfo.middle.lineAbbr" @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
-          <p>本站编号</p>
-          <input v-model="signInfo.middle.middleStaNumber" @change="sendData" type="number">
+          <p>[测试] 使用第二条色带</p>
+          <input v-model="signInfo.secondLine.enable" @change="requestRearrange" type="checkbox">
+        </div>
+        <div v-if="signInfo.secondLine.enable" class="form-min-row">
+          <p>第二条线路颜色</p>
+          <input v-model="signInfo.secondLine.color" @change="sendData" type="color">
         </div>
       </div>
     </div>
@@ -171,6 +179,10 @@ export default {
           rightStaNameEnglish: 'Hokuriku',
           rightStaNameChinese: '北宿',
           rightTextColor: '#7A7A7A',
+        },
+        secondLine: {
+          enable: false,
+          color: '#7297DD',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
