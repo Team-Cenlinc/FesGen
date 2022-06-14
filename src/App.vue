@@ -4,11 +4,13 @@
     <div>
 
     </div>
-    <SideTools @contentNeedRearrange="RequireRearrange"/>
+    <SideTools @contentNeedRearrange="RequireRearrange" @switchViewer="updateViewer" ref="sideTools"/>
     <Signs v-if="signStyle === 'kitajuku-dentetsu'" ref="signs"/>
     <EntranceGuideSign v-if="signStyle === 'test-sign'" ref="entrancesSign"/>
-    <Editor v-if="signStyle === 'kitajuku-dentetsu'" @someChanged="UpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="RequireRearrange"/>
-    <EntranceGuideEditor v-if="signStyle === 'test-sign'" @someChanged="UpdateData" @signChanged="UpdateSignStyle"/>
+    <Editor v-if="signStyle === 'kitajuku-dentetsu'  && viewerType === ''" @someChanged="UpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="RequireRearrange"/>
+    <EntranceGuideEditor v-if="signStyle === 'test-sign' && viewerType === ''" @someChanged="UpdateData" @signChanged="UpdateSignStyle"/>
+    <DownloadViewer v-if="viewerType === 'download'" @switchViewer="updateViewer"/>
+    <UploadViewer v-if="viewerType === 'upload'" @switchViewer="updateViewer"/>
     <FooterFlex :title="titles"/>
   </div>
 </template>
@@ -21,20 +23,22 @@ import Signs from "./components/sign"
 import Editor from "@/components/editor"
 import EntranceGuideSign from "./components/entranceGuideSign";
 import EntranceGuideEditor from "@/components/entranceGuideEditor";
+import DownloadViewer from "@/components/downloadViewer";
+import UploadViewer from "@/components/uploadViewer";
 
 export default {
   name: 'App',
-  components: {HeaderFlex, FooterFlex, Signs, EntranceGuideSign, EntranceGuideEditor, SideTools, Editor},
+  components: {HeaderFlex, FooterFlex, Signs, EntranceGuideSign, EntranceGuideEditor, SideTools, DownloadViewer, UploadViewer, Editor},
   data()  {
     return{
       titles: 'FesGen',
-      signStyle: "kitajuku-dentetsu"
+      signStyle: "kitajuku-dentetsu",
+      viewerType: ""
       }
   },
   methods: {
     UpdateSignStyle(signStyle){
       this.signStyle = signStyle
-      console.log(signStyle)
     },
     UpdateData(lightStyle, signInfo, signScale){
       this.$refs.signs.UpdateData(signInfo, lightStyle, signScale)
@@ -45,6 +49,10 @@ export default {
     entranceUpdateData(lightStyle, signInfo, signScale){
       this.$refs.entrancesSign.UpdateData(signInfo, lightStyle, signScale)
     },
+    updateViewer(viewerType){
+      this.viewerType = viewerType
+      console.log(viewerType)
+    }
   },
 }
 </script>

@@ -4,20 +4,20 @@
       <button @click="scrollToTop" class="material-symbols-outlined side-tools-topic" title="返回标题">keyboard_double_arrow_up</button>
     </div>
     <div class="sync" v-bind:class="{position: !isVisible}">
-      <button @click="requestRearrange" class="material-symbols-outlined side-tools-topic" title="同步信息">sync</button>
+      <button @click="requestRearrange" class="material-symbols-outlined side-tools-topic" title="重置信息">sync</button>
     </div>
     <div class="files">
       <button @click="hiddenTrigger" class="material-symbols-outlined side-tools-topic" title="文件管理">folder_open</button>
       <ul v-bind:class="{visible: status_clicked}">
-        <li><button class="material-symbols-outlined side-tools-content" title="下载文件">download</button></li>
-        <li><button class="material-symbols-outlined side-tools-content" title="上传文件">upload</button></li>
+        <li><button @click="switchViewerDownload" class="material-symbols-outlined side-tools-content" title="下载文件">download</button></li>
+        <li><button @click="switchViewerUpload" class="material-symbols-outlined side-tools-content" title="上传文件">upload</button></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import Editor from "@/components/editor"
+import Sign from "@/components/sign.vue"
 
 export default {
   name: "sideTools",
@@ -58,21 +58,24 @@ export default {
       this.status_clicked = !this.status_clicked;
     },
     requestRearrange() {
-      this.$emit("contentNeedRearrange", Editor.data().lightStyle, Editor.data().signInfo, Editor.data().output)
+      this.$emit("contentNeedRearrange", Sign.data().lightStyle, Sign.data().signInfo, Sign.data().output)
     },
     scrollToTop() {
       let time;
       let step = document.documentElement.scrollTop;
       time = window.setInterval(function () {
-        // 每次30px
-        step -= 30;
+        step -= 20;
         if (step <= 0) {
           window.clearInterval(time);
         }
         window.scrollTo(0, step);
       }, 10);
     },
-    imageToSvg() {
+    switchViewerDownload() {
+      this.$emit("switchViewer", "download")
+    },
+    switchViewerUpload() {
+      this.$emit("switchViewer", "upload")
     }
   },
   beforeDestroy() {
@@ -84,7 +87,7 @@ export default {
 <style scoped>
 
 .side-tools{
-  float: right;
+  justify-content: flex-end;
   margin: 15px;
   display: -webkit-flex; /* Safari */
   display: flex;

@@ -182,7 +182,7 @@ export default {
         },
         secondLine: {
           enable: false,
-          color: '#7297DD',
+          color: '#A0D4E7',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',

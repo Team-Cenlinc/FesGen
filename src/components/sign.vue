@@ -63,7 +63,7 @@ export default {
         },
         secondLine: {
           enable: false,
-          color: '#7297DD',
+          color: '#A0D4E7',
         },
         lineColor: '#7297DD',
         backgroundColor: '#ECECEC',
@@ -178,6 +178,9 @@ export default {
       dom = this.$refs.svg.getElementById("lineColorBelt1")
       dom.attributes.stroke.value = this.signInfo.lineColor
 
+      dom = this.$refs.svg.getElementById("lineColorBelt2")
+      dom.attributes.stroke.value = this.signInfo.secondLine.color
+
       dom = this.$refs.svg.getElementById("background")
       dom.attributes[3].value = this.signInfo.frameThickness
       dom.attributes.fill.value = this.signInfo.backgroundColor
@@ -268,12 +271,37 @@ export default {
 
       xRefPoint = this.signInfo.frameThickness / 2
       xValueFin = this.output.outputWidth - (this.signInfo.frameThickness / 2)
-      yValueFin = weightBorderY / 2 + 180
-      dom = this.$refs.svg.getElementById("lineColorBelt1")
-      dom.attributes[1].value = xRefPoint
-      dom.attributes[3].value = xValueFin
-      dom.attributes[2].value = yValueFin
-      dom.attributes[4].value = yValueFin
+      yValueFin = weightBorderY / 2
+
+      if (this.signInfo.secondLine.enable) {
+        dom = this.$refs.svg.getElementById("lineColorBelt2")
+        dom.attributes.visibility.value = "enable"
+        dom.attributes[1].value = xRefPoint
+        dom.attributes[3].value = xValueFin
+        dom.attributes[2].value = yValueFin + 183.25
+        dom.attributes[4].value = yValueFin + 183.25
+        dom.attributes[8].value = 7.5
+        dom = this.$refs.svg.getElementById("lineColorBelt1")
+        dom.attributes[1].value = xRefPoint
+        dom.attributes[3].value = xValueFin
+        dom.attributes[2].value = yValueFin + 176.75
+        dom.attributes[4].value = yValueFin + 176.75
+        dom.attributes[8].value = 7.5
+      } else {
+        dom = this.$refs.svg.getElementById("lineColorBelt2")
+        dom.attributes.visibility.value = "hidden"
+        dom.attributes[1].value = xRefPoint
+        dom.attributes[3].value = xValueFin
+        dom.attributes[2].value = yValueFin + 180
+        dom.attributes[4].value = yValueFin + 180
+        dom.attributes[8].value = 15
+        dom = this.$refs.svg.getElementById("lineColorBelt1")
+        dom.attributes[1].value = xRefPoint
+        dom.attributes[3].value = xValueFin
+        dom.attributes[2].value = yValueFin + 180
+        dom.attributes[4].value = yValueFin + 180
+        dom.attributes[8].value = 15
+      }
 
       dom = this.$refs.svg.getElementById("background")
       dom.attributes.width.value = this.output.outputWidth
@@ -281,13 +309,13 @@ export default {
 
       // signInfo.main
 
-      contentLength = this.signInfo.main.staNameChinese.length
+      dom = this.$refs.svg.getElementById("staNameChinese")
+      contentLength = dom.getBBox().width
 
       xRefPoint = 240
       yRefPoint = 60
       xValueFin = xRefPoint - (contentLength * 60) + (weightBorderX / 2)
       yValueFin = yRefPoint + (weightBorderY / 4)
-      dom = this.$refs.svg.getElementById("staNameChinese")
       dom.attributes.x.value = xValueFin
       dom.attributes.y.value = yValueFin
 
@@ -357,15 +385,15 @@ export default {
       dom = this.$refs.svg.getElementById("Left")
       dom.attributes.transform.value = "translate(" + xRefPoint.toString() + ", " + yValueFin.toString() +")"
 
+      dom = this.$refs.svg.getElementById("leftIcon")
       xRefPoint = 60
       yRefPoint = 5
-      contentLength = this.signInfo.left.leftStaNameChinese.length * 25
+      contentLength = domHelp.getBBox().width
       xValueFin = contentLength + 10
       if (contentLength === 0){
         xValueFin = 0
       }
 
-      dom = this.$refs.svg.getElementById("leftIcon")
       dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yRefPoint.toString() +")"
 
       // signInfo.right - Change Text Start Point
@@ -382,10 +410,10 @@ export default {
       // Modify start point of text.
 
       xRefPoint = 0
-      contentLength = this.signInfo.right.rightStaNameChinese.length * 25 - 50
       xValueFin = xRefPoint - contentLength
       dom = this.$refs.svg.getElementById("rightStaNameChinese")
       dom.attributes[2].value = xValueFin
+      contentLength = domHelp.getBBox().width - 50
 
       dom = this.$refs.svg.getElementById("rightStaNameEnglish")
       dom.attributes[2].value = xValueFin
