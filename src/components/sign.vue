@@ -314,7 +314,7 @@ export default {
 
       xRefPoint = 240
       yRefPoint = 60
-      xValueFin = xRefPoint - (contentLength * 60) + (weightBorderX / 2)
+      xValueFin = xRefPoint - (contentLength) + (weightBorderX / 2)
       yValueFin = yRefPoint + (weightBorderY / 4)
       dom.attributes.x.value = xValueFin
       dom.attributes.y.value = yValueFin
@@ -385,15 +385,15 @@ export default {
       dom = this.$refs.svg.getElementById("Left")
       dom.attributes.transform.value = "translate(" + xRefPoint.toString() + ", " + yValueFin.toString() +")"
 
-      dom = this.$refs.svg.getElementById("leftIcon")
+      dom = this.$refs.svg.getElementById("leftStaNameChinese")
       xRefPoint = 60
       yRefPoint = 5
-      contentLength = domHelp.getBBox().width
+      contentLength = dom.getBBox().width
       xValueFin = contentLength + 10
       if (contentLength === 0){
         xValueFin = 0
       }
-
+      dom = this.$refs.svg.getElementById("leftIcon")
       dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yRefPoint.toString() +")"
 
       // signInfo.right - Change Text Start Point
@@ -413,7 +413,7 @@ export default {
       xValueFin = xRefPoint - contentLength
       dom = this.$refs.svg.getElementById("rightStaNameChinese")
       dom.attributes[2].value = xValueFin
-      contentLength = domHelp.getBBox().width - 50
+      contentLength = dom.getBBox().width - 50
 
       dom = this.$refs.svg.getElementById("rightStaNameEnglish")
       dom.attributes[2].value = xValueFin
