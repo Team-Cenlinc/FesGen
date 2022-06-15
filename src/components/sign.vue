@@ -410,10 +410,10 @@ export default {
       // Modify start point of text.
 
       xRefPoint = 0
-      xValueFin = xRefPoint - contentLength
       dom = this.$refs.svg.getElementById("rightStaNameChinese")
-      dom.attributes[2].value = xValueFin
       contentLength = dom.getBBox().width - 50
+      xValueFin = xRefPoint - contentLength
+      dom.attributes[2].value = xValueFin
 
       dom = this.$refs.svg.getElementById("rightStaNameEnglish")
       dom.attributes[2].value = xValueFin
