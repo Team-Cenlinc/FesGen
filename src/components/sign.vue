@@ -352,18 +352,20 @@ export default {
 
 
       // lineIcon (Abbr), Original length 130px
-      let domHelp = this.$refs.svg.getElementById("lineAbbr");
+      let domHelp = this.$refs.svg.getElementById("lineAbbr")
 
       xRefPoint = 0
       yRefPoint = 0
       yValueFin = yRefPoint + (weightBorderY / 2)
       contentLength = domHelp.getBBox().width
-      contentCompareLength = (this.signInfo.middle.lineName.length * 21)
+
+      domHelp = this.$refs.svg.getElementById("lineName")
+      contentCompareLength = domHelp.getBBox().width
 
       dom = this.$refs.svg.getElementById("abbrIcon")
-      dom.attributes[7].value = (domHelp.getBBox().width) + 10
+      dom.attributes[7].value = contentLength + 10
 
-      xValueFin = domHelp.getBBox().width - 10
+      xValueFin = contentLength - 10
       dom = this.$refs.svg.getElementById("lineName")
       dom.attributes[2].value = xValueFin + 90
 
