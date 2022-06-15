@@ -51,7 +51,6 @@ export default {
     },
     updateViewer(viewerType){
       this.viewerType = viewerType
-      console.log(viewerType)
     }
   },
 }

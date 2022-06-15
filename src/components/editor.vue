@@ -176,7 +176,7 @@ export default {
         },
         right: {
           rightStaNumber: '02',
-          rightStaNameEnglish: 'Hokuriku',
+          rightStaNameEnglish: 'Kitajuku',
           rightStaNameChinese: '北宿',
           rightTextColor: '#7A7A7A',
         },
