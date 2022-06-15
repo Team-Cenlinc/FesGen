@@ -55,7 +55,7 @@
         <h2><span class="material-symbols-outlined icon-editor">info</span> 本站信息</h2>
           <div class="form-min-row">
             <p>站名 中文</p>
-            <input v-model.lazy="signInfo.main.staNameChinese" @change="requestRearrange" type="text">
+            <input v-model="signInfo.main.staNameChinese" @change="requestRearrange" type="text">
           </div>
           <div class="form-min-row">
             <p>站名 英语</p>

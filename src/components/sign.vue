@@ -408,14 +408,23 @@ export default {
 
       // Modify start point of text.
 
-      xRefPoint = 0
+      xRefPoint = 84
       dom = this.$refs.svg.getElementById("rightStaNameChinese")
-      contentLength = dom.getBBox().width - 50
+      contentLength = dom.getBBox().width
       xValueFin = xRefPoint - contentLength
       dom.attributes[2].value = xValueFin
 
+      dom = this.$refs.svg.getElementById("rightIcon")
+      xValueFin = 40 - contentLength
+      console.log()
+      dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", 5)"
+
+
       dom = this.$refs.svg.getElementById("rightStaNameEnglish")
+      contentLength = dom.getBBox().width
+      xValueFin = xRefPoint - contentLength
       dom.attributes[2].value = xValueFin
+
 
       // signInfo.direction
 

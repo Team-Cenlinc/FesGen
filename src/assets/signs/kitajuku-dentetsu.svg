@@ -36,11 +36,11 @@
             <line x1="2" y1="180" x2="598" y2="180"  transform="translate(0, 0)" id="lineColorBelt1" stroke="#7297DD" stroke-width="15"></line>
             <line x1="2" y1="180" x2="598" y2="180"  transform="translate(0, 0)" id="lineColorBelt2" stroke="#A0D4E7" stroke-width="15" visibility="hidden"></line>
             <g id="Right" transform="translate(472.000000, 120.000000)">
-                <text id="rightStaNameChinese" x="0" y="25" font-family="PingFangSC-Regular, PingFang SC" font-size="25" font-weight="normal" fill="#737373">
+                <text id="rightStaNameChinese" x="46" y="25" font-family="PingFangSC-Regular, PingFang SC" font-size="25" font-weight="normal" fill="#737373">
                     <!-- Origin 0, 25 -->
                     <tspan>北宿</tspan>
                 </text>
-                <g id="rightIcon" transform="translate(60.000000, 5.000000)">
+                <g id="rightIcon" transform="translate(0.000000, 5.000000)">
                     <path id="rightIconInner" d="M5.508,2.052 L5.508,20.484 L2.88,20.484 C2.24376797,20.484 1.66776797,20.226116 1.25082598,19.809174 C0.833883984,19.392232 0.576,18.816232 0.576,18.18 L0.576,18.18 L0.576,4.356 C0.576,3.71976797 0.833883984,3.14376797 1.25082598,2.72682598 C1.66776797,2.30988398 2.24376797,2.052 2.88,2.052 L2.88,2.052 L5.508,2.052 Z" stroke="#737373" stroke-width="1.152" fill="#737373"></path>
                     <path id="rightIconOuter" d="M30.852,2.276 C31.4263761,2.276 31.9463761,2.50881193 32.3227821,2.8852179 C32.6991881,3.26162386 32.932,3.78162386 32.932,4.356 L32.932,4.356 L32.932,18.18 C32.932,18.7543761 32.6991881,19.2743761 32.3227821,19.6507821 C31.9463761,20.0271881 31.4263761,20.26 30.852,20.26 L30.852,20.26 L5.732,20.26 L5.732,2.276 Z" stroke="#737373" stroke-width="1.6"></path>
                     <text id="rightStaNumber" x="10" y="17" font-family="PingFangSC-Medium, PingFang SC" font-size="15" font-weight="400" fill="#737373">
@@ -49,7 +49,7 @@
                     </text>
                 </g>
                 <path id="rightEpli" transform="translate(0, 0)" d="M44.4403628,56.6376551 C46.6495018,56.6376551 48.0481869,54.6838124 49.4403628,52.6376551 C50.147638,51.598134 50.0067802,50.7516832 51.2432808,49.752862 C51.6064123,49.4595314 52.234694,49.3128661 53.128126,49.3128661 L56.5755452,49.3128661 C49.3722921,46.437622 45.2699895,45 44.2686375,45 C43.3037763,45 39.2142305,46.437622 32,49.3128661 L35.5930172,49.3128661 C36.0291578,49.3264432 36.4428059,49.4295662 36.8339617,49.622235 C37.8503086,50.12285 38.870861,52.2054812 39.0504228,52.4841404 C40.3787559,54.5455602 42.2312238,56.6376551 44.4403628,56.6376551 Z" fill="#ECECEC"></path>
-                <text id="rightStaNameEnglish" x="0" y="45" font-family="Helvetica" font-size="18" font-weight="normal" fill="#737373">
+                <text id="rightStaNameEnglish" x="22" y="45" font-family="Helvetica" font-size="18" font-weight="normal" fill="#737373">
                     <!-- Origin 0, 45 -->
                     <tspan>Kitajuku</tspan>
                 </text>
