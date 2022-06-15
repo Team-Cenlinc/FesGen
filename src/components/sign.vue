@@ -1,7 +1,7 @@
 <template>
   <div id="canvas">
     <keep-alive>
-      <component :is="this.signStyle" ref="svg" class="sign"></component>
+      <component :is="this.signStyle" ref="svg" class="sign" id="svg-sign"></component>
     </keep-alive>
     <div class="data">
       <h4>SignStyle: </h4>
@@ -20,9 +20,6 @@ import KitajukuDentetsu from '../assets/signs/kitajuku-dentetsu.svg'
 
 window.componentsConfig = {    //左边是key值，右边是组件的引入路径
   'kitajuku-dentetsu': '../assets/signs/kitajuku-dentetsu.svg',
-  'test-sign': '../assets/signs/test-sign.svg',
-  'test3': './test3.vue',
-  'test4': './test4.vue',
 }
 export default {
   name: 'Sign',
