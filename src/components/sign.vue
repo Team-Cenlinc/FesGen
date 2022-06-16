@@ -1,5 +1,6 @@
 <template>
   <div id="canvas">
+    <canvas id="sign-canvas" />
     <keep-alive>
       <component :is="this.signStyle" ref="svg" class="sign" id="svg-sign"></component>
     </keep-alive>
@@ -8,7 +9,6 @@
       <p>{{ this.signStyle || '你尚未选择'}}</p>
     </div>
     <hr/>
-    <button>下载</button>
     <div class="data">
       <p v-show="false">{{ this.signInfo || 'NO'}}</p>
     </div>
@@ -68,15 +68,19 @@ export default {
         displayForwardArrow: true,
         chnCharacterBold: false,
         direction: 'left',
-      },
-      downloadOption: "svg"
+      }
     }
   },
   updated() {
     this.UpdateSignData()
   },
+  mounted() {
+    this.UpdateSignData()
+    this.RequireRearrange()
+  },
   methods: {
     UpdateData(signInfo, lightStyle, signScale){
+      this.convertToCanvas()
       this.lightStyle = lightStyle
       this.signInfo = signInfo
       this.output = signScale
@@ -216,6 +220,7 @@ export default {
         dom = this.$refs.svg.getElementById("leftStaNameChinese")
         dom.attributes[4].value = "normal"
       }
+      this.convertToCanvas()
     },
     RequireRearrange(lightStyle, signInfo, signScale) {
 
@@ -439,18 +444,39 @@ export default {
         yValueFin = weightBorderY / 2
         dom.attributes.transform.value = "translate(0" + yValueFin.toString() +") rotate(0)"
       }
-    }
+      this.convertToCanvas()
+    },
+    convertToCanvas() {
+      let svgDom = document.getElementById("svg-sign")
+      let {width, height} = svgDom.getBBox()
+      let clonedSvgElements = svgDom.cloneNode(true)
+      console.log(width, height, clonedSvgElements)
+      let outerHTML = clonedSvgElements.outerHTML,
+          blob = new Blob([outerHTML],{type:'image/svg+xml;charset=utf-8'});
+      let URL = window.URL || window.webkitURL || window;
+      let blobURL = URL.createObjectURL(blob);
+
+      let image = new Image();
+      image.onload = () => {
+        let canvas = document.getElementById('sign-canvas');
+        canvas.width = width;
+        canvas.height = height;
+        let context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0, width, height);
+      };
+      image.src = blobURL;
+    },
   },
 }
 </script>
 
 <style scoped>
 #canvas {
-  margin: 30px auto 1px;
-  padding: 0;
+  margin: 50px auto 1px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: -30px;
 }
 hr{
   width: 600px;
@@ -481,8 +507,7 @@ button:hover {
 }
 
 .sign{
-  margin: -140px auto;
-  transform: scale(35%, 35%);
+  visibility: hidden;
 }
 
 </style>

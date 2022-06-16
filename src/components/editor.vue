@@ -23,6 +23,9 @@
           <p>站名汉字字符强调</p>
           <input v-model="signInfo.chnCharacterBold" @change="sendData" type="checkbox">
         </div>
+        <div class="form-min-row">
+          <button @click="requestRearrange" class="material-symbols-outlined tools-topic" title="刷新">sync</button>
+        </div>
       </div>
       <div>
         <h2><span class="material-symbols-outlined icon-editor">tune</span>「北宿电铁-站牌」全局设置</h2>
@@ -193,6 +196,9 @@ export default {
       },
     }
   },
+  mounted() {
+    this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
+  },
   methods :{
     sendData(){
       this.$emit('someChanged', this.lightStyle, this.signInfo, this.output)
@@ -271,6 +277,21 @@ input {
 
 .button{
   border-radius: 30px;
+}
+
+button.tools-topic{
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 100%;
+  border-style: none;
+  box-shadow: 5px 5px 5px gray;
+  transform: scale(125%, 125%);
+  transition: 225ms ease-out;
+}
+
+button.tools-topic:hover{
+  background-color: gray;
+  color: #ffffff;
 }
 
 .form-min-row {

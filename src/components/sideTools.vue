@@ -3,10 +3,7 @@
     <div class="to-header" v-bind:class="{visible: isVisible}" >
       <button @click="scrollToTop" class="material-symbols-outlined side-tools-topic" title="返回标题">keyboard_double_arrow_up</button>
     </div>
-    <div class="sync" v-bind:class="{position: !isVisible}">
-      <button @click="requestRearrange" class="material-symbols-outlined side-tools-topic" title="重置信息">sync</button>
-    </div>
-    <div class="files">
+    <div class="files" v-bind:class="{position: !isVisible}">
       <button @click="hiddenTrigger" class="material-symbols-outlined side-tools-topic" title="文件管理">folder_open</button>
       <ul v-bind:class="{visible: status_clicked}">
         <li><button @click="switchViewerDownload" class="material-symbols-outlined side-tools-content" title="下载文件">download</button></li>
@@ -18,6 +15,7 @@
 
 <script>
 import Sign from "@/components/sign.vue"
+import DownloadViewer from "@/components/downloadViewer";
 
 export default {
   name: "sideTools",
@@ -73,6 +71,7 @@ export default {
     },
     switchViewerDownload() {
       this.$emit("switchViewer", "download")
+      DownloadViewer.methods.convertToCanvas()
     },
     switchViewerUpload() {
       this.$emit("switchViewer", "upload")
