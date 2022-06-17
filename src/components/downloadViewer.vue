@@ -9,7 +9,7 @@
           <h2><span class="material-symbols-outlined icon-editor">tune</span> 导出设置</h2>
           <div class="form-min-row">
             <p>导出格式</p>
-            <select v-model="fileType">
+            <select v-bind:class="{'not-chose': this.fileType !== ''}" v-model="fileType">
               <option disabled value="">请选择</option>
               <option value="json">.json</option>
               <option value="png">.png</option>
@@ -17,16 +17,12 @@
             </select>
           </div>
           <div class="form-min-row">
-            <p>站牌样式</p>
-            <select v-model="signStyle">
-              <option disabled value="">请选择</option>
-              <option value="test-sign">测试用</option>
-              <option value="kitajuku-dentetsu">北宿电铁</option>
-            </select>
-          </div>
-          <div class="form-min-row">
             <p>文件名</p>
             <div><input v-model="fileName" placeholder="请输入" type="text"></div>
+          </div>
+          <div class="form-min-row">
+            <p>文件质量</p>
+            <div><input v-model="fileQuality" max="100" type="range"></div>
           </div>
         </div>
         <div class="download-tools">
@@ -38,15 +34,10 @@
           </div>
           <div class="form-min-row">
             <button @click="downloadItems" class="material-symbols-outlined icon-action">file_download</button>
+            <button @click="switchViewerReturn" class="material-symbols-outlined icon-return" title="返回编辑器">undo</button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="download-tools">
-      <button @click="downloadItems">test</button>
-    </div>
-    <div class="return-to-previous-editor">
-      <button @click="switchViewerReturn" class="material-symbols-outlined icon-return" title="返回编辑器">undo</button>
     </div>
   </div>
 </template>
@@ -60,21 +51,27 @@ export default {
       fileName: "",
       fileType: "",
       fileQuality: 1,
-      jsonCache: {
-
-      }
+      jsonCache: {}
     }
   },
   methods: {
     switchViewerReturn() {
       this.$emit("switchViewer", "")
     },
-    convertToCanvas(signElementId) {
+    convertToCanvas() {
+      let signElementId
+      let signName = sessionStorage.getItem("instanceSignStyle")
+      if (signName === "kitajuku-dentetsu") {
+        signElementId = 'svg-sign'
+      } else if (signName === "test-sign") {
+        signElementId = 'sign-entrance'
+      }
       let svgDom = document.getElementById(signElementId)
-      let {width, height} = svgDom.getBBox()
+      let width = svgDom.getBBox().width
+      let height = svgDom.getBBox().height
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,
-          blob = new Blob([outerHTML],{type:'image/svg+xml;charset=utf-8'});
+          blob = new Blob([outerHTML], {type: 'image/svg+xml;charset=utf-8'});
       let URL = window.URL || window.webkitURL || window;
       let blobURL = URL.createObjectURL(blob);
 
@@ -89,10 +86,13 @@ export default {
       image.src = blobURL;
     },
     downloadItems() {
+      let fileQualityRanged = this.fileQuality / 100
+      console.log(this.fileQuality)
       let canvas = document.getElementById("preview-sign-canvas");
-      let png = canvas.toDataURL('image/png', this.fileQuality);
-      let jpeg = canvas.toDataURL('image/jpeg');
-      let download = function(href, name){
+      let png = canvas.toDataURL('image/png', fileQualityRanged);
+      let jpeg = canvas.toDataURL('image/jpeg', fileQualityRanged);
+      let json = this.configVersionModifier()
+      let download = function (href, name) {
         let link = document.createElement('a');
         link.download = name;
         link.style.opacity = "0";
@@ -101,21 +101,42 @@ export default {
         link.click();
         link.remove();
       }
-
-      if (this.fileType === "png"){
-        download(png, this.fileName + ".png");
-      } else if(this.fileType === "jpg") {
-        download(jpeg, this.fileName + ".jpg");
+      let fileName
+      if (this.fileName === "") {
+        fileName = this.signStyle
+      } else {
+        fileName = this.fileName
       }
 
-    }
+      if (this.fileType === "png") {
+        download(png, fileName + ".png");
+      } else if (this.fileType === "jpg") {
+        download(jpeg, fileName + ".jpg");
+      } else if (this.fileType === "json") {
+        download(json, fileName + ".json")
+      }
+    },
+    configVersionModifier(){
+      let jsonConfig = JSON.parse(sessionStorage.getItem("instanceConfig"))
+      jsonConfig.configVersion = "beta-v0.1.1"
+      let data = JSON.stringify(jsonConfig)
+      return 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(data)
+    },
   }
 }
+
+
 
 
 </script>
 
 <style scoped>
+
+.download-viewer{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px 10px 300px 10px;
+}
 
 .canvas{
   margin: 30px auto 1px;
@@ -126,14 +147,11 @@ export default {
 }
 
 .icon-return{
-  margin: -65px 15px;
-  float: right;
   padding: 10px;
   background-color: #ffffff;
   border-radius: 100%;
   border-style: none;
   box-shadow: 5px 5px 5px gray;
-  transform: scale(125%, 125%);
   transition: 225ms ease-out;
 }
 
@@ -185,10 +203,6 @@ input {
   background: #ffffff;
 }
 
-.button{
-  border-radius: 30px;
-}
-
 .hint {
   font-weight: bold;
   height: 16px;
@@ -203,6 +217,10 @@ input {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.not-chose{
+
 }
 
 .material-symbols-outlined{

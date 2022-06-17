@@ -50,17 +50,8 @@ export default {
       this.$refs.entrancesSign.UpdateData(signInfo, lightStyle, signScale)
     },
     updateViewer(viewerType){
+      sessionStorage.setItem("instanceSignStyle", this.signStyle)
       this.viewerType = viewerType
-      let signElementId
-      let signName = this.signStyle
-      if (signName === "kitajuku-dentetsu") {
-        signElementId = 'svg-sign'
-      } else if (signName === "test-sign") {
-        signElementId = 'sign-entrance'
-      }
-      if (viewerType === "download") {
-        DownloadViewer.methods.convertToCanvas(signElementId)
-      }
     },
   },
 }

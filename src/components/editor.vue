@@ -199,15 +199,19 @@ export default {
   mounted() {
     this.$emit('someChanged', this.lightStyle, this.signInfo, this.output)
     this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
+    this.dataToJson()
   },
   methods :{
     sendData(){
+      this.dataToJson()
       this.$emit('someChanged', this.lightStyle, this.signInfo, this.output)
     },
     sendSign(){
+      this.dataToJson()
       this.$emit('signChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
     },
     requestRearrange(){
+      this.dataToJson()
       this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     },
     changeDirection(){
@@ -218,6 +222,8 @@ export default {
       } else {
         this.signInfo.direction = "left"
       }
+
+      this.dataToJson()
 
       this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
     },
@@ -241,8 +247,14 @@ export default {
       this.signInfo.left.leftTextColor = tempR
       this.signInfo.right.rightTextColor = tempL
 
+      this.dataToJson()
+
       this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     },
+    dataToJson(){
+      let jsonData = JSON.stringify(this.$data);
+      sessionStorage.setItem("instanceConfig", jsonData)
+    }
   },
 }
 </script>
