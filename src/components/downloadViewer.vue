@@ -69,8 +69,8 @@ export default {
     switchViewerReturn() {
       this.$emit("switchViewer", "")
     },
-    convertToCanvas() {
-      let svgDom = document.getElementById("svg-sign")
+    convertToCanvas(signElementId) {
+      let svgDom = document.getElementById(signElementId)
       let {width, height} = svgDom.getBBox()
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,

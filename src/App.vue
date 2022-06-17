@@ -51,7 +51,17 @@ export default {
     },
     updateViewer(viewerType){
       this.viewerType = viewerType
-    }
+      let signElementId
+      let signName = this.signStyle
+      if (signName === "kitajuku-dentetsu") {
+        signElementId = 'svg-sign'
+      } else if (signName === "test-sign") {
+        signElementId = 'sign-entrance'
+      }
+      if (viewerType === "download") {
+        DownloadViewer.methods.convertToCanvas(signElementId)
+      }
+    },
   },
 }
 </script>
@@ -61,5 +71,8 @@ p, h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+SideTools {
+  float: right;
 }
 </style>

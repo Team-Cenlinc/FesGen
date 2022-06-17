@@ -197,6 +197,7 @@ export default {
     }
   },
   mounted() {
+    this.$emit('someChanged', this.lightStyle, this.signInfo, this.output)
     this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
   },
   methods :{

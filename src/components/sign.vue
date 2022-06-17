@@ -76,11 +76,9 @@ export default {
   },
   mounted() {
     this.UpdateSignData()
-    this.RequireRearrange()
   },
   methods: {
     UpdateData(signInfo, lightStyle, signScale){
-      this.convertToCanvas()
       this.lightStyle = lightStyle
       this.signInfo = signInfo
       this.output = signScale
@@ -444,7 +442,8 @@ export default {
         yValueFin = weightBorderY / 2
         dom.attributes.transform.value = "translate(0" + yValueFin.toString() +") rotate(0)"
       }
-      this.convertToCanvas()
+
+      this.UpdateSignData()
     },
     convertToCanvas() {
       let svgDom = document.getElementById("svg-sign")

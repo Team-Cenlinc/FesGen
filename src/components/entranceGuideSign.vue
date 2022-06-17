@@ -1,7 +1,7 @@
 <template>
   <div id="canvas">
     <keep-alive>
-      <component :is="this.signStyle" ref="svg"></component>
+      <component :is="this.signStyle" ref="svg" id="sign-entrance"></component>
     </keep-alive>
     <div class="data">
       <h4>SignStyle: </h4>
@@ -53,7 +53,7 @@ export default {
     },
     UpdateSignData() {
       console.log("Under Construction")
-    }
+    },
   }
 }
 </script>
