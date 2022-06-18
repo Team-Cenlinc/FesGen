@@ -2,7 +2,7 @@
   <div id="editor" class="form">
     <div class="row">
       <div>
-        <h2><span class="material-symbols-outlined icon-editor">palette</span> FesGen编辑器设置</h2>
+        <h2><span class="material-symbols-outlined icon-editor">palette</span>FesGen编辑器设置</h2>
         <div class="form-min-row">
           <p>站牌样式</p>
           <select v-model="signStyle" @change="sendSign">
@@ -24,17 +24,14 @@
           <input v-model="signInfo.chnCharacterBold" @change="sendData" type="checkbox">
         </div>
         <div class="form-min-row">
-          <p class="hint">刷新数据</p>
-          <button @click="requestRearrange" class="material-symbols-outlined tools-topic" title="刷新">sync</button>
+          <button @click="requestRearrange" class="button-alert">刷新数据</button>
+          <button @click="resetData" class="button-danger">重置数据</button>
         </div>
-        <h2 class="warn"><span class="material-symbols-outlined icon-editor">warning</span> 危险区域</h2>
-        <div class="form-min-row">
-          <p class="warn">重置数据</p>
-          <button @click="resetData" class="material-symbols-outlined tools-topic" title="刷新">device_reset</button>
-        </div>
+        <!--<h2 class="warn"><span class="material-symbols-outlined icon-editor">warning</span> 危险区域</h2>-->
+
       </div>
       <div>
-        <h2><span class="material-symbols-outlined icon-editor">tune</span>「北宿电铁-站牌」全局设置</h2>
+          <h2><span class="material-symbols-outlined icon-editor">tune</span>北宿电铁-站牌」全局设置</h2>
           <div class="form-min-row">
             <p>宽度</p>
             <div><input v-model="output.outputWidth" placeholder="600" min="0" @change="requestRearrange" type="number" value="600"> px</div>
@@ -52,16 +49,17 @@
           <input v-model="signInfo.displayForwardArrow" checked="checked" @change="sendData" type="checkbox">
         </div>
         <div class="form-min-row">
-          <p>反转左右信息</p>
-          <input class="button" @click="reverseLeftRight" value="  反转左右信息  " type="button">
-          <p>改变行进方向</p>
-          <input class="button" @click="changeDirection" value="  改变行进方向  " type="button">
+          <p>方向相关</p>
+          <div>
+            <input class="button" @click="reverseLeftRight" value="  反转左右信息  " type="button">
+            <input class="button" @click="changeDirection" value="  改变行进方向  " type="button">
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div>
-        <h2><span class="material-symbols-outlined icon-editor">info</span> 本站信息</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span>本站信息</h2>
           <div class="form-min-row">
             <p>站名 中文</p>
             <input v-model="signInfo.main.staNameChinese" @change="requestRearrange" type="text">
@@ -84,7 +82,7 @@
           </div>
       </div>
       <div>
-        <h2><span class="material-symbols-outlined icon-editor">info</span> 主要信息</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span>主要信息</h2>
         <div class="form-min-row">
           <p>线路颜色</p>
           <input v-model="signInfo.lineColor" @change="sendData" type="color">
@@ -113,7 +111,7 @@
     </div>
     <div class="row">
       <div>
-        <h2><span class="material-symbols-outlined icon-editor">info</span> 左侧站点信息</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span>左侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
           <input v-model="signInfo.left.leftStaNameChinese" value='锦冈' @change="requestRearrange" type="text">
@@ -132,7 +130,7 @@
         </div>
       </div>
       <div>
-        <h2><span class="material-symbols-outlined icon-editor">info</span> 右侧站点信息</h2>
+        <h2><span class="material-symbols-outlined icon-editor">info</span>右侧站点信息</h2>
         <div class="form-min-row">
           <p>站名 中文</p>
           <input v-model="signInfo.right.rightStaNameChinese" value='北宿' @change="requestRearrange" type="text">
@@ -333,10 +331,10 @@ export default {
 }
 
 .row h2 {
-  border-bottom: 8px solid #a0d4e8;
   width: fit-content;
   height: 27px;
   margin: 20px 0 10px 10px;
+  border-bottom: 8px solid #a0d4e8;
 }
 
 .row h2.warn{
@@ -351,12 +349,12 @@ input {
 
 input[type="text"] {
   padding: 5px;
-  border-radius: 30px;
+  border-radius: 3px;
 }
 
 input[type="number"] {
   padding: 5px;
-  border-radius: 30px;
+  border-radius: 3px;
 }
 
 input[type="color"] {
@@ -364,14 +362,14 @@ input[type="color"] {
 }
 
 input[type="button"] {
-  border-radius: 30px;
+  border-radius: 3px;
 }
 
 select {
   padding: 5px;
   background: #ffffff;
   border-style: none;
-  border-radius: 30px;
+  border-radius: 3px;
 }
 
 button.tools-topic{
@@ -379,7 +377,6 @@ button.tools-topic{
   background-color: #ffffff;
   border-radius: 100%;
   border-style: none;
-  box-shadow: 5px 5px 5px gray;
   transform: scale(125%, 125%);
   transition: 225ms ease-out;
 }
@@ -411,7 +408,54 @@ button.tools-topic:hover{
   border-bottom: 8px solid #ff5858;
 }
 
+.button{
+  height: 30px;
+  width: 100px;
+  border-radius: 3px;
+  border-width: 0;
+  transition: 200ms ease-out;
+  margin: 5px;
+  background-color: #fafafa;
+}
+
+.button:hover{
+  background-color: #565656;
+  color: rgb(255, 255, 255)
+}
+
+.button-alert{
+  height: 40px;
+  width: 120px;
+  font-size: 19px;
+  border-width: 0;
+  border-radius: 3px;
+  border-bottom: 5px solid #ffde5a;
+  transition: 200ms ease-out;
+  background-color: #fafafa;
+}
+.button-alert:hover{
+  background-color: #ffde5a;
+  color: rgb(255, 255, 255)
+}
+
+.button-danger{
+  height: 40px;
+  width: 120px;
+  font-size: 19px;
+  border-width: 0;
+  border-radius: 3px;
+  border-bottom: 5px solid #ff5858;
+  transition: 200ms ease-out;
+  background-color: #fafafa;
+}
+.button-danger:hover{
+  background-color: #ff5858;
+  color: rgb(255, 255, 255)
+}
+
 .material-symbols-outlined{
+  margin-right: 4px;
+  transform: translateY(3px);
    font-variation-settings:
        'FILL' 0,
        'wght' 400,

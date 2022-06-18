@@ -470,6 +470,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: -30px;
+  border-width: 10px;
 }
 hr{
   width: 600px;
