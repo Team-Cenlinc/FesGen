@@ -191,12 +191,12 @@ input {
 
 input[type="text"] {
   padding: 5px;
-  border-radius: 30px;
+  border-radius: 3px;
 }
 
 input[type="number"] {
   padding: 5px;
-  border-radius: 30px;
+  border-radius: 3px;
 }
 
 input[type="range"] {
@@ -207,7 +207,7 @@ input[type="range"] {
 select {
   padding: 5px;
   background: #ffffff;
-  border-radius: 30px;
+  border-radius: 3px;
 }
 
 .hint {

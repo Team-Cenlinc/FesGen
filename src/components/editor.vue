@@ -27,11 +27,9 @@
           <button @click="requestRearrange" class="button-alert">刷新数据</button>
           <button @click="resetData" class="button-danger">重置数据</button>
         </div>
-        <!--<h2 class="warn"><span class="material-symbols-outlined icon-editor">warning</span> 危险区域</h2>-->
-
       </div>
       <div>
-          <h2><span class="material-symbols-outlined icon-editor">tune</span>北宿电铁-站牌」全局设置</h2>
+          <h2><span class="material-symbols-outlined icon-editor">tune</span>北宿电铁-站牌: 全局设置</h2>
           <div class="form-min-row">
             <p>宽度</p>
             <div><input v-model="output.outputWidth" placeholder="600" min="0" @change="requestRearrange" type="number" value="600"> px</div>
@@ -337,11 +335,6 @@ export default {
   border-bottom: 8px solid #a0d4e8;
 }
 
-.row h2.warn{
-  font-weight: bold;
-  border-bottom: 8px solid #ff5858;
-}
-
 input {
   background: #ffffff;
   border-style: none;
@@ -372,20 +365,6 @@ select {
   border-radius: 3px;
 }
 
-button.tools-topic{
-  padding: 10px;
-  background-color: #ffffff;
-  border-radius: 100%;
-  border-style: none;
-  transform: scale(125%, 125%);
-  transition: 225ms ease-out;
-}
-
-button.tools-topic:hover{
-  background-color: gray;
-  color: #ffffff;
-}
-
 .form-min-row {
   margin: 0;
   padding: 10px 20px 10px 10px;
@@ -394,18 +373,6 @@ button.tools-topic:hover{
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-}
-
-.hint {
-  font-weight: bold;
-  height: 16px;
-  border-bottom: 8px solid #ffe58e;
-}
-
-.warn {
-  font-weight: bold;
-  height: 16px;
-  border-bottom: 8px solid #ff5858;
 }
 
 .button{
