@@ -4,10 +4,6 @@
     <keep-alive>
       <component :is="this.signStyle" ref="svg" class="sign" id="svg-sign"></component>
     </keep-alive>
-    <div class="data">
-      <h4>SignStyle: </h4>
-      <p>{{ this.signStyle || '你尚未选择'}}</p>
-    </div>
     <hr/>
     <div class="data">
       <p v-show="false">{{ this.signInfo || 'NO'}}</p>
@@ -419,7 +415,6 @@ export default {
 
       dom = this.$refs.svg.getElementById("rightIcon")
       xValueFin = 40 - contentLength
-      console.log()
       dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", 5)"
 
 
@@ -449,7 +444,6 @@ export default {
       let svgDom = document.getElementById("svg-sign")
       let {width, height} = svgDom.getBBox()
       let clonedSvgElements = svgDom.cloneNode(true)
-      console.log(width, height, clonedSvgElements)
       let outerHTML = clonedSvgElements.outerHTML,
           blob = new Blob([outerHTML],{type:'image/svg+xml;charset=utf-8'});
       let URL = window.URL || window.webkitURL || window;

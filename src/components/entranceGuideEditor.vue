@@ -42,13 +42,35 @@ export default {
       }
     }
   },
+  mounted() {
+    this.reloadCache()
+    this.dataToJson()
+  },
   methods: {
     sendData(){
+      this.dataToJson()
       this.$emit('someChanged', this.lightStyle, this.signInfo, this.output)
     },
     sendSign(){
+      this.dataToJson()
       this.$emit('signChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
     },
+    dataToJson(){
+      let jsonData = JSON.stringify(this.$data);
+      sessionStorage.setItem("instanceConfigEntrance", jsonData)
+    },
+    reloadCache() {
+      if (sessionStorage.getItem("instanceConfigEntrance") !== null) {
+        let jsonData = JSON.parse(sessionStorage.getItem("instanceConfigEntrance"))
+        if (jsonData.signStyle === "test-sign") {
+          this.signInfo = jsonData.signInfo
+          this.signStyle = jsonData.signStyle
+          this.lightStyle = jsonData.lightStyle
+          this.output = jsonData.output
+          this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
+        }
+      }
+    }
   }
 }
 </script>

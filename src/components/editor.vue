@@ -24,22 +24,28 @@
           <input v-model="signInfo.chnCharacterBold" @change="sendData" type="checkbox">
         </div>
         <div class="form-min-row">
+          <p class="hint">刷新数据</p>
           <button @click="requestRearrange" class="material-symbols-outlined tools-topic" title="刷新">sync</button>
+        </div>
+        <h2 class="warn"><span class="material-symbols-outlined icon-editor">warning</span> 危险区域</h2>
+        <div class="form-min-row">
+          <p class="warn">重置数据</p>
+          <button @click="resetData" class="material-symbols-outlined tools-topic" title="刷新">device_reset</button>
         </div>
       </div>
       <div>
         <h2><span class="material-symbols-outlined icon-editor">tune</span>「北宿电铁-站牌」全局设置</h2>
           <div class="form-min-row">
             <p>宽度</p>
-            <div><input v-model="output.outputWidth" placeholder="600" @change="requestRearrange" type="number" value="600"> px</div>
+            <div><input v-model="output.outputWidth" placeholder="600" min="0" @change="requestRearrange" type="number" value="600"> px</div>
           </div>
           <div class="form-min-row">
             <p>高度</p>
-            <div><input v-model="output.outputHeight" placeholder="200" @change="requestRearrange" type="number" value="200"> px</div>
+            <div><input v-model="output.outputHeight" placeholder="200" min="0" @change="requestRearrange" type="number" value="200"> px</div>
           </div>
         <div class="form-min-row">
           <p>边框大小</p>
-          <div><input v-model="signInfo.frameThickness" placeholder="4" value='4' @change="requestRearrange" type="number"> px</div>
+          <div><input v-model="signInfo.frameThickness" placeholder="4" value='4' min="0" @change="requestRearrange" type="number"> px</div>
         </div>
         <div class="form-min-row">
           <p>显示行进方向箭头</p>
@@ -193,10 +199,11 @@ export default {
         displayForwardArrow: true,
         chnCharacterBold: false,
         direction: 'left',
-      },
+      }
     }
   },
   mounted() {
+    this.reloadCache()
     this.$emit('someChanged', this.lightStyle, this.signInfo, this.output)
     this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     this.dataToJson()
@@ -212,6 +219,7 @@ export default {
     },
     requestRearrange(){
       this.dataToJson()
+
       this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     },
     changeDirection(){
@@ -224,7 +232,6 @@ export default {
       }
 
       this.dataToJson()
-
       this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
     },
     reverseLeftRight(){
@@ -254,6 +261,59 @@ export default {
     dataToJson(){
       let jsonData = JSON.stringify(this.$data);
       sessionStorage.setItem("instanceConfig", jsonData)
+    },
+    reloadCache() {
+      if (sessionStorage.getItem("instanceConfig") !== null) {
+        let jsonData = JSON.parse(sessionStorage.getItem("instanceConfig"))
+        this.signInfo = jsonData.signInfo
+        this.lightStyle = jsonData.lightStyle
+        this.output = jsonData.output
+        this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
+      }
+    },
+    resetData() {
+      this.lightStyle = 'fluore'
+      this.output = {
+        outputWidth: 600,
+        outputHeight: 200,
+      }
+      this.signInfo = {
+        main: {
+          staNameEnglish: 'Kaihin-Shukukai',
+          staNameChinese: '海浜宿海',
+          staNameKana: 'かいひんしゅくかい',
+          mainTextColor: '#383838',
+        },
+        left: {
+          leftStaNumber: '04',
+          leftStaNameEnglish: 'Nishikioka',
+          leftStaNameChinese: '錦岡',
+          leftTextColor: '#383838',
+        },
+        middle: {
+          lineName: '東海岸本線',
+          lineAbbr: 'T',
+          middleStaNumber: '03',
+        },
+        right: {
+          rightStaNumber: '02',
+          rightStaNameEnglish: 'Kitajuku',
+          rightStaNameChinese: '北宿',
+          rightTextColor: '#7A7A7A',
+        },
+        secondLine: {
+          enable: false,
+          color: '#A0D4E7',
+        },
+        lineColor: '#7297DD',
+        backgroundColor: '#ECECEC',
+        frameThickness: 4,
+        displayForwardArrow: true,
+        chnCharacterBold: false,
+        direction: 'left',
+      }
+      this.dataToJson()
+      this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
     }
   },
 }
@@ -279,16 +339,38 @@ export default {
   margin: 20px 0 10px 10px;
 }
 
-input {
-  border-top-style: none;
-  border-left-style: none;
-  border-right-style: none;
-  border-bottom-width: 2px;
-  border-bottom: #4e4e4e;
-  background: #ffffff;
+.row h2.warn{
+  font-weight: bold;
+  border-bottom: 8px solid #ff5858;
 }
 
-.button{
+input {
+  background: #ffffff;
+  border-style: none;
+}
+
+input[type="text"] {
+  padding: 5px;
+  border-radius: 30px;
+}
+
+input[type="number"] {
+  padding: 5px;
+  border-radius: 30px;
+}
+
+input[type="color"] {
+  background: transparent;
+}
+
+input[type="button"] {
+  border-radius: 30px;
+}
+
+select {
+  padding: 5px;
+  background: #ffffff;
+  border-style: none;
   border-radius: 30px;
 }
 
@@ -315,6 +397,18 @@ button.tools-topic:hover{
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.hint {
+  font-weight: bold;
+  height: 16px;
+  border-bottom: 8px solid #ffe58e;
+}
+
+.warn {
+  font-weight: bold;
+  height: 16px;
+  border-bottom: 8px solid #ff5858;
 }
 
 .material-symbols-outlined{

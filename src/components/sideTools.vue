@@ -52,7 +52,6 @@ export default {
       }
     },
     hiddenTrigger() {
-      console.log("triggered")
       this.status_clicked = !this.status_clicked;
     },
     requestRearrange() {

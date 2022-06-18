@@ -9,7 +9,7 @@
           <h2><span class="material-symbols-outlined icon-editor">tune</span> 导出设置</h2>
           <div class="form-min-row">
             <p>导出格式</p>
-            <select v-bind:class="{'not-chose': this.fileType !== ''}" v-model="fileType">
+            <select v-bind:class="{'not-chose': this.fileType === ''}" v-model="fileType">
               <option disabled value="">请选择</option>
               <option value="json">.json</option>
               <option value="png">.png</option>
@@ -18,23 +18,24 @@
           </div>
           <div class="form-min-row">
             <p>文件名</p>
-            <div><input v-model="fileName" placeholder="请输入" type="text"></div>
+            <input v-model="fileName" placeholder="请输入" type="text">
           </div>
-          <div class="form-min-row">
+          <div class="form-min-row" v-if="this.fileType !== 'json' || ''">
             <p>文件质量</p>
-            <div><input v-model="fileQuality" max="100" type="range"></div>
+            <input v-model="fileQuality" max="100" min="0" type="range">
+            <input v-model="fileQuality" max="100" min="0" type="number">
           </div>
         </div>
         <div class="download-tools">
-          <h2><span class="material-symbols-outlined icon-editor">done</span> 操作</h2>
+          <h2><span class="material-symbols-outlined icon-editor">ads_click</span> 操作</h2>
           <div class="form-min-row">
             <p class="hint">在下载前，请确认您所需要的变更已执行并确认显示正确。</p>
             <p class="hint">若不正确，请返回并使用刷新以强制执行更改</p>
             <p class="hint">若无任何图像信息，请选择一种站牌样式或返回编辑器以编辑。</p>
           </div>
-          <div class="form-min-row">
-            <button @click="downloadItems" class="material-symbols-outlined icon-action">file_download</button>
-            <button @click="switchViewerReturn" class="material-symbols-outlined icon-return" title="返回编辑器">undo</button>
+          <div class="form-min-row action-button">
+            <button v-bind:disabled="this.fileType === ''" @click="downloadItems" class="material-symbols-outlined icon-action" title="下载文件">file_download</button>
+            <button @click="switchViewerReturn" class="material-symbols-outlined icon-action" title="返回编辑器">undo</button>
           </div>
         </div>
       </div>
@@ -50,7 +51,7 @@ export default {
       signStyle: "kitajuku-dentetsu",
       fileName: "",
       fileType: "",
-      fileQuality: 1,
+      fileQuality: 100,
       jsonCache: {}
     }
   },
@@ -87,7 +88,6 @@ export default {
     },
     downloadItems() {
       let fileQualityRanged = this.fileQuality / 100
-      console.log(this.fileQuality)
       let canvas = document.getElementById("preview-sign-canvas");
       let png = canvas.toDataURL('image/png', fileQualityRanged);
       let jpeg = canvas.toDataURL('image/jpeg', fileQualityRanged);
@@ -146,22 +146,12 @@ export default {
   align-items: center;
 }
 
-.icon-return{
-  padding: 10px;
-  background-color: #ffffff;
-  border-radius: 100%;
-  border-style: none;
-  box-shadow: 5px 5px 5px gray;
-  transition: 225ms ease-out;
-}
-
-.icon-return:hover{
-  background-color: gray;
-  color: #ffffff;
+.form-min-row.action-button{
+  display: -webkit-flex; /* Safari */
+  display: flex;
 }
 
 .icon-action{
-  float: right;
   padding: 10px;
   background-color: #ffffff;
   border-radius: 100%;
@@ -195,12 +185,29 @@ export default {
 }
 
 input {
-  border-top-style: none;
-  border-left-style: none;
-  border-right-style: none;
-  border-bottom-width: 2px;
-  border-bottom: #4e4e4e;
   background: #ffffff;
+  border-style: none;
+}
+
+input[type="text"] {
+  padding: 5px;
+  border-radius: 30px;
+}
+
+input[type="number"] {
+  padding: 5px;
+  border-radius: 30px;
+}
+
+input[type="range"] {
+  border-style: none;
+  color: #a0d4e7;
+}
+
+select {
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 30px;
 }
 
 .hint {
@@ -220,7 +227,7 @@ input {
 }
 
 .not-chose{
-
+  border-color: #ff0000;
 }
 
 .material-symbols-outlined{

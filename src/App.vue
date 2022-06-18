@@ -54,6 +54,9 @@ export default {
       this.viewerType = viewerType
     },
   },
+  beforeDestroy() {
+    sessionStorage.clear()
+  }
 }
 </script>
 
