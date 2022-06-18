@@ -6,7 +6,7 @@
     <div class="form">
       <div class="row">
         <div>
-          <h2><span class="material-symbols-outlined icon-editor">tune</span> 导出设置</h2>
+          <h2><span class="material-symbols-outlined icon-editor">tune</span>导出设置</h2>
           <div class="form-min-row">
             <p>导出格式</p>
             <select v-bind:class="{'not-chose': this.fileType === ''}" v-model="fileType">
@@ -27,14 +27,14 @@
           </div>
         </div>
         <div class="download-tools">
-          <h2><span class="material-symbols-outlined icon-editor">ads_click</span> 操作</h2>
+          <h2><span class="material-symbols-outlined icon-editor">ads_click</span>操作</h2>
           <div class="form-min-row">
             <p class="hint">在下载前，请确认您所需要的变更已执行并确认显示正确。</p>
             <p class="hint">若不正确，请返回并使用刷新以强制执行更改</p>
             <p class="hint">若无任何图像信息，请选择一种站牌样式或返回编辑器以编辑。</p>
           </div>
           <div class="form-min-row action-button">
-            <button v-bind:disabled="this.fileType === ''" @click="downloadItems" class="material-symbols-outlined icon-action" title="下载文件">file_download</button>
+            <button v-bind:disabled="this.fileType === ''" @click="downloadItems" class="material-symbols-outlined icon-action" title="下载文件">cloud_download</button>
             <button @click="switchViewerReturn" class="material-symbols-outlined icon-action" title="返回编辑器">undo</button>
           </div>
         </div>
