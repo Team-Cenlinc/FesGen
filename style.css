@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'source-han-sans', 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', '源ノ角ゴシック JP', 'Noto Sans', 'M+ 1c', 游ゴシック体, 'Yu Gothic', YuGothic, メイリオ, Meiryo, sans-serif;
+    font-family: 'source-han-sans', sans-serif;
 }
 
 html {
