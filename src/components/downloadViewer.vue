@@ -103,7 +103,7 @@ export default {
       }
       let fileName
       if (this.fileName === "") {
-        fileName = this.signStyle
+        fileName = sessionStorage.getItem("instanceSignStyle")
       } else {
         fileName = this.fileName
       }
