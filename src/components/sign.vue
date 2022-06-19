@@ -349,6 +349,12 @@ export default {
       dom = this.$refs.svg.getElementById("middleEpli")
       dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yValueFin.toString() +")"
 
+      xRefPoint = 21
+      dom = this.$refs.svg.getElementById("leftStaNumber")
+      contentLength = dom.getBBox().width
+      xValueFin = 21 - (contentLength / 2) + 8
+      dom.attributes[2].value = xValueFin
+
 
       // lineIcon (Abbr), Original length 130px
       let domHelp = this.$refs.svg.getElementById("lineAbbr")
@@ -394,6 +400,13 @@ export default {
       dom = this.$refs.svg.getElementById("leftIcon")
       dom.attributes.transform.value = "translate(" + xValueFin.toString() + ", " + yRefPoint.toString() +")"
 
+      // Mid Point
+      xRefPoint = 13
+      dom = this.$refs.svg.getElementById("leftStaNumber")
+      contentLength = dom.getBBox().width
+      xValueFin = 13 - (contentLength / 2) + 6
+      dom.attributes[2].value = xValueFin
+
       // signInfo.right - Change Text Start Point
 
       // Global group
@@ -421,6 +434,12 @@ export default {
       dom = this.$refs.svg.getElementById("rightStaNameEnglish")
       contentLength = dom.getBBox().width
       xValueFin = xRefPoint - contentLength
+      dom.attributes[2].value = xValueFin
+
+      xRefPoint = 13
+      dom = this.$refs.svg.getElementById("rightStaNumber")
+      contentLength = dom.getBBox().width
+      xValueFin = 13 - (contentLength / 2) + 6
       dom.attributes[2].value = xValueFin
 
 

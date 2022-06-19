@@ -72,7 +72,7 @@
           </div>
         <div class="form-min-row">
           <p>本站编号</p>
-          <input v-model="signInfo.middle.middleStaNumber" @change="sendData" type="number">
+          <input v-model="signInfo.middle.middleStaNumber" @change="requestRearrange" type="text">
         </div>
           <div class="form-min-row">
             <p>字体颜色</p>
@@ -120,7 +120,7 @@
         </div>
         <div class="form-min-row">
           <p>站点编号</p>
-          <input v-model="signInfo.left.leftStaNumber" value='04' @change="sendData" type="number">
+          <input v-model="signInfo.left.leftStaNumber" value='04' @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
           <p>字体颜色</p>
@@ -139,7 +139,7 @@
         </div>
         <div class="form-min-row">
           <p>站点编号</p>
-          <input v-model="signInfo.right.rightStaNumber" value='02' @change="sendData" type="number">
+          <input v-model="signInfo.right.rightStaNumber" value='02' @change="requestRearrange" type="text">
         </div>
         <div class="form-min-row">
           <p>字体颜色</p>
