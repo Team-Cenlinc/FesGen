@@ -17,16 +17,12 @@
             <p class="danger"  v-if="!this.correctFormat">错误的格式文件格式</p>
             <input v-model="this.correctFormat" type="checkbox" disabled="disabled">
           </div>
-          <div class="form-min-row">
-            <p>导视牌模板</p>
-            <input v-model="this.sign" type="text" readonly="readonly">
-          </div>
         </div>
         <div>
           <h2><span class="material-symbols-outlined icon-editor">ads_click</span>操作与提示</h2>
           <div class="form-min-row">
             <p v-if="this.wrongFileCount" class="danger">请上传 1 个文件！</p>
-            <p v-if="!this.completeness" class="danger">文件不完整！</p>
+            <p v-if="this.completeness" class="danger">文件不完整！</p>
           </div>
           <div class="form-min-row">
             <p class="hint">导入检查器会自动检查提交的文件</p>
@@ -34,7 +30,7 @@
             <p class="hint">若正确请点击按钮以跳转</p>
           </div>
           <div class="form-min-row">
-            <button v-bind:disabled="this.sign === '' & this.correctFormat" @click="switchStyle" class="material-symbols-outlined icon-action" title="导入">input</button>
+            <button v-bind:disabled="!this.completeness && !this.correctFormat" @click="switchStyle" class="material-symbols-outlined icon-action" title="导入">input</button>
             <button @click="switchViewerReturn" class="material-symbols-outlined icon-action" title="返回编辑器">undo</button>
           </div>
         </div>
@@ -107,8 +103,7 @@ export default {
                 } else if (jsonObj.signStyle === "test-sign") {
                   sessionStorage.setItem("instanceConfigEntrance", this.result)
                 }
-                this.$data.sign.setValue(jsonObj.signStyle)
-                console.log(this.sign)
+                sessionStorage.setItem("instanceSignStyle", jsonObj.signStyle)
               }
               this.completeness = true
             } catch (error) {
@@ -120,8 +115,8 @@ export default {
         }
       }
     },
-    switchStyle () {
-      this.$emit("switchStyle", this.sign)
+    switchStyle() {
+      this.$emit("switchStyle", sessionStorage.getItem("instanceSignStyle"))
       this.$emit("switchViewer", "")
     }
   }
