@@ -58,8 +58,30 @@ header a.header-nav{
 }
 
 header a.header-nav:hover {
-    background-color: rgba(79, 79, 79, .65);
-    color: #f3f3f3;
+    z-index: 1;
+    color: #383838;
+    background: #e3e3e3;
+}
+
+a.header-nav:after, a.header-nav:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 80%;
+    width: 0;
+    height: 10%;
+    background-color: transparent;
+    z-index: -2;
+}
+
+a.header-nav:before{
+    transition: .3s;
+    background-color: #7092d5;
+    z-index: -1;
+}
+
+a.header-nav:hover:after, a.header-nav:hover:before{
+    width: 100%;
 }
 
 .main {
