@@ -1,5 +1,7 @@
 <template>
   <header>
+    <meta charset="utf-8" name="description" content="FesGen 是由Team Cenlinc制作的导视生成器。">
+    <meta name="keywords" content="导视, FesGen, Cenlinc, Team Cenlinc, Sign Generator">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <div class="header-flex">
       <h1><small><a href="/" class="header-nav-home">{{ title }}</a></small></h1>
@@ -82,7 +84,7 @@ export default {
   --header-color: #e5e5e5;
   --header-nav-color: #e5e5e5;
   --header-nav-color-hover: #e3e3e3;
-  --header-nav-color-bg-hover: #545454;
+  --header-nav-color-bg-hover: #2d2d2d;
   --header-nav-color-line-hover: #8ba3d7;
 }
 

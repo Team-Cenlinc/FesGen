@@ -60,7 +60,7 @@ footer #footer-description p{
 
 footer span {
   font-size: 14px;
-  color: #919191;
+  color: #4f4f4f;
   text-align: right;
   float: right;
 }
