@@ -4,8 +4,8 @@
     <div class="header-flex">
       <h1><small><a href="/" class="header-nav-home">{{ title }}</a></small></h1>
       <span>
-        <button v-if="darkMode" class="material-symbols-outlined header-nav">dark_mode</button>
-        <button v-if="!darkMode" class="material-symbols-outlined header-nav">light_mode</button>
+        <input type="button" @click="changeModeAnimation" v-if="darkMode" class="material-symbols-outlined header-nav" value="dark_mode">
+        <input type="button" @click="changeModeAnimation" v-if="!darkMode" class="material-symbols-outlined header-nav" value="light_mode">
         <a href="/about.html" class="header-nav">About</a>
         <a href="/help.html" class="header-nav">Help</a>
         <a href="https://github.com/Team-Cenlinc/FesGen/tree/main" target="_blank" class="header-nav">GitHub</a>
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import anime from 'animejs/lib/anime.es.js';
+
 export default {
   name: "flex-header",
   props: [
@@ -26,15 +28,67 @@ export default {
     return{
       darkMode: false,
     }
+  },
+  mounted() {
+    const darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+    if (darkMode && darkMode.matches) {
+      document.body.classList.add('dark');
+      this.darkMode = true
+    }
+    darkMode && darkMode.addEventListener('change', e => {
+      if (e.matches) {
+        document.body.classList.add('dark');
+        this.darkMode = true
+      } else {
+        document.body.classList.remove('dark');
+        this.darkMode = false
+      }
+    });
+  },
+  methods:{
+    changeModeAnimation () {
+      anime({
+        targets: 'input.header-nav',
+        translateY: -100,
+        direction: 'alternate',
+        duration: 100
+          })
+      this.darkMode = !this.darkMode
+      this.changeColorTheme()
+    },
+    changeColorTheme() {
+      if (this.darkMode){
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
   }
 }
 </script>
 
 <style>
+:root {
+  --header-background-color: #a5ddf0;
+  --header-color: #1f1f1f;
+  --header-nav-color: #4f4f4f;
+  --header-nav-color-hover: #383838;
+  --header-nav-color-bg-hover: #e3e3e3;
+  --header-nav-color-line-hover: #7092d5;
+}
+
+:root .dark {
+  --header-background-color: #002c36;
+  --header-color: #e5e5e5;
+  --header-nav-color: #e5e5e5;
+  --header-nav-color-hover: #e3e3e3;
+  --header-nav-color-bg-hover: #545454;
+  --header-nav-color-line-hover: #8ba3d7;
+}
 
 header {
-  background-color: #a5ddf0;
-  color: #1f1f1f;
+  background-color: var(--header-background-color);
+  color: var(--header-color);
   padding: 10px 20px;
   margin:  0;
   box-shadow: 0 0 5px #484848;
@@ -57,7 +111,7 @@ header a.header-nav-home {
   display: flex;
   padding: 0 1em;
   line-height: 50px;
-  color: #4f4f4f;
+  color: var(--header-nav-color);
   text-decoration: none;
   float: right;
 }
@@ -66,7 +120,7 @@ header .header-nav{
   display: block;
   padding: 0 1em;
   line-height: 50px;
-  color: #4f4f4f;
+  color: var(--header-nav-color);
   text-decoration: none;
   position: relative;
   transition: 225ms ease-out;
@@ -75,8 +129,8 @@ header .header-nav{
 
 header a.header-nav:hover {
   z-index: 1;
-  color: #383838;
-  background: #e3e3e3;
+  color: var(--header-nav-color-hover);
+  background: var(--header-nav-color-bg-hover);
 }
 
 a.header-nav:after, a.header-nav:before{
@@ -92,7 +146,7 @@ a.header-nav:after, a.header-nav:before{
 
 a.header-nav:before{
   transition: .3s;
-  background-color: #7092d5;
+  background-color: var(--header-nav-color-line-hover);
   z-index: -1;
 }
 
@@ -108,15 +162,16 @@ a.header-nav:hover:after, a.header-nav:hover:before{
       'opsz' 48
 }
 
-button.header-nav{
-  background-color: #a5ddf0;
-  color: #4f4f4f;
+input.header-nav{
+  background-color: transparent;
+  padding: -10px;
+  color: var(--header-nav-color);
   border-style: none;
   transition: 225ms ease-out;
 }
 
-button.header-nav:hover {
-  color: #f3f3f3;
+input.header-nav:hover {
+  color: var(--header-nav-color-hover);
 }
 
 </style>
