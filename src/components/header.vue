@@ -4,7 +4,8 @@
     <div class="header-flex">
       <h1><small><a href="/" class="header-nav-home">{{ title }}</a></small></h1>
       <span>
-        <button class="material-symbols-outlined header-nav">menu</button>
+        <button v-if="darkMode" class="material-symbols-outlined header-nav">dark_mode</button>
+        <button v-if="!darkMode" class="material-symbols-outlined header-nav">light_mode</button>
         <a href="/about.html" class="header-nav">About</a>
         <a href="/help.html" class="header-nav">Help</a>
         <a href="https://github.com/Team-Cenlinc/FesGen/tree/main" target="_blank" class="header-nav">GitHub</a>
@@ -20,11 +21,17 @@ export default {
   name: "flex-header",
   props: [
       'title'
-  ]
+  ],
+  data() {
+    return{
+      darkMode: false,
+    }
+  }
 }
 </script>
 
 <style>
+
 header {
   background-color: #a5ddf0;
   color: #1f1f1f;
@@ -43,6 +50,7 @@ header .header-flex {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  border-bottom-color: white;
 }
 
 header a.header-nav-home {
@@ -55,7 +63,7 @@ header a.header-nav-home {
 }
 
 header .header-nav{
-  display: flex;
+  display: block;
   padding: 0 1em;
   line-height: 50px;
   color: #4f4f4f;
@@ -66,8 +74,30 @@ header .header-nav{
 }
 
 header a.header-nav:hover {
-  background-color: rgba(79, 79, 79, .65);
-  color: #f3f3f3;
+  z-index: 1;
+  color: #383838;
+  background: #e3e3e3;
+}
+
+a.header-nav:after, a.header-nav:before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 80%;
+  width: 0;
+  height: 10%;
+  background-color: transparent;
+  z-index: -2;
+}
+
+a.header-nav:before{
+  transition: .3s;
+  background-color: #7092d5;
+  z-index: -1;
+}
+
+a.header-nav:hover:after, a.header-nav:hover:before{
+  width: 100%;
 }
 
 .material-symbols-outlined {
