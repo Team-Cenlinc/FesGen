@@ -10,9 +10,7 @@
   "dependencies": {
     "animejs": "^3.2.1",
     "core-js": "^3.6.5",
-    "material-design-icons": "^3.0.1",
-    "vue": "^2.6.11",
-    "vue-material": "^1.0.0-beta-15"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
