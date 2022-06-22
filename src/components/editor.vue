@@ -317,6 +317,7 @@ export default {
 
 <style scoped>
 .form {
+  color: var(--editor-selector-color);
   max-width: 1000px;
   margin: 0 auto;
   padding: 10px 10px;
@@ -324,7 +325,7 @@ export default {
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid #9E9E9E;
+  border-top: 1px solid var(--editor-row-border);
   margin: 30px auto 30px;
 }
 
@@ -332,11 +333,12 @@ export default {
   width: fit-content;
   height: 27px;
   margin: 20px 0 10px 10px;
-  border-bottom: 8px solid #a0d4e8;
+  border-bottom: 8px solid var(--editor-topic-highlight);
 }
 
 input {
-  background: #ffffff;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   border-style: none;
 }
 
@@ -360,7 +362,8 @@ input[type="button"] {
 
 select {
   padding: 5px;
-  background: #ffffff;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   border-style: none;
   border-radius: 3px;
 }
@@ -382,7 +385,8 @@ select {
   border-width: 0;
   transition: 200ms ease-out;
   margin: 5px;
-  background-color: #fafafa;
+  background-color: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
 }
 
 .button:hover{
@@ -398,11 +402,12 @@ select {
   border-radius: 3px;
   border-bottom: 5px solid #ffde5a;
   transition: 200ms ease-out;
-  background-color: #fafafa;
+  color: var(--editor-selector-color);
+  background-color: var(--editor-selector-bg-color);
 }
 .button-alert:hover{
   background-color: #ffde5a;
-  color: rgb(255, 255, 255)
+  color: var(--editor-selector-color);
 }
 
 .button-danger{
@@ -413,11 +418,12 @@ select {
   border-radius: 3px;
   border-bottom: 5px solid #ff5858;
   transition: 200ms ease-out;
-  background-color: #fafafa;
+  color: var(--editor-selector-color);
+  background-color: var(--editor-selector-bg-color);
 }
 .button-danger:hover{
   background-color: #ff5858;
-  color: rgb(255, 255, 255)
+  color: var(--editor-selector-color);
 }
 
 .material-symbols-outlined{

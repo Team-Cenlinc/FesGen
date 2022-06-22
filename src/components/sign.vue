@@ -1,10 +1,11 @@
 <template>
   <div id="canvas">
     <canvas id="sign-canvas" />
-    <keep-alive>
-      <component :is="this.signStyle" ref="svg" class="sign" id="svg-sign"></component>
-    </keep-alive>
-    <hr/>
+    <div id="sign-component">
+      <keep-alive>
+        <component :is="this.signStyle" ref="svg" class="sign" id="svg-sign"></component>
+      </keep-alive>
+    </div>
     <div class="data">
       <p v-show="false">{{ this.signInfo || 'NO'}}</p>
     </div>
@@ -488,17 +489,23 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: -30px;
+  padding: -50px;
   border-width: 10px;
+  z-index: 1;
 }
-hr{
-  width: 600px;
+
+#sign-component{
+  z-index: -1;
+  margin: -70px;
+  transform: scale(5%, 5%);
 }
+
 .data {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+
 .data h4 {
   margin-right: 20px;
   color: #333333;

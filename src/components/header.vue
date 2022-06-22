@@ -70,30 +70,12 @@ export default {
 </script>
 
 <style>
-:root {
-  --header-background-color: #a5ddf0;
-  --header-color: #1f1f1f;
-  --header-nav-color: #4f4f4f;
-  --header-nav-color-hover: #383838;
-  --header-nav-color-bg-hover: #e3e3e3;
-  --header-nav-color-line-hover: #7092d5;
-}
-
-:root .dark {
-  --header-background-color: #002c36;
-  --header-color: #e5e5e5;
-  --header-nav-color: #e5e5e5;
-  --header-nav-color-hover: #e3e3e3;
-  --header-nav-color-bg-hover: #2d2d2d;
-  --header-nav-color-line-hover: #8ba3d7;
-}
-
 header {
   background-color: var(--header-background-color);
   color: var(--header-color);
   padding: 10px 20px;
   margin:  0;
-  box-shadow: 0 0 5px #484848;
+  box-shadow: 0 0 5px var(--header-shade-color);
   flex: 0 0 auto;
   z-index: 1;
 }
@@ -106,7 +88,6 @@ header .header-flex {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  border-bottom-color: white;
 }
 
 header a.header-nav-home {

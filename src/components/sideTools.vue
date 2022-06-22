@@ -1,11 +1,11 @@
 <template>
-  <div class="side-tools" v-bind:class="{solid: isSolid}">
-    <div class="to-header" v-bind:class="{visible: isVisible}" >
+  <div class="side-tools" v-bind:class="{solid: this.isSolid}">
+    <div class="to-header" v-bind:class="{visible: this.isVisible}" >
       <button @click="scrollToTop" class="material-symbols-outlined side-tools-topic" title="返回标题">keyboard_double_arrow_up</button>
     </div>
-    <div class="files" v-bind:class="{position: !isVisible}">
+    <div class="files" v-bind:class="{position: !this.isVisible}">
       <button @click="hiddenTrigger" class="material-symbols-outlined side-tools-topic" title="文件管理">folder_open</button>
-      <ul v-bind:class="{visible: status_clicked}">
+      <ul v-bind:class="{visible: this.status_clicked}">
         <li><button @click="switchViewerDownload" class="material-symbols-outlined side-tools-content" title="下载文件">download</button></li>
         <li><button @click="switchViewerUpload" class="material-symbols-outlined side-tools-content" title="上传文件">upload</button></li>
       </ul>
@@ -105,10 +105,11 @@ export default {
 .side-tools button.side-tools-topic{
   margin: 0 0 15px 0;
   padding: 10px;
-  background-color: #ffffff;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   border-radius: 100%;
   border-style: none;
-  box-shadow: 5px 5px 5px gray;
+  box-shadow: 5px 5px 5px var(--sidetool-shade-color);
   transform: scale(125%, 125%);
   transition: 225ms ease-out;
 }
@@ -116,10 +117,11 @@ export default {
 .side-tools button.side-tools-content{
   margin: -3px 0 8px 0;
   padding: 10px;
-  background-color: #ffffff;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   border-radius: 100%;
   border-style: none;
-  box-shadow: 5px 5px 5px gray;
+  box-shadow: 5px 5px 5px var(--sidetool-shade-color);
   transform: scale(100%, 100%);
   flex-direction: column;
   transition: 225ms ease-out;
