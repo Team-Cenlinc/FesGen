@@ -4,12 +4,6 @@
       <component :is="this.signStyle" ref="svg" id="sign-entrance"></component>
     </keep-alive>
     <div class="data">
-      <h4>SignStyle: </h4>
-      <p>{{ this.signStyle || '你尚未选择'}}</p>
-    </div>
-    <hr/>
-    <button>下载</button>
-    <div class="data">
       <p v-show="false">{{ this.signInfo || 'NO'}}</p>
     </div>
   </div>

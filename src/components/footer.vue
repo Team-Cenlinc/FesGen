@@ -28,9 +28,9 @@ export default {
 <style scoped>
 footer {
   margin: 0;
-  background-color: #e3e2e2;
+  background-color: var(--footer-backgroun-color);
   padding: 20px 30px 20px 30px;
-  box-shadow: 0 0 7px #484848;
+  box-shadow: 0 0 7px var(--footer-shade-color);
   flex: 0 0 auto;
 }
 
@@ -46,11 +46,11 @@ footer .footer-flex {
 }
 
 footer h2 {
-  color: #4f4f4f;
+  color: var(--footer-text-color);
 }
 
 footer #footer-description p{
-  color: #4f4f4f;
+  color: var(--footer-text-color);
   display: -webkit-flex; /* Safari */
   display: flex;
   flex-direction: row;
@@ -60,7 +60,7 @@ footer #footer-description p{
 
 footer span {
   font-size: 14px;
-  color: #4f4f4f;
+  color: var(--footer-text-color);
   text-align: right;
   float: right;
 }

@@ -133,6 +133,7 @@ export default {
 <style scoped>
 
 .download-viewer{
+  color: var(--editor-selector-color);
   max-width: 1000px;
   margin: 0 auto;
   padding: 10px 10px 300px 10px;
@@ -153,10 +154,11 @@ export default {
 
 .icon-action{
   padding: 10px;
-  background-color: #ffffff;
+  background-color: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   border-radius: 100%;
   border-style: none;
-  box-shadow: 5px 5px 5px gray;
+  box-shadow: 5px 5px 5px var(--tool-icon-shade-color);
   transition: 225ms ease-out;
 }
 
@@ -173,19 +175,20 @@ export default {
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid #9E9E9E;
+  border-top: 1px solid var(--editor-row-border);
   margin: 30px auto 30px;
 }
 
 .row h2 {
-  border-bottom: 8px solid #a0d4e8;
+  border-bottom: 8px solid var(--editor-topic-highlight);
   width: fit-content;
   height: 27px;
   margin: 20px 0 10px 10px;
 }
 
 input {
-  background: #ffffff;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   border-style: none;
 }
 
@@ -201,19 +204,20 @@ input[type="number"] {
 
 input[type="range"] {
   border-style: none;
-  color: #a0d4e7;
+  color: var(--file-range-color);
 }
 
 select {
   padding: 5px;
-  background: #ffffff;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   border-radius: 3px;
 }
 
 .hint {
   font-weight: bold;
   height: 16px;
-  border-bottom: 8px solid #ffe58e;
+  border-bottom: 8px solid var(--global-alert);
 }
 
 .form-min-row {

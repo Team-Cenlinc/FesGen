@@ -25,9 +25,9 @@
             <p v-if="this.completeness" class="danger">文件不完整！</p>
           </div>
           <div class="form-min-row">
-            <p class="hint">导入检查器会自动检查提交的文件</p>
-            <p class="hint">检查器检查完毕后请检查是否为上传的文件</p>
-            <p class="hint">若正确请点击按钮以跳转</p>
+            <p class="alert">导入检查器会自动检查提交的文件</p>
+            <p class="alert">检查器检查完毕后请检查是否为上传的文件</p>
+            <p class="alert">若正确请点击按钮以跳转</p>
           </div>
           <div class="form-min-row">
             <button v-bind:disabled="!this.completeness && !this.correctFormat" @click="switchStyle" class="material-symbols-outlined icon-action" title="导入">input</button>
@@ -128,6 +128,7 @@ export default {
 <style scoped>
 
 .upload-viewer{
+  color: var(--editor-selector-color);
   max-width: 1000px;
   margin: 0 auto;
   padding: 10px 10px 300px 10px;
@@ -141,10 +142,6 @@ export default {
   align-items: center;
 }
 
-.canvas{
-
-}
-
 input[type="file"] {
   width: 0;
   height: 0;
@@ -156,7 +153,8 @@ input[type="file"] {
 
 #input-file + label {
   padding: 20px 100px;
-  background-color: #ffffff;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   transition: 225ms ease-out;
   text-align: center;
   border-radius: 5px;
@@ -170,7 +168,7 @@ input[type="file"] {
 
 #drag-file {
   padding: 20px 150px;
-  background-color: #ffffff;
+  background: var(--editor-selector-bg-color);
   border-style: double;
   transition: 225ms ease-out;
   text-align: center;
@@ -179,10 +177,11 @@ input[type="file"] {
 
 .icon-action{
   padding: 10px;
-  background-color: #ffffff;
+  background-color: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
   border-radius: 100%;
   border-style: none;
-  box-shadow: 5px 5px 5px gray;
+  box-shadow: 5px 5px 5px var(--tool-icon-shade-color);
   transition: 225ms ease-out;
 }
 
@@ -203,12 +202,12 @@ span.icon-upload {
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid #9E9E9E;
+  border-top: 1px solid var(--editor-row-border);
   margin: 30px auto 30px;
 }
 
 .row h2 {
-  border-bottom: 8px solid #a0d4e8;
+  border-bottom: 8px solid var(--editor-topic-highlight);
   width: fit-content;
   height: 27px;
   margin: 20px 0 10px 10px;
@@ -217,19 +216,13 @@ span.icon-upload {
 .alert{
   font-weight: bold;
   height: 16px;
-  border-bottom: 8px solid #ffe58e;
+  border-bottom: 8px solid var(--global-alert);
 }
 
 .danger {
   font-weight: bold;
   height: 16px;
-  border-bottom: 8px solid #ff5858;
-}
-
-.hint {
-  font-weight: bold;
-  height: 16px;
-  border-bottom: 8px solid #ffe58e;
+  border-bottom: 8px solid var(--global-danger);
 }
 
 .form-min-row {

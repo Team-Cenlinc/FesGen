@@ -416,13 +416,13 @@ select {
   font-size: 19px;
   border-width: 0;
   border-radius: 3px;
-  border-bottom: 5px solid #ff5858;
+  border-bottom: 5px solid var(--global-danger);
   transition: 200ms ease-out;
   color: var(--editor-selector-color);
   background-color: var(--editor-selector-bg-color);
 }
 .button-danger:hover{
-  background-color: #ff5858;
+  background-color: var(--global-danger);
   color: var(--editor-selector-color);
 }
 

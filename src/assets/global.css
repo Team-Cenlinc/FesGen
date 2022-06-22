@@ -1,5 +1,7 @@
 :root {
     --global-background-color: #eeeeee;
+    --global-alert: #ffde5a;
+    --global-danger: #ff5858;
     --header-background-color: #a5ddf0;
     --header-color: #1f1f1f;
     --header-nav-color: #4f4f4f;
@@ -13,15 +15,21 @@
     --editor-selector-color: #000000;
     --sidetool-shade-color: gray;
     --tool-icon-shade-color: gray;
+    --file-range-color: #a0d4e7;
+    --footer-backgroun-color: #e3e2e2;
+    --footer-shade-color: #484848;
+    --footer-text-color: #4f4f4f;
 }
 
 :root .dark {
     --global-background-color: #252525;
-    --header-background-color: rgb(0, 29, 31);
+    --global-alert: rgba(180, 154, 54, 1);
+    --global-danger: rgba(194, 55, 55, 1);
+    --header-background-color: rgb(0, 25, 26);
     --header-color: #e5e5e5;
     --header-nav-color: #e5e5e5;
     --header-nav-color-hover: #e3e3e3;
-    --header-nav-color-bg-hover: #565656;
+    --header-nav-color-bg-hover: #363636;
     --header-nav-color-line-hover: #8ba3d7;
     --header-shade-color: rgba(0, 59, 80, 0.35);
     --editor-row-border: #e5e5e5;
@@ -30,7 +38,10 @@
     --editor-selector-color: #e3e3e3;
     --sidetool-shade-color: rgba(0, 59, 80, 0.35);
     --tool-icon-shade-color: rgba(0, 59, 80, 0.35);
+    --file-range-color: rgba(85, 123, 138, 0.75);
     --footer-backgroun-color: #000000;
+    --footer-shade-color: rgba(0, 59, 80, 0.35);
+    --footer-text-color: #e3e2e2;
 }
 
 * {

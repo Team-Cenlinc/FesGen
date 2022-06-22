@@ -77,6 +77,7 @@ export default {
 
 <style scoped>
 .form {
+  color: var(--editor-selector-color);
   max-width: 1000px;
   margin: 0 auto;
   padding: 10px 10px 300px 10px;
@@ -84,12 +85,12 @@ export default {
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid #9E9E9E;
+  border-top: 1px solid var(--editor-row-border);
   margin: 30px auto 30px;
 }
 
 .row h2 {
-  border-bottom: 8px solid #a0d4e8;
+  border-bottom: 8px solid var(--editor-topic-highlight);
   width: fit-content;
   height: 27px;
   margin: 20px 0 10px 10px;
@@ -97,7 +98,16 @@ export default {
 
 input {
   border-style: none;
-  background: #ffffff;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
+}
+
+select {
+  padding: 5px;
+  background: var(--editor-selector-bg-color);
+  color: var(--editor-selector-color);
+  border-style: none;
+  border-radius: 3px;
 }
 
 .form-min-row {
