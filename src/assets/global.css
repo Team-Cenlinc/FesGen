@@ -19,6 +19,7 @@
     --footer-backgroun-color: #e3e2e2;
     --footer-shade-color: #484848;
     --footer-text-color: #4f4f4f;
+    --footer-transition-color: #c6c6c6;
 }
 
 :root .dark {
@@ -42,6 +43,7 @@
     --footer-backgroun-color: #000000;
     --footer-shade-color: rgba(0, 59, 80, 0.35);
     --footer-text-color: #e3e2e2;
+    --footer-transition-color: #3e3e3e;
 }
 
 * {

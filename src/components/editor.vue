@@ -400,13 +400,13 @@ select {
   font-size: 19px;
   border-width: 0;
   border-radius: 3px;
-  border-bottom: 5px solid #ffde5a;
+  border-bottom: 5px solid var(--global-alert);
   transition: 200ms ease-out;
   color: var(--editor-selector-color);
   background-color: var(--editor-selector-bg-color);
 }
 .button-alert:hover{
-  background-color: #ffde5a;
+  background-color: var(--global-alert);
   color: var(--editor-selector-color);
 }
 

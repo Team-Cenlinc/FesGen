@@ -61,7 +61,12 @@ footer #footer-description p{
 }
 
 #teleport-nav-twitter{
+  transition: 200ms ease-out;
   fill: var(--footer-text-color)
+}
+
+#teleport-nav-twitter:hover{
+  fill: var(--footer-transition-color)
 }
 
 footer #copyright-explanation{
