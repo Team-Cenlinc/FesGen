@@ -22,9 +22,13 @@
               <option value="led">LED</option>
             </select>
           </div>
+          <div class="form-min-row">
+            <button @click="requestRearrange" class="button-alert">刷新数据</button>
+            <button @click="resetData" class="button-danger">重置数据</button>
+          </div>
         </div>
         <div>
-          <h2><span class="material-symbols-outlined icon-editor">tune</span>北宿电铁-站牌: 全局设置</h2>
+          <h2><span class="material-symbols-outlined icon-editor">tune</span>FTA 车站牌: 全局设置</h2>
           <div class="form-min-row">
             <p>宽度</p>
             <div><input v-model="output.outputWidth" placeholder="600" min="0" @change="requestRearrange" type="number" value="600"> px</div>
@@ -33,9 +37,62 @@
             <p>高度</p>
             <div><input v-model="output.outputHeight" placeholder="200" min="0" @change="requestRearrange" type="number" value="200"> px</div>
           </div>
+          <div class="form-min-row">
+            <p>字体颜色</p>
+            <input v-model="signInfo.layoutInfo.textColor" @change="sendData" type="color">
+          </div>
+          <div class="form-min-row">
+            <p>背景颜色</p>
+            <input v-model="signInfo.layoutInfo.backgroundColor" @change="sendData" type="color">
+          </div>
         </div>
       </div>
 
+      <div class="row">
+        <div>
+          <h2><span class="material-symbols-outlined icon-editor">info</span>本站信息</h2>
+          <div class="form-min-row">
+            <p>站名</p>
+            <div><input v-model="signInfo.thisStation.nameMain" @change="requestRearrange" type="text"></div>
+          </div>
+          <div class="form-min-row">
+            <p>站名 - 第二语言</p>
+            <div><input v-model="signInfo.thisStation.nameSub" @change="requestRearrange" type="text"></div>
+          </div>
+
+        </div>
+        <div>
+          <h2><span class="material-symbols-outlined icon-editor">info</span>线路信息</h2>
+          <div v-for="line in signInfo.lineInfo" :key="line.name">
+            <div class="form-min-row">
+              <p>线路名</p>
+              <div><input v-model="line.name" @change="requestRearrange" type="text"></div>
+            </div>
+            <div class="form-min-row">
+              <p>线路缩写</p>
+              <div><input v-model="line.nameAbbr" @change="requestRearrange" type="text"></div>
+            </div>
+            <div class="form-min-row">
+              <p>线路颜色</p>
+              <div><input v-model="line.color" @change="requestRearrange" type="color"></div>
+            </div>
+            <div class="form-min-row line-info-form-end">
+              <p>线路于本站的序号</p>
+              <div><input v-model="line.stationNumber" @change="requestRearrange" type="number"></div>
+            </div>
+          </div>
+
+          <div class="form-min-row">
+            <p class="hint">"删除线路"操作将删除最后一个线路</p>
+          </div>
+
+          <div class="form-min-row">
+            <p>线路操作</p>
+            <input class="button" @click="addLine" value="  新增线路  " type="button">
+            <input class="button" @click="delLine" value="  删除线路  " type="button">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +109,10 @@ export default {
         outputHeight: 200,
       },
       signInfo: {
+        layoutInfo: {
+          backgroundColor: '#FFFFFF',
+          textColor: '#000000',
+        },
         thisStation: {
           nameMain: "壑湖",
           nameSub: "Horhuu / Lake He",
@@ -59,16 +120,18 @@ export default {
         lineInfo: [
           {
             name: "Waterside Line · 浦蓝线",
+            nameAbbr: "WS",
             color: "#55CCFF",
             stationNumber: "04"
           },
           {
             name: "Discover Line · 探索线",
+            nameAbbr: "DS",
             color: "#F8B62D",
             stationNumber: "08"
           }
         ]
-      }
+      },
     }
   },
   mounted() {
@@ -91,12 +154,12 @@ export default {
     },
     dataToJson(){
       let jsonData = JSON.stringify(this.$data);
-      sessionStorage.setItem("instanceConfigEntrance", jsonData)
+      sessionStorage.setItem("instanceConfigFTAStation", jsonData)
     },
     reloadCache() {
-      if (sessionStorage.getItem("instanceConfigEntrance") !== null) {
-        let jsonData = JSON.parse(sessionStorage.getItem("instanceConfigEntrance"))
-        if (jsonData.signStyle === "test-sign") {
+      if (sessionStorage.getItem("instanceConfigFTAStation") !== null) {
+        let jsonData = JSON.parse(sessionStorage.getItem("instanceConfigFTAStation"))
+        if (jsonData.signStyle === "FTA-station") {
           this.signInfo = jsonData.signInfo
           this.signStyle = jsonData.signStyle
           this.lightStyle = jsonData.lightStyle
@@ -107,6 +170,10 @@ export default {
     },
     resetData(){
       this.signInfo = {
+        layoutInfo: {
+          backgroundColor: '#FFFFFF',
+          textColor: '#000000',
+        },
         thisStation: {
           nameMain: "壑湖",
           nameSub: "Horhuu / Lake He",
@@ -114,11 +181,13 @@ export default {
         lineInfo: [
           {
             name: "Waterside Line · 浦蓝线",
+            nameAbbr: "WS",
             color: "#55CCFF",
             stationNumber: "04"
           },
           {
             name: "Discover Line · 探索线",
+            nameAbbr: "DS",
             color: "#F8B62D",
             stationNumber: "08"
           }
@@ -132,6 +201,24 @@ export default {
       }
       this.dataToJson()
       this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
+    },
+    addLine(){
+      let randomNumber = Math.floor(Math.random() * 100)
+      let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16)
+      let randomChar = String.fromCharCode(65 + Math.floor(Math.random() * 26))
+      this.signInfo.lineInfo.push({
+        name: randomChar,
+        nameAbbr: randomChar,
+        color: randomColor,
+        stationNumber: randomNumber
+      })
+      this.dataToJson()
+      this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
+    },
+    delLine(){
+      this.signInfo.lineInfo.pop()
+      this.dataToJson()
+      this.$emit("beltDeleted", this.lightStyle, this.signInfo, this.output)
     }
   }
 }
@@ -200,6 +287,10 @@ select {
   align-items: center;
 }
 
+.line-info-form-end{
+  border-bottom: 1px solid var(--editor-row-border);
+}
+
 .button{
   height: 30px;
   width: 100px;
@@ -246,6 +337,12 @@ select {
 .button-danger:hover{
   background-color: var(--global-danger);
   color: var(--editor-selector-color);
+}
+
+.hint {
+  font-weight: bold;
+  height: 16px;
+  border-bottom: 8px solid var(--global-alert);
 }
 
 .material-symbols-outlined{

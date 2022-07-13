@@ -2,33 +2,34 @@
 
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="_层_1">
 
-    <rect x="0" y="0" width="600" height="200" fill="#FFFFFF"/>
-    <rect x="0" y="160" width="600" height="40" fill="#55CCFF"/>
+    <rect id="background" x="0" y="0" width="600" height="200" fill="#FFFFFF"/>
 
-    <rect x="20" y="170" width="36" height="19" rx="9.5" ry="9.5" fill="#FFFFFF"/>
-    <text transform="translate(29 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="12" fill="#000000">
+    <rect id="color-belt-1" x="0" y="160" width="600" height="40" fill="#55CCFF"/>
+
+    <rect id="color-belt-abbr-frame-1" x="20" y="170" width="36" height="19" rx="9.5" ry="9.5" fill="#FFFFFF"/>
+    <text id="color-belt-abbr-1" transform="translate(29 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="12" fill="#000000">
         <tspan x="0" y="0">WS</tspan>
     </text>
-    <text transform="translate(67 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="14" fill="#FFFFFF">
+    <text id="color-belt-name-1" transform="translate(67 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="14" fill="#FFFFFF">
         <tspan x="0" y="0">Waterside Line · 浦蓝线</tspan>
     </text>
 
-    <text transform="translate(15.93 81.21)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="72" fill="#000000">
-        <tspan x="0" y="0">壑湖</tspan>
-    </text>
-    <text transform="translate(20.21 117.87)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="24" fill="#000000">
-        <tspan x="0" y="0">Horhuu / Lake He</tspan>
-    </text>
-    <text transform="translate(20.93 146.07)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="700" font-size="18" fill="#000000">
-        <tspan x="0" y="0" style="letter-spacing:0em;">WS-04 | DS-08</tspan>
-    </text>
-
-    <rect x="238" y="160" width="362" height="40" fill="#F8B62D"/>
-    <rect x="258" y="170" width="36" height="19" rx="9.5" ry="9.5" fill="#FFFFFF"/>
-    <text transform="translate(268 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="12" fill="#000000">
+    <rect id="color-belt-2" x="238" y="160" width="362" height="40" fill="#F8B62D"/>
+    <rect id="color-belt-abbr-frame-2" x="258" y="170" width="36" height="19" rx="9.5" ry="9.5" fill="#FFFFFF"/>
+    <text id="color-belt-abbr-2" transform="translate(268 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="12" fill="#000000">
         <tspan x="0" y="0">DS</tspan>
     </text>
-    <text transform="translate(306 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="14" fill="#FFFFFF">
+    <text id="color-belt-name-2" transform="translate(306 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="14" fill="#FFFFFF">
         <tspan x="0" y="0">Discover Line · 探索线</tspan>
+    </text>
+
+    <text id="station-name" transform="translate(15.93 81.21)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="72" fill="#000000">
+        <tspan x="0" y="0">壑湖</tspan>
+    </text>
+    <text id="station-name-sub" transform="translate(20.21 117.87)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="24" fill="#000000">
+        <tspan x="0" y="0">Horhuu / Lake He</tspan>
+    </text>
+    <text id="station-number" transform="translate(20.93 146.07)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="700" font-size="18" fill="#000000">
+        <tspan x="0" y="0" style="letter-spacing:0em;">WS-04 | DS-08</tspan>
     </text>
 </svg>

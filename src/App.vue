@@ -10,7 +10,8 @@
     <StationSignFTA v-if="signStyle === 'FTA-station'  && viewerType === ''" ref="stationSignFTA"/>
     <Editor v-if="signStyle === 'kitajuku-dentetsu'  && viewerType === ''" @someChanged="UpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="RequireRearrange"/>
     <EntranceGuideEditor v-if="signStyle === 'test-sign' && viewerType === ''" @someChanged="entranceUpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="entranceRearrangement"/>
-    <StationSignFTAEditor v-if="signStyle === 'FTA-station' && viewerType === ''" @someChanged="stationFTAUpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="stationFTARearrangement"/>
+    <StationSignFTAEditor v-if="signStyle === 'FTA-station' && viewerType === ''" @someChanged="stationFTAUpdateData"
+                          @signChanged="UpdateSignStyle" @contentNeedRearrange="stationFTARearrangement" @beltDeleted="delBeltFTA"/>
     <DownloadViewer v-if="viewerType === 'download'" @switchViewer="updateViewer" ref="download"/>
     <UploadViewer v-if="viewerType === 'upload'" @switchViewer="updateViewer" @switchStyle="UpdateSignStyle" ref="upload"/>
     <FooterFlex :title="titles"/>
@@ -63,6 +64,9 @@ export default {
     },
     stationFTARearrangement(lightStyle, signInfo, signScale){
       this.$refs.stationSignFTA.RequireRearrange(lightStyle, signInfo, signScale)
+    },
+    delBeltFTA(lightStyle, signInfo, signScale){
+      this.$refs.stationSignFTA.removeBelt(lightStyle, signInfo, signScale)
     },
     updateViewer(viewerType){
       sessionStorage.setItem("instanceSignStyle", this.signStyle)

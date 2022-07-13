@@ -223,6 +223,8 @@ export default {
       this.signInfo = signInfo
       this.output = signScale
 
+      this.UpdateSignData()
+
       // Calculation Zone
 
       /** Rearrange Accept list (For Dev)
@@ -458,7 +460,6 @@ export default {
         dom.attributes.transform.value = "translate(0" + yValueFin.toString() +") rotate(0)"
       }
 
-      this.UpdateSignData()
     },
     convertToCanvas() {
       let svgDom = document.getElementById("svg-sign")
