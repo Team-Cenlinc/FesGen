@@ -9,6 +9,7 @@
             <option disabled value="">请选择</option>
             <option value="test-sign">测试用</option>
             <option value="kitajuku-dentetsu">北宿电铁</option>
+            <option value="FTA-station">FTA 车站牌</option>
           </select>
         </div>
         <div class="form-min-row">

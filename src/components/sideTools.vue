@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Sign from "@/components/sign.vue"
-import DownloadViewer from "@/components/downloadViewer";
+import Sign from "@/components/signs/sign.vue"
+import DownloadViewer from "@/components/files/downloadViewer";
 
 export default {
   name: "sideTools",

@@ -3,13 +3,14 @@
     <div id="editor" class="form">
       <div class="row">
         <div>
-          <h2>FesGen编辑器设置</h2>
+          <h2><span class="material-symbols-outlined icon-editor">palette</span>FesGen编辑器设置</h2>
           <div class="form-min-row">
             <p>站牌样式</p>
             <select v-model="signStyle" @change="sendSign">
               <option disabled value="">请选择</option>
               <option value="test-sign">测试用</option>
               <option value="kitajuku-dentetsu">北宿电铁</option>
+              <option value="FTA-station">FTA 车站牌</option>
             </select>
           </div>
           <div class="form-min-row">

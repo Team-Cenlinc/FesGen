@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import TestSign from '../assets/signs/test-sign.svg'
+import TestSign from '../../assets/signs/test-sign.svg'
 window.componentsConfig = {    //左边是key值，右边是组件的引入路径
-  'test-sign': '../assets/signs/test-sign.svg',
+  'test-sign': '../../assets/signs/test-sign.svg',
 }
 
 export default {

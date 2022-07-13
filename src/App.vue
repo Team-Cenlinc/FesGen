@@ -7,8 +7,10 @@
     <SideTools @contentNeedRearrange="RequireRearrange" @switchViewer="updateViewer" ref="sideTools"/>
     <Signs v-if="signStyle === 'kitajuku-dentetsu'  && viewerType === ''" ref="signs"/>
     <EntranceGuideSign v-if="signStyle === 'test-sign'  && viewerType === ''" ref="entrancesSign"/>
+    <StationSignFTA v-if="signStyle === 'FTA-station'  && viewerType === ''" ref="stationSignFTA"/>
     <Editor v-if="signStyle === 'kitajuku-dentetsu'  && viewerType === ''" @someChanged="UpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="RequireRearrange"/>
-    <EntranceGuideEditor v-if="signStyle === 'test-sign' && viewerType === ''" @someChanged="UpdateData" @signChanged="UpdateSignStyle"/>
+    <EntranceGuideEditor v-if="signStyle === 'test-sign' && viewerType === ''" @someChanged="entranceUpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="entranceRearrangement"/>
+    <StationSignFTAEditor v-if="signStyle === 'FTA-station' && viewerType === ''" @someChanged="stationFTAUpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="stationFTARearrangement"/>
     <DownloadViewer v-if="viewerType === 'download'" @switchViewer="updateViewer" ref="download"/>
     <UploadViewer v-if="viewerType === 'upload'" @switchViewer="updateViewer" @switchStyle="UpdateSignStyle" ref="upload"/>
     <FooterFlex :title="titles"/>
@@ -19,16 +21,20 @@
 import HeaderFlex from './components/header'
 import SideTools from "./components/sideTools";
 import FooterFlex from './components/footer'
-import Signs from "./components/sign"
-import Editor from "@/components/editor"
-import EntranceGuideSign from "./components/entranceGuideSign";
-import EntranceGuideEditor from "@/components/entranceGuideEditor";
-import DownloadViewer from "@/components/downloadViewer";
-import UploadViewer from "@/components/uploadViewer";
+import Signs from "./components/signs/sign"
+import Editor from "@/components/signs/editor"
+import EntranceGuideSign from "./components/signs/entranceGuideSign";
+import EntranceGuideEditor from "@/components/signs/entranceGuideEditor";
+import DownloadViewer from "@/components/files/downloadViewer";
+import UploadViewer from "@/components/files/uploadViewer";
+import StationSignFTA from "@/components/signs/stationSignFTA";
+import StationSignFTAEditor from "@/components/signs/stationSignFTAEditor";
 
 export default {
   name: 'App',
-  components: {HeaderFlex, FooterFlex, Signs, EntranceGuideSign, EntranceGuideEditor, SideTools, DownloadViewer, UploadViewer, Editor},
+  components: {
+    StationSignFTA, StationSignFTAEditor,
+    HeaderFlex, FooterFlex, Signs, EntranceGuideSign, EntranceGuideEditor, SideTools, DownloadViewer, UploadViewer, Editor},
   data()  {
     return{
       titles: 'FesGen',
@@ -48,6 +54,15 @@ export default {
     },
     entranceUpdateData(lightStyle, signInfo, signScale){
       this.$refs.entrancesSign.UpdateData(signInfo, lightStyle, signScale)
+    },
+    entranceRearrangement(lightStyle, signInfo, signScale){
+      this.$refs.entrancesSign.RequireRearrange(lightStyle, signInfo, signScale)
+    },
+    stationFTAUpdateData(lightStyle, signInfo, signScale){
+      this.$refs.stationSignFTA.UpdateData(signInfo, lightStyle, signScale)
+    },
+    stationFTARearrangement(lightStyle, signInfo, signScale){
+      this.$refs.stationSignFTA.RequireRearrange(lightStyle, signInfo, signScale)
     },
     updateViewer(viewerType){
       sessionStorage.setItem("instanceSignStyle", this.signStyle)

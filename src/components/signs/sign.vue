@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import KitajukuDentetsu from '../assets/signs/kitajuku-dentetsu.svg'
+import KitajukuDentetsu from '../../assets/signs/kitajuku-dentetsu.svg'
 
 window.componentsConfig = {    //左边是key值，右边是组件的引入路径
-  'kitajuku-dentetsu': '../assets/signs/kitajuku-dentetsu.svg',
+  'kitajuku-dentetsu': '../../assets/signs/kitajuku-dentetsu.svg',
 }
 export default {
   name: 'Sign',
