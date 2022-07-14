@@ -137,7 +137,7 @@ export default {
           belt.setAttribute("id", "color-belt-" + i)
           let abbrFrame = document.createElement('rect')
           abbrFrame.setAttribute("id", "color-belt-abbr-frame-" + i)
-          abbrFrame.setAttribute("fill", this.signInfo.layoutInfo.backgroundColor)
+          abbrFrame.setAttribute("fill", this.signInfo.lineInfo[i - 1].color)
           abbrFrame.setAttribute("width", "36")
           abbrFrame.setAttribute("height", "19")
           abbrFrame.setAttribute("rx", "9.5")
