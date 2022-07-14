@@ -477,20 +477,7 @@ export default {
         canvas.height = height;
         let context = canvas.getContext('2d');
 
-        let getPixelRatio = function(context) {
-          let backingStore = context.backingStorePixelRatio ||
-              context.webkitBackingStorePixelRatio ||
-              context.mozBackingStorePixelRatio ||
-              context.msBackingStorePixelRatio ||
-              context.oBackingStorePixelRatio ||
-              context.backingStorePixelRatio || 1;
-
-          return (window.devicePixelRatio || 1) / backingStore;
-        };
-
-        let ratio = getPixelRatio(context);
-
-        context.drawImage(image, 0, 0, width * ratio, height * ratio);
+        context.drawImage(image, 0, 0, width, height);
       };
       image.src = blobURL;
     },
