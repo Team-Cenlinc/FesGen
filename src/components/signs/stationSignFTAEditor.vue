@@ -43,7 +43,7 @@
           </div>
           <div class="form-min-row">
             <p>背景颜色</p>
-            <input v-model="signInfo.layoutInfo.backgroundColor" @change="sendData" type="color">
+            <input v-model="signInfo.layoutInfo.backgroundColor" @change="requestRearrange" type="color">
           </div>
         </div>
       </div>
