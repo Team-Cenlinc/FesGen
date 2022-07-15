@@ -120,7 +120,16 @@ export default {
       }
     },
     configVersionModifier(){
-      let jsonConfig = JSON.parse(sessionStorage.getItem("instanceConfig"))
+      let signName = sessionStorage.getItem("instanceSignStyle")
+      let configKey
+      if (signName === "kitajuku-dentetsu") {
+        configKey = "instanceConfig"
+      } else if (signName === "test-sign") {
+        configKey = "instanceConfigEntrance"
+      } else if (signName === 'FTA-station') {
+        configKey = "instanceConfigFTAStation"
+      }
+      let jsonConfig = JSON.parse(sessionStorage.getItem(configKey))
       jsonConfig.configVersion = "beta-v0.1.1"
       let data = JSON.stringify(jsonConfig)
       return 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(data)
