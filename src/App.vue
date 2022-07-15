@@ -65,8 +65,8 @@ export default {
     stationFTARearrangement(lightStyle, signInfo, signScale){
       this.$refs.stationSignFTA.RequireRearrange(lightStyle, signInfo, signScale)
     },
-    delBeltFTA(lightStyle, signInfo, signScale){
-      this.$refs.stationSignFTA.removeBelt(lightStyle, signInfo, signScale)
+    delBeltFTA(lightStyle, signInfo, signScale, index){
+      this.$refs.stationSignFTA.removeBelt(lightStyle, signInfo, signScale, index)
     },
     updateViewer(viewerType){
       sessionStorage.setItem("instanceSignStyle", this.signStyle)

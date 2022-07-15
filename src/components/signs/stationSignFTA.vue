@@ -40,31 +40,25 @@ export default {
           textColor: '#000000',
         },
         thisStation: {
-          nameMain: "壑湖",
-          nameSub: "Horhuu / Lake He",
+          nameMain: "主城湾",
+          nameSub: "Spawn Bay",
         },
         lineInfo: [
           {
             name: "Waterside Line · 浦蓝线",
             nameAbbr: "WS",
             color: "#55CCFF",
-            stationNumber: "04"
+            stationNumber: "01"
           },
-          {
-            name: "Discover Line · 探索线",
-            nameAbbr: "DS",
-            color: "#F8B62D",
-            stationNumber: "08"
-          }
         ]
       },
     }
   },
   updated() {
-    // this.UpdateSignData()
+    this.UpdateSignData()
   },
   mounted() {
-    // this.UpdateSignData()
+    this.UpdateSignData()
     this.convertToCanvas()
   },
   methods: {
@@ -81,9 +75,11 @@ export default {
       // signInfo.thisStation
 
       let dom = this.$refs.svg.getElementById('station-name')
+      dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
       dom.childNodes[0].innerHTML = this.signInfo.thisStation.nameMain
 
       dom = this.$refs.svg.getElementById('station-name-sub')
+      dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
       dom.childNodes[0].innerHTML = this.signInfo.thisStation.nameSub
 
       // signInfo.lineInfo
@@ -91,13 +87,13 @@ export default {
       this.colorBeltCheck()
 
       dom = this.$refs.svg.getElementById('station-number')
+      dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
 
       let lineCount = this.signInfo.lineInfo.length - 1
       let numberStr = ''
       let strComplex = []
 
       for (let i = 0; i <= lineCount; i++){
-        console.log(i)
         numberStr = this.signInfo.lineInfo[i].nameAbbr + '-' + this.signInfo.lineInfo[i].stationNumber
         strComplex.push(numberStr)
       }
@@ -125,44 +121,98 @@ export default {
       dom.setAttribute('height', this.output.outputHeight)
       dom.setAttribute('fill', this.signInfo.layoutInfo.backgroundColor)
 
+      let lineCount = this.signInfo.lineInfo.length
+      let lastPositionX = 0
+      let lineWidthComplex = []
+
+      for (let i = 1; i <= lineCount; i++) {
+        let lineElementWidth
+
+        dom = this.$refs.svg.getElementById('color-belt-abbr-' + i)
+        let abbrWidth = this.$refs.svg.getElementById('color-belt-abbr-' + i).getBBox().width
+        let abbrPosition = lastPositionX + 20 + 9
+        dom.setAttribute('transform', ('translate(' + abbrPosition.toString() + ', ' + (this.output.outputHeight - 16).toString() + ')'))
+        dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
+        dom.childNodes[0].innerHTML = this.signInfo.lineInfo[i - 1].nameAbbr
+
+        dom = this.$refs.svg.getElementById('color-belt-abbr-frame-' + i)
+        dom.setAttribute('width', abbrWidth + 18)
+        dom.setAttribute('x', lastPositionX + 20)
+        dom.setAttribute('y', this.output.outputHeight - 30)
+        dom.setAttribute("fill", this.signInfo.layoutInfo.backgroundColor)
+
+
+        dom = this.$refs.svg.getElementById('color-belt-name-' + i)
+        let nameWidth = this.$refs.svg.getElementById('color-belt-name-' + i).getBBox().width
+        console.log(nameWidth, i)
+        let namePosition = abbrWidth + 18 + 20 + 20 + lastPositionX
+        dom.setAttribute('transform', ('translate(' + namePosition.toString() + ', ' + (this.output.outputHeight - 16).toString() + ')'))
+
+        dom.childNodes[0].innerHTML = this.signInfo.lineInfo[i - 1].name
+        lineElementWidth = nameWidth + 20 + 20 + abbrWidth + 18 + 20
+
+        dom = this.$refs.svg.getElementById('color-belt-' + i)
+        dom.setAttribute('fill', this.signInfo.lineInfo[i - 1].color)
+        dom.setAttribute('x', lastPositionX)
+        dom.setAttribute('y', this.output.outputHeight - 40)
+        dom.setAttribute('width', lineElementWidth)
+
+        lastPositionX += lineElementWidth
+
+        lineWidthComplex.push(lineElementWidth)
+        if (lineWidthComplex.length === 1){
+          dom.setAttribute('width', this.output.outputWidth)
+        } else {
+          let totalWidth = 0
+          for (let j = 0; j < lineWidthComplex.length - 1; j++) {
+            totalWidth += lineWidthComplex.at(j)
+          }
+          let widthAfterFirst = this.output.outputWidth - totalWidth
+          dom.setAttribute('width', widthAfterFirst)
+        }
+      }
 
       this.convertToCanvas()
     },
     colorBeltCheck(){
       let lineCount = this.signInfo.lineInfo.length
-      for (let i = 1; i === lineCount; i++) {
+      for (let i = 1; i <= lineCount; i++) {
         let haveBelt = !!this.$refs.svg.getElementById('color-belt-' + i)
         if (!haveBelt) {
-          let belt = document.createElement('rect')
+          let belt = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
           belt.setAttribute("id", "color-belt-" + i)
-          let abbrFrame = document.createElement('rect')
+          belt.setAttribute("x", "0")
+          belt.setAttribute("y", "160")
+          belt.setAttribute("height", "40")
+          belt.setAttribute("fill", this.signInfo.lineInfo[i - 1].color)
+          let abbrFrame = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
           abbrFrame.setAttribute("id", "color-belt-abbr-frame-" + i)
-          abbrFrame.setAttribute("fill", this.signInfo.lineInfo[i - 1].color)
+          abbrFrame.setAttribute("fill", this.signInfo.layoutInfo.backgroundColor)
           abbrFrame.setAttribute("width", "36")
           abbrFrame.setAttribute("height", "19")
           abbrFrame.setAttribute("rx", "9.5")
           abbrFrame.setAttribute("ry", "9.5")
 
-          let abbr = document.createElement('text')
+          let abbr = document.createElementNS('http://www.w3.org/2000/svg', 'text')
           abbr.setAttribute("id", "color-belt-abbr-" + i)
           abbr.setAttribute("fill", this.signInfo.layoutInfo.textColor)
           abbr.setAttribute("font-size", "12")
           abbr.setAttribute("font-family", ".PingFangSC-Regular, .PingFang SC")
           abbr.setAttribute("font-weight", "700")
-          let abbrTspan = document.createElement('tspan')
+          let abbrTspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan')
           abbrTspan.setAttribute("x", "0")
           abbrTspan.setAttribute("y", "0")
           abbrTspan.innerHTML = this.signInfo.lineInfo[i - 1].nameAbbr
 
           abbr.appendChild(abbrTspan)
 
-          let name = document.createElement('text')
+          let name = document.createElementNS('http://www.w3.org/2000/svg', 'text')
           name.setAttribute("id", "color-belt-name-" + i)
           name.setAttribute("fill", this.signInfo.layoutInfo.backgroundColor)
           name.setAttribute("font-size", "14")
           name.setAttribute("font-family", ".PingFangSC-Regular, .PingFang SC")
-          name.setAttribute("font-weight", "700")
-          let nameTspan = document.createElement('tspan')
+          name.setAttribute("font-weight", "600")
+          let nameTspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan')
           nameTspan.setAttribute("x", "0")
           nameTspan.setAttribute("y", "0")
           nameTspan.innerHTML = this.signInfo.lineInfo[i - 1].name
@@ -170,19 +220,20 @@ export default {
           name.appendChild(nameTspan)
 
           let basePoint = this.$refs.svg.getElementById('station-name')
-          this.$refs.svg.insertBefore(name, basePoint)
-          this.$refs.svg.insertBefore(abbr, basePoint)
-          this.$refs.svg.insertBefore(abbrFrame, basePoint)
+
           this.$refs.svg.insertBefore(belt, basePoint)
+          this.$refs.svg.insertBefore(abbrFrame, basePoint)
+          this.$refs.svg.insertBefore(abbr, basePoint)
+          this.$refs.svg.insertBefore(name, basePoint)
         }
       }
     },
-    removeBelt(lightStyle, signInfo, signScale){
+    removeBelt(lightStyle, signInfo, signScale, index){
       this.lightStyle = lightStyle
       this.signInfo = signInfo
       this.output = signScale
 
-      let index = this.signInfo.lineInfo.length + 1
+      index += 1
       let haveBelt = !!this.$refs.svg.getElementById('color-belt-' + index)
       if (haveBelt){
         let belt = this.$refs.svg.getElementById('color-belt-' + index)
@@ -198,6 +249,9 @@ export default {
         name.remove()
       }
       this.RequireRearrange(lightStyle, signInfo, signScale)
+    },
+    beltArrangement(){
+
     },
     convertToCanvas() {
       let svgDom = document.getElementById("svg-sign-FTA-station")

@@ -63,22 +63,22 @@
         </div>
         <div>
           <h2><span class="material-symbols-outlined icon-editor">info</span>线路信息</h2>
-          <div v-for="line in signInfo.lineInfo" :key="line.name">
+          <div v-for="line in signInfo.lineInfo" :key="line.index" @change="requestRearrange">
             <div class="form-min-row">
               <p>线路名</p>
-              <div><input v-model="line.name" @change="requestRearrange" type="text"></div>
+              <div><input v-model="line.name" type="text"></div>
             </div>
             <div class="form-min-row">
               <p>线路缩写</p>
-              <div><input v-model="line.nameAbbr" @change="requestRearrange" type="text"></div>
+              <div><input v-model="line.nameAbbr" type="text"></div>
             </div>
             <div class="form-min-row">
               <p>线路颜色</p>
-              <div><input v-model="line.color" @change="requestRearrange" type="color"></div>
+              <div><input v-model="line.color" type="color"></div>
             </div>
             <div class="form-min-row line-info-form-end">
               <p>线路于本站的序号</p>
-              <div><input v-model="line.stationNumber" @change="requestRearrange" type="number"></div>
+              <div><input v-model="line.stationNumber" type="number"></div>
             </div>
           </div>
 
@@ -114,28 +114,24 @@ export default {
           textColor: '#000000',
         },
         thisStation: {
-          nameMain: "壑湖",
-          nameSub: "Horhuu / Lake He",
+          nameMain: "主城湾",
+          nameSub: "Spawn Bay",
         },
         lineInfo: [
           {
             name: "Waterside Line · 浦蓝线",
             nameAbbr: "WS",
             color: "#55CCFF",
-            stationNumber: "04"
+            stationNumber: "01"
           },
-          {
-            name: "Discover Line · 探索线",
-            nameAbbr: "DS",
-            color: "#F8B62D",
-            stationNumber: "08"
-          }
         ]
       },
     }
   },
   mounted() {
     this.reloadCache()
+    this.$emit('someChanged', this.lightStyle, this.signInfo, this.output)
+    this.$emit("contentNeedRearrange", this.lightStyle, this.signInfo, this.output)
     this.dataToJson()
   },
   methods: {
@@ -159,14 +155,11 @@ export default {
     reloadCache() {
       if (sessionStorage.getItem("instanceConfigFTAStation") !== null) {
         let jsonData = JSON.parse(sessionStorage.getItem("instanceConfigFTAStation"))
-        if (jsonData.signStyle === "FTA-station") {
           this.signInfo = jsonData.signInfo
-          this.signStyle = jsonData.signStyle
           this.lightStyle = jsonData.lightStyle
           this.output = jsonData.output
           this.$emit('contentNeedRearrange', this.lightStyle, this.signInfo, this.output)
         }
-      }
     },
     resetData(){
       this.signInfo = {
@@ -175,22 +168,16 @@ export default {
           textColor: '#000000',
         },
         thisStation: {
-          nameMain: "壑湖",
-          nameSub: "Horhuu / Lake He",
+          nameMain: "主城湾",
+          nameSub: "Spawn Bay",
         },
         lineInfo: [
           {
             name: "Waterside Line · 浦蓝线",
             nameAbbr: "WS",
             color: "#55CCFF",
-            stationNumber: "04"
+            stationNumber: "01"
           },
-          {
-            name: "Discover Line · 探索线",
-            nameAbbr: "DS",
-            color: "#F8B62D",
-            stationNumber: "08"
-          }
         ]
       }
       this.signStyle = "FTA-station"
@@ -218,7 +205,7 @@ export default {
     delLine(){
       this.signInfo.lineInfo.pop()
       this.dataToJson()
-      this.$emit("beltDeleted", this.lightStyle, this.signInfo, this.output)
+      this.$emit("beltDeleted", this.lightStyle, this.signInfo, this.output, this.signInfo.lineInfo.length)
     }
   }
 }
