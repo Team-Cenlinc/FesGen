@@ -102,6 +102,8 @@ export default {
                   sessionStorage.setItem("instanceConfig", this.result)
                 } else if (jsonObj.signStyle === "test-sign") {
                   sessionStorage.setItem("instanceConfigEntrance", this.result)
+                } else if (jsonObj.signStyle === "FTA-station"){
+                  sessionStorage.setItem("instanceConfigFTA", this.result)
                 }
                 sessionStorage.setItem("instanceSignStyle", jsonObj.signStyle)
               }
