@@ -45,6 +45,14 @@
             <p>背景颜色</p>
             <input v-model="signInfo.layoutInfo.backgroundColor" @change="requestRearrange" type="color">
           </div>
+          <div class="form-min-row">
+            <p>站名斜体</p>
+            <input v-model="signInfo.signConfig.stationNameItalic" @change="requestRearrange" type="checkbox">
+          </div>
+          <div class="form-min-row">
+            <p>信息精简化</p>
+            <input v-model="signInfo.signConfig.simplifySign" @change="requestRearrange" type="checkbox">
+          </div>
         </div>
       </div>
 
@@ -109,6 +117,10 @@ export default {
         outputHeight: 200,
       },
       signInfo: {
+        signConfig: {
+          stationNameItalic: false,
+          simplifySign: false,
+        },
         layoutInfo: {
           backgroundColor: '#FFFFFF',
           textColor: '#000000',
@@ -163,6 +175,10 @@ export default {
     },
     resetData(){
       this.signInfo = {
+        signConfig: {
+          stationNameItalic: false,
+          simplifySign: false,
+        },
         layoutInfo: {
           backgroundColor: '#FFFFFF',
           textColor: '#000000',

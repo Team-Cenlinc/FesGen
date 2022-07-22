@@ -35,6 +35,10 @@ export default {
         outputHeight: 200,
       },
       signInfo: {
+        signConfig: {
+          stationNameItalic: false,
+          simplifySign: false,
+        },
         layoutInfo: {
           backgroundColor: '#FFFFFF',
           textColor: '#000000',
@@ -76,10 +80,14 @@ export default {
 
       let dom = this.$refs.svg.getElementById('station-name')
       dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
+      dom.setAttribute("font-style", this.signInfo.signConfig.stationNameItalic ? "italic" : "normal")
+      console.log(this.$data)
+      console.log(this.signInfo.signConfig.stationNameItalic ? "italic" : "normal")
       dom.childNodes[0].innerHTML = this.signInfo.thisStation.nameMain
 
       dom = this.$refs.svg.getElementById('station-name-sub')
       dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
+      dom.setAttribute("font-style", this.signInfo.signConfig.stationNameItalic ? "italic" : "normal")
       dom.childNodes[0].innerHTML = this.signInfo.thisStation.nameSub
 
       // signInfo.lineInfo
@@ -88,6 +96,7 @@ export default {
 
       dom = this.$refs.svg.getElementById('station-number')
       dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
+      dom.setAttribute("visibility", this.signInfo.signConfig.simplifySign ? "hidden" : "visible")
 
       let lineCount = this.signInfo.lineInfo.length - 1
       let numberStr = ''
@@ -133,6 +142,7 @@ export default {
         let abbrPosition = lastPositionX + 20 + 9
         dom.setAttribute('transform', ('translate(' + abbrPosition.toString() + ', ' + (this.output.outputHeight - 16).toString() + ')'))
         dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
+        dom.setAttribute("visibility", this.signInfo.signConfig.simplifySign ? "hidden" : "visible")
         dom.childNodes[0].innerHTML = this.signInfo.lineInfo[i - 1].nameAbbr
 
         dom = this.$refs.svg.getElementById('color-belt-abbr-frame-' + i)
@@ -140,6 +150,7 @@ export default {
         dom.setAttribute('x', lastPositionX + 20)
         dom.setAttribute('y', this.output.outputHeight - 30)
         dom.setAttribute("fill", this.signInfo.layoutInfo.backgroundColor)
+        dom.setAttribute("visibility", this.signInfo.signConfig.simplifySign ? "hidden" : "visible")
 
 
         dom = this.$refs.svg.getElementById('color-belt-name-' + i)
@@ -149,6 +160,7 @@ export default {
         dom.setAttribute('transform', ('translate(' + namePosition.toString() + ', ' + (this.output.outputHeight - 16).toString() + ')'))
 
         dom.childNodes[0].innerHTML = this.signInfo.lineInfo[i - 1].name
+        dom.setAttribute("visibility", this.signInfo.signConfig.simplifySign ? "hidden" : "visible")
         lineElementWidth = nameWidth + 20 + 20 + abbrWidth + 18 + 20
 
         dom = this.$refs.svg.getElementById('color-belt-' + i)
@@ -159,16 +171,22 @@ export default {
 
         lastPositionX += lineElementWidth
 
-        lineWidthComplex.push(lineElementWidth)
-        if (lineWidthComplex.length === 1){
-          dom.setAttribute('width', this.output.outputWidth)
+        if (this.signInfo.signConfig.simplifySign) {
+          let singleLineWidth = this.output.outputWidth / lineCount
+          dom.setAttribute('x', singleLineWidth * (i - 1))
+          dom.setAttribute('width', singleLineWidth)
         } else {
-          let totalWidth = 0
-          for (let j = 0; j < lineWidthComplex.length - 1; j++) {
-            totalWidth += lineWidthComplex.at(j)
+          lineWidthComplex.push(lineElementWidth)
+          if (lineWidthComplex.length === 1){
+            dom.setAttribute('width', this.output.outputWidth)
+          } else {
+            let totalWidth = 0
+            for (let j = 0; j < lineWidthComplex.length - 1; j++) {
+              totalWidth += lineWidthComplex.at(j)
+            }
+            let widthAfterFirst = this.output.outputWidth - totalWidth
+            dom.setAttribute('width', widthAfterFirst)
           }
-          let widthAfterFirst = this.output.outputWidth - totalWidth
-          dom.setAttribute('width', widthAfterFirst)
         }
       }
 
@@ -249,9 +267,6 @@ export default {
         name.remove()
       }
       this.RequireRearrange(lightStyle, signInfo, signScale)
-    },
-    beltArrangement(){
-
     },
     convertToCanvas() {
       let svgDom = document.getElementById("svg-sign-FTA-station")
