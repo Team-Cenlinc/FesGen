@@ -47,6 +47,10 @@ export default {
           nameMain: "主城湾",
           nameSub: "Spawn Bay",
         },
+        logoInfo:{
+          enableLogo: false,
+          logoStyle: '',
+        },
         lineInfo: [
           {
             name: "Waterside Line · 浦蓝线",
@@ -108,7 +112,10 @@ export default {
       }
 
       dom.childNodes[0].innerHTML = strComplex.join(' | ')
-
+        this.$refs.svg.getElementById("FTA-Logo-SUR").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR" ? "visible" : "hidden")
+        this.$refs.svg.getElementById("FTA-Logo-SUR-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR-Reversed" ? "visible" : "hidden")
+        this.$refs.svg.getElementById("FTA-Logo-PUAT").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-PUAT" ? "visible" : "hidden")
+        this.$refs.svg.getElementById("FTA-Logo-PUAT-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-PUAT-Reversed" ? "visible" : "hidden")
 
 
       this.convertToCanvas()

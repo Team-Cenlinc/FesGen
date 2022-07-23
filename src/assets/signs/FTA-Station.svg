@@ -23,4 +23,52 @@
     <text id="station-number" transform="translate(20.93 146.07)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="700" font-size="18" fill="#000000">
         <tspan x="0" y="0" style="letter-spacing:0em;">WS-01</tspan>
     </text>
+
+    <g transform="translate(500 105)" id="FTA-Logo-PUAT">
+        <rect x="0" y="-5" width="80" height="18"/>
+        <rect x="-90" y="18" width="170" height="18"/>
+        <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
+            <tspan x="-20" y="2" style="letter-spacing:-.02em;">Fetarute</tspan>
+            <tspan x="-115" y="24" style="letter-spacing:-.04em;">Transportation Authority</tspan>
+        </text>
+        <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
+            <tspan x="-5" y="0">Pyutocor Urban Area Transit</tspan>
+        </text>
+    </g>
+
+    <g transform="translate(500 105)" id="FTA-Logo-PUAT-Reversed">
+        <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
+        <rect x="-90" y="18" width="170" height="18" fill="#FFFFFF"/>
+        <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
+            <tspan x="-20" y="2" style="letter-spacing:-.02em;">Fetarute</tspan>
+            <tspan x="-115" y="24" style="letter-spacing:-.04em;">Transportation Authority</tspan>
+        </text>
+        <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
+            <tspan x="-5" y="0">Pyutocor Urban Area Transit</tspan>
+        </text>
+    </g>
+
+    <g transform="translate(500 105)" id="FTA-Logo-SUR">
+        <rect x="0" y="-5" width="80" height="18"/>
+        <rect x="-90" y="18" width="170" height="18"/>
+        <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
+            <tspan x="-20" y="2" style="letter-spacing:-.02em;">Fetarute</tspan>
+            <tspan x="-115" y="24" style="letter-spacing:-.04em;">Transportation Authority</tspan>
+        </text>
+        <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
+            <tspan x="60" y="0">Survival Railroad</tspan>
+        </text>
+    </g>
+
+    <g transform="translate(500 105)" id="FTA-Logo-SUR-Reversed">
+        <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
+        <rect x="-90" y="18" width="170" height="18" fill="#FFFFFF"/>
+        <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
+            <tspan x="-20" y="2" style="letter-spacing:-.02em;">Fetarute</tspan>
+            <tspan x="-115" y="24" style="letter-spacing:-.04em;">Transportation Authority</tspan>
+        </text>
+        <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
+            <tspan x="60" y="0">Survival Railroad</tspan>
+        </text>
+    </g>
 </svg>

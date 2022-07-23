@@ -39,7 +39,7 @@
           </div>
           <div class="form-min-row">
             <p>字体颜色</p>
-            <input v-model="signInfo.layoutInfo.textColor" @change="sendData" type="color">
+            <input v-model="signInfo.layoutInfo.textColor" @change="requestRearrange" type="color">
           </div>
           <div class="form-min-row">
             <p>背景颜色</p>
@@ -52,6 +52,20 @@
           <div class="form-min-row">
             <p>信息精简化</p>
             <input v-model="signInfo.signConfig.simplifySign" @change="requestRearrange" type="checkbox">
+          </div>
+          <div class="form-min-row">
+            <p>显示Logo</p>
+            <input v-model="signInfo.logoInfo.enableLogo" @change="requestRearrange" type="checkbox">
+          </div>
+          <div v-if="signInfo.logoInfo.enableLogo" class="form-min-row">
+            <p>Logo选项</p>
+            <select v-model="signInfo.logoInfo.logoStyle" @change="requestRearrange">
+              <option disabled value="">请选择</option>
+              <option value="FTA-Logo-SUR">生存铁路</option>
+              <option value="FTA-Logo-PUAT">蒲塘桥都市区域交通</option>
+              <option value="FTA-Logo-SUR-Reversed">生存铁路-反色</option>
+              <option value="FTA-Logo-PUAT-Reversed">蒲塘桥都市区域交通-反色</option>
+            </select>
           </div>
         </div>
       </div>
@@ -129,6 +143,10 @@ export default {
           nameMain: "主城湾",
           nameSub: "Spawn Bay",
         },
+        logoInfo:{
+          enableLogo: false,
+          logoStyle: '',
+        },
         lineInfo: [
           {
             name: "Waterside Line · 浦蓝线",
@@ -186,6 +204,10 @@ export default {
         thisStation: {
           nameMain: "主城湾",
           nameSub: "Spawn Bay",
+        },
+        logoInfo:{
+          enableLogo: false,
+          logoStyle: '',
         },
         lineInfo: [
           {
