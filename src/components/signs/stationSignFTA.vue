@@ -112,6 +112,11 @@ export default {
       }
 
       dom.childNodes[0].innerHTML = strComplex.join(' | ')
+
+      if (!this.signInfo.logoInfo.enableLogo){
+        this.signInfo.logoInfo.logoStyle = ''
+      }
+
         this.$refs.svg.getElementById("FTA-Logo-SUR").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-SUR-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR-Reversed" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-PUAT").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-PUAT" ? "visible" : "hidden")
