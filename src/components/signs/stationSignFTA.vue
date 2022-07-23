@@ -115,14 +115,19 @@ export default {
 
       if (!this.signInfo.logoInfo.enableLogo){
         this.signInfo.logoInfo.logoStyle = ''
-      }
-
+      } else {
         this.$refs.svg.getElementById("FTA-Logo-SUR").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-SUR-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR-Reversed" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-PUAT").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-PUAT" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-PUAT-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-PUAT-Reversed" ? "visible" : "hidden")
 
+        if (this.signInfo.logoInfo.logoStyle === '') {
+          this.$refs.svg.getElementById("FTA-Logo-SUR").setAttribute('transform', "translate(" + (this.output.outputWidth - 100).toString() + "," + (this.output.outputHeight - 95).toString() + ")");
+        } else {
+          this.$refs.svg.getElementById(this.signInfo.logoInfo.logoStyle).setAttribute('transform', "translate(" + (this.output.outputWidth - 100).toString() + "," + (this.output.outputHeight - 95).toString() + ")");
 
+        }
+        }
       this.convertToCanvas()
     },
     RequireRearrange(lightStyle, signInfo, signScale) {
