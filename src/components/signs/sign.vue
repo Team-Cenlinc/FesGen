@@ -223,8 +223,6 @@ export default {
       this.signInfo = signInfo
       this.output = signScale
 
-      this.UpdateSignData()
-
       // Calculation Zone
 
       /** Rearrange Accept list (For Dev)
@@ -460,10 +458,12 @@ export default {
         dom.attributes.transform.value = "translate(0" + yValueFin.toString() +") rotate(0)"
       }
 
+      this.UpdateSignData()
+
     },
     convertToCanvas() {
-      let svgDom = document.getElementById("svg-sign")
-      let {width, height} = svgDom.getBBox()
+      let svgDom = this.newSvgConstructor()
+      let {width, height} = document.getElementById("svg-sign").getBBox()
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,
           blob = new Blob([outerHTML],{type:'image/svg+xml;charset=utf-8'});
@@ -481,6 +481,18 @@ export default {
       };
       image.src = blobURL;
     },
+
+    newSvgConstructor() {
+      let newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      newSvg.setAttribute("version", "1.1")
+      newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+      newSvg.setAttribute("id", "svg-sign")
+      newSvg.setAttribute("class", "sign")
+      newSvg.setAttribute("viewBox", "0 0 " + this.output.outputWidth.toString() + " " + this.output.outputHeight.toString())
+      let svgDom = document.getElementById("svg-inner")
+      newSvg.appendChild(svgDom.cloneNode(true))
+      return newSvg
+    }
   },
 }
 </script>

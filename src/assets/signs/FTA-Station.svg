@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="_层_1">
-
+    <g id="svg-inner-FTAS">
     <rect id="background" x="0" y="0" width="600" height="200" fill="#FFFFFF"/>
 
     <rect id="color-belt-1" x="0" y="160" width="600" height="40" fill="#55CCFF"/>
 
     <rect id="color-belt-abbr-frame-1" x="20" y="170" width="36" height="19" rx="9.5" ry="9.5" fill="#FFFFFF"/>
-    <text id="color-belt-abbr-1" transform="translate(29 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="12" fill="#000000">
+    <text id="color-belt-abbr-1" transform="translate(29 184)" font-family=".PingFangSC-Regular, .PingFang SC, source-han-sans" font-weight="700" font-size="12" fill="#000000">
         <tspan x="0" y="0">WS</tspan>
     </text>
-    <text id="color-belt-name-1" transform="translate(67 184)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="500" font-size="14" fill="#FFFFFF">
+    <text id="color-belt-name-1" transform="translate(67 184)" font-family=".PingFangSC-Regular, .PingFang SC, source-han-sans" font-weight="500" font-size="14" fill="#FFFFFF">
         <tspan x="0" y="0">Waterside Line · 浦蓝线</tspan>
     </text>
 
-    <text id="station-name" transform="translate(15.93 81.21)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="72" fill="#000000">
+    <text id="station-name" transform="translate(15.93 81.21)" font-family=".PingFangSC-Regular, .PingFang SC, source-han-sans" font-weight="700" font-size="72" fill="#000000">
         <tspan x="0" y="0">主城湾</tspan>
     </text>
-    <text id="station-name-sub" transform="translate(20.21 117.87)" font-family=".PingFangSC-Regular, .PingFang SC" font-weight="700" font-size="24" fill="#000000">
+    <text id="station-name-sub" transform="translate(20.21 117.87)" font-family=".PingFangSC-Regular, .PingFang SC, source-han-sans" font-weight="700" font-size="24" fill="#000000">
         <tspan x="0" y="0">Spawn Bay</tspan>
     </text>
     <text id="station-number" transform="translate(20.93 146.07)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="700" font-size="18" fill="#000000">
@@ -70,5 +70,6 @@
         <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
             <tspan x="65" y="0">Survival Railroad</tspan>
         </text>
+    </g>
     </g>
 </svg>

@@ -8,10 +8,12 @@
     <Signs v-if="signStyle === 'kitajuku-dentetsu'  && viewerType === ''" ref="signs"/>
     <EntranceGuideSign v-if="signStyle === 'test-sign'  && viewerType === ''" ref="entrancesSign"/>
     <StationSignFTA v-if="signStyle === 'FTA-station'  && viewerType === ''" ref="stationSignFTA"/>
+    <GuideSignFTA v-if="signStyle === 'FTA-guide'  && viewerType === ''" ref="guideSignFTA"/>
     <Editor v-if="signStyle === 'kitajuku-dentetsu'  && viewerType === ''" @someChanged="UpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="RequireRearrange"/>
     <EntranceGuideEditor v-if="signStyle === 'test-sign' && viewerType === ''" @someChanged="entranceUpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="entranceRearrangement"/>
     <StationSignFTAEditor v-if="signStyle === 'FTA-station' && viewerType === ''" @someChanged="stationFTAUpdateData"
                           @signChanged="UpdateSignStyle" @contentNeedRearrange="stationFTARearrangement" @beltDeleted="delBeltFTA"/>
+    <GuideSignFTAEditor v-if="signStyle === 'FTA-guide' && viewerType === ''" @signChanged="UpdateSignStyle"/>
     <DownloadViewer v-if="viewerType === 'download'" @switchViewer="updateViewer" ref="download"/>
     <UploadViewer v-if="viewerType === 'upload'" @switchViewer="updateViewer" @switchStyle="UpdateSignStyle" ref="upload"/>
     <FooterFlex :title="titles"/>
@@ -30,11 +32,13 @@ import DownloadViewer from "@/components/files/downloadViewer";
 import UploadViewer from "@/components/files/uploadViewer";
 import StationSignFTA from "@/components/signs/stationSignFTA";
 import StationSignFTAEditor from "@/components/signs/stationSignFTAEditor";
+import GuideSignFTA from "@/components/signs/guideSignFTA";
+import GuideSignFTAEditor from "@/components/signs/guideSignFTAEditor";
 
 export default {
   name: 'App',
   components: {
-    StationSignFTA, StationSignFTAEditor,
+    StationSignFTA, StationSignFTAEditor, GuideSignFTA, GuideSignFTAEditor,
     HeaderFlex, FooterFlex, Signs, EntranceGuideSign, EntranceGuideEditor, SideTools, DownloadViewer, UploadViewer, Editor},
   data()  {
     return{

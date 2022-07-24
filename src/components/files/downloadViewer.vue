@@ -61,17 +61,23 @@ export default {
     },
     convertToCanvas() {
       let signElementId
+      let signInnerId
       let signName = sessionStorage.getItem("instanceSignStyle")
       if (signName === "kitajuku-dentetsu") {
         signElementId = 'svg-sign'
+        signInnerId = 'svg-inner'
       } else if (signName === "test-sign") {
         signElementId = 'sign-entrance'
       } else if (signName === 'FTA-station') {
         signElementId = 'svg-sign-FTA-station'
+        signInnerId = 'svg-inner-FTAS'
+      } else if (signName === 'FTA-guide') {
+        signElementId = 'svg-sign-FTA-guide'
+        signInnerId = 'svg-inner-FTAG'
       }
-      let svgDom = document.getElementById(signElementId)
-      let width = svgDom.getBBox().width
-      let height = svgDom.getBBox().height
+      let svgDom = this.newSvgConstructor(signElementId, signInnerId)
+      let width = document.getElementById(signElementId).getBBox().width
+      let height = document.getElementById(signElementId).getBBox().height
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,
           blob = new Blob([outerHTML], {type: 'image/svg+xml;charset=utf-8'});
@@ -134,10 +140,30 @@ export default {
       let data = JSON.stringify(jsonConfig)
       return 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(data)
     },
+
+    newSvgConstructor(signElementId, signInnerId) {
+      let newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      newSvg.setAttribute("version", "1.1")
+      newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+      newSvg.setAttribute("id", signElementId)
+      newSvg.setAttribute("class", "sign")
+      let signName = sessionStorage.getItem("instanceSignStyle")
+      let configKey
+      if (signName === "kitajuku-dentetsu") {
+        configKey = "instanceConfig"
+      } else if (signName === "test-sign") {
+        configKey = "instanceConfigEntrance"
+      } else if (signName === 'FTA-station') {
+        configKey = "instanceConfigFTAStation"
+      }
+      let jsonConfig = JSON.parse(sessionStorage.getItem(configKey))
+      newSvg.setAttribute("viewBox", "0 0 " + jsonConfig.output.outputWidth.toString() + " " + jsonConfig.output.outputHeight.toString())
+      let svgDom = document.getElementById(signInnerId)
+      newSvg.appendChild(svgDom.cloneNode(true))
+      return newSvg
+    }
   }
 }
-
-
 
 
 </script>

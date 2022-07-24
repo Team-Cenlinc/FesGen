@@ -42,6 +42,7 @@ export default {
         layoutInfo: {
           backgroundColor: '#FFFFFF',
           textColor: '#000000',
+          stationNameColor: '#FFFFFF',
         },
         thisStation: {
           nameMain: "主城湾",
@@ -85,8 +86,6 @@ export default {
       let dom = this.$refs.svg.getElementById('station-name')
       dom.setAttribute("fill", this.signInfo.layoutInfo.textColor)
       dom.setAttribute("font-style", this.signInfo.signConfig.stationNameItalic ? "italic" : "normal")
-      console.log(this.$data)
-      console.log(this.signInfo.signConfig.stationNameItalic ? "italic" : "normal")
       dom.childNodes[0].innerHTML = this.signInfo.thisStation.nameMain
 
       dom = this.$refs.svg.getElementById('station-name-sub')
@@ -115,7 +114,7 @@ export default {
 
       if (!this.signInfo.logoInfo.enableLogo){
         this.signInfo.logoInfo.logoStyle = ''
-      } else {
+      }
         this.$refs.svg.getElementById("FTA-Logo-SUR").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-SUR-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR-Reversed" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-PUAT").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-PUAT" ? "visible" : "hidden")
@@ -126,7 +125,6 @@ export default {
         } else {
           this.$refs.svg.getElementById(this.signInfo.logoInfo.logoStyle).setAttribute('transform', "translate(" + (this.output.outputWidth - 100).toString() + "," + (this.output.outputHeight - 95).toString() + ")");
 
-        }
         }
       this.convertToCanvas()
     },
@@ -172,7 +170,6 @@ export default {
 
         dom = this.$refs.svg.getElementById('color-belt-name-' + i)
         let nameWidth = this.$refs.svg.getElementById('color-belt-name-' + i).getBBox().width
-        console.log(nameWidth, i)
         let namePosition = abbrWidth + 18 + 20 + 20 + lastPositionX
         dom.setAttribute('transform', ('translate(' + namePosition.toString() + ', ' + (this.output.outputHeight - 16).toString() + ')'))
 
@@ -286,8 +283,8 @@ export default {
       this.RequireRearrange(lightStyle, signInfo, signScale)
     },
     convertToCanvas() {
-      let svgDom = document.getElementById("svg-sign-FTA-station")
-      let {width, height} = svgDom.getBBox()
+      let svgDom = this.newSvgConstructor()
+      let {width, height} = document.getElementById("svg-sign-FTA-station").getBBox()
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,
           blob = new Blob([outerHTML],{type:'image/svg+xml;charset=utf-8'});
@@ -302,10 +299,21 @@ export default {
         let context = canvas.getContext('2d');
 
         context.drawImage(image, 0, 0, width, height);
-
       };
       image.src = blobURL;
     },
+
+    newSvgConstructor() {
+      let newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      newSvg.setAttribute("version", "1.1")
+      newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+      newSvg.setAttribute("id", "svg-sign-FTA-station")
+      newSvg.setAttribute("class", "sign")
+      newSvg.setAttribute("viewBox", "0 0 " + this.output.outputWidth.toString() + " " + this.output.outputHeight.toString())
+      let svgDom = document.getElementById("svg-inner-FTAS")
+      newSvg.appendChild(svgDom.cloneNode(true))
+      return newSvg
+    }
   }
 }
 </script>

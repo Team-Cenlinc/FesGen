@@ -12,6 +12,7 @@
               <option value="test-sign">测试用</option>
               <option value="kitajuku-dentetsu">北宿电铁</option>
               <option value="FTA-station">FTA 车站牌</option>
+              <option value="FTA-guide">FTA 导视牌</option>
             </select>
           </div>
           <div class="form-min-row">
@@ -40,6 +41,10 @@
           <div class="form-min-row">
             <p>字体颜色</p>
             <input v-model="signInfo.layoutInfo.textColor" @change="requestRearrange" type="color">
+          </div>
+          <div class="form-min-row">
+            <p>线路名字体颜色</p>
+            <input v-model="signInfo.layoutInfo.stationNameColor" @change="requestRearrange" type="color">
           </div>
           <div class="form-min-row">
             <p>背景颜色</p>
@@ -138,6 +143,7 @@ export default {
         layoutInfo: {
           backgroundColor: '#FFFFFF',
           textColor: '#000000',
+          stationNameColor: '#FFFFFF',
         },
         thisStation: {
           nameMain: "主城湾",
@@ -200,6 +206,7 @@ export default {
         layoutInfo: {
           backgroundColor: '#FFFFFF',
           textColor: '#000000',
+          stationNameColor: '#FFFFFF',
         },
         thisStation: {
           nameMain: "主城湾",
