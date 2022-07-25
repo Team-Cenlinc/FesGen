@@ -333,9 +333,9 @@ export default {
 
 .row h2 {
   width: fit-content;
-  height: 27px;
+  height: 22px;
   margin: 20px 0 10px 10px;
-  border-bottom: 8px solid var(--editor-topic-highlight);
+  border-bottom: 10px solid var(--editor-topic-highlight);
 }
 
 input {

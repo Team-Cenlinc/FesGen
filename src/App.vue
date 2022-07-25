@@ -13,7 +13,7 @@
     <EntranceGuideEditor v-if="signStyle === 'test-sign' && viewerType === ''" @someChanged="entranceUpdateData" @signChanged="UpdateSignStyle" @contentNeedRearrange="entranceRearrangement"/>
     <StationSignFTAEditor v-if="signStyle === 'FTA-station' && viewerType === ''" @someChanged="stationFTAUpdateData"
                           @signChanged="UpdateSignStyle" @contentNeedRearrange="stationFTARearrangement" @beltDeleted="delBeltFTA"/>
-    <GuideSignFTAEditor v-if="signStyle === 'FTA-guide' && viewerType === ''" @signChanged="UpdateSignStyle"/>
+    <GuideSignFTAEditor v-if="signStyle === 'FTA-guide' && viewerType === ''" @signChanged="UpdateSignStyle" @contentChanged="guideSignFTAUpdateData"/>
     <DownloadViewer v-if="viewerType === 'download'" @switchViewer="updateViewer" ref="download"/>
     <UploadViewer v-if="viewerType === 'upload'" @switchViewer="updateViewer" @switchStyle="UpdateSignStyle" ref="upload"/>
     <FooterFlex :title="titles"/>
@@ -71,6 +71,9 @@ export default {
     },
     delBeltFTA(lightStyle, signInfo, signScale, index){
       this.$refs.stationSignFTA.removeBelt(lightStyle, signInfo, signScale, index)
+    },
+    guideSignFTAUpdateData(lightStyle, signInfo, signScale){
+      this.$refs.guideSignFTA.UpdateData(signInfo, lightStyle, signScale)
     },
     updateViewer(viewerType){
       sessionStorage.setItem("instanceSignStyle", this.signStyle)

@@ -251,12 +251,13 @@ export default {
 
           name.appendChild(nameTspan)
 
-          let basePoint = this.$refs.svg.getElementById('station-name')
+          let basePoint = this.$refs.svg.getElementById("station-name")
 
-          this.$refs.svg.insertBefore(belt, basePoint)
-          this.$refs.svg.insertBefore(abbrFrame, basePoint)
-          this.$refs.svg.insertBefore(abbr, basePoint)
-          this.$refs.svg.insertBefore(name, basePoint)
+          this.$refs.svg.getElementById("svg-inner-FTAS").insertBefore(belt, basePoint)
+          this.$refs.svg.getElementById("svg-inner-FTAS").insertBefore(abbrFrame, basePoint)
+          this.$refs.svg.getElementById("svg-inner-FTAS").insertBefore(abbr, basePoint)
+          this.$refs.svg.getElementById("svg-inner-FTAS").insertBefore(name, basePoint)
+
         }
       }
     },
@@ -284,7 +285,8 @@ export default {
     },
     convertToCanvas() {
       let svgDom = this.newSvgConstructor()
-      let {width, height} = document.getElementById("svg-sign-FTA-station").getBBox()
+      let width = this.output.outputWidth
+      let height = this.output.outputHeight
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,
           blob = new Blob([outerHTML],{type:'image/svg+xml;charset=utf-8'});
@@ -310,8 +312,11 @@ export default {
       newSvg.setAttribute("id", "svg-sign-FTA-station")
       newSvg.setAttribute("class", "sign")
       newSvg.setAttribute("viewBox", "0 0 " + this.output.outputWidth.toString() + " " + this.output.outputHeight.toString())
+      newSvg.setAttribute("width", this.output.outputWidth.toString())
+      newSvg.setAttribute("height", this.output.outputHeight.toString())
       let svgDom = document.getElementById("svg-inner-FTAS")
       newSvg.appendChild(svgDom.cloneNode(true))
+
       return newSvg
     }
   }

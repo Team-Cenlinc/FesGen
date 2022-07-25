@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="_层_1">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="_层_1" height="200" width="600" viewBox="0 0 600 200">
     <g id="svg-inner-FTAG">
         <rect id="background" x="0" y="0" width="600" height="200" fill="#FFFFFF"/>
-        <rect id="color-belt-1" x="0" y="160" width="600" height="40" fill="#55CCFF"/>
+        <rect id="color-belt" x="0" y="160" width="600" height="40" fill="#55CCFF"/>
         <g>
 
         </g>

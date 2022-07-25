@@ -14,6 +14,45 @@
               <option value="FTA-guide">FTA 导视牌</option>
             </select>
           </div>
+          <div class="form-min-row">
+            <button @click="contentChange" class="button-alert">刷新数据</button>
+            <button @click="resetData" class="button-danger">重置数据</button>
+          </div>
+        </div>
+        <div>
+          <h2><span class="material-symbols-outlined icon-editor">tune</span>FTA 导视牌: 全局设置</h2>
+          <div class="form-min-row">
+            <p>宽度</p>
+            <div><input v-model="output.outputWidth" placeholder="600" min="0" @change="contentChange" type="number" value="600"> px</div>
+          </div>
+          <div class="form-min-row">
+            <p>高度</p>
+            <div><input v-model="output.outputHeight" placeholder="200" min="0" @change="contentChange" type="number" value="200"> px</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <h2><span class="material-symbols-outlined icon-editor">layers</span>信息层设置</h2>
+          <div class="form-min-row">
+            <button class="button">新建信息层</button>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <h2><span class="material-symbols-outlined icon-editor">info</span>组件信息设置</h2>
+          <div class="form-min-row" v-if="this.focusComponent.focusLayer === -1">
+            <p class="hint">您未选择信息层</p>
+          </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent === -1">
+            <p class="hint">您未选择组件</p>
+          </div>
+        </div>
+        <div>
+
         </div>
       </div>
     </div>
@@ -25,7 +64,10 @@ export default {
   name: "guideSignFTAEditor",
   data() {
     return {
-      focusComponent: "",
+      focusComponent: {
+        focusLayer: -1,
+        focusComponent: -1,
+      },
       signStyle: 'FTA-guide',
       lightStyle: 'fluore',
       output: {
@@ -56,10 +98,65 @@ export default {
     }
   },
   mounted() {
+    this.reloadCache()
+    this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
+    this.dataToJson()
   },
   methods: {
     sendSign() {
+      this.dataToJson()
       this.$emit('signChanged', this.signStyle, this.lightStyle, this.signInfo, this.output)
+    },
+    contentChange() {
+      this.dataToJson()
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
+    },
+    dataToJson(){
+      let jsonData = JSON.stringify(this.$data);
+      sessionStorage.setItem("instanceConfigFTAGuide", jsonData)
+    },
+    reloadCache() {
+      if (sessionStorage.getItem("instanceConfigFTAGuide") !== null) {
+        let jsonData = JSON.parse(sessionStorage.getItem("instanceConfigFTAGuide"))
+        this.signInfo = jsonData.signInfo
+        this.lightStyle = jsonData.lightStyle
+        this.output = jsonData.output
+        this.$emit('contentChanged', this.lightStyle, this.signInfo, this.output)
+      }
+    },
+    resetData() {
+      this.signInfo = {
+        layers: [
+          [
+            {
+              type: 'span',
+              width: 100,
+              height: 100,
+              components: [
+                {
+                  type: 'text',
+                  text: 'Accessible Elevator',
+                  iconLeft: 'ARROW_LEFT',
+                  iconRight: 'ACCESSIBLE_ELEVATOR',
+                  bold: false,
+                  italic: false,
+                }
+              ]
+            }
+          ]
+        ]
+      }
+      this.lightStyle = 'fluore'
+      this.output = {
+        outputWidth: 600,
+        outputHeight: 200,
+      }
+      this.focusComponent = {
+        focusLayer: -1,
+        focusComponent: -1,
+      }
+      this.dataToJson()
+      this.$emit('contentChanged', this.lightStyle, this.signInfo, this.output)
     },
   }
 }
@@ -81,9 +178,9 @@ export default {
 
 .row h2 {
   width: fit-content;
-  height: 27px;
+  height: 22px;
   margin: 20px 0 10px 10px;
-  border-bottom: 8px solid var(--editor-topic-highlight);
+  border-bottom: 10px solid var(--editor-topic-highlight);
 }
 
 input {

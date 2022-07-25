@@ -81,7 +81,8 @@ export default {
 
     convertToCanvas() {
       let svgDom = document.getElementById("svg-sign-FTA-guide")
-      let {width, height} = svgDom.getBBox()
+      let width = this.output.outputWidth
+      let height = this.output.outputHeight
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,
           blob = new Blob([outerHTML],{type:'image/svg+xml;charset=utf-8'});
@@ -101,6 +102,20 @@ export default {
       image.src = blobURL;
     },
 
+    newSvgConstructor() {
+      let newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      newSvg.setAttribute("version", "1.1")
+      newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+      newSvg.setAttribute("id", "svg-sign-FTA-guide")
+      newSvg.setAttribute("class", "sign")
+      newSvg.setAttribute("viewBox", "0 0 " + this.output.outputWidth.toString() + " " + this.output.outputHeight.toString())
+      newSvg.setAttribute("width", this.output.outputWidth.toString())
+      newSvg.setAttribute("height", this.output.outputHeight.toString())
+      let svgDom = document.getElementById("svg-inner-FTAG")
+      newSvg.appendChild(svgDom.cloneNode(true))
+
+      return newSvg
+    }
 
   }
 }

@@ -463,7 +463,8 @@ export default {
     },
     convertToCanvas() {
       let svgDom = this.newSvgConstructor()
-      let {width, height} = document.getElementById("svg-sign").getBBox()
+      let width = this.output.outputWidth
+      let height = this.output.outputHeight
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,
           blob = new Blob([outerHTML],{type:'image/svg+xml;charset=utf-8'});
@@ -489,8 +490,11 @@ export default {
       newSvg.setAttribute("id", "svg-sign")
       newSvg.setAttribute("class", "sign")
       newSvg.setAttribute("viewBox", "0 0 " + this.output.outputWidth.toString() + " " + this.output.outputHeight.toString())
+      newSvg.setAttribute("width", this.output.outputWidth.toString())
+      newSvg.setAttribute("height", this.output.outputHeight.toString())
       let svgDom = document.getElementById("svg-inner")
       newSvg.appendChild(svgDom.cloneNode(true))
+
       return newSvg
     }
   },
