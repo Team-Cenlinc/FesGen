@@ -42,6 +42,7 @@ export default {
               type: 'span',
               width: 100,
               height: 100,
+              backgroundColor: '#FFFFFF',
               components: [
                 {
                   type: 'text',

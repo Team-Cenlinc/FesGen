@@ -34,25 +34,153 @@
       <div class="row">
         <div>
           <h2><span class="material-symbols-outlined icon-editor">layers</span>信息层设置</h2>
-          <div class="form-min-row">
-            <button class="button">新建信息层</button>
+          <div class="form-min-row" v-if="this.focusComponent.focusLayer === -1">
+            <p class="hint">您未选择信息层</p>
           </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusLayer !== -1">
+            <p>信息层名称</p>
+            <div><input type="text" v-model="signInfo.layers[focusComponent.focusLayer].name" @change="contentChange"></div>
+          </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusLayer !== -1">
+            <p>信息层背景色</p>
+            <div><input type="color" v-model="signInfo.layers[focusComponent.focusLayer].baseColor" @change="contentChange"></div>
+          </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusLayer !== -1">
+            <p>信息层高度</p>
+            <div><input type="number" v-model="signInfo.layers[focusComponent.focusLayer].height" min="0" value="100" @change="contentChange"></div>
+          </div>
+          <div class="form-min-row">
+            <button @click="addLayer" class="button">新建信息层</button>
+            <button @click="deleteLayer" class="button">删除信息层</button>
+          </div>
+
         </div>
         <div>
+          <draggable v-model="signInfo.layers">
+            <div class="drag-sorter" v-for="(layers, index) in signInfo.layers" :key="layers.id" @click="selectLayer(index)">{{ layers.name }} <span class="material-symbols-outlined sorter-icon">menu</span></div>
+          </draggable>
         </div>
       </div>
       <div class="row">
         <div>
           <h2><span class="material-symbols-outlined icon-editor">info</span>组件信息设置</h2>
-          <div class="form-min-row" v-if="this.focusComponent.focusLayer === -1">
-            <p class="hint">您未选择信息层</p>
-          </div>
           <div class="form-min-row" v-if="this.focusComponent.focusComponent === -1">
             <p class="hint">您未选择组件</p>
           </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
+            <p>组件名称</p>
+            <div><input type="text" v-model="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].name" @change="contentChange"></div>
+          </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
+            <p>组件背景色</p>
+            <div><input type="color" v-model="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].backgroundColor" @change="contentChange"></div>
+          </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
+            <p>组件宽度</p>
+            <div><input type="number" v-model="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].width" @change="contentChange" min="0" value="100"> px</div>
+          </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
+            <p>组件类型</p>
+            <select v-model="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type" @change="changeType(signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type, signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].id, signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].name)">
+              <option disabled value="">请选择</option>
+              <option value="text">文本</option>
+              <option value="exit">出口</option>
+              <option value="info">信息</option>
+              <option value="warn">警示</option>
+              <option value="span">间隔</option>
+            </select>
+          </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
+            <p>剧中显示</p>
+            <div><input type="checkbox" v-model="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].center" @change="contentChange"></div>
+          </div>
+          <div v-if="this.focusComponent.focusComponent !== -1" class="form-min-row content-info-form-end">
+            <button @click="createComponentInLayer" class="button">新建层内组件</button>
+            <button @click="deleteComponentInLayer" class="button">删除层内组件</button>
+          </div>
+          <div v-if="this.focusComponent.focusComponent !== -1">
+            <div v-for="(content, index) in signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].components" :key="content.id">
+              <div class="form-min-row">
+                <h2>第 {{ index + 1 }} 层</h2>
+              </div>
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+                  <p>本层文本内容</p>
+                  <div><input type="text" v-model="content.text" @change="contentChange"></div>
+              </div>
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+                <p>本层文本颜色</p>
+                <div><input type="color" v-model="content.textColor" @change="contentChange"></div>
+              </div>
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+                <p>本层左侧图标类型</p>
+                <select v-model="content.iconLeft">
+                  <option disabled value="">请选择</option>
+                  <option value="NONE">无</option>
+                  <option value="INFORMATION">信息咨询台</option>
+                  <option value="ACCESSIBLE_ELEVATOR">垂直电梯</option>
+                  <option value="ACCESSIBLE_STAIRS">有轮椅升降机的楼梯</option>
+                  <option value="ACCESSIBLE">残障友好标志</option>
+                  <option value="STAIRS">楼梯</option>
+                  <option value="NOT_AVAILABLE">不可用</option>
+                  <option value="ARROW_DOWN">向下的箭头</option>
+                  <option value="ARROW_UP">向上的箭头</option>
+                  <option value="ARROW_LEFT">向左的箭头</option>
+                  <option value="ARROW_RIGHT">向右的箭头</option>
+                  <option value="ARROW_UP_LEFT">向左上的箭头</option>
+                  <option value="ARROW_UP_RIGHT">向右上的箭头</option>
+                  <option value="ARROW_DOWN_LEFT">向左下的箭头</option>
+                  <option value="ARROW_DOWN_RIGHT">向右下的箭头</option>
+                </select>
+              </div>
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+                <p>本层左侧图标颜色</p>
+                <div><input type="color" v-model="content.iconLeftColor" @change="contentChange"></div>
+              </div>
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+                <p>本层右侧图标类型</p>
+                <select v-model="content.iconRight">
+                  <option disabled value="">请选择</option>
+                  <option value="NONE">无</option>
+                  <option value="INFORMATION">信息咨询台</option>
+                  <option value="ACCESSIBLE_ELEVATOR">垂直电梯</option>
+                  <option value="ACCESSIBLE_STAIRS">有轮椅升降机的楼梯</option>
+                  <option value="ACCESSIBLE">残障友好标志</option>
+                  <option value="STAIRS">楼梯</option>
+                  <option value="NOT_AVAILABLE">不可用</option>
+                  <option value="ARROW_DOWN">向下的箭头</option>
+                  <option value="ARROW_UP">向上的箭头</option>
+                  <option value="ARROW_LEFT">向左的箭头</option>
+                  <option value="ARROW_RIGHT">向右的箭头</option>
+                  <option value="ARROW_UP_LEFT">向左上的箭头</option>
+                  <option value="ARROW_UP_RIGHT">向右上的箭头</option>
+                  <option value="ARROW_DOWN_LEFT">向左下的箭头</option>
+                  <option value="ARROW_DOWN_RIGHT">向右下的箭头</option>
+                </select>
+              </div>
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+                <p>本层右侧图标颜色</p>
+                <div><input type="color" v-model="content.iconRightColor" @change="contentChange"></div>
+              </div>
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+                <p>粗体文字</p>
+                <div><input type="checkbox" v-model="content.bold" @change="contentChange"></div>
+              </div>
+              <div class="form-min-row content-info-form-end" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+                <p>斜体文字</p>
+                <div><input type="checkbox" v-model="content.italic" @change="contentChange"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
+              <button @click="createContentInComponent" class="button">新建组件内层</button>
+              <button @click="deleteContentInComponent" class="button">删除组件内层</button>
+          </div>
         </div>
         <div>
-
+          <draggable v-if="this.focusComponent.focusLayer !== -1" v-model="signInfo.layers[focusComponent.focusLayer].components">
+            <div class="drag-sorter" v-for="(component, index) in signInfo.layers[focusComponent.focusLayer].components" :key="component.id" @click="selectComponent(index)">{{ component.name }} <span class="material-symbols-outlined sorter-icon">menu</span></div>
+          </draggable>
         </div>
       </div>
     </div>
@@ -60,13 +188,22 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+
 export default {
   name: "guideSignFTAEditor",
+  components: {
+    draggable,
+  },
   data() {
     return {
       focusComponent: {
         focusLayer: -1,
         focusComponent: -1,
+      },
+      uniqueIdTable: {
+        layerIds: [0],
+        componentIds: [0],
       },
       signStyle: 'FTA-guide',
       lightStyle: 'fluore',
@@ -76,31 +213,46 @@ export default {
       },
       signInfo: {
         layers: [
-          [
-            {
-              type: 'span',
-              width: 100,
-              height: 100,
-              components: [
-                {
-                  type: 'text',
-                  text: 'Accessible Elevator',
-                  iconLeft: 'ARROW_LEFT',
-                  iconRight: 'ACCESSIBLE_ELEVATOR',
-                  bold: false,
-                  italic: false,
-                }
-              ]
-            }
-          ]
+          {
+            name: 'Layer1',
+            id: 0,
+            height: 100,
+            baseColor: '#FFFFFF',
+            components: [
+              {
+                id: 0,
+                name: 'init',
+                type: 'text',
+                width: 100,
+                center: false,
+                backgroundColor: '#FFFFFF',
+                components: [
+                  {
+                    id: 0,
+                    text: 'Accessible Elevator',
+                    textColor: '#000000',
+                    iconLeft: 'ARROW_LEFT',
+                    iconLeftColor: '#000000',
+                    iconRight: 'ACCESSIBLE_ELEVATOR',
+                    iconRightColor: '#000000',
+                    bold: false,
+                    italic: false,
+                  }
+                ]
+              }
+            ]
+          },
         ]
       }
     }
   },
   mounted() {
     this.reloadCache()
-    this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
+    this.$emit('contentChanged', this.signInfo.layers, this.lightStyle, this.output)
     this.dataToJson()
+  },
+  updated() {
+    this.$emit('contentChanged', this.signInfo.layers, this.lightStyle, this.output)
   },
   methods: {
     sendSign() {
@@ -111,7 +263,8 @@ export default {
       this.dataToJson()
       this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     },
-    dataToJson(){
+    dataToJson() {
+
       let jsonData = JSON.stringify(this.$data);
       sessionStorage.setItem("instanceConfigFTAGuide", jsonData)
     },
@@ -127,29 +280,45 @@ export default {
     resetData() {
       this.signInfo = {
         layers: [
-          [
-            {
-              type: 'span',
-              width: 100,
-              height: 100,
-              components: [
-                {
-                  type: 'text',
-                  text: 'Accessible Elevator',
-                  iconLeft: 'ARROW_LEFT',
-                  iconRight: 'ACCESSIBLE_ELEVATOR',
-                  bold: false,
-                  italic: false,
-                }
-              ]
-            }
-          ]
+          {
+            name: 'Layer1',
+            id: 0,
+            height: 100,
+            baseColor: '#FFFFFF',
+            components: [
+              {
+                id: 0,
+                name: 'init',
+                type: 'text',
+                width: 100,
+                center: false,
+                backgroundColor: '#FFFFFF',
+                components: [
+                  {
+                    id: 0,
+                    text: 'Accessible Elevator',
+                    textColor: '#000000',
+                    iconLeft: 'ARROW_LEFT',
+                    iconLeftColor: '#000000',
+                    iconRight: 'ACCESSIBLE_ELEVATOR',
+                    iconRightColor: '#000000',
+                    bold: false,
+                    italic: false,
+                  }
+                ]
+              }
+            ]
+          },
         ]
       }
       this.lightStyle = 'fluore'
       this.output = {
         outputWidth: 600,
         outputHeight: 200,
+      }
+      this.uniqueIdTable = {
+        layerIds: [0],
+        componentIds: [0],
       }
       this.focusComponent = {
         focusLayer: -1,
@@ -158,6 +327,268 @@ export default {
       this.dataToJson()
       this.$emit('contentChanged', this.lightStyle, this.signInfo, this.output)
     },
+    addLayer() {
+      let layerId = this.uniqueIdTable.layerIds[this.uniqueIdTable.layerIds.length - 1] + 1
+      this.uniqueIdTable.layerIds.push(layerId)
+
+      this.signInfo.layers.push({
+        name: 'Layer' + (this.signInfo.layers.length + 1),
+        id: layerId,
+        height: 100,
+        baseColor: '#FFFFFF',
+        components: [
+          {
+            id: 0,
+            name: 'init',
+            type: 'text',
+            width: 100,
+            center: false,
+            backgroundColor: '#FFFFFF',
+            components: [
+              {
+                id: 0,
+                type: 'text',
+                text: 'Accessible Elevator',
+                textColor: '#000000',
+                iconLeft: 'ARROW_LEFT',
+                iconLeftColor: '#000000',
+                iconRight: 'ACCESSIBLE_ELEVATOR',
+                iconRightColor: '#000000',
+                bold: false,
+                italic: false,
+              }
+            ]
+          }
+        ]
+      })
+      this.uniqueIdTable.layerIds.push(this.uniqueIdTable.layerIds.length)
+      this.focusComponent.focusLayer = this.signInfo.layers.length - 1
+      this.dataToJson()
+      this.$emit('contentChanged', this.lightStyle, this.signInfo, this.output)
+    },
+    selectLayer(index) {
+      this.focusComponent.focusLayer = index
+    },
+    deleteLayer() {
+      this.focusComponent.focusLayer = -1
+      this.signInfo.layers.splice(this.focusComponent.focusLayer, 1)
+      this.dataToJson()
+      this.$emit('contentChanged', this.lightStyle, this.signInfo, this.output)
+    },
+    selectComponent(index) {
+      this.focusComponent.focusComponent = index
+    },
+    changeType(type, formerId, formerName) {
+      let componentTemplate
+      console.log(type, formerId)
+      if (type === 'text') {
+        componentTemplate = {
+          id: formerId,
+          name: formerName,
+          type: 'text',
+          width: 100,
+          center: false,
+          backgroundColor: '#FFFFFF',
+          components: [
+            {
+              id: 0,
+              text: 'Accessible Elevator',
+              textColor: '#000000',
+              iconLeft: 'ARROW_LEFT',
+              iconLeftColor: '#000000',
+              iconRight: 'ACCESSIBLE_ELEVATOR',
+              iconRightColor: '#000000',
+              bold: false,
+              italic: false,
+            }
+          ]
+        }
+      } else if (type === 'warn') {
+        componentTemplate = {
+          id: formerId,
+          name: formerName,
+          type: 'warn',
+          width: 100,
+          center: false,
+          backgroundColor: '#ffca2e',
+          components: [
+            {
+              id: 0,
+              text: 'Watch ahead!',
+              textColor: '#000000',
+              iconLeft: 'NONE',
+              iconLeftColor: '#000000',
+              iconRight: 'NONE',
+              iconRightColor: '#000000',
+              bold: false,
+              italic: false,
+            }
+          ]
+        }
+      } else if (type === 'info') {
+        componentTemplate = {
+          id: formerId,
+          name: formerName,
+          type: 'info',
+          width: 100,
+          center: false,
+          backgroundColor: '#2b75ff',
+          components: [
+            {
+              id: 0,
+              text: '',
+              textColor: '#000000',
+              iconLeft: 'Information',
+              iconLeftColor: '#000000',
+              iconRight: 'NONE',
+              iconRightColor: '#000000',
+              bold: false,
+              italic: false,
+            },
+            {
+              id: 1,
+              text: 'Information Desk',
+              iconLeft: 'NONE',
+              iconLeftColor: '#000000',
+              iconRight: 'NONE',
+              iconRightColor: '#000000',
+              bold: false,
+              italic: false,
+            }
+          ]
+        }
+      } else if (type === 'exit') {
+        componentTemplate = {
+          id: formerId,
+          name: formerName,
+          type: 'exit',
+          width: 100,
+          center: false,
+          backgroundColor: '#d00000',
+          components: [
+            {
+              id: 0,
+              text: '',
+              textColor: '#000000',
+              iconLeft: 'EXIT_WITH_FRAME',
+              iconLeftColor: '#FFFFFF',
+              iconRight: 'NONE',
+              iconRightColor: '#000000',
+              bold: false,
+              italic: false,
+            },
+            {
+              id: 1,
+              text: 'Exit',
+              textColor: '#FFFFFF',
+              iconLeft: 'NONE',
+              iconLeftColor: '#000000',
+              iconRight: 'NONE',
+              iconRightColor: '#000000',
+              bold: false,
+              italic: false,
+            }
+          ]
+        }
+      } else if (type === 'span') {
+        componentTemplate = {
+          id: formerId,
+          name: formerName,
+          type: 'span',
+          width: 100,
+          center: true,
+          backgroundColor: '#FFFFFF',
+          components: [
+            {
+              id: 0,
+              showLogo: false,
+              showSpanLine: true,
+              color: '#000000',
+              logoType: 'NONE',
+              bold: false,
+              italic: false,
+            }
+          ]
+        }
+      }
+      this.signInfo.layers[this.focusComponent.focusLayer].components[this.focusComponent.focusComponent] = componentTemplate
+      this.dataToJson()
+    },
+    createComponentInLayer() {
+      let newId = 0
+      while (this.signInfo.layers[this.focusComponent.focusLayer].components.find(component => component.id === newId)) {
+        newId++
+      }
+
+      let componentTemplate = {
+        id: newId,
+        name: 'init',
+        type: 'text',
+        width: 100,
+        center: false,
+        backgroundColor: '#FFFFFF',
+        components: [
+          {
+            id: 0,
+            text: 'Accessible Elevator',
+            iconLeft: 'ARROW_LEFT',
+            iconLeftColor: '#000000',
+            iconRight: 'ACCESSIBLE_ELEVATOR',
+            iconRightColor: '#000000',
+            bold: false,
+            italic: false,
+          }
+        ]
+      }
+      this.uniqueIdTable.componentIds.push(this.uniqueIdTable.componentIds.length)
+      this.signInfo.layers[this.focusComponent.focusLayer].components.push(componentTemplate)
+      this.focusComponent.focusComponent = this.signInfo.layers[this.focusComponent.focusLayer].components.length - 1
+      this.dataToJson()
+    },
+    deleteComponentInLayer() {
+      this.signInfo.layers[this.focusComponent.focusLayer].components.splice(this.focusComponent.focusComponent, 1)
+      this.focusComponent.focusComponent = -1
+      this.dataToJson()
+    },
+    createContentInComponent() {
+      let newId = 0
+      let componentTemplate
+      while (this.signInfo.layers[this.focusComponent.focusLayer].components[this.focusComponent.focusComponent].components.find(component => component.id === newId)) {
+        newId++
+      }
+
+      let currentType = this.signInfo.layers[this.focusComponent.focusLayer].components[this.focusComponent.focusComponent].type
+
+      if (currentType !== 'span') {
+        componentTemplate = {
+          id: newId,
+          text: '',
+          textColor: '#000000',
+          iconLeft: 'NONE',
+          iconLeftColor: '#000000',
+          iconRight: 'NONE',
+          iconRightColor: '#000000',
+          bold: false,
+          italic: false,
+        }
+      } else {
+        componentTemplate = {
+          id: newId,
+          showLogo: false,
+          showSpanLine: true,
+          color: '#000000',
+          logoType: 'NONE',
+          bold: false,
+          italic: false,
+        }
+      }
+      this.signInfo.layers[this.focusComponent.focusLayer].components[this.focusComponent.focusComponent].components.push(componentTemplate)
+      this.dataToJson()
+    },
+    deleteContentInComponent() {
+      this.signInfo.layers[this.focusComponent.focusLayer].components[this.focusComponent.focusComponent].components.pop()
+      this.dataToJson()
+    }
   }
 }
 </script>
@@ -225,10 +656,6 @@ select {
   align-items: center;
 }
 
-.line-info-form-end{
-  border-bottom: 1px solid var(--editor-row-border);
-}
-
 .button{
   height: 30px;
   width: 100px;
@@ -281,6 +708,31 @@ select {
   font-weight: bold;
   height: 16px;
   border-bottom: 8px solid var(--global-alert);
+}
+
+.drag-sorter{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--editor-selector-bg-color);
+}
+
+.sorter-icon{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--editor-selector-color);
+  margin: 5px;
+  cursor: pointer;
+}
+
+.content-info-form-end{
+  border-bottom: 1px solid var(--editor-row-border);
 }
 
 .material-symbols-outlined{
