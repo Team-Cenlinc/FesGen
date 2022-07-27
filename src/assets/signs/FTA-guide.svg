@@ -3,9 +3,237 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="_层_1" height="200" width="600" viewBox="0 0 600 200">
     <g id="svg-inner-FTAG">
         <rect id="background" x="0" y="0" width="600" height="200" fill="#FFFFFF"/>
-        <rect id="color-belt" x="0" y="160" width="600" height="40" fill="#55CCFF"/>
-        <g>
+        <rect id="color-belt" x="0" y="180" width="600" height="20" fill="#55CCFF"/>
 
+        <!-- Statement: Developing -->
+        <g>
+            <text id="statement" transform="translate(100 80)" fill="#000000" font-size="20" font-family=".Source Sans Variable, .Source Sans Pro">
+                <tspan x="0" dy="20">Developing, Not ready for use... Coming soon!</tspan>
+            </text>
+        </g>
+
+        <g id="reserved-icons" visibility="visible">
+
+            <g id="INFORMATION" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
+                <circle cx="95.17" cy="44.43" r="17.79"/>
+                <rect x="76.49" y="72.1" width="37.36" height="92.03" rx="15" ry="15"/>
+            </g>
+
+            <g id="ACCESSIBLE_ELEVATOR" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
+                <rect x="51.69" y="97.38" width="86.96" height="73.91" rx="10" ry="10" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+                <g>
+                    <circle cx="75.87" cy="124.5" r="5.68"/>
+                    <rect x="68.98" y="131.39" width="13.77" height="21.5" rx="3" ry="3"/>
+                    <rect x="70.8" y="150.04" width="10.13" height="15.82" rx="3" ry="3"/>
+                </g>
+                <g>
+                    <circle cx="95.64" cy="124.29" r="5.68"/>
+                    <rect x="88.75" y="131.18" width="13.77" height="21.5" rx="3" ry="3"/>
+                    <rect x="90.57" y="149.83" width="10.13" height="15.82" rx="3" ry="3"/>
+                </g>
+                <g>
+                    <circle cx="114.47" cy="124.29" r="5.68"/>
+                    <rect x="107.59" y="131.18" width="13.77" height="21.5" rx="3" ry="3"/>
+                    <rect x="109.4" y="149.83" width="10.13" height="15.82" rx="3" ry="3"/>
+                </g>
+                <line x1="95.06" y1="19.94" x2="95.06" y2="86.62" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+                <line x1="75.09" y1="39.25" x2="96.85" y2="17.49" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+                <line x1="93.45" y1="17.49" x2="115.2" y2="39.25" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+                <line x1="115.16" y1="65.33" x2="93.4" y2="87.09" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+                <line x1="96.8" y1="87.09" x2="75.05" y2="65.33" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+            </g>
+
+            <g id="ACCESSIBLE_STAIRS" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
+                <g>
+                    <line x1="18.03" y1="85.63" x2="48.03" y2="85.63" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="45.23" y1="102.75" x2="45.23" y2="82.75" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="42.21" y1="99.88" x2="72.21" y2="99.88" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="69.41" y1="117" x2="69.41" y2="97" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="66.36" y1="114.37" x2="96.36" y2="114.37" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="93.56" y1="131.5" x2="93.56" y2="111.5" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="90.55" y1="129.32" x2="120.55" y2="129.32" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="117.69" y1="146.49" x2="117.69" y2="126.49" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="114.71" y1="143.6" x2="144.71" y2="143.6" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="141.85" y1="160.76" x2="141.85" y2="140.76" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="139.41" y1="157.87" x2="169.41" y2="157.87" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                </g>
+                <g>
+                    <line x1="21.11" y1="64.69" x2="46.57" y2="64.69" style="stroke-miterlimit:10; stroke-width:5px;" fill="none" />
+                    <line x1="156.69" y1="135.07" x2="176.9" y2="135.07" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+                    <line x1="45.42" y1="64.69" x2="157.94" y2="135.07" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+                </g>
+                <g>
+                    <path d="M144.68,72.31c-.55,1.19-1.64,3.25-3.57,5.37-1,1.1-3.13,3.39-6.76,4.96-1.56,.68-4.28,1.6-7.73,1.55-.63,0-2.38-.07-4.57-.65-.93-.25-4.74-1.33-8.51-4.63-1.4-1.23-4.28-3.83-5.85-8.24-.98-2.75-1.09-5.18-1.07-6.47,0-.49,.05-2.2,.57-4.38,1.11-4.56,3.47-7.57,4.16-8.4,2.46-2.99,5.13-4.49,5.96-4.93" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
+                    <circle cx="123.88" cy="35.23" r="6.02"/>
+                    <rect x="122.05" y="43.44" width="11.27" height="26.73" rx="5.63" ry="5.63" transform="translate(-7.92 23.03) rotate(-10)"/>
+                    <rect x="130.45" y="50.8" width="20.03" height="7.49" rx="2.79" ry="2.79" style="stroke-miterlimit:10;"/>
+                    <rect x="125.6" y="63.62" width="21.43" height="7" rx="3.5" ry="3.5" style="stroke-miterlimit:10;"/>
+                    <rect x="136.32" y="69.87" width="21.43" height="7" rx="3.5" ry="3.5" transform="translate(137.05 -90.65) rotate(60)" style="stroke-miterlimit:10;"/>
+                </g>
+            </g>
+
+            <g id="ACCESSIBLE" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
+                <g>
+                    <path d="M133.41,127.56c-1.17,2.54-3.48,6.9-7.59,11.41-2.12,2.33-6.65,7.2-14.36,10.55-3.31,1.44-9.09,3.41-16.44,3.3-1.34-.02-5.07-.15-9.71-1.38-1.97-.52-10.08-2.82-18.08-9.85-2.97-2.61-9.1-8.13-12.45-17.53-2.08-5.84-2.31-11-2.28-13.76,.01-1.05,.1-4.68,1.22-9.31,2.35-9.7,7.38-16.09,8.84-17.85,5.24-6.35,10.91-9.54,12.67-10.48" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
+                    <circle cx="90.38" cy="50.31" r="12.79"/>
+                    <rect x="85.29" y="66.17" width="23.95" height="56.83" rx="8" ry="8" transform="translate(-14.95 18.33) rotate(-10)"/>
+                    <rect x="103.17" y="81.83" width="42.58" height="15.92" rx="5" ry="5" style="stroke-miterlimit:10;"/>
+                    <rect x="92.85" y="109.08" width="45.55" height="14.89" rx="3.5" ry="3.5" style="stroke-miterlimit:10;"/>
+                    <rect x="119.06" y="123.68" width="45.55" height="14.89" rx="5" ry="5" transform="translate(184.47 -57.27) rotate(60)" style="stroke-miterlimit:10;"/>
+                </g>
+            </g>
+
+            <g id="STAIRS" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
+                <g>
+                    <line x1="19.48" y1="79.29" x2="49.48" y2="79.29" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="46.68" y1="96.42" x2="46.68" y2="76.42" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="43.66" y1="93.54" x2="73.66" y2="93.54" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="70.86" y1="110.67" x2="70.86" y2="90.67" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="67.81" y1="108.03" x2="97.81" y2="108.03" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="95.01" y1="125.16" x2="95.01" y2="105.16" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="92" y1="122.99" x2="122" y2="122.99" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="119.14" y1="140.15" x2="119.14" y2="120.15" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="116.15" y1="137.26" x2="146.15" y2="137.26" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="143.3" y1="154.43" x2="143.3" y2="134.43" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                    <line x1="140.86" y1="151.54" x2="170.86" y2="151.54" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                </g>
+                <line x1="70.81" y1="45.89" x2="156.96" y2="99.13" style="stroke-miterlimit:10; stroke-width:4px;" fill="none"/>
+                <line x1="69.76" y1="66.86" x2="69.76" y2="44.16" style="stroke-miterlimit:10; stroke-width:4px;" fill="none"/>
+                <line x1="157.58" y1="100.76" x2="157.58" y2="78.06" style="stroke-miterlimit:10; stroke-width:4px;" fill="none"/>
+            </g>
+
+            <g id="COLOR_BLOCK" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;"/>
+            </g>
+
+            <g id="NOT_AVAILABLE" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <circle cx="90" cy="90" r="80" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="33.41" y1="146.43" x2="146.28" y2="33.57" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+            </g>
+
+            <g id="EXIT_WITH_FRAME" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
+                <polyline points="88.63 52.51 157.08 52.51 157.08 138.5 88.63 138.5" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                <line x1="66.65" y1="75.4" x2="90.54" y2="51.51" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                <line x1="66.04" y1="114.36" x2="91.15" y2="139.48" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                <line x1="103.79" y1="94.38" x2="30.45" y2="94.58" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                <line x1="26.5" y1="96.97" x2="50.39" y2="73.07" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+                <line x1="26.71" y1="92.83" x2="51.82" y2="117.94" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
+            </g>
+
+            <g id="EXIT_WITHOUT_FRAME" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <polyline points="75.09 4 153.66 4 153.66 102.7 75.09 102.7" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
+                <line x1="50.4" y1="30.35" x2="77.82" y2="2.92" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
+                <line x1="48.97" y1="74.93" x2="77.79" y2="103.75" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
+                <line x1="89.36" y1="52.66" x2="5.18" y2="52.89" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
+                <line x1="2.83" y1="54.42" x2="30.25" y2="27" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
+                <line x1="3.54" y1="49.45" x2="32.36" y2="78.27" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
+            </g>
+
+            <!-- ARROW_Group -->
+
+            <g id="ARROW_DOWN" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <line x1="61.39" y1="150" x2="61.39" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="116.1" y1="95.72" x2="54.6" y2="157.21" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="68.57" y1="157.31" x2="7.07" y2="95.82" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+            </g>
+
+            <g id="ARROW_UP" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <line x1="61.78" y1="14.39" x2="61.78" y2="164.39" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="7.07" y1="68.67" x2="68.57" y2="7.17" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="54.6" y1="7.07" x2="116.1" y2="68.57" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+            </g>
+
+            <g id="ARROW_LEFT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <line x1="14.39" y1="61.39" x2="164.39" y2="61.39" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="68.67" y1="116.1" x2="7.17" y2="54.6" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="7.07" y1="68.57" x2="68.57" y2="7.07" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+            </g>
+
+            <g id="ARROW_RIGHT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <line x1="150" y1="61.78" y2="61.78" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="95.72" y1="7.07" x2="157.21" y2="68.57" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="157.31" y1="54.6" x2="95.82" y2="116.1" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+            </g>
+
+            <g id="ARROW_UP_LEFT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <line x1="10.3" y1="10.1" x2="116.37" y2="116.17" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="10" y1="87.16" x2="10" y2=".19" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1=".05" y1="10" x2="87.02" y2="10" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+            </g>
+
+            <g id="ARROW_UP_RIGHT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <line x1="113.14" y1="10.3" x2="7.07" y2="116.37" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="36.07" y1="10" x2="123.04" y2="10" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="113.24" y1=".05" x2="113.24" y2="87.02" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+            </g>
+
+            <g id="ARROW_DOWN_LEFT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+                <line x1="10.1" y1="113.14" x2="116.17" y2="7.07" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="87.16" y1="113.44" x2=".19" y2="113.44" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+                <line x1="10" y1="123.38" x2="10" y2="36.41" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+            </g>
+
+           <g id="ARROW_DOWN_RIGHT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+               <line x1="113.14" y1="113.14" x2="7.07" y2="7.07" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+               <line x1="113.44" y1="36.07" x2="113.44" y2="123.04" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+               <line x1="123.38" y1="113.24" x2="36.41" y2="113.24" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
+           </g>
+        </g>
+
+        <!-- LOGO_Group -->
+
+        <g id="FTA-Logo-PUAT" transform="scale(1) translate(0 0)">
+            <rect x="0" y="-5" width="80" height="18"/>
+            <rect x="-110" y="18" width="190" height="18"/>
+            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
+                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
+                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
+            </text>
+            <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
+                <tspan x="-2" y="0">Pyutocor Urban Area Transit</tspan>
+            </text>
+        </g>
+
+        <g id="FTA-Logo-PUAT-Reversed" transform="scale(1) translate(0 0)">
+            <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
+            <rect x="-110" y="18" width="190" height="18" fill="#FFFFFF"/>
+            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
+                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
+                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
+            </text>
+            <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
+                <tspan x="-2" y="0">Pyutocor Urban Area Transit</tspan>
+            </text>
+        </g>
+
+        <g id="FTA-Logo-SUR" transform="scale(1) translate(0 0)">
+            <rect x="0" y="-5" width="80" height="18"/>
+            <rect x="-110" y="18" width="190" height="18"/>
+            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
+                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
+                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
+            </text>
+            <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
+                <tspan x="65" y="0">Survival Railroad</tspan>
+            </text>
+        </g>
+
+        <g id="FTA-Logo-SUR-Reversed" transform="scale(1) translate(0 0)">
+            <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
+            <rect x="-110" y="18" width="190" height="18" fill="#FFFFFF"/>
+            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
+                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
+                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
+            </text>
+            <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
+                <tspan x="65" y="0">Survival Railroad</tspan>
+            </text>
         </g>
     </g>
 </svg>

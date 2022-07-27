@@ -4,7 +4,7 @@
     <div>
 
     </div>
-    <SideTools @contentNeedRearrange="RequireRearrange" @switchViewer="updateViewer" ref="sideTools"/>
+    <SideTools @contentNeedRearrange="{RequireRearrange, stationFTARearrangement, guideSignFTAUpdateData}" @switchViewer="updateViewer" ref="sideTools"/>
     <Signs v-if="signStyle === 'kitajuku-dentetsu'  && viewerType === ''" ref="signs"/>
     <EntranceGuideSign v-if="signStyle === 'test-sign'  && viewerType === ''" ref="entrancesSign"/>
     <StationSignFTA v-if="signStyle === 'FTA-station'  && viewerType === ''" ref="stationSignFTA"/>

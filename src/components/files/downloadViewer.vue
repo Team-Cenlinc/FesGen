@@ -62,22 +62,28 @@ export default {
     convertToCanvas() {
       let signElementId
       let signInnerId
+      let configKey
       let signName = sessionStorage.getItem("instanceSignStyle")
       if (signName === "kitajuku-dentetsu") {
         signElementId = 'svg-sign'
         signInnerId = 'svg-inner'
+        configKey = "instanceConfig"
       } else if (signName === "test-sign") {
         signElementId = 'sign-entrance'
+        configKey = "instanceConfigEntrance"
       } else if (signName === 'FTA-station') {
         signElementId = 'svg-sign-FTA-station'
         signInnerId = 'svg-inner-FTAS'
+        configKey = "instanceConfigFTAStation"
       } else if (signName === 'FTA-guide') {
         signElementId = 'svg-sign-FTA-guide'
         signInnerId = 'svg-inner-FTAG'
+        configKey = "instanceConfigFTAGuide"
       }
-      let svgDom = this.newSvgConstructor(signElementId, signInnerId)
-      let width = document.getElementById(signElementId).getBBox().width
-      let height = document.getElementById(signElementId).getBBox().height
+      let svgDom = this.newSvgConstructor(signElementId, signInnerId, configKey)
+      let jsonConfig = JSON.parse(sessionStorage.getItem(configKey))
+      let width = jsonConfig.output.outputWidth
+      let height = jsonConfig.output.outputHeight
       let clonedSvgElements = svgDom.cloneNode(true)
       let outerHTML = clonedSvgElements.outerHTML,
           blob = new Blob([outerHTML], {type: 'image/svg+xml;charset=utf-8'});
@@ -134,6 +140,8 @@ export default {
         configKey = "instanceConfigEntrance"
       } else if (signName === 'FTA-station') {
         configKey = "instanceConfigFTAStation"
+      } else if (signName === 'FTA-guide') {
+        configKey = "instanceConfigFTAGuide"
       }
       let jsonConfig = JSON.parse(sessionStorage.getItem(configKey))
       jsonConfig.configVersion = "beta-v0.1.1"
@@ -141,21 +149,13 @@ export default {
       return 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(data)
     },
 
-    newSvgConstructor(signElementId, signInnerId) {
+    newSvgConstructor(signElementId, signInnerId, configKey) {
       let newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       newSvg.setAttribute("version", "1.1")
       newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
       newSvg.setAttribute("id", signElementId)
       newSvg.setAttribute("class", "sign")
-      let signName = sessionStorage.getItem("instanceSignStyle")
-      let configKey
-      if (signName === "kitajuku-dentetsu") {
-        configKey = "instanceConfig"
-      } else if (signName === "test-sign") {
-        configKey = "instanceConfigEntrance"
-      } else if (signName === 'FTA-station') {
-        configKey = "instanceConfigFTAStation"
-      }
+
       let jsonConfig = JSON.parse(sessionStorage.getItem(configKey))
       newSvg.setAttribute("viewBox", "0 0 " + jsonConfig.output.outputWidth.toString() + " " + jsonConfig.output.outputHeight.toString())
       let svgDom = document.getElementById(signInnerId)

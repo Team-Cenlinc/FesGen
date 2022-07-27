@@ -29,6 +29,10 @@
             <p>高度</p>
             <div><input v-model="output.outputHeight" placeholder="200" min="0" @change="contentChange" type="number" value="200"> px</div>
           </div>
+          <div class="form-min-row">
+            <p>色带颜色</p>
+            <div><input v-model="signInfo.beltColor" placeholder="#000000" @change="contentChange" type="color" value="#000000"></div>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -91,7 +95,7 @@
             </select>
           </div>
           <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
-            <p>剧中显示</p>
+            <p>文本居中显示</p>
             <div><input type="checkbox" v-model="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].center" @change="contentChange"></div>
           </div>
           <div v-if="this.focusComponent.focusComponent !== -1" class="form-min-row content-info-form-end">
@@ -122,6 +126,8 @@
                   <option value="ACCESSIBLE">残障友好标志</option>
                   <option value="STAIRS">楼梯</option>
                   <option value="NOT_AVAILABLE">不可用</option>
+                  <option value="EXIT_WITH_FRAME">有框出口标识</option>
+                  <option value="EXIT_WITHOUT_FRAME">无框出口标识</option>
                   <option value="ARROW_DOWN">向下的箭头</option>
                   <option value="ARROW_UP">向上的箭头</option>
                   <option value="ARROW_LEFT">向左的箭头</option>
@@ -146,6 +152,7 @@
                   <option value="ACCESSIBLE_STAIRS">有轮椅升降机的楼梯</option>
                   <option value="ACCESSIBLE">残障友好标志</option>
                   <option value="STAIRS">楼梯</option>
+                  <option value="COLOR_BLOCK">色块</option>
                   <option value="NOT_AVAILABLE">不可用</option>
                   <option value="ARROW_DOWN">向下的箭头</option>
                   <option value="ARROW_UP">向上的箭头</option>
@@ -161,18 +168,46 @@
                 <p>本层右侧图标颜色</p>
                 <div><input type="color" v-model="content.iconRightColor" @change="contentChange"></div>
               </div>
-              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type === 'span'">
+                <p>空区底色</p>
+                <div><input type="color" v-model="content.color" @change="contentChange"></div>
+              </div>
+
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type === 'span'">
+                <p>显示分隔线</p>
+                <div><input type="checkbox" v-model="content.showSpanLine" @change="contentChange"></div>
+              </div>
+
+              <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type === 'span'">
+                <p>显示LOGO</p>
+                <div><input type="checkbox" v-model="content.showLogo" @change="contentChange"></div>
+              </div>
+
+              <div v-if="content.showLogo && signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type === 'span'" class="form-min-row">
+                <p>Logo选项</p>
+                <select v-model="content.logoType" @change="contentChange">
+                  <option disabled value="">请选择</option>
+                  <option value="FTA-Logo-SUR">生存铁路</option>
+                  <option value="FTA-Logo-PUAT">蒲塘桥都市区域交通</option>
+                  <option value="FTA-Logo-SUR-Reversed">生存铁路-反色</option>
+                  <option value="FTA-Logo-PUAT-Reversed">蒲塘桥都市区域交通-反色</option>
+                </select>
+              </div>
+
+              <div class="form-min-row">
                 <p>粗体文字</p>
                 <div><input type="checkbox" v-model="content.bold" @change="contentChange"></div>
               </div>
-              <div class="form-min-row content-info-form-end" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
+              <div class="form-min-row content-info-form-end">
                 <p>斜体文字</p>
                 <div><input type="checkbox" v-model="content.italic" @change="contentChange"></div>
               </div>
+
             </div>
           </div>
 
-          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1 && signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
               <button @click="createContentInComponent" class="button">新建组件内层</button>
               <button @click="deleteContentInComponent" class="button">删除组件内层</button>
           </div>
@@ -212,6 +247,7 @@ export default {
         outputHeight: 200,
       },
       signInfo: {
+        beltColor: '#000000',
         layers: [
           {
             name: 'Layer1',
@@ -279,6 +315,7 @@ export default {
     },
     resetData() {
       this.signInfo = {
+        beltColor: '#000000',
         layers: [
           {
             name: 'Layer1',
@@ -503,7 +540,7 @@ export default {
               id: 0,
               showLogo: false,
               showSpanLine: true,
-              color: '#000000',
+              color: '#FFFFFF',
               logoType: 'NONE',
               bold: false,
               italic: false,
@@ -576,7 +613,7 @@ export default {
           id: newId,
           showLogo: false,
           showSpanLine: true,
-          color: '#000000',
+          color: '#FFFFFF',
           logoType: 'NONE',
           bold: false,
           italic: false,

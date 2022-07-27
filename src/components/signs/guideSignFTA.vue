@@ -28,7 +28,14 @@ export default {
   },
   data() {
     return {
-      focusComponent: "",
+      focusComponent: {
+        focusLayer: -1,
+        focusComponent: -1,
+      },
+      uniqueIdTable: {
+        layerIds: [0],
+        componentIds: [0],
+      },
       signStyle: 'FTA-guide',
       lightStyle: 'fluore',
       output: {
@@ -36,25 +43,37 @@ export default {
         outputHeight: 200,
       },
       signInfo: {
+        beltColor: '#000000',
         layers: [
-          [
-            {
-              type: 'span',
-              width: 100,
-              height: 100,
-              backgroundColor: '#FFFFFF',
-              components: [
-                {
-                  type: 'text',
-                  text: 'Accessible Elevator',
-                  iconLeft: 'ARROW_LEFT',
-                  iconRight: 'ACCESSIBLE_ELEVATOR',
-                  bold: false,
-                  italic: false,
-                }
-              ]
-            }
-          ]
+          {
+            name: 'Layer1',
+            id: 0,
+            height: 100,
+            baseColor: '#FFFFFF',
+            components: [
+              {
+                id: 0,
+                name: 'init',
+                type: 'text',
+                width: 100,
+                center: false,
+                backgroundColor: '#FFFFFF',
+                components: [
+                  {
+                    id: 0,
+                    text: 'Accessible Elevator',
+                    textColor: '#000000',
+                    iconLeft: 'ARROW_LEFT',
+                    iconLeftColor: '#000000',
+                    iconRight: 'ACCESSIBLE_ELEVATOR',
+                    iconRightColor: '#000000',
+                    bold: false,
+                    italic: false,
+                  }
+                ]
+              }
+            ]
+          },
         ]
       }
     }
