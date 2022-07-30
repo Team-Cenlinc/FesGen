@@ -31,7 +31,11 @@
           </div>
           <div class="form-min-row">
             <p>色带颜色</p>
-            <div><input v-model="signInfo.beltColor" placeholder="#000000" @change="contentChange" type="color" value="#000000"></div>
+            <div><input v-model="signInfo.beltColor" @change="contentChange" type="color"></div>
+          </div>
+          <div class="form-min-row">
+            <p>基础颜色</p>
+            <div><input v-model="signInfo.generalBaseColor" @change="contentChange" type="color"></div>
           </div>
         </div>
       </div>
@@ -117,7 +121,7 @@
               </div>
               <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
                 <p>本层左侧图标类型</p>
-                <select v-model="content.iconLeft">
+                <select v-model="content.iconLeft" @change="contentChange">
                   <option disabled value="">请选择</option>
                   <option value="NONE">无</option>
                   <option value="INFORMATION">信息咨询台</option>
@@ -144,7 +148,7 @@
               </div>
               <div class="form-min-row" v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type !== 'span'">
                 <p>本层右侧图标类型</p>
-                <select v-model="content.iconRight">
+                <select v-model="content.iconRight" @change="contentChange">
                   <option disabled value="">请选择</option>
                   <option value="NONE">无</option>
                   <option value="INFORMATION">信息咨询台</option>
@@ -195,6 +199,10 @@
                 </select>
               </div>
 
+              <div class="form-min-row">
+                <p>大号文字</p>
+                <div><input type="checkbox" v-model="content.large" @change="contentChange"></div>
+              </div>
               <div class="form-min-row">
                 <p>粗体文字</p>
                 <div><input type="checkbox" v-model="content.bold" @change="contentChange"></div>
@@ -248,6 +256,7 @@ export default {
       },
       signInfo: {
         beltColor: '#000000',
+        generalBaseColor: '#FFFFFF',
         layers: [
           {
             name: 'Layer1',
@@ -271,6 +280,7 @@ export default {
                     iconLeftColor: '#000000',
                     iconRight: 'ACCESSIBLE_ELEVATOR',
                     iconRightColor: '#000000',
+                    large: false,
                     bold: false,
                     italic: false,
                   }
@@ -284,11 +294,8 @@ export default {
   },
   mounted() {
     this.reloadCache()
-    this.$emit('contentChanged', this.signInfo.layers, this.lightStyle, this.output)
+    this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     this.dataToJson()
-  },
-  updated() {
-    this.$emit('contentChanged', this.signInfo.layers, this.lightStyle, this.output)
   },
   methods: {
     sendSign() {
@@ -316,6 +323,7 @@ export default {
     resetData() {
       this.signInfo = {
         beltColor: '#000000',
+        generalBaseColor: '#FFFFFF',
         layers: [
           {
             name: 'Layer1',
@@ -339,6 +347,7 @@ export default {
                     iconLeftColor: '#000000',
                     iconRight: 'ACCESSIBLE_ELEVATOR',
                     iconRightColor: '#000000',
+                    large: false,
                     bold: false,
                     italic: false,
                   }
@@ -362,7 +371,7 @@ export default {
         focusComponent: -1,
       }
       this.dataToJson()
-      this.$emit('contentChanged', this.lightStyle, this.signInfo, this.output)
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     },
     addLayer() {
       let layerId = this.uniqueIdTable.layerIds[this.uniqueIdTable.layerIds.length - 1] + 1
@@ -391,6 +400,7 @@ export default {
                 iconLeftColor: '#000000',
                 iconRight: 'ACCESSIBLE_ELEVATOR',
                 iconRightColor: '#000000',
+                large: false,
                 bold: false,
                 italic: false,
               }
@@ -401,7 +411,7 @@ export default {
       this.uniqueIdTable.layerIds.push(this.uniqueIdTable.layerIds.length)
       this.focusComponent.focusLayer = this.signInfo.layers.length - 1
       this.dataToJson()
-      this.$emit('contentChanged', this.lightStyle, this.signInfo, this.output)
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     },
     selectLayer(index) {
       this.focusComponent.focusLayer = index
@@ -410,7 +420,7 @@ export default {
       this.focusComponent.focusLayer = -1
       this.signInfo.layers.splice(this.focusComponent.focusLayer, 1)
       this.dataToJson()
-      this.$emit('contentChanged', this.lightStyle, this.signInfo, this.output)
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     },
     selectComponent(index) {
       this.focusComponent.focusComponent = index
@@ -435,6 +445,7 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'ACCESSIBLE_ELEVATOR',
               iconRightColor: '#000000',
+              large: false,
               bold: false,
               italic: false,
             }
@@ -457,6 +468,7 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              large: false,
               bold: false,
               italic: false,
             }
@@ -489,6 +501,7 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              large: false,
               bold: false,
               italic: false,
             }
@@ -511,6 +524,7 @@ export default {
               iconLeftColor: '#FFFFFF',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              large: false,
               bold: false,
               italic: false,
             },
@@ -522,6 +536,7 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              large: false,
               bold: false,
               italic: false,
             }
@@ -550,6 +565,7 @@ export default {
       }
       this.signInfo.layers[this.focusComponent.focusLayer].components[this.focusComponent.focusComponent] = componentTemplate
       this.dataToJson()
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     },
     createComponentInLayer() {
       let newId = 0
@@ -572,6 +588,7 @@ export default {
             iconLeftColor: '#000000',
             iconRight: 'ACCESSIBLE_ELEVATOR',
             iconRightColor: '#000000',
+            large: false,
             bold: false,
             italic: false,
           }
@@ -581,11 +598,13 @@ export default {
       this.signInfo.layers[this.focusComponent.focusLayer].components.push(componentTemplate)
       this.focusComponent.focusComponent = this.signInfo.layers[this.focusComponent.focusLayer].components.length - 1
       this.dataToJson()
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     },
     deleteComponentInLayer() {
       this.signInfo.layers[this.focusComponent.focusLayer].components.splice(this.focusComponent.focusComponent, 1)
       this.focusComponent.focusComponent = -1
       this.dataToJson()
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     },
     createContentInComponent() {
       let newId = 0
@@ -605,6 +624,7 @@ export default {
           iconLeftColor: '#000000',
           iconRight: 'NONE',
           iconRightColor: '#000000',
+          large: false,
           bold: false,
           italic: false,
         }
@@ -621,10 +641,12 @@ export default {
       }
       this.signInfo.layers[this.focusComponent.focusLayer].components[this.focusComponent.focusComponent].components.push(componentTemplate)
       this.dataToJson()
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     },
     deleteContentInComponent() {
       this.signInfo.layers[this.focusComponent.focusLayer].components[this.focusComponent.focusComponent].components.pop()
       this.dataToJson()
+      this.$emit('contentChanged', this.signInfo, this.lightStyle, this.output)
     }
   }
 }

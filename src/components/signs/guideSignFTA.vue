@@ -44,6 +44,7 @@ export default {
       },
       signInfo: {
         beltColor: '#000000',
+        generalBaseColor: '#FFFFFF',
         layers: [
           {
             name: 'Layer1',
@@ -67,6 +68,7 @@ export default {
                     iconLeftColor: '#000000',
                     iconRight: 'ACCESSIBLE_ELEVATOR',
                     iconRightColor: '#000000',
+                    large: false,
                     bold: false,
                     italic: false,
                   }
@@ -96,7 +98,43 @@ export default {
     },
 
     UpdateSignData() {
-      console.log("Under Construction")
+
+      // Empty the current sign
+
+      this.$refs.svg.firstChild.remove()
+
+      // Redraw the sign
+
+      console.log(this.signInfo.generalBaseColor)
+
+      let newComp = document.createElementNS("http://www.w3.org/2000/svg", "g")
+      newComp.setAttribute("id", "svg-inner-FTAG")
+
+      let background = document.createElementNS("http://www.w3.org/2000/svg", "rect")
+      background.setAttribute("x", "0")
+      background.setAttribute("y", "0")
+      background.setAttribute("width", this.output.outputWidth.toString())
+      background.setAttribute("height", this.output.outputHeight.toString())
+      background.setAttribute("fill", this.signInfo.generalBaseColor)
+      background.setAttribute("id", "background")
+      newComp.appendChild(background)
+
+      let colorBelt = document.createElementNS("http://www.w3.org/2000/svg", "rect")
+      colorBelt.setAttribute("x", "0")
+      colorBelt.setAttribute("y", (this.output.outputHeight - 20).toString())
+      colorBelt.setAttribute("width", this.output.outputWidth.toString())
+      colorBelt.setAttribute("height", "20")
+      colorBelt.setAttribute("fill", this.signInfo.beltColor)
+      colorBelt.setAttribute("id", "colorBelt")
+      newComp.appendChild(colorBelt)
+
+
+      let basePoint = this.$refs.svg.getElementById("reserved-icons")
+
+      this.$refs.svg.insertBefore(newComp, basePoint)
+
+      this.convertToCanvas()
+
     },
 
     convertToCanvas() {

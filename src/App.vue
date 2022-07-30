@@ -72,7 +72,7 @@ export default {
     delBeltFTA(lightStyle, signInfo, signScale, index){
       this.$refs.stationSignFTA.removeBelt(lightStyle, signInfo, signScale, index)
     },
-    guideSignFTAUpdateData(lightStyle, signInfo, signScale){
+    guideSignFTAUpdateData(signInfo, lightStyle, signScale){
       this.$refs.guideSignFTA.UpdateData(signInfo, lightStyle, signScale)
     },
     updateViewer(viewerType){
