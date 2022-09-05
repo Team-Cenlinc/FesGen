@@ -73,6 +73,7 @@ export default {
       this.$refs.stationSignFTA.removeBelt(lightStyle, signInfo, signScale, index)
     },
     guideSignFTAUpdateData(signInfo, lightStyle, signScale){
+      console.log("reached")
       this.$refs.guideSignFTA.UpdateData(signInfo, lightStyle, signScale)
     },
     updateViewer(viewerType){

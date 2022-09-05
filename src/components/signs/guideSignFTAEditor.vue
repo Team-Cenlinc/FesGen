@@ -132,6 +132,7 @@
                   <option value="NOT_AVAILABLE">不可用</option>
                   <option value="EXIT_WITH_FRAME">有框出口标识</option>
                   <option value="EXIT_WITHOUT_FRAME">无框出口标识</option>
+                  <option value="COLOR_BLOCK">色块</option>
                   <option value="ARROW_DOWN">向下的箭头</option>
                   <option value="ARROW_UP">向上的箭头</option>
                   <option value="ARROW_LEFT">向左的箭头</option>
@@ -158,6 +159,8 @@
                   <option value="STAIRS">楼梯</option>
                   <option value="COLOR_BLOCK">色块</option>
                   <option value="NOT_AVAILABLE">不可用</option>
+                  <option value="EXIT_WITH_FRAME">有框出口标识</option>
+                  <option value="EXIT_WITHOUT_FRAME">无框出口标识</option>
                   <option value="ARROW_DOWN">向下的箭头</option>
                   <option value="ARROW_UP">向上的箭头</option>
                   <option value="ARROW_LEFT">向左的箭头</option>
@@ -199,10 +202,6 @@
                 </select>
               </div>
 
-              <div class="form-min-row">
-                <p>大号文字</p>
-                <div><input type="checkbox" v-model="content.large" @change="contentChange"></div>
-              </div>
               <div class="form-min-row">
                 <p>粗体文字</p>
                 <div><input type="checkbox" v-model="content.bold" @change="contentChange"></div>
@@ -537,8 +536,8 @@ export default {
               iconRight: 'NONE',
               iconRightColor: '#000000',
               large: false,
-              bold: false,
-              italic: false,
+              bold: true,
+              italic: true,
             }
           ]
         }
@@ -577,7 +576,7 @@ export default {
         id: newId,
         name: 'init',
         type: 'text',
-        width: 100,
+        width: 260,
         center: false,
         backgroundColor: '#FFFFFF',
         components: [

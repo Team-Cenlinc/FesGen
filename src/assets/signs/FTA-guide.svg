@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="_层_1" height="200" width="600" viewBox="0 0 600 200">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="_层_1" height="200" width="600" viewBox="0 0 600 200"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <g id="svg-inner-FTAG">
         <rect id="background" x="0" y="0" width="600" height="200" fill="#FFFFFF"/>
@@ -8,13 +9,13 @@
     </g>
 
     <g id="reserved-icons" visibility="hidden">
-        <g id="INFORMATION" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="INFORMATION" transform="scale(0.15) translate(0 0)">
             <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
             <circle cx="95.17" cy="44.43" r="17.79"/>
             <rect x="76.49" y="72.1" width="37.36" height="92.03" rx="15" ry="15"/>
         </g>
 
-        <g id="ACCESSIBLE_ELEVATOR" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ACCESSIBLE_ELEVATOR" transform="scale(0.15) translate(0 0)">
             <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
             <rect x="51.69" y="97.38" width="86.96" height="73.91" rx="10" ry="10" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
             <g>
@@ -39,7 +40,7 @@
             <line x1="96.8" y1="87.09" x2="75.05" y2="65.33" style="stroke-miterlimit:10; stroke-width:5px;" fill="none"/>
         </g>
 
-        <g id="ACCESSIBLE_STAIRS" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ACCESSIBLE_STAIRS" transform="scale(0.15) translate(0 0)">
             <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
             <g>
                 <line x1="18.03" y1="85.63" x2="48.03" y2="85.63" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
@@ -69,7 +70,7 @@
             </g>
         </g>
 
-        <g id="ACCESSIBLE" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ACCESSIBLE" transform="scale(0.15) translate(0 0)">
             <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
             <g>
                 <path d="M133.41,127.56c-1.17,2.54-3.48,6.9-7.59,11.41-2.12,2.33-6.65,7.2-14.36,10.55-3.31,1.44-9.09,3.41-16.44,3.3-1.34-.02-5.07-.15-9.71-1.38-1.97-.52-10.08-2.82-18.08-9.85-2.97-2.61-9.1-8.13-12.45-17.53-2.08-5.84-2.31-11-2.28-13.76,.01-1.05,.1-4.68,1.22-9.31,2.35-9.7,7.38-16.09,8.84-17.85,5.24-6.35,10.91-9.54,12.67-10.48" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
@@ -81,7 +82,7 @@
             </g>
         </g>
 
-        <g id="STAIRS" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="STAIRS" transform="scale(0.15) translate(0 0)">
             <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
             <g>
                 <line x1="19.48" y1="79.29" x2="49.48" y2="79.29" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
@@ -101,16 +102,16 @@
             <line x1="157.58" y1="100.76" x2="157.58" y2="78.06" style="stroke-miterlimit:10; stroke-width:4px;" fill="none"/>
         </g>
 
-        <g id="COLOR_BLOCK" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="COLOR_BLOCK" transform="scale(0.15) translate(0 0)">
             <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;"/>
         </g>
 
-        <g id="NOT_AVAILABLE" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="NOT_AVAILABLE" transform="scale(0.15) translate(0 0)">
             <circle cx="90" cy="90" r="80" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="33.41" y1="146.43" x2="146.28" y2="33.57" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
         </g>
 
-        <g id="EXIT_WITH_FRAME" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="EXIT_WITH_FRAME" transform="scale(0.15) translate(0 0)">
             <rect x="5" y="5" width="180.34" height="180.34" rx="30" ry="30" style="stroke-miterlimit:10; stroke-width:10px;" fill="none"/>
             <polyline points="88.63 52.51 157.08 52.51 157.08 138.5 88.63 138.5" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
             <line x1="66.65" y1="75.4" x2="90.54" y2="51.51" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
@@ -120,7 +121,7 @@
             <line x1="26.71" y1="92.83" x2="51.82" y2="117.94" style="stroke-miterlimit:10; stroke-width:6px;" fill="none"/>
         </g>
 
-        <g id="EXIT_WITHOUT_FRAME" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="EXIT_WITHOUT_FRAME" transform="scale(0.2) translate(-25 15)">
             <polyline points="75.09 4 153.66 4 153.66 102.7 75.09 102.7" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
             <line x1="50.4" y1="30.35" x2="77.82" y2="2.92" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
             <line x1="48.97" y1="74.93" x2="77.79" y2="103.75" style="stroke-miterlimit:10; stroke-width:8px;" fill="none"/>
@@ -131,49 +132,49 @@
 
         <!-- ARROW_Group -->
 
-        <g id="ARROW_DOWN" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ARROW_DOWN" transform="scale(0.15) translate(35 15)">
             <line x1="61.39" y1="150" x2="61.39" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="116.1" y1="95.72" x2="54.6" y2="157.21" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="68.57" y1="157.31" x2="7.07" y2="95.82" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
         </g>
 
-        <g id="ARROW_UP" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ARROW_UP" transform="scale(0.15) translate(35 15)">
             <line x1="61.78" y1="14.39" x2="61.78" y2="164.39" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="7.07" y1="68.67" x2="68.57" y2="7.17" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="54.6" y1="7.07" x2="116.1" y2="68.57" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
         </g>
 
-        <g id="ARROW_LEFT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ARROW_LEFT" transform="scale(0.15) translate(35 15)">
             <line x1="14.39" y1="61.39" x2="164.39" y2="61.39" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="68.67" y1="116.1" x2="7.17" y2="54.6" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="7.07" y1="68.57" x2="68.57" y2="7.07" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
         </g>
 
-        <g id="ARROW_RIGHT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ARROW_RIGHT" transform="scale(0.15) translate(35 15)">
             <line x1="150" y1="61.78" y2="61.78" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="95.72" y1="7.07" x2="157.21" y2="68.57" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="157.31" y1="54.6" x2="95.82" y2="116.1" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
         </g>
 
-        <g id="ARROW_UP_LEFT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ARROW_UP_LEFT" transform="scale(0.15) translate(35 15)">
             <line x1="10.3" y1="10.1" x2="116.37" y2="116.17" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="10" y1="87.16" x2="10" y2=".19" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1=".05" y1="10" x2="87.02" y2="10" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
         </g>
 
-        <g id="ARROW_UP_RIGHT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ARROW_UP_RIGHT" transform="scale(0.15) translate(35 15)">
             <line x1="113.14" y1="10.3" x2="7.07" y2="116.37" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="36.07" y1="10" x2="123.04" y2="10" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="113.24" y1=".05" x2="113.24" y2="87.02" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
         </g>
 
-        <g id="ARROW_DOWN_LEFT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ARROW_DOWN_LEFT" transform="scale(0.15) translate(35 15)">
             <line x1="10.1" y1="113.14" x2="116.17" y2="7.07" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="87.16" y1="113.44" x2=".19" y2="113.44" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="10" y1="123.38" x2="10" y2="36.41" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
         </g>
 
-        <g id="ARROW_DOWN_RIGHT" transform="scale(0.15) translate(0 0)" stroke="#000000" fill="#000000">
+        <g id="ARROW_DOWN_RIGHT" transform="scale(0.15) translate(35 15)">
             <line x1="113.14" y1="113.14" x2="7.07" y2="7.07" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="113.44" y1="36.07" x2="113.44" y2="123.04" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
             <line x1="123.38" y1="113.24" x2="36.41" y2="113.24" style="stroke-miterlimit:10; stroke-width:20px;" fill="none"/>
@@ -206,7 +207,7 @@
             </text>
         </g>
 
-        <g id="FTA-Logo-SUR" transform="scale(1) translate(0 0)">
+        <g id="FTA-Logo-SUR" transform="scale(1) translate(300 75)">
             <rect x="0" y="-5" width="80" height="18"/>
             <rect x="-110" y="18" width="190" height="18"/>
             <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
@@ -231,10 +232,4 @@
         </g>
     </g>
 
-    <!-- Statement: Developing -->
-    <g>
-        <text id="statement" transform="translate(80 80)" fill="#000000" font-size="20" font-family=".Source Sans Variable, .Source Sans Pro">
-            <tspan x="0" dy="20">Developing, Not ready for use... Coming soon!</tspan>
-        </text>
-    </g>
 </svg>
