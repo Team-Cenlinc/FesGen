@@ -153,6 +153,7 @@ export default {
       let newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
       newSvg.setAttribute("version", "1.1")
       newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+      newSvg.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink")
       newSvg.setAttribute("id", signElementId)
       newSvg.setAttribute("class", "sign")
 
@@ -160,6 +161,10 @@ export default {
       newSvg.setAttribute("viewBox", "0 0 " + jsonConfig.output.outputWidth.toString() + " " + jsonConfig.output.outputHeight.toString())
       let svgDom = document.getElementById(signInnerId)
       newSvg.appendChild(svgDom.cloneNode(true))
+      if (signInnerId === "svg-inner-FTAG") {
+        let svgDom2 = document.getElementById("reserved-icons")
+        newSvg.appendChild(svgDom2.cloneNode(true))
+      }
       return newSvg
     }
   }
