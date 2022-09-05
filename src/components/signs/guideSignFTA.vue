@@ -185,7 +185,6 @@ export default {
               let componentCenter = component.center
               let internalComponentBasePointY = 0
               for (let k = 1; k <= internalComponentCount; k++) {
-                console.log(internalComponentBasePointY)
                 let internalComponentBasePointX = 0
                 let internalComponent = componentComponents[k - 1]
                 let internalComponentText = internalComponent.text
@@ -266,9 +265,7 @@ export default {
             } else {
               let internalComponentCount = componentComponents.length
               let componentCenter = component.center
-              let internalComponentBasePointY = 0
               for (let k = 1; k <= internalComponentCount; k++) {
-                let internalComponentBasePointX = 0
                 let internalComponent = componentComponents[k - 1]
                 let internalComponentIfLogo = internalComponent.showLogo
                 let internalComponentIfSpanLine = internalComponent.showSpanLine
@@ -277,7 +274,7 @@ export default {
 
                 let internalComponentGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
                 internalComponentGroup.setAttribute("id", "internal-component-" + k.toString())
-                internalComponentGroup.setAttribute("transform", "translate(" + internalComponentBasePointX.toString() + ", " + internalComponentBasePointY.toString() + ")")
+                internalComponentGroup.setAttribute("transform", "translate(0, " + ((k - 1) * 10).toString() + ")")
 
                 if (internalComponentIfSpanLine) {
                   let internalComponentSpanLine = document.createElementNS("http://www.w3.org/2000/svg", "rect")

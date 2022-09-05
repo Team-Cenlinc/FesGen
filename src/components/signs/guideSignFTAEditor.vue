@@ -334,7 +334,7 @@ export default {
                 id: 0,
                 name: 'init',
                 type: 'text',
-                width: 100,
+                width: 260,
                 center: false,
                 backgroundColor: '#FFFFFF',
                 components: [
