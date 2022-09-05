@@ -217,7 +217,7 @@ export default {
 
                 let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
                 if (componentCenter) {
-                  internalComponentTextElement.setAttribute("x", (componentWidth / 2).toString())
+                  internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
                   internalComponentTextElement.setAttribute("y", (layerHeight / 2).toString())
                   internalComponentTextElement.setAttribute("text-anchor", "middle")
                 } else {
@@ -299,7 +299,7 @@ export default {
                     let internalComponentLogo = document.createElementNS("http://www.w3.org/2000/svg", "use")
                     internalComponentLogo.setAttribute("href", "#" + internalComponentLogoType)
                     internalComponentLogo.setAttribute("xlink:href", "#" + internalComponentLogoType)
-                    internalComponentLogo.setAttribute("x", (componentWidth / 2 - 15).toString())
+                    internalComponentLogo.setAttribute("x", (componentWidth / 2).toString())
                     internalComponentLogo.setAttribute("y", (layerHeight / 2 - 25).toString())
                     internalComponentLogo.setAttribute("fill", internalComponentSpanThemeColor)
                     internalComponentLogo.setAttribute("stroke", internalComponentSpanThemeColor)
@@ -310,7 +310,8 @@ export default {
               }
             }
             layerGroup.appendChild(componentGroup)
-            componentBasePointX += componentWidth
+            componentBasePointX = (componentWidth * 1) + (componentBasePointX * 1)
+            console.log(componentBasePointX)
           }
           newComp.appendChild(layerGroup)
           basePointY += layerHeight
