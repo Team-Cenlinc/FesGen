@@ -301,10 +301,15 @@ export default {
                     internalComponentLogo.setAttribute("xlink:href", "#" + internalComponentLogoType)
                     internalComponentLogo.setAttribute("x", (componentWidth / 2).toString())
                     internalComponentLogo.setAttribute("y", (layerHeight / 2 - 25).toString())
-                    internalComponentLogo.setAttribute("fill", internalComponentSpanThemeColor)
-                    internalComponentLogo.setAttribute("stroke", internalComponentSpanThemeColor)
                     internalComponentGroup.appendChild(internalComponentLogo)
                   }
+                } else {
+                  let internalComponentLogo = document.createElementNS("http://www.w3.org/2000/svg", "use")
+                  internalComponentLogo.setAttribute("href", "#" + internalComponentLogoType)
+                  internalComponentLogo.setAttribute("xlink:href", "#" + internalComponentLogoType)
+                  internalComponentLogo.setAttribute("x", (15).toString())
+                  internalComponentLogo.setAttribute("y", (15).toString())
+                  internalComponentGroup.appendChild(internalComponentLogo)
                 }
                 componentGroup.appendChild(internalComponentGroup)
               }
