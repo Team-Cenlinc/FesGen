@@ -119,7 +119,10 @@ export default {
         this.$refs.svg.getElementById("FTA-Logo-SUR-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-SUR-Reversed" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-PUAT").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-PUAT" ? "visible" : "hidden")
         this.$refs.svg.getElementById("FTA-Logo-PUAT-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-PUAT-Reversed" ? "visible" : "hidden")
-
+        this.$refs.svg.getElementById("FTA-Logo-NLRR").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-NLRR" ? "visible" : "hidden")
+        this.$refs.svg.getElementById("FTA-Logo-NLRR-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-NLRR-Reversed" ? "visible" : "hidden")
+        this.$refs.svg.getElementById("FTA-Logo-MLR").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-MLR" ? "visible" : "hidden")
+        this.$refs.svg.getElementById("FTA-Logo-MLR-Reversed").setAttribute("visibility", this.signInfo.logoInfo.logoStyle === "FTA-Logo-MLR-Reversed" ? "visible" : "hidden")
         if (this.signInfo.logoInfo.logoStyle === '') {
           this.$refs.svg.getElementById("FTA-Logo-SUR").setAttribute('transform', "translate(" + (this.output.outputWidth - 100).toString() + "," + (this.output.outputHeight - 95).toString() + ")");
         } else {

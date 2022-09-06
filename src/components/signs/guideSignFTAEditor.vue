@@ -102,6 +102,9 @@
             <p>文本居中显示</p>
             <div><input type="checkbox" v-model="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].center" @change="contentChange"></div>
           </div>
+          <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
+            <p class="hint">使用字符"|"可以分割第一第二语言文本</p>
+          </div>
           <div v-if="this.focusComponent.focusComponent !== -1" class="form-min-row content-info-form-end">
             <button @click="createComponentInLayer" class="button">新建层内组件</button>
             <button @click="deleteComponentInLayer" class="button">删除层内组件</button>
@@ -191,14 +194,18 @@
                 <div><input type="checkbox" v-model="content.showLogo" @change="contentChange"></div>
               </div>
 
-              <div v-if="content.showLogo && signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type === 'span'" class="form-min-row">
+              <div v-if="signInfo.layers[focusComponent.focusLayer].components[focusComponent.focusComponent].type === 'span'" class="form-min-row">
                 <p>Logo选项</p>
                 <select v-model="content.logoType" @change="contentChange">
                   <option disabled value="">请选择</option>
                   <option value="FTA-Logo-SUR">生存铁路</option>
+                  <option value="FTA-Logo-NLRR">北方大陆铁路</option>
+                  <option value="FTA-Logo-MLR">大都会联贯铁路</option>
                   <option value="FTA-Logo-PUAT">蒲塘桥都市区域交通</option>
                   <option value="FTA-Logo-SUR-Reversed">生存铁路-反色</option>
                   <option value="FTA-Logo-PUAT-Reversed">蒲塘桥都市区域交通-反色</option>
+                  <option value="FTA-Logo-NLRR-Reversed">北方大陆铁路-反色</option>
+                  <option value="FTA-Logo-MLR-Reversed">大都会联贯铁路-反色</option>
                 </select>
               </div>
 

@@ -215,34 +215,155 @@ export default {
                   internalComponentBasePointX += 15
                 }
 
-                let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
-                if (componentCenter) {
-                  internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
-                  internalComponentTextElement.setAttribute("y", (layerHeight / 2).toString())
-                  internalComponentTextElement.setAttribute("text-anchor", "middle")
-                } else {
-                  internalComponentTextElement.setAttribute("x", "0")
-                  internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 36).toString())
-                  internalComponentTextElement.setAttribute("text-anchor", "start")
-                }
-                if (internalComponentItalic) {
-                  internalComponentTextElement.setAttribute("font-style", "italic")
-                } else {
-                  internalComponentTextElement.setAttribute("font-style", "normal")
-                }
-                if (internalComponentBold) {
-                  internalComponentTextElement.setAttribute("font-weight", "bold")
-                } else {
-                  internalComponentTextElement.setAttribute("font-weight", "normal")
-                }
-                internalComponentTextElement.setAttribute("fill", internalComponentTextColor)
-                internalComponentTextElement.setAttribute("id", "internal-component-text-" + k.toString())
-                internalComponentTextElement.setAttribute("font-size", "20")
-                internalComponentTextElement.setAttribute("font-family", ".Source Sans Variable, .Source Sans Pro")
-                internalComponentTextElement.setAttribute("transform", "translate(" + internalComponentBasePointX.toString() + ", " + "0)")
-                internalComponentTextElement.textContent = internalComponentText
+                if(internalComponentText.includes("|")){
 
-                internalComponentGroup.appendChild(internalComponentTextElement)
+                  let splittedText = internalComponentText.split("|")
+
+                  let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
+                  if (componentCenter) {
+                    internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
+                    internalComponentTextElement.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "middle")
+                  } else {
+                    internalComponentTextElement.setAttribute("x", "0")
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "start")
+                  }
+                  if (internalComponentItalic) {
+                    internalComponentTextElement.setAttribute("font-style", "italic")
+                  } else {
+                    internalComponentTextElement.setAttribute("font-style", "normal")
+                  }
+                  if (internalComponentBold) {
+                    internalComponentTextElement.setAttribute("font-weight", "bold")
+                  } else {
+                    internalComponentTextElement.setAttribute("font-weight", "normal")
+                  }
+                  internalComponentTextElement.setAttribute("fill", internalComponentTextColor)
+                  internalComponentTextElement.setAttribute("id", "internal-component-text-" + k.toString())
+                  internalComponentTextElement.setAttribute("font-size", "22")
+                  internalComponentTextElement.setAttribute("font-family", ".Source Sans Variable, .Source Sans Pro")
+                  internalComponentTextElement.setAttribute("transform", "translate(" + internalComponentBasePointX.toString() + ", " + "0)")
+                  internalComponentTextElement.textContent = splittedText[0]
+                  internalComponentGroup.appendChild(internalComponentTextElement)
+
+                  let internalComponentTextElement2 = document.createElementNS("http://www.w3.org/2000/svg", "text")
+                  if (componentCenter) {
+                    internalComponentTextElement2.setAttribute("x", (componentWidth / 2 - 15).toString())
+                    internalComponentTextElement2.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement2.setAttribute("text-anchor", "middle")
+                  } else {
+                    internalComponentTextElement2.setAttribute("x", "0")
+                    internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                    internalComponentTextElement2.setAttribute("text-anchor", "start")
+                  }
+                  if (internalComponentItalic) {
+                    internalComponentTextElement2.setAttribute("font-style", "italic")
+                  } else {
+                    internalComponentTextElement2.setAttribute("font-style", "normal")
+                  }
+                  if (internalComponentBold) {
+                    internalComponentTextElement2.setAttribute("font-weight", "bold")
+                  } else {
+                    internalComponentTextElement2.setAttribute("font-weight", "normal")
+                  }
+                  internalComponentTextElement2.setAttribute("fill", internalComponentTextColor)
+                  internalComponentTextElement2.setAttribute("id", "internal-component-text-" + k.toString())
+                  internalComponentTextElement2.setAttribute("font-size", "15")
+                  internalComponentTextElement2.setAttribute("font-family", ".Source Sans Variable, .Source Sans Pro")
+                  internalComponentTextElement2.setAttribute("transform", "translate(" + internalComponentBasePointX.toString() + ", " + "0)")
+                  internalComponentTextElement2.textContent = splittedText[1]
+                  internalComponentGroup.appendChild(internalComponentTextElement2)
+
+                  //Support of alternative symbol
+                } else if (internalComponentText.includes("｜")){
+                  let splittedText = internalComponentText.split("｜")
+
+                  let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
+                  if (componentCenter) {
+                    internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
+                    internalComponentTextElement.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "middle")
+                  } else {
+                    internalComponentTextElement.setAttribute("x", "0")
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "start")
+                  }
+                  if (internalComponentItalic) {
+                    internalComponentTextElement.setAttribute("font-style", "italic")
+                  } else {
+                    internalComponentTextElement.setAttribute("font-style", "normal")
+                  }
+                  if (internalComponentBold) {
+                    internalComponentTextElement.setAttribute("font-weight", "bold")
+                  } else {
+                    internalComponentTextElement.setAttribute("font-weight", "normal")
+                  }
+                  internalComponentTextElement.setAttribute("fill", internalComponentTextColor)
+                  internalComponentTextElement.setAttribute("id", "internal-component-text-" + k.toString())
+                  internalComponentTextElement.setAttribute("font-size", "22")
+                  internalComponentTextElement.setAttribute("font-family", ".Source Sans Variable, .Source Sans Pro")
+                  internalComponentTextElement.setAttribute("transform", "translate(" + internalComponentBasePointX.toString() + ", " + "0)")
+                  internalComponentTextElement.textContent = splittedText[0]
+                  internalComponentGroup.appendChild(internalComponentTextElement)
+
+                  let internalComponentTextElement2 = document.createElementNS("http://www.w3.org/2000/svg", "text")
+                  if (componentCenter) {
+                    internalComponentTextElement2.setAttribute("x", (componentWidth / 2 - 15).toString())
+                    internalComponentTextElement2.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement2.setAttribute("text-anchor", "middle")
+                  } else {
+                    internalComponentTextElement2.setAttribute("x", "0")
+                    internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                    internalComponentTextElement2.setAttribute("text-anchor", "start")
+                  }
+                  if (internalComponentItalic) {
+                    internalComponentTextElement2.setAttribute("font-style", "italic")
+                  } else {
+                    internalComponentTextElement2.setAttribute("font-style", "normal")
+                  }
+                  if (internalComponentBold) {
+                    internalComponentTextElement2.setAttribute("font-weight", "bold")
+                  } else {
+                    internalComponentTextElement2.setAttribute("font-weight", "normal")
+                  }
+                  internalComponentTextElement2.setAttribute("fill", internalComponentTextColor)
+                  internalComponentTextElement2.setAttribute("id", "internal-component-text-" + k.toString())
+                  internalComponentTextElement2.setAttribute("font-size", "15")
+                  internalComponentTextElement2.setAttribute("font-family", ".Source Sans Variable, .Source Sans Pro")
+                  internalComponentTextElement2.setAttribute("transform", "translate(" + internalComponentBasePointX.toString() + ", " + "0)")
+                  internalComponentTextElement2.textContent = splittedText[1]
+                  internalComponentGroup.appendChild(internalComponentTextElement2)
+                } else{
+                  let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
+                  if (componentCenter) {
+                    internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
+                    internalComponentTextElement.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "middle")
+                  } else {
+                    internalComponentTextElement.setAttribute("x", "0")
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 36).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "start")
+                  }
+                  if (internalComponentItalic) {
+                    internalComponentTextElement.setAttribute("font-style", "italic")
+                  } else {
+                    internalComponentTextElement.setAttribute("font-style", "normal")
+                  }
+                  if (internalComponentBold) {
+                    internalComponentTextElement.setAttribute("font-weight", "bold")
+                  } else {
+                    internalComponentTextElement.setAttribute("font-weight", "normal")
+                  }
+                  internalComponentTextElement.setAttribute("fill", internalComponentTextColor)
+                  internalComponentTextElement.setAttribute("id", "internal-component-text-" + k.toString())
+                  internalComponentTextElement.setAttribute("font-size", "30")
+                  internalComponentTextElement.setAttribute("font-family", ".Source Sans Variable, .Source Sans Pro")
+                  internalComponentTextElement.setAttribute("transform", "translate(" + internalComponentBasePointX.toString() + ", " + "0)")
+                  internalComponentTextElement.textContent = internalComponentText
+
+                  internalComponentGroup.appendChild(internalComponentTextElement)
+                }
 
                 if (internalComponentIconRight !== 'NONE') {
                   let iconRight = document.createElementNS("http://www.w3.org/2000/svg", "use")
