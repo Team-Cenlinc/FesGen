@@ -222,7 +222,7 @@ export default {
                   let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
                   if (componentCenter) {
                     internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
-                    internalComponentTextElement.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
@@ -250,7 +250,7 @@ export default {
                   let internalComponentTextElement2 = document.createElementNS("http://www.w3.org/2000/svg", "text")
                   if (componentCenter) {
                     internalComponentTextElement2.setAttribute("x", (componentWidth / 2 - 15).toString())
-                    internalComponentTextElement2.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
                     internalComponentTextElement2.setAttribute("text-anchor", "middle")
                   } else {
                     internalComponentTextElement2.setAttribute("x", "0")
@@ -282,7 +282,7 @@ export default {
                   let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
                   if (componentCenter) {
                     internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
-                    internalComponentTextElement.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
@@ -310,7 +310,7 @@ export default {
                   let internalComponentTextElement2 = document.createElementNS("http://www.w3.org/2000/svg", "text")
                   if (componentCenter) {
                     internalComponentTextElement2.setAttribute("x", (componentWidth / 2 - 15).toString())
-                    internalComponentTextElement2.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
                     internalComponentTextElement2.setAttribute("text-anchor", "middle")
                   } else {
                     internalComponentTextElement2.setAttribute("x", "0")
@@ -338,7 +338,7 @@ export default {
                   let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
                   if (componentCenter) {
                     internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
-                    internalComponentTextElement.setAttribute("y", (layerHeight / 2).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 36).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
@@ -369,7 +369,7 @@ export default {
                   let iconRight = document.createElementNS("http://www.w3.org/2000/svg", "use")
                   iconRight.setAttribute("href", "#" + internalComponentIconRight)
                   iconRight.setAttribute("xlink:href", "#" + internalComponentIconRight)
-                  iconRight.setAttribute("x", (componentWidth - 15).toString())
+                  iconRight.setAttribute("x", (componentWidth - 40).toString())
                   iconRight.setAttribute("y", (internalComponentBasePointY + 15).toString())
                   iconRight.setAttribute("fill", internalComponentIconRightColor)
                   iconRight.setAttribute("stroke", internalComponentIconRightColor)
