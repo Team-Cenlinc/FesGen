@@ -18,9 +18,6 @@
         <text id="station-name" transform="translate(15.93 81.21)" font-family=".PingFangSC-Regular, .PingFang SC, source-han-sans" font-weight="700" font-size="72" fill="#000000">
             <tspan x="0" y="0">主城湾</tspan>
         </text>
-        <text id="station-name" transform="translate(15.93 160)" font-family=".PingFangSC-Regular, .PingFang SC, source-han-sans" font-weight="700" font-size="72" fill="#000000">
-            <tspan x="0" y="0">主城湾</tspan>
-        </text>
         <text id="station-name-sub" transform="translate(20.21 117.87)" font-family="Helvetica, .PingFangSC-Regular, .PingFang SC, source-han-sans" font-weight="700" font-size="24" fill="#000000">
             <tspan x="0" y="0">Spawn Bay</tspan>
         </text>
