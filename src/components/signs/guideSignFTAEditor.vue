@@ -105,7 +105,7 @@
           <div class="form-min-row" v-if="this.focusComponent.focusComponent !== -1">
             <p class="hint">使用字符"|"可以分割第一第二语言文本</p>
           </div>
-          <div v-if="this.focusComponent.focusComponent !== -1" class="form-min-row content-info-form-end">
+          <div v-if="this.focusComponent.focusLayer !== -1" class="form-min-row content-info-form-end">
             <button @click="createComponentInLayer" class="button">新建层内组件</button>
             <button @click="deleteComponentInLayer" class="button">删除层内组件</button>
           </div>
