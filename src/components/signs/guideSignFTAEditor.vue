@@ -210,6 +210,10 @@
               </div>
 
               <div class="form-min-row">
+                <p>向右对齐</p>
+                <div><input type="checkbox" v-model="content.right" @change="contentChange"></div>
+              </div>
+              <div class="form-min-row">
                 <p>粗体文字</p>
                 <div><input type="checkbox" v-model="content.bold" @change="contentChange"></div>
               </div>
@@ -286,6 +290,7 @@ export default {
                     iconLeftColor: '#000000',
                     iconRight: 'ACCESSIBLE_ELEVATOR',
                     iconRightColor: '#000000',
+                    right: false,
                     large: false,
                     bold: false,
                     italic: false,
@@ -353,6 +358,7 @@ export default {
                     iconLeftColor: '#000000',
                     iconRight: 'ACCESSIBLE_ELEVATOR',
                     iconRightColor: '#000000',
+                    right: false,
                     large: false,
                     bold: false,
                     italic: false,
@@ -406,6 +412,7 @@ export default {
                 iconLeftColor: '#000000',
                 iconRight: 'ACCESSIBLE_ELEVATOR',
                 iconRightColor: '#000000',
+                right: false,
                 large: false,
                 bold: false,
                 italic: false,
@@ -451,6 +458,7 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'ACCESSIBLE_ELEVATOR',
               iconRightColor: '#000000',
+              right: false,
               large: false,
               bold: false,
               italic: false,
@@ -474,6 +482,7 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              right: false,
               large: false,
               bold: false,
               italic: false,
@@ -497,6 +506,8 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              right: false,
+              large: false,
               bold: false,
               italic: false,
             },
@@ -507,6 +518,7 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              right: false,
               large: false,
               bold: false,
               italic: false,
@@ -530,6 +542,7 @@ export default {
               iconLeftColor: '#FFFFFF',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              right: false,
               large: false,
               bold: false,
               italic: false,
@@ -542,6 +555,7 @@ export default {
               iconLeftColor: '#000000',
               iconRight: 'NONE',
               iconRightColor: '#000000',
+              right: false,
               large: false,
               bold: true,
               italic: true,
@@ -594,6 +608,7 @@ export default {
             iconLeftColor: '#000000',
             iconRight: 'ACCESSIBLE_ELEVATOR',
             iconRightColor: '#000000',
+            right: false,
             large: false,
             bold: false,
             italic: false,
@@ -630,6 +645,7 @@ export default {
           iconLeftColor: '#000000',
           iconRight: 'NONE',
           iconRightColor: '#000000',
+          right: false,
           large: false,
           bold: false,
           italic: false,

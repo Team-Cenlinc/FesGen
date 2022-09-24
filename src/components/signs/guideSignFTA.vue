@@ -195,6 +195,8 @@ export default {
                 let internalComponentIconRightColor = internalComponent.iconRightColor
                 let internalComponentBold = internalComponent.bold
                 let internalComponentItalic = internalComponent.italic
+                let internalComponentRight = internalComponent.right
+
 
                 let internalComponentGroup = document.createElementNS("http://www.w3.org/2000/svg", "g")
                 internalComponentGroup.setAttribute("id", "internal-component-" + k.toString())
@@ -224,6 +226,10 @@ export default {
                     internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
+                  } else if (internalComponentRight) {
+                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "end")
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
@@ -252,6 +258,10 @@ export default {
                     internalComponentTextElement2.setAttribute("x", (componentWidth / 2 - 15).toString())
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
                     internalComponentTextElement2.setAttribute("text-anchor", "middle")
+                  } else if (internalComponentRight) {
+                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "end")
                   } else {
                     internalComponentTextElement2.setAttribute("x", "0")
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
@@ -284,6 +294,10 @@ export default {
                     internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
+                  } else if (internalComponentRight) {
+                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "end")
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
@@ -312,6 +326,10 @@ export default {
                     internalComponentTextElement2.setAttribute("x", (componentWidth / 2 - 15).toString())
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
                     internalComponentTextElement2.setAttribute("text-anchor", "middle")
+                  } else if (internalComponentRight) {
+                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "end")
                   } else {
                     internalComponentTextElement2.setAttribute("x", "0")
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
@@ -338,11 +356,15 @@ export default {
                   let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
                   if (componentCenter) {
                     internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
-                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 36).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 40).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
+                  } else if (internalComponentRight) {
+                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 40).toString())
+                    internalComponentTextElement.setAttribute("text-anchor", "end")
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
-                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 36).toString())
+                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 40).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "start")
                   }
                   if (internalComponentItalic) {
