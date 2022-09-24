@@ -259,9 +259,9 @@ export default {
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
                     internalComponentTextElement2.setAttribute("text-anchor", "middle")
                   } else if (internalComponentRight) {
-                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
-                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 45).toString())
-                    internalComponentTextElement.setAttribute("text-anchor", "end")
+                    internalComponentTextElement2.setAttribute("x", (componentWidth - 100).toString())
+                    internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                    internalComponentTextElement2.setAttribute("text-anchor", "end")
                   } else {
                     internalComponentTextElement2.setAttribute("x", "0")
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
@@ -285,7 +285,7 @@ export default {
                   internalComponentTextElement2.textContent = splittedText[1]
                   internalComponentGroup.appendChild(internalComponentTextElement2)
 
-                  //Support of alternative symbol
+                  //Support for full-space symbol
                 } else if (internalComponentText.includes("｜")){
                   let splittedText = internalComponentText.split("｜")
 
@@ -327,9 +327,9 @@ export default {
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
                     internalComponentTextElement2.setAttribute("text-anchor", "middle")
                   } else if (internalComponentRight) {
-                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
-                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 45).toString())
-                    internalComponentTextElement.setAttribute("text-anchor", "end")
+                    internalComponentTextElement2.setAttribute("x", (componentWidth - 100).toString())
+                    internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                    internalComponentTextElement2.setAttribute("text-anchor", "end")
                   } else {
                     internalComponentTextElement2.setAttribute("x", "0")
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
