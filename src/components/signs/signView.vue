@@ -19,7 +19,7 @@ window.componentsConfig = {    //左边是key值，右边是组件的引入路�
   'kitajuku-dentetsu': '../../assets/signs/kitajuku-dentetsu.svg',
 }
 export default {
-  name: 'Sign',
+  name: 'signView',
   components: {
     KitajukuDentetsu
   },

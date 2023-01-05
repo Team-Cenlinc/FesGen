@@ -154,7 +154,7 @@
 
 <script>
 export default {
-  name: "editor",
+  name: "editorView",
   data()  {
     return{
       signStyle: 'kitajuku-dentetsu',

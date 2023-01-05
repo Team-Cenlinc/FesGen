@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Sign from "@/components/signs/sign.vue"
+import Sign from "@/components/signs/signView.vue"
 import DownloadViewer from "@/components/files/downloadViewer";
 
 export default {
