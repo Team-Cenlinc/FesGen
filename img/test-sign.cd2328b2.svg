@@ -1,0 +1,28 @@
+
+      module.exports = {
+        functional: true,
+        render(_h, _vm) {
+          const { _c, _v, data, children = [] } = _vm;
+
+          const {
+            class: classNames,
+            staticClass,
+            style,
+            staticStyle,
+            attrs = {},
+            ...rest
+          } = data;
+
+          return _c(
+            'svg',
+            {
+              class: [classNames,staticClass],
+              style: [style,staticStyle],
+              attrs: Object.assign({"width":"620px","height":"220px","viewBox":"0 0 620 220","version":"1.1","xmlns":"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink"}, attrs),
+              ...rest,
+            },
+            children.concat([_c('rect',{attrs:{"id":"background","stroke":"#4D4D4D","stroke-width":"2","fill":"#ECECEC","x":"1","y":"1","width":"598","height":"198"}}),_c('text',{attrs:{"id":"MID-kanji","font-family":".PingFangSC-Regular, .PingFang SC","font-size":"62.208","font-weight":"normal","fill":"#383838"}},[_c('tspan',{attrs:{"id":"MID-kanji-text","x":"156","y":"100"}},[_v('海浜宿海')])]),_c('line',{attrs:{"x1":"2","y1":"177.846485","x2":"598.003562","y2":"177.846485","id":"line","stroke":"#7297DD","stroke-width":"15"}})])
+          )
+        }
+      }
+    
