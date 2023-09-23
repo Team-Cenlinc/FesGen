@@ -15,8 +15,8 @@
         </a>
       </div>
       <div id="copyright-explanation">
-        Powered by Fetarute Community<br>
-        导视牌设计版权所有 © 2022 Team Cenlinc
+        Powered by Fetarute Community with ❤️<br>
+        导视牌设计版权所有 © 2023 Team Cenlinc
       </div>
     </div>
   </footer>

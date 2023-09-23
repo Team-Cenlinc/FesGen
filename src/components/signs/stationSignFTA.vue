@@ -243,10 +243,10 @@ export default {
 
           let name = document.createElementNS('http://www.w3.org/2000/svg', 'text')
           name.setAttribute("id", "color-belt-name-" + i)
-          name.setAttribute("fill", this.signInfo.layoutInfo.backgroundColor)
+          name.setAttribute("fill", this.signInfo.layoutInfo.stationNameColor)
           name.setAttribute("font-size", "14")
           name.setAttribute("font-family", ".PingFangSC-Regular, .PingFang SC")
-          name.setAttribute("font-weight", "600")
+          name.setAttribute("font-weight", "500")
           let nameTspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan')
           nameTspan.setAttribute("x", "0")
           nameTspan.setAttribute("y", "0")
@@ -286,6 +286,7 @@ export default {
       }
       this.RequireRearrange(lightStyle, signInfo, signScale)
     },
+
     convertToCanvas() {
       let svgDom = this.newSvgConstructor()
       let width = this.output.outputWidth
