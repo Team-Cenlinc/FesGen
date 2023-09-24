@@ -278,13 +278,13 @@ export default {
                 id: 0,
                 name: 'init',
                 type: 'text',
-                width: 100,
+                width: 600,
                 center: false,
                 backgroundColor: '#FFFFFF',
                 components: [
                   {
                     id: 0,
-                    text: 'Accessible Elevator',
+                    text: '无障碍电梯|Accessible Elevator',
                     textColor: '#000000',
                     iconLeft: 'ARROW_LEFT',
                     iconLeftColor: '#000000',
@@ -346,13 +346,13 @@ export default {
                 id: 0,
                 name: 'init',
                 type: 'text',
-                width: 260,
+                width: 600,
                 center: false,
                 backgroundColor: '#FFFFFF',
                 components: [
                   {
                     id: 0,
-                    text: 'Accessible Elevator',
+                    text: '无障碍电梯|Accessible Elevator',
                     textColor: '#000000',
                     iconLeft: 'ARROW_LEFT',
                     iconLeftColor: '#000000',

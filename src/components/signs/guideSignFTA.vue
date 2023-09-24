@@ -56,18 +56,19 @@ export default {
                 id: 0,
                 name: 'init',
                 type: 'text',
-                width: 100,
+                width: 600,
                 center: false,
                 backgroundColor: '#FFFFFF',
                 components: [
                   {
                     id: 0,
-                    text: 'Accessible Elevator',
+                    text: '无障碍电梯|Accessible Elevator',
                     textColor: '#000000',
                     iconLeft: 'ARROW_LEFT',
                     iconLeftColor: '#000000',
                     iconRight: 'ACCESSIBLE_ELEVATOR',
                     iconRightColor: '#000000',
+                    right: false,
                     large: false,
                     bold: false,
                     italic: false,
@@ -227,9 +228,15 @@ export default {
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
                   } else if (internalComponentRight) {
-                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
-                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
-                    internalComponentTextElement.setAttribute("text-anchor", "end")
+                    if (internalComponentIconRight !== 'NONE') {
+                      internalComponentTextElement.setAttribute("x", (componentWidth - 65).toString())
+                      internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
+                      internalComponentTextElement.setAttribute("text-anchor", "end")
+                    } else {
+                      internalComponentTextElement.setAttribute("x", (componentWidth - 25).toString())
+                      internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
+                      internalComponentTextElement.setAttribute("text-anchor", "end")
+                    }
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
@@ -259,9 +266,15 @@ export default {
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
                     internalComponentTextElement2.setAttribute("text-anchor", "middle")
                   } else if (internalComponentRight) {
-                    internalComponentTextElement2.setAttribute("x", (componentWidth - 100).toString())
-                    internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
-                    internalComponentTextElement2.setAttribute("text-anchor", "end")
+                    if (internalComponentIconRight !== 'NONE') {
+                      internalComponentTextElement2.setAttribute("x", (componentWidth - 65).toString())
+                      internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                      internalComponentTextElement2.setAttribute("text-anchor", "end")
+                    } else {
+                      internalComponentTextElement2.setAttribute("x", (componentWidth - 25).toString())
+                      internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                      internalComponentTextElement2.setAttribute("text-anchor", "end")
+                    }
                   } else {
                     internalComponentTextElement2.setAttribute("x", "0")
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
@@ -295,9 +308,15 @@ export default {
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
                   } else if (internalComponentRight) {
-                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
-                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
-                    internalComponentTextElement.setAttribute("text-anchor", "end")
+                    if (internalComponentIconRight !== 'NONE') {
+                      internalComponentTextElement.setAttribute("x", (componentWidth - 65).toString())
+                      internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
+                      internalComponentTextElement.setAttribute("text-anchor", "end")
+                    } else {
+                      internalComponentTextElement.setAttribute("x", (componentWidth - 25).toString())
+                      internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
+                      internalComponentTextElement.setAttribute("text-anchor", "end")
+                    }
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 27).toString())
@@ -327,9 +346,15 @@ export default {
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
                     internalComponentTextElement2.setAttribute("text-anchor", "middle")
                   } else if (internalComponentRight) {
-                    internalComponentTextElement2.setAttribute("x", (componentWidth - 100).toString())
-                    internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
-                    internalComponentTextElement2.setAttribute("text-anchor", "end")
+                    if (internalComponentIconRight !== 'NONE') {
+                      internalComponentTextElement2.setAttribute("x", (componentWidth - 65).toString())
+                      internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                      internalComponentTextElement2.setAttribute("text-anchor", "end")
+                    } else {
+                      internalComponentTextElement2.setAttribute("x", (componentWidth - 25).toString())
+                      internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
+                      internalComponentTextElement2.setAttribute("text-anchor", "end")
+                    }
                   } else {
                     internalComponentTextElement2.setAttribute("x", "0")
                     internalComponentTextElement2.setAttribute("y", (internalComponentBasePointY + 45).toString())
@@ -352,16 +377,22 @@ export default {
                   internalComponentTextElement2.setAttribute("transform", "translate(" + internalComponentBasePointX.toString() + ", " + "0)")
                   internalComponentTextElement2.textContent = splittedText[1]
                   internalComponentGroup.appendChild(internalComponentTextElement2)
-                } else{
+                } else {
                   let internalComponentTextElement = document.createElementNS("http://www.w3.org/2000/svg", "text")
                   if (componentCenter) {
                     internalComponentTextElement.setAttribute("x", (componentWidth / 2 - 15).toString())
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 40).toString())
                     internalComponentTextElement.setAttribute("text-anchor", "middle")
                   } else if (internalComponentRight) {
-                    internalComponentTextElement.setAttribute("x", (componentWidth - 100).toString())
-                    internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 40).toString())
-                    internalComponentTextElement.setAttribute("text-anchor", "end")
+                    if (internalComponentIconRight !== 'NONE') {
+                      internalComponentTextElement.setAttribute("x", (componentWidth - 65).toString())
+                      internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 40).toString())
+                      internalComponentTextElement.setAttribute("text-anchor", "end")
+                    } else {
+                      internalComponentTextElement.setAttribute("x", (componentWidth - 25).toString())
+                      internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 40).toString())
+                      internalComponentTextElement.setAttribute("text-anchor", "end")
+                    }
                   } else {
                     internalComponentTextElement.setAttribute("x", "0")
                     internalComponentTextElement.setAttribute("y", (internalComponentBasePointY + 40).toString())
@@ -458,7 +489,7 @@ export default {
               }
             }
             layerGroup.appendChild(componentGroup)
-            componentBasePointX = (componentWidth * 1) + (componentBasePointX * 1)
+            componentBasePointX = (componentWidth) + (componentBasePointX)
             console.log(componentBasePointX)
           }
           newComp.appendChild(layerGroup)

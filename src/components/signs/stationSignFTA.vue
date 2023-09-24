@@ -172,6 +172,7 @@ export default {
 
 
         dom = this.$refs.svg.getElementById('color-belt-name-' + i)
+        dom.setAttribute("fill", this.signInfo.layoutInfo.stationNameColor)
         let nameWidth = this.$refs.svg.getElementById('color-belt-name-' + i).getBBox().width
         let namePosition = abbrWidth + 18 + 20 + 20 + lastPositionX
         dom.setAttribute('transform', ('translate(' + namePosition.toString() + ', ' + (this.output.outputHeight - 16).toString() + ')'))
@@ -243,10 +244,10 @@ export default {
 
           let name = document.createElementNS('http://www.w3.org/2000/svg', 'text')
           name.setAttribute("id", "color-belt-name-" + i)
-          name.setAttribute("fill", this.signInfo.layoutInfo.stationNameColor)
           name.setAttribute("font-size", "14")
           name.setAttribute("font-family", ".PingFangSC-Regular, .PingFang SC")
           name.setAttribute("font-weight", "500")
+          name.setAttribute("fill", this.signInfo.layoutInfo.stationNameColor)
           let nameTspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan')
           nameTspan.setAttribute("x", "0")
           nameTspan.setAttribute("y", "0")
