@@ -3,7 +3,7 @@
     <div class="footer-flex">
       <div id="footer-description">
         <p>
-          {{ title }} - Beta<br>
+          {{ title }} - Beta - v2023.09.004<br>
           是由 Cenlinc Studio 开发的导视牌生成器。
         </p>
       </div>
