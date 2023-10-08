@@ -13,8 +13,8 @@
     --editor-topic-highlight: #a0d4e8;
     --editor-selector-bg-color: #ffffff;
     --editor-selector-color: #000000;
-    --sidetool-shade-color: gray;
-    --tool-icon-shade-color: gray;
+    --sidetool-shade-color: rgb(128, 128, 128);
+    --tool-icon-shade-color: rgb(128, 128, 128);
     --file-range-color: #a0d4e7;
     --footer-backgroun-color: #e3e2e2;
     --footer-shade-color: #484848;
