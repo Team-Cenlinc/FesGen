@@ -68,11 +68,13 @@
               <option value="FTA-Logo-SUR">生存铁路</option>
               <option value="FTA-Logo-NLRR">北方大陆铁路</option>
               <option value="FTA-Logo-MLR">大都会联贯铁路</option>
+              <option value="FTA-Logo-Lobby">大厅区域交通</option>
               <option value="FTA-Logo-PUAT">蒲塘桥都市区域交通</option>
               <option value="FTA-Logo-SUR-Reversed">生存铁路-反色</option>
-              <option value="FTA-Logo-PUAT-Reversed">蒲塘桥都市区域交通-反色</option>
               <option value="FTA-Logo-NLRR-Reversed">北方大陆铁路-反色</option>
               <option value="FTA-Logo-MLR-Reversed">大都会联贯铁路-反色</option>
+              <option value="FTA-Logo-Lobby-Reversed">大厅区域交通-反色</option>
+              <option value="FTA-Logo-PUAT-Reversed">蒲塘桥都市区域交通-反色</option>
             </select>
           </div>
         </div>
