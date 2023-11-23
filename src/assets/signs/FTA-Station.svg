@@ -26,121 +26,131 @@
         </text>
 
         <g transform="translate(500 105)" id="FTA-Logo-PUAT" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18"/>
-            <rect x="-110" y="18" width="190" height="18"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#333" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#fff" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#fff" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
                 <tspan x="-2" y="0">Pyutocor Urban Area Transit</tspan>
             </text>
         </g>
 
         <g transform="translate(500 105)" id="FTA-Logo-PUAT-Reversed" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
-            <rect x="-110" y="18" width="190" height="18" fill="#FFFFFF"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#fff" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#333" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#333" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
                 <tspan x="-2" y="0">Pyutocor Urban Area Transit</tspan>
             </text>
         </g>
 
         <g transform="translate(500 105)" id="FTA-Logo-SUR" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18"/>
-            <rect x="-110" y="18" width="190" height="18"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#333" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#fff" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#fff" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
                 <tspan x="65" y="0">Survival Railroad</tspan>
             </text>
         </g>
 
         <g transform="translate(500 105)" id="FTA-Logo-SUR-Reversed" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
-            <rect x="-110" y="18" width="190" height="18" fill="#FFFFFF"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#fff" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#333" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#333" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
                 <tspan x="65" y="0">Survival Railroad</tspan>
             </text>
         </g>
 
         <g id="FTA-Logo-NLRR" transform="scale(1) translate(500 105)" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18"/>
-            <rect x="-110" y="18" width="190" height="18"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#333" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#fff" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#fff" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-95 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
                 <tspan x="55" y="0">North Land Rail Road</tspan>
             </text>
         </g>
 
         <g id="FTA-Logo-NLRR-Reversed" transform="scale(1) translate(500 105)" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
-            <rect x="-110" y="18" width="190" height="18" fill="#FFFFFF"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#fff" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#333" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#333" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-95 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
                 <tspan x="55" y="0">North Land Rail Road</tspan>
             </text>
         </g>
 
         <g id="FTA-Logo-Lobby" transform="scale(1) translate(500 105)" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18"/>
-            <rect x="-110" y="18" width="190" height="18"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#333" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#fff" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#fff" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
                 <tspan x="80" y="0">Lobby Transit</tspan>
             </text>
         </g>
 
         <g id="FTA-Logo-Lobby-Reversed" transform="scale(1) translate(500 105)" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
-            <rect x="-110" y="18" width="190" height="18" fill="#FFFFFF"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#fff" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#333" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#333" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
                 <tspan x="80" y="0">Lobby Transit</tspan>
             </text>
         </g>
 
         <g id="FTA-Logo-MLR" transform="scale(1) translate(500 105)" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18"/>
-            <rect x="-110" y="18" width="190" height="18"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#FFFFFF" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#333" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#fff" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#fff" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
             <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#000000">
                 <tspan x="55" y="0">Metrolink Railroad</tspan>
             </text>
         </g>
 
         <g id="FTA-Logo-MLR-Reversed" transform="scale(1) translate(500 105)" visibility="hidden">
-            <rect x="0" y="-5" width="80" height="18" fill="#FFFFFF"/>
-            <rect x="-110" y="18" width="190" height="18" fill="#FFFFFF"/>
-            <text transform="translate(40 7)" font-family="SourceSansRoman-Semibold, 'Source Sans Variable'" font-weight="700" font-size="14" fill="#000000" >
-                <tspan x="-20" y="2" style="letter-spacing:0.02em;">Fetarute</tspan>
-                <tspan x="-133" y="24" style="letter-spacing:0.02em;">Transportation Authority</tspan>
-            </text>
-            <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#FFFFFF">
+            <g transform="scale(0.11) translate(450 15)">
+                <polygon class="cls-1" fill="#fff" stroke-width="0px" points="64.8 0 54 54 36 144 18 234 0 324 189 324 198 324 216 234 234 144 252 54 262.8 0 64.8 0"/>
+                <g>
+                    <path class="cls-2" stroke-width="0px" fill="#333" d="m180,243h18s1.8-9,1.8-9h-9l7.2-36h-45l-9,45h36Zm-19.8-36h27l-5.4,27h-27l5.4-27Z"/>
+                    <polygon class="cls-2" stroke-width="0px" fill="#333" points="207 252 203.4 252 122.4 252 129.6 216 135 216 135 216 136.8 207 135 207 131.4 207 135 189 126 189 122.4 207 91.8 207 97.2 180 135 180 135 180 136.8 171 135 171 99 171 90 171 82.8 207 32.4 207 27 207 23.4 207 21.6 216 27 216 30.6 216 81 216 73.8 252 36 252 34.2 261 36 261 36 261 72 261 81 261 90 216 120.6 216 111.6 261 117 261 120.6 261 201.6 261 207 261 210.6 261 212.4 252 207 252"/>
+                </g>
+            </g>
+            <text transform="translate(-80 50)" font-family=".Source Sans Variable, .Source Sans Pro" font-weight="400" font-size="12" fill="#ffffff">
                 <tspan x="55" y="0">Metrolink Railroad</tspan>
             </text>
         </g>
