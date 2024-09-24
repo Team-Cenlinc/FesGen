@@ -9,8 +9,8 @@
         <a href="/about.html" class="header-nav">About</a>
         <a href="/help.html" class="header-nav">Help</a>
         <a href="https://github.com/Team-Cenlinc/FesGen/tree/main" class="header-nav">GitHub</a>
-        <a href="https://www.fetarute.org/wiki/index.php/FesGen" class="header-nav">Wiki</a>
-        <a href="/" target="_blank" class="header-nav">Home Page</a>
+        <a href="https://utils.fetarute.org/wiki/index.php/FesGen" class="header-nav">Wiki</a>
+        <a href="/" target="https://www.fetarute.org" class="header-nav">Home Page</a>
       </span>
     </div>
   </header>
