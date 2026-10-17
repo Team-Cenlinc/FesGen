@@ -46,8 +46,9 @@ p {
   margin: 0;
 }
 
+/* 焦点框：2px 文字色实线加 2px 间隙，清楚但不压住控件本身。 */
 :focus-visible {
-  outline: 3px solid var(--color-text);
+  outline: 2px solid var(--color-text);
   outline-offset: 2px;
 }
 
@@ -60,7 +61,10 @@ p {
   white-space: nowrap;
 }
 
-/* 主操作：无彩 action 色，不占用任何牌子或线路的颜色。 */
+/*
+ * 按钮是一块小牌子：2px 牌框，按下时轻微缩小。
+ * 主操作用反白的牌面（文字色底），不占用任何线路色。
+ */
 .button {
   display: inline-flex;
   align-items: center;
@@ -68,45 +72,44 @@ p {
   gap: 8px;
   min-height: 40px;
   padding: 0 16px;
-  border: 2px solid var(--color-text);
+  border: var(--border-plate);
   border-radius: var(--radius-control);
   background: var(--color-surface);
-  font-weight: 650;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
   transition:
     background-color var(--duration-feedback) ease,
-    transform var(--duration-press) var(--motion-standard);
-}
-
-.button:hover {
-  background: color-mix(in srgb, var(--color-text) 6%, var(--color-surface));
+    color var(--duration-feedback) ease,
+    transform var(--duration-press) var(--ease-out);
 }
 
 .button:active {
-  transform: translateY(1px);
-}
-
-.button:disabled {
-  cursor: not-allowed;
-  opacity: 0.45;
-  transform: none;
+  transform: scale(0.97);
 }
 
 .button--primary {
-  border-color: var(--color-action);
   background: var(--color-action);
+  border-color: var(--color-action);
   color: var(--color-action-text);
-}
-
-.button--primary:hover {
-  background: color-mix(in srgb, var(--color-action) 86%, var(--color-surface));
 }
 
 .button--small {
   min-height: 32px;
   padding: 0 10px;
   font-size: 14px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background: color-mix(in srgb, var(--color-text) 7%, var(--color-surface));
+  }
+
+  .button--primary:hover {
+    background: color-mix(in srgb, var(--color-action) 84%, var(--color-surface));
+  }
 }
 
 .field {
@@ -116,21 +119,35 @@ p {
 
 .field__label {
   font-size: 13px;
-  font-weight: 650;
+  font-weight: 700;
   color: var(--color-muted);
 }
 
 .input {
   width: 100%;
-  min-height: 36px;
-  padding: 0 10px;
+  min-height: 40px;
+  padding: 0 12px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-control);
   background: var(--color-surface-raised);
+  transition: border-color var(--duration-feedback) ease;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .input:hover {
+    border-color: color-mix(in srgb, var(--color-text) 45%, var(--color-border));
+  }
+}
+
+/* 输入框聚焦时换成牌框，不另加外圈。 */
 .input:focus-visible {
+  border-color: var(--color-text);
+  outline: 1px solid var(--color-text);
   outline-offset: 0;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
 }
 
 .panel {
@@ -142,4 +159,10 @@ p {
 .hint {
   font-size: 13px;
   color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:active {
+    transform: none;
+  }
 }

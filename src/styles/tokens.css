@@ -107,10 +107,14 @@ html[data-appearance="dark"] {
   --radius-panel: 10px;
   --radius-control: 6px;
   --radius-pill: 999px;
-  /* 灯箱外框使用和网站页头相同的 3px 实线。 */
+  /* 灯箱外框使用和网站页头相同的 3px 实线；控件用 2px 的“牌框”。 */
   --border-sign: 3px solid var(--color-text);
+  --border-plate: 2px solid var(--color-text);
 
-  --motion-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --motion-standard: var(--ease-out);
   --duration-feedback: 150ms;
-  --duration-press: 100ms;
+  --duration-press: 120ms;
+  --duration-move: 200ms;
 }
