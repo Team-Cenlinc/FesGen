@@ -5,6 +5,7 @@ import type { FontId, FontStack } from "@/fonts/stacks";
 import { OpentypeShaper, type TextAnchor, type TextShaper } from "@/fonts/shaper";
 import { renderTreeToSvg, type RenderNode, type RenderTree } from "../render";
 import { kitajukuStyle } from ".";
+import { LEFT_STOP_MARK, MIDDLE_STOP_MARK, RIGHT_STOP_MARK } from "./assets";
 import {
   kitajukuDefaults,
   migrateLegacyKitajuku,
@@ -199,6 +200,41 @@ describe("北宿电铁：排版（600×200 与旧版一致）", () => {
       [176.75, 7.5, "#7297DD"],
       [183.25, 7.5, "#A0D4E7"],
     ]);
+  });
+
+  it("站点标记从色带上挖空，开灯光时露出背景和渐变，不用底色盖", () => {
+    const tree = layout();
+    const holes: RenderNode[] = [];
+    const drawnPaths: string[] = [];
+    const walk = (node: RenderNode) => {
+      if (node.kind === "group") {
+        holes.push(...(node.holes ?? []));
+        node.children.forEach(walk);
+      } else if (node.kind === "path") {
+        drawnPaths.push(node.d);
+      }
+    };
+    tree.content.forEach(walk);
+    expect(holes).toHaveLength(3);
+    for (const mark of [LEFT_STOP_MARK, MIDDLE_STOP_MARK, RIGHT_STOP_MARK]) {
+      expect(drawnPaths).not.toContain(mark);
+    }
+
+    const svg = renderTreeToSvg(tree, { lighting: "fluore", layers: "content" });
+    expect(svg).toContain('<mask id="fesgen-holes-0" maskUnits="userSpaceOnUse"');
+    expect(svg).toContain('<g mask="url(#fesgen-holes-0)"><line');
+    // 蒙版里的挖空形状一律画成黑色。
+    expect(svg.match(/<mask[\s\S]*?<\/mask>/)![0]).not.toContain('fill="none"');
+  });
+
+  it("隐藏色带时连同缺口一起去掉", () => {
+    const svg = renderTreeToSvg(
+      layout(undefined, undefined, { [M.belt]: { dx: 0, dy: 0, scale: 1, hidden: true } }),
+      {
+        lighting: "none",
+      },
+    );
+    expect(svg).not.toContain("<mask");
   });
 
   it("色带从边框内沿画起", () => {

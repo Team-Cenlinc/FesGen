@@ -184,12 +184,14 @@ export function layoutKitajuku({
             strokeWidth: 15,
           },
         ];
+    // 站点标记是色带上的缺口：从色带里挖掉，透出背景和灯光。旧版是用底色画上去的，
+    // 不开灯光时两者一样；开了灯光，底色画的缺口不受渐变影响，会比周围更白。
     const marks: RenderNode[] = [
-      at(29, 120 + dy / 2, [{ kind: "path", d: LEFT_STOP_MARK, fill: c.background }]),
-      at(235 + dx / 2, 100 + dy / 2, [{ kind: "path", d: MIDDLE_STOP_MARK, fill: c.background }]),
-      at(472 + dx, 120 + dy / 2, [{ kind: "path", d: RIGHT_STOP_MARK, fill: c.background }]),
+      at(29, 120 + dy / 2, [{ kind: "path", d: LEFT_STOP_MARK }]),
+      at(235 + dx / 2, 100 + dy / 2, [{ kind: "path", d: MIDDLE_STOP_MARK }]),
+      at(472 + dx, 120 + dy / 2, [{ kind: "path", d: RIGHT_STOP_MARK }]),
     ];
-    addModule(KITAJUKU_MODULES.belt, [...belts, ...marks], {
+    addModule(KITAJUKU_MODULES.belt, [{ kind: "group", children: belts, holes: marks }], {
       x: x1,
       y: 172.5 + dy / 2,
       width: x2 - x1,

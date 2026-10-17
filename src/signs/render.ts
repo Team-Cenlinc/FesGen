@@ -28,7 +28,16 @@ export type RenderNode =
     }
   | { kind: "path"; d: string; fill?: string; stroke?: string; strokeWidth?: number }
   | { kind: "polygon"; points: string; fill: string }
-  | { kind: "group"; transform?: string; children: RenderNode[] };
+  | {
+      kind: "group";
+      transform?: string;
+      children: RenderNode[];
+      /**
+       * 从这一组里挖掉的形状（同一坐标系，只看形状不看颜色）。挖空处露出下面的背景层和灯光，
+       * 而不是用底色盖上去——用底色盖的话，开灯光时那一块不受渐变影响，会比周围更白或更暗。
+       */
+      holes?: RenderNode[];
+    };
 
 export interface BBox {
   x: number;
@@ -127,7 +136,51 @@ function attrs(entries: Record<string, string | number | undefined>): string {
     .join("");
 }
 
-function nodeToSvg(node: RenderNode): string {
+/** 序列化过程中的状态：给挖空用的蒙版分配文档内唯一的 id。 */
+interface SvgContext {
+  masks: number;
+}
+
+/** 把挖空形状画成蒙版里的黑色：只保留几何，颜色一律换掉。 */
+function asMaskShape(node: RenderNode): RenderNode {
+  switch (node.kind) {
+    case "group":
+      return { ...node, children: node.children.map(asMaskShape), holes: undefined };
+    case "line":
+      return { ...node, stroke: "#000" };
+    case "polygon":
+      return { ...node, fill: "#000" };
+    default:
+      return { ...node, fill: "#000", stroke: node.stroke ? "#000" : undefined };
+  }
+}
+
+// 蒙版范围取得足够大，盖住任何缩放和微调后的位置；蒙版只是“白色保留、黑色挖掉”。
+const MASK_EXTENT = 100000;
+
+function groupToSvg(node: Extract<RenderNode, { kind: "group" }>, context: SvgContext): string {
+  const children = node.children.map((child) => nodeToSvg(child, context)).join("");
+  if (!node.holes?.length) {
+    return `<g${attrs({ transform: node.transform })}>${children}</g>`;
+  }
+  const id = `fesgen-holes-${context.masks++}`;
+  const region = attrs({
+    x: -MASK_EXTENT,
+    y: -MASK_EXTENT,
+    width: MASK_EXTENT * 2,
+    height: MASK_EXTENT * 2,
+  });
+  const holes = node.holes.map((hole) => nodeToSvg(asMaskShape(hole), context)).join("");
+  // 蒙版和被遮的内层组共用外层组的坐标系，挖空形状和内容按同一套变换对齐。
+  return (
+    `<g${attrs({ transform: node.transform })}>` +
+    `<mask id="${id}" maskUnits="userSpaceOnUse"${region}>` +
+    `<rect${region} fill="#fff"/>${holes}</mask>` +
+    `<g mask="url(#${id})">${children}</g></g>`
+  );
+}
+
+function nodeToSvg(node: RenderNode, context: SvgContext): string {
   switch (node.kind) {
     case "rect":
       return `<rect${attrs({
@@ -161,7 +214,7 @@ function nodeToSvg(node: RenderNode): string {
     case "polygon":
       return `<polygon${attrs({ points: node.points, fill: node.fill })}/>`;
     case "group":
-      return `<g${attrs({ transform: node.transform })}>${node.children.map(nodeToSvg).join("")}</g>`;
+      return groupToSvg(node, context);
   }
 }
 
@@ -204,13 +257,14 @@ export interface SvgOptions {
 /** 序列化成独立的 SVG 文档字符串（导出、预览、光栅化共用）。 */
 export function renderTreeToSvg(tree: RenderTree, options: SvgOptions): string {
   const layers = options.layers ?? "all";
+  const context: SvgContext = { masks: 0 };
   const parts: string[] = [];
   if (layers !== "content") {
-    parts.push(...tree.background.map(nodeToSvg));
+    parts.push(...tree.background.map((node) => nodeToSvg(node, context)));
     parts.push(lightingSvg(options.lighting, tree.width, tree.height));
   }
   if (layers !== "background") {
-    parts.push(...tree.content.map(nodeToSvg));
+    parts.push(...tree.content.map((node) => nodeToSvg(node, context)));
   }
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" width="${fmt(tree.width)}" height="${fmt(tree.height)}" ` +
