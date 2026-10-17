@@ -5,7 +5,14 @@ import type { FontId, FontStack } from "@/fonts/stacks";
 import { OpentypeShaper, type TextAnchor, type TextShaper } from "@/fonts/shaper";
 import { renderTreeToSvg, type RenderNode, type RenderTree } from "../render";
 import { kitajukuStyle } from ".";
-import { LEFT_STOP_MARK, MIDDLE_STOP_MARK, RIGHT_STOP_MARK } from "./assets";
+import {
+  LEFT_STOP_MARK,
+  LEFT_STOP_MARK_CENTER_X,
+  MIDDLE_STOP_MARK,
+  MIDDLE_STOP_MARK_CENTER_X,
+  RIGHT_STOP_MARK,
+  RIGHT_STOP_MARK_CENTER_X,
+} from "./assets";
 import {
   kitajukuDefaults,
   migrateLegacyKitajuku,
@@ -54,6 +61,22 @@ function textOrigins(tree: RenderTree): { x: number; y: number }[] {
       const [x, y] = node.d.slice(1).split(" ").map(Number);
       out.push({ x: x!, y: y! });
     }
+  };
+  tree.content.forEach(walk);
+  return out;
+}
+
+/** 色带上三个挖空缺口的平移量（左、中、右）。 */
+function holeOrigins(tree: RenderTree): { x: number; y: number }[] {
+  const out: { x: number; y: number }[] = [];
+  const walk = (node: RenderNode) => {
+    if (node.kind !== "group") return;
+    for (const hole of node.holes ?? []) {
+      const match =
+        hole.kind === "group" && /translate\(([-\d.]+) ([-\d.]+)\)/.exec(hole.transform ?? "");
+      if (match) out.push({ x: Number(match[1]), y: Number(match[2]) });
+    }
+    node.children.forEach(walk);
   };
   tree.content.forEach(walk);
   return out;
@@ -166,11 +189,53 @@ describe("北宿电铁：排版（600×200 与旧版一致）", () => {
     expect(english).toEqual({ x: 320, y: 80 });
   });
 
-  it("线路标整体以 305 为中线居中", () => {
+  it("线路标整体在牌面中轴 300 上居中", () => {
     const origins = textOrigins(layout());
-    // 缩写 T 宽 7.5，线路名 5 字 × 10.5 = 52.5；baseX = 235 + (0 - 7.5 - 52.5 - 5) / 2 = 202.5
-    expect(origins[3]).toEqual({ x: 202.5 + 70, y: 115 });
-    expect(origins[4]).toEqual({ x: 202.5 + 7.5 + 80, y: 118 });
+    // 缩写方块 7.5 + 10，间隔 5，线路名 5 字 × 10.5 = 52.5，共 75 宽，从 300 - 37.5 起
+    // 缩写在方块里水平、竖直都居中：中心 (271.25, 110)，基线在中心下方 15 × 0.36
+    expect(origins[3]!.x).toBeCloseTo(262.5 + 5, 6);
+    expect(origins[3]!.y).toBeCloseTo(110 + 15 * 0.36, 6);
+    expect(origins[4]).toEqual({ x: 262.5 + 17.5 + 5, y: 118 });
+  });
+
+  it("线路标、本站编号牌和本站缺口共用中轴，换尺寸时一起移动", () => {
+    for (const [size, axis] of [
+      [{ width: 600, height: 200 }, 300],
+      [{ width: 800, height: 200 }, 400],
+    ] as const) {
+      const tree = layout(undefined, size);
+      const badge = tree.modules[M.stationNumber]!;
+      expect(badge.x + badge.width / 2).toBeCloseTo(axis, 2);
+      const line = tree.modules[M.lineMark]!;
+      expect(line.x + line.width / 2).toBeCloseTo(axis, 2);
+      expect(holeOrigins(tree)[1]!.x + MIDDLE_STOP_MARK_CENTER_X).toBeCloseTo(axis, 2);
+    }
+  });
+
+  it("邻站缺口对准整组站名和编号牌的中心", () => {
+    const content = kitajukuDefaults();
+    content.right.chinese = "北宿中央公園";
+    const tree = layout(content);
+    const [left, , right] = holeOrigins(tree);
+    const leftBox = tree.modules[M.leftStation]!;
+    const rightBox = tree.modules[M.rightStation]!;
+    expect(left!.x + LEFT_STOP_MARK_CENTER_X).toBeCloseTo(leftBox.x + leftBox.width / 2, 2);
+    expect(right!.x + RIGHT_STOP_MARK_CENTER_X).toBeCloseTo(rightBox.x + rightBox.width / 2, 2);
+  });
+
+  it("编号在编号牌里居中，放不下时等比缩小", () => {
+    const content = kitajukuDefaults();
+    content.station.number = "12345";
+    content.left.number = "1234";
+    const tree = layout(content);
+    // 假字体每字 0.5 字号宽：本站 5 字 × 9.85 = 49.3 > 26，邻站 4 字 × 7.5 = 30 > 20
+    expect(tree.minTextSize[M.stationNumber]).toBeCloseTo((19.7074944 * 26) / (5 * 9.8537472), 4);
+    expect(tree.minTextSize[M.leftStation]).toBeCloseTo(10, 4);
+    const number = textOrigins(tree)[5]!;
+    const size = tree.minTextSize[M.stationNumber]!;
+    const badgeX = 300 - 21.51;
+    // 居中对齐：落笔点 + 半个字宽（5 字 × 0.5 字号 ÷ 2）= 编号牌白底的中心
+    expect(number.x + (5 * size * 0.5) / 2).toBeCloseTo(badgeX + 24.85, 4);
   });
 
   it("左站中文名从 x=29 起，编号牌跟在名字后面", () => {
@@ -178,8 +243,9 @@ describe("北宿电铁：排版（600×200 与旧版一致）", () => {
     const origins = textOrigins(tree);
     const left = origins.slice(6, 9);
     expect(left[0]).toEqual({ x: 29, y: 145 });
-    // 錦岡 2 字 × 12.5 = 25，编号牌在 29 + 25 + 10，编号居中于牌内 19
-    expect(left[1]).toEqual({ x: 29 + 35 + 19 - 7.5, y: 142 });
+    // 錦岡 2 字 × 12.5 = 25，编号牌在 29 + 25 + 10；编号居中于牌内白底（19.11, 11.27）
+    expect(left[1]!.x).toBeCloseTo(29 + 35 + 19.11 - 7.5, 6);
+    expect(left[1]!.y).toBeCloseTo(125 + 11.27 + 15 * 0.36, 6);
     expect(left[2]).toEqual({ x: 29, y: 165 });
   });
 

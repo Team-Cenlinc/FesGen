@@ -14,10 +14,13 @@ import type { LayoutInput } from "../types";
 import {
   ARROW_POINTS,
   LEFT_STOP_MARK,
+  LEFT_STOP_MARK_CENTER_X,
   MIDDLE_STOP_MARK,
+  MIDDLE_STOP_MARK_CENTER_X,
   NEIGHBOR_ICON_INNER,
   NEIGHBOR_ICON_OUTER,
   RIGHT_STOP_MARK,
+  RIGHT_STOP_MARK_CENTER_X,
   STATION_ICON_INNER,
   STATION_ICON_OUTER,
 } from "./assets";
@@ -49,6 +52,18 @@ const LATIN: FontId = "tex-gyre-heros-400";
 const ASCENT = 0.88;
 const DESCENT = 0.14;
 
+/**
+ * 编号牌里白底部分的中心和可用宽度（相对编号牌原点，已扣掉描边和两侧各 3 的留白）。
+ * 编号按中心对齐，放不下时等比缩小；visualCenterX 是整块编号牌（含左侧色块）的中心。
+ */
+const STATION_BADGE = { centerX: 24.85, centerY: 13.93, room: 26, visualCenterX: 21.51 };
+const NEIGHBOR_BADGE = { centerX: 19.11, centerY: 11.27, room: 20 };
+/**
+ * TeX Gyre Heros 的数字和大写字母高约 0.72 字号。基线放在方块中心下方半个字高，
+ * 编号和线路缩写就竖直居中（不用固定基线，缩小字号时也居中）。
+ */
+const CAP_HALF_HEIGHT = 0.36;
+
 export function layoutKitajuku({
   content: c,
   size,
@@ -71,6 +86,13 @@ export function layoutKitajuku({
   const contentNodes: RenderNode[] = [];
   const measure = (font: FontId, value: string, fontSize: number) =>
     shaper.measure(fontStack(font), value, fontSize);
+  /** 编号太宽时缩小到放得进编号牌。 */
+  const fitNumber = (value: string, fontSize: number, room: number) => {
+    const width = measure(LATIN, value, fontSize);
+    return width > room ? (fontSize * room) / width : fontSize;
+  };
+  // 本站名以外的中间一列（线路标、本站编号、本站缺口）共用的中轴：牌面正中。
+  const axis = 300 + dx / 2;
 
   /** 排一段文字，同时记录这个模块的最小字号和缺字。 */
   function text(
@@ -148,6 +170,70 @@ export function layoutKitajuku({
         ]
       : [];
 
+  // —— 左右邻站：中文名 + 编号牌，英文名在下 ——
+  function layoutNeighbor(
+    id: string,
+    data: KitajukuNeighbor,
+    side: "left" | "right",
+  ): { children: RenderNode[]; bbox: BBox } {
+    const groupX = side === "left" ? 29 : 472 + dx;
+    const groupY = 120 + dy / 2;
+    const nameWidth = measure(nameFont, data.chinese, 25);
+    const anchor: TextAnchor = side === "left" ? "start" : "end";
+    const textX = side === "left" ? groupX : groupX + 84;
+    const iconX =
+      side === "left" ? groupX + (nameWidth ? nameWidth + 10 : 0) : groupX + 40 - nameWidth;
+    const iconY = groupY + 5;
+    const chinese = text(
+      id,
+      nameFont,
+      data.chinese,
+      25,
+      textX,
+      groupY + 25,
+      anchor,
+      data.textColor,
+    );
+    const english = text(id, LATIN, data.english, 18, textX, groupY + 45, anchor, data.textColor);
+    const numberSize = fitNumber(data.number, 15, NEIGHBOR_BADGE.room);
+    const number = text(
+      id,
+      LATIN,
+      data.number,
+      numberSize,
+      iconX + NEIGHBOR_BADGE.centerX,
+      iconY + NEIGHBOR_BADGE.centerY + numberSize * CAP_HALF_HEIGHT,
+      "middle",
+      data.textColor,
+    );
+    return {
+      children: [
+        chinese.node,
+        at(iconX, iconY, [
+          {
+            kind: "path",
+            d: NEIGHBOR_ICON_INNER,
+            fill: data.textColor,
+            stroke: data.textColor,
+            strokeWidth: 1.152,
+          },
+          { kind: "path", d: NEIGHBOR_ICON_OUTER, stroke: data.textColor, strokeWidth: 1.6 },
+        ]),
+        number.node,
+        english.node,
+      ],
+      bbox: unionBBox([
+        chinese.bbox,
+        english.bbox,
+        number.bbox,
+        { x: iconX + 0.576, y: iconY + 2.052, width: 32.356, height: 18.432 },
+      ]),
+    };
+  }
+  // 邻站先排好：色带上的缺口要对准它们的中心。模块仍按原来的先后加入，图层顺序不变。
+  const leftNeighbor = layoutNeighbor(KITAJUKU_MODULES.leftStation, c.left, "left");
+  const rightNeighbor = layoutNeighbor(KITAJUKU_MODULES.rightStation, c.right, "right");
+
   // —— 色带与三个站点标记 ——
   {
     const x1 = c.frameThickness / 2;
@@ -186,10 +272,17 @@ export function layoutKitajuku({
         ];
     // 站点标记是色带上的缺口：从色带里挖掉，透出背景和灯光。旧版是用底色画上去的，
     // 不开灯光时两者一样；开了灯光，底色画的缺口不受渐变影响，会比周围更白。
+    // 缺口对准车站：本站在中轴上，邻站在整组站名和编号牌的正下方，但不出色带两端。
+    const centerOf = (box: BBox) => box.x + box.width / 2;
+    const onBelt = (x: number) => Math.min(x2 - 16, Math.max(x1 + 16, x));
     const marks: RenderNode[] = [
-      at(29, 120 + dy / 2, [{ kind: "path", d: LEFT_STOP_MARK }]),
-      at(235 + dx / 2, 100 + dy / 2, [{ kind: "path", d: MIDDLE_STOP_MARK }]),
-      at(472 + dx, 120 + dy / 2, [{ kind: "path", d: RIGHT_STOP_MARK }]),
+      at(onBelt(centerOf(leftNeighbor.bbox)) - LEFT_STOP_MARK_CENTER_X, 120 + dy / 2, [
+        { kind: "path", d: LEFT_STOP_MARK },
+      ]),
+      at(axis - MIDDLE_STOP_MARK_CENTER_X, 100 + dy / 2, [{ kind: "path", d: MIDDLE_STOP_MARK }]),
+      at(onBelt(centerOf(rightNeighbor.bbox)) - RIGHT_STOP_MARK_CENTER_X, 120 + dy / 2, [
+        { kind: "path", d: RIGHT_STOP_MARK },
+      ]),
     ];
     addModule(KITAJUKU_MODULES.belt, [{ kind: "group", children: belts, holes: marks }], {
       x: x1,
@@ -246,18 +339,20 @@ export function layoutKitajuku({
     );
   }
 
-  // —— 线路标：缩写方块 + 线路名，整体以 305 为中线居中 ——
+  // —— 线路标：缩写方块 + 线路名，整体在中轴上居中 ——
   {
     const id = KITAJUKU_MODULES.lineMark;
     const color = c.station.textColor;
     const abbrWidth = measure(LATIN, c.line.abbr, 15);
     const nameWidth = measure(JP_REGULAR, c.line.name, 21);
-    const baseX = 235 + (dx - abbrWidth - nameWidth - 5) / 2;
+    const abbrBoxWidth = c.line.abbr ? abbrWidth + 10 : 0;
+    const gap = c.line.abbr && c.line.name ? 5 : 0;
+    const startX = axis - (abbrBoxWidth + gap + nameWidth) / 2;
     const baseY = 100 + dy / 2;
     const children: RenderNode[] = [];
     const boxes: (BBox | null)[] = [];
     if (c.line.abbr) {
-      const box = { x: baseX + 65, y: baseY, width: abbrWidth + 10, height: 20 };
+      const box = { x: startX, y: baseY, width: abbrBoxWidth, height: 20 };
       children.push({
         kind: "rect",
         ...box,
@@ -267,7 +362,16 @@ export function layoutKitajuku({
         strokeWidth: 1.14960384,
       });
       children.push(
-        text(id, LATIN, c.line.abbr, 15, baseX + 70, baseY + 15, "start", c.background).node,
+        text(
+          id,
+          LATIN,
+          c.line.abbr,
+          15,
+          startX + abbrBoxWidth / 2,
+          baseY + box.height / 2 + 15 * CAP_HALF_HEIGHT,
+          "middle",
+          c.background,
+        ).node,
       );
       boxes.push(box);
     }
@@ -276,7 +380,7 @@ export function layoutKitajuku({
       JP_REGULAR,
       c.line.name,
       21,
-      baseX + abbrWidth + 80,
+      startX + abbrBoxWidth + gap,
       baseY + 18,
       "start",
       color,
@@ -290,9 +394,19 @@ export function layoutKitajuku({
   {
     const id = KITAJUKU_MODULES.stationNumber;
     const color = c.station.textColor;
-    const x = 280 + dx / 2;
+    const x = axis - STATION_BADGE.visualCenterX;
     const y = 135 + dy / 2;
-    const number = text(id, LATIN, c.station.number, 19.7074944, x + 12, y + 21, "start", color);
+    const numberSize = fitNumber(c.station.number, 19.7074944, STATION_BADGE.room);
+    const number = text(
+      id,
+      LATIN,
+      c.station.number,
+      numberSize,
+      x + STATION_BADGE.centerX,
+      y + STATION_BADGE.centerY + numberSize * CAP_HALF_HEIGHT,
+      "middle",
+      color,
+    );
     addModule(
       id,
       [
@@ -306,64 +420,8 @@ export function layoutKitajuku({
     );
   }
 
-  // —— 左右邻站：中文名 + 编号牌，英文名在下 ——
-  function neighbor(id: string, data: KitajukuNeighbor, side: "left" | "right") {
-    const groupX = side === "left" ? 29 : 472 + dx;
-    const groupY = 120 + dy / 2;
-    const nameWidth = measure(nameFont, data.chinese, 25);
-    const anchor: TextAnchor = side === "left" ? "start" : "end";
-    const textX = side === "left" ? groupX : groupX + 84;
-    const iconX =
-      side === "left" ? groupX + (nameWidth ? nameWidth + 10 : 0) : groupX + 40 - nameWidth;
-    const iconY = groupY + 5;
-    const chinese = text(
-      id,
-      nameFont,
-      data.chinese,
-      25,
-      textX,
-      groupY + 25,
-      anchor,
-      data.textColor,
-    );
-    const english = text(id, LATIN, data.english, 18, textX, groupY + 45, anchor, data.textColor);
-    const number = text(
-      id,
-      LATIN,
-      data.number,
-      15,
-      iconX + 19,
-      iconY + 17,
-      "middle",
-      data.textColor,
-    );
-    addModule(
-      id,
-      [
-        chinese.node,
-        at(iconX, iconY, [
-          {
-            kind: "path",
-            d: NEIGHBOR_ICON_INNER,
-            fill: data.textColor,
-            stroke: data.textColor,
-            strokeWidth: 1.152,
-          },
-          { kind: "path", d: NEIGHBOR_ICON_OUTER, stroke: data.textColor, strokeWidth: 1.6 },
-        ]),
-        number.node,
-        english.node,
-      ],
-      unionBBox([
-        chinese.bbox,
-        english.bbox,
-        number.bbox,
-        { x: iconX + 0.576, y: iconY + 2.052, width: 32.356, height: 18.432 },
-      ]),
-    );
-  }
-  neighbor(KITAJUKU_MODULES.leftStation, c.left, "left");
-  neighbor(KITAJUKU_MODULES.rightStation, c.right, "right");
+  addModule(KITAJUKU_MODULES.leftStation, leftNeighbor.children, leftNeighbor.bbox);
+  addModule(KITAJUKU_MODULES.rightStation, rightNeighbor.children, rightNeighbor.bbox);
 
   // —— 行进方向箭头：朝左时在左站上方，朝右时旋转 180° 移到右站上方 ——
   if (c.arrow.visible) {
