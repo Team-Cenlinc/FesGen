@@ -4,6 +4,10 @@
  * 牌子上的文字始终由用户填写，不属于界面文案。
  */
 export const zhHans = {
+  controls: {
+    decrease: "减少",
+    increase: "增加",
+  },
   app: {
     name: "FesGen",
     tagline: "导视牌生成器",
