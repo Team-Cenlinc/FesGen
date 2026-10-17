@@ -127,6 +127,8 @@ function setTweak(moduleId: string, patch: Partial<ModuleTweak>) {
 
 // —— 快捷键：撤销、重做、Esc 取消选择。输入框里交给浏览器自己的撤销。 ——
 function onKeyDown(event: KeyboardEvent) {
+  // 页头菜单等已经处理过的按键（比如用 Esc 收起菜单）不再当作编辑器快捷键。
+  if (event.defaultPrevented) return;
   const target = event.target;
   const typing =
     target instanceof Element && target.closest("input, textarea, [contenteditable]") !== null;
@@ -313,7 +315,7 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeyDown));
 .editor {
   display: grid;
   gap: 16px;
-  width: min(calc(100% - 32px), 1392px);
+  width: var(--page-width-wide);
   margin: 0 auto;
   padding: 24px 0 64px;
 }
@@ -373,8 +375,8 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeyDown));
 .editor__outline,
 .editor__properties {
   position: sticky;
-  top: 108px;
-  max-height: calc(100vh - 124px);
+  top: calc(var(--site-header-bottom) + 12px);
+  max-height: calc(100vh - var(--site-header-bottom) - 28px);
   overflow-y: auto;
   padding: 16px;
 }
@@ -449,7 +451,7 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeyDown));
   display: grid;
   justify-items: start;
   gap: 16px;
-  width: min(calc(100% - 32px), 1392px);
+  width: var(--page-width);
   margin: 0 auto;
   padding: 64px 0;
 }

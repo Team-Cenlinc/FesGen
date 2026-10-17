@@ -117,4 +117,48 @@ html[data-appearance="dark"] {
   --duration-feedback: 150ms;
   --duration-press: 120ms;
   --duration-move: 200ms;
+
+  /*
+   * 页头动效，与 Fetarute-Website src/styles/global.css 的 :root 同名同值，两边改动请同步。
+   */
+  --motion-header-standard-effects: ease;
+  --motion-header-standard-spatial: cubic-bezier(0.23, 1, 0.32, 1);
+  --motion-header-standard-move: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-header-standard-effects: 150ms;
+  --duration-header-press: 100ms;
+  --motion-header-layout-expand: var(--motion-header-standard-spatial);
+  --motion-header-layout-contract: var(--motion-header-standard-move);
+  --duration-header-layout-expand: 240ms;
+  --duration-header-layout-contract: 180ms;
+  --duration-header-content-handoff: 100ms;
+  --duration-header-reduced-feedback: 120ms;
+  --color-header-surface: var(--color-surface);
+  /* 页头与正文共用的版心宽度，和网站页头同一公式，保证左右边缘对齐。 */
+  --page-width: min(85vw, calc(100% - 40px));
+  /* 编辑器要给画布留空间，不跟页头的 85vw，只保留页头的最小边距。 */
+  --page-width-wide: min(calc(100% - 40px), 1392px);
+
+  /*
+   * 导航指示点用的线路色，取自 Fetarute-Website src/data/railway.ts。
+   * 只用作导航装饰，与牌子内容无关（牌子上的线路仍由用户自由填写）。
+   */
+  --line-fta-sl: #1712a7;
+  --line-surn-bs: #17b292;
+  --line-surn-lt: #c8ffff;
+  --line-surn-frn: #ffcd2a;
+  --line-surn-pn: #ee65a6;
+  --line-surn-ws: #70deee;
+  --line-surc-ds: #f6a000;
+  --line-surc-mt: #d920d9;
+  --line-surc-l: #c40d0b;
+  /* 会话随机线路选出之前（或存储不可用时）作品库使用的确定线路色。 */
+  --color-home-line: var(--line-fta-sl);
+}
+
+/* 小屏页头左右各留 12px，正文跟着对齐。 */
+@media (max-width: 760px) {
+  :root {
+    --page-width: calc(100% - 24px);
+    --page-width-wide: calc(100% - 24px);
+  }
 }

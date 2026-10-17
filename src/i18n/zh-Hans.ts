@@ -8,6 +8,9 @@ export const zhHans = {
     decrease: "减少",
     increase: "增加",
   },
+  header: {
+    label: "站点顶部导航",
+  },
   app: {
     name: "FesGen",
     tagline: "导视牌生成器",
@@ -17,6 +20,8 @@ export const zhHans = {
     label: "主导航",
     library: "作品库",
     mapArt: "地图画",
+    more: "菜单",
+    moreHint: "站内导航与外部服务",
   },
   serviceDesk: {
     label: "服务台",
@@ -26,7 +31,7 @@ export const zhHans = {
     appearanceDark: "深色",
     guide: "上手指南",
     guideBody:
-      "地图画工具：导入一张图片，选好地图格子，FesGen 会把它换成 Minecraft 地图色板里的颜色。下载 PNG 后用 ImageFrame 导入游戏即可。",
+      "在作品库新建一块牌子，点牌面上的文字就能改，做好后导出 PNG、SVG 或地图画。地图画工具也能把现成的图片换成 Minecraft 地图色板，下载 PNG 后用 ImageFrame 导入游戏。",
     about: "关于",
     aboutBody: "FesGen 是由 Cenlinc Studio 开发的导视牌生成器，属于 Fetarute 社区。",
     version: "版本",
@@ -38,6 +43,7 @@ export const zhHans = {
     website: "Fetarute 官网",
     wiki: "Fetarute Wiki",
     github: "GitHub 仓库",
+    newTab: "在新标签页打开",
   },
   library: {
     title: "作品库",

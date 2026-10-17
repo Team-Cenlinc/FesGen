@@ -180,7 +180,7 @@ function finishRename() {
 .library {
   display: grid;
   gap: 24px;
-  width: min(calc(100% - 32px), 1392px);
+  width: var(--page-width);
   margin: 0 auto;
   padding: 40px 0 80px;
 }

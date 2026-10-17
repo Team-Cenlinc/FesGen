@@ -353,7 +353,7 @@ onBeforeUnmount(() => {
 .map-art {
   display: grid;
   gap: 32px;
-  width: min(calc(100% - 32px), 1392px);
+  width: var(--page-width);
   margin: 0 auto;
   padding: 40px 0 80px;
 }
@@ -552,7 +552,6 @@ onBeforeUnmount(() => {
 
 @media (max-width: 900px) {
   .map-art {
-    width: calc(100% - 16px);
     padding: 28px 0 64px;
   }
 
