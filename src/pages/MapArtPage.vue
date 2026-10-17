@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { PhCheck, PhCopy, PhDownloadSimple, PhGridNine } from "@phosphor-icons/vue";
 import { computed, onBeforeUnmount, ref, shallowRef, watch } from "vue";
+import ColorChip from "@/components/ColorChip.vue";
 import GridPicker from "@/components/mapart/GridPicker.vue";
 import MapArtPreview from "@/components/mapart/MapArtPreview.vue";
 import SourceDropzone from "@/components/mapart/SourceDropzone.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import SegmentedControl from "@/components/SegmentedControl.vue";
+import StepSection from "@/components/StepSection.vue";
+import SwitchToggle from "@/components/SwitchToggle.vue";
 import { messages as m } from "@/i18n";
 import { hexToRgb, rgbToHex } from "@/mapart/colors";
 import { placeSource, type FitMode } from "@/mapart/fit";
@@ -56,7 +59,7 @@ const viewOptions: { value: "map" | "original"; label: string }[] = [
   { value: "map", label: m.mapArt.preview.mapArt },
   { value: "original", label: m.mapArt.preview.original },
 ];
-const zoomOptions = [
+const zoomOptions: { value: number; label: string }[] = [
   { value: 0, label: m.mapArt.preview.zoomFit },
   { value: 1, label: "1×" },
   { value: 2, label: "2×" },
@@ -81,6 +84,7 @@ const fileNameOverride = ref<string | null>(null);
 const mapName = ref("fesgen");
 const imageUrl = ref("");
 const copied = ref(false);
+const downloadHint = ref(false);
 
 const suggested = computed(() => (source.value ? suggestGrid(source.value.size) : undefined));
 const isExact = computed(() => {
@@ -89,6 +93,9 @@ const isExact = computed(() => {
 });
 const targetSize = computed(() => gridPixelSize(grid.value));
 const shownImage = computed(() => (view.value === "map" ? result.value?.image : fitted.value));
+const sourceDetail = computed(() =>
+  source.value ? `${source.value.size.width} × ${source.value.size.height} px` : undefined,
+);
 const defaultFileName = computed(
   () => `${source.value?.baseName ?? "fesgen"}-${grid.value.rows}x${grid.value.columns}`,
 );
@@ -120,10 +127,11 @@ async function onFile(file: File) {
   paddingHex.value = rgbToHex(sampleCornerColor(bitmap));
   fileNameOverride.value = null;
   mapName.value = sanitizeImageFrameName(baseName);
+  downloadHint.value = false;
   source.value = { bitmap, name: file.name, baseName, size };
 }
 
-// 参数一变就重新生成；只保留最后一次请求的结果，连续拖动时不会闪回旧图。
+// 参数一变就重新生成；只保留最后一次请求的结果，连续调整时不会闪回旧图。
 let latestRun = 0;
 watch([source, grid, fit, paddingKind, paddingHex, dither], async () => {
   const current = source.value;
@@ -144,8 +152,12 @@ watch([source, grid, fit, paddingKind, paddingHex, dither], async () => {
   working.value = false;
 });
 
+// 下载按钮始终可点：还没有图时说明原因，而不是给一个灰掉、不知道为什么点不了的按钮。
 async function download() {
-  if (!result.value) return;
+  if (!result.value) {
+    downloadHint.value = true;
+    return;
+  }
   const blob = await encodePng(result.value.image);
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -178,73 +190,62 @@ onBeforeUnmount(() => {
 
     <div class="map-art__layout">
       <aside class="map-art__controls">
-        <section class="panel section">
-          <h2 class="section__title">{{ m.mapArt.source.heading }}</h2>
-          <SourceDropzone :file-name="source?.name" @file="onFile" />
-          <p v-if="source" class="hint">{{ source.size.width }} × {{ source.size.height }} px</p>
-          <p v-if="sourceError" class="section__error" role="alert">{{ sourceError }}</p>
-        </section>
+        <StepSection :title="m.mapArt.source.heading">
+          <SourceDropzone :file-name="source?.name" :detail="sourceDetail" @file="onFile" />
+          <p v-if="sourceError" class="notice notice--error" role="alert">{{ sourceError }}</p>
+        </StepSection>
 
-        <section class="panel section">
-          <h2 class="section__title">{{ m.mapArt.grid.heading }}</h2>
+        <StepSection :title="m.mapArt.grid.heading">
           <GridPicker v-model="grid" :suggested="suggested" />
-          <p v-if="isExact" class="hint">{{ m.mapArt.grid.exactMatch }}</p>
-        </section>
+          <p v-if="isExact" class="notice notice--ok">{{ m.mapArt.grid.exactMatch }}</p>
+        </StepSection>
 
-        <section class="panel section">
-          <h2 class="section__title">{{ m.mapArt.fit.heading }}</h2>
+        <StepSection :title="m.mapArt.fit.heading">
           <SegmentedControl v-model="fit" :options="fitOptions" :label="m.mapArt.fit.heading" />
           <p v-if="isExact" class="hint">{{ m.mapArt.fit.notNeeded }}</p>
-          <div v-else-if="fit === 'contain'" class="section__row">
+          <div v-else-if="fit === 'contain'" class="control-row">
             <span class="field__label">{{ m.mapArt.fit.padding }}</span>
             <SegmentedControl
               v-model="paddingKind"
+              size="sm"
               :options="paddingOptions"
               :label="m.mapArt.fit.padding"
             />
-            <input
+            <ColorChip
               v-if="paddingKind === 'color'"
               v-model="paddingHex"
-              class="section__color"
-              type="color"
-              :aria-label="m.mapArt.fit.padding"
+              :label="m.mapArt.fit.padding"
             />
           </div>
-        </section>
+        </StepSection>
 
-        <section class="panel section">
-          <h2 class="section__title">{{ m.mapArt.dither.heading }}</h2>
+        <StepSection :title="m.mapArt.dither.heading">
           <SegmentedControl
             v-model="dither"
             :options="ditherOptions"
             :label="m.mapArt.dither.heading"
           />
           <p class="hint">{{ m.mapArt.dither.hint }}</p>
-        </section>
+        </StepSection>
       </aside>
 
       <section class="map-art__stage">
-        <div class="panel section">
-          <div class="stage__toolbar">
-            <h2 class="section__title">{{ m.mapArt.preview.heading }}</h2>
+        <StepSection :title="m.mapArt.preview.heading">
+          <template #aside>
             <SegmentedControl
               v-model="view"
+              size="sm"
               :options="viewOptions"
               :label="m.mapArt.preview.heading"
             />
-            <label class="stage__zoom">
-              <span class="field__label">{{ m.mapArt.preview.zoom }}</span>
-              <select v-model.number="zoom" class="input">
-                <option v-for="option in zoomOptions" :key="option.value" :value="option.value">
-                  {{ option.label }}
-                </option>
-              </select>
-            </label>
-            <label class="stage__toggle">
-              <input v-model="showGrid" type="checkbox" />
-              {{ m.mapArt.preview.gridLines }}
-            </label>
-          </div>
+            <SegmentedControl
+              v-model="zoom"
+              size="sm"
+              :options="zoomOptions"
+              :label="m.mapArt.preview.zoom"
+            />
+            <SwitchToggle v-model="showGrid">{{ m.mapArt.preview.gridLines }}</SwitchToggle>
+          </template>
 
           <MapArtPreview
             v-if="shownImage"
@@ -254,75 +255,95 @@ onBeforeUnmount(() => {
             :show-grid="showGrid"
             :label="view === 'map' ? m.mapArt.preview.mapArt : m.mapArt.preview.original"
           />
-          <p v-else class="stage__empty">{{ m.mapArt.preview.empty }}</p>
-          <p v-if="working && source" class="hint" aria-live="polite">
-            {{ m.mapArt.preview.working }}
-          </p>
+          <div v-else class="stage__empty">
+            <span class="stage__empty-wall" aria-hidden="true">
+              <span v-for="cell in 3" :key="cell" />
+            </span>
+            <p>{{ m.mapArt.preview.empty }}</p>
+          </div>
 
-          <dl v-if="result" class="stats">
+          <dl v-if="result" class="stats" :class="{ 'stats--working': working }">
             <div>
               <dt>{{ m.mapArt.stats.size }}</dt>
-              <dd>{{ result.image.width }} × {{ result.image.height }} px</dd>
+              <dd>{{ result.image.width }} × {{ result.image.height }}</dd>
             </div>
             <div>
               <dt>{{ m.mapArt.stats.maps }}</dt>
-              <dd>{{ grid.rows * grid.columns }}（{{ gridLabel(grid) }}）</dd>
+              <dd>
+                {{ grid.rows * grid.columns }}
+                <span class="stats__aside">{{ gridLabel(grid) }}</span>
+              </dd>
             </div>
             <div>
               <dt>{{ m.mapArt.stats.colors }}</dt>
-              <dd>{{ result.colorsUsed }} / {{ paletteSize }}</dd>
+              <dd>
+                {{ result.colorsUsed }}
+                <span class="stats__aside">/ {{ paletteSize }}</span>
+              </dd>
             </div>
             <div>
               <dt>{{ m.mapArt.stats.transparent }}</dt>
               <dd>{{ result.transparentPixels }}</dd>
             </div>
           </dl>
-        </div>
+          <p v-if="working && source" class="visually-hidden" aria-live="polite">
+            {{ m.mapArt.preview.working }}
+          </p>
+        </StepSection>
 
-        <div class="panel section">
-          <h2 class="section__title">{{ m.mapArt.export.heading }}</h2>
+        <StepSection :title="m.mapArt.export.heading">
           <div class="export__row">
             <label class="field export__name">
               <span class="field__label">{{ m.mapArt.export.fileName }}</span>
               <input v-model="fileName" class="input" type="text" spellcheck="false" />
             </label>
-            <button
-              type="button"
-              class="button button--primary"
-              :disabled="!result || working"
-              @click="download"
-            >
+            <button type="button" class="button button--primary export__download" @click="download">
               <PhDownloadSimple :size="18" weight="bold" aria-hidden="true" />
               {{ m.mapArt.export.download }}
             </button>
           </div>
+          <p v-if="downloadHint && !result" class="notice notice--caution" role="status">
+            {{ m.mapArt.export.needsSource }}
+          </p>
 
-          <h3 class="export__subtitle">{{ m.mapArt.export.command }}</h3>
-          <p class="hint">{{ m.mapArt.export.commandHint }}</p>
-          <div class="export__row">
-            <label class="field">
-              <span class="field__label">{{ m.mapArt.export.mapName }}</span>
-              <input v-model="mapName" class="input" type="text" spellcheck="false" />
-            </label>
-            <label class="field export__url">
-              <span class="field__label">{{ m.mapArt.export.imageUrl }}</span>
-              <input
-                v-model="imageUrl"
-                class="input"
-                type="url"
-                placeholder="https://"
-                spellcheck="false"
-              />
-            </label>
+          <div class="export__command-block">
+            <h3 class="export__subtitle">{{ m.mapArt.export.command }}</h3>
+            <p class="hint">{{ m.mapArt.export.commandHint }}</p>
+            <div class="export__row">
+              <label class="field">
+                <span class="field__label">{{ m.mapArt.export.mapName }}</span>
+                <input v-model="mapName" class="input" type="text" spellcheck="false" />
+              </label>
+              <label class="field export__url">
+                <span class="field__label">{{ m.mapArt.export.imageUrl }}</span>
+                <input
+                  v-model="imageUrl"
+                  class="input"
+                  type="url"
+                  placeholder="https://"
+                  spellcheck="false"
+                />
+              </label>
+            </div>
+            <div class="terminal">
+              <code class="terminal__line">{{ command }}</code>
+              <button
+                type="button"
+                class="terminal__copy"
+                :class="{ 'terminal__copy--done': copied }"
+                @click="copyCommand"
+              >
+                <component
+                  :is="copied ? PhCheck : PhCopy"
+                  :size="16"
+                  weight="bold"
+                  aria-hidden="true"
+                />
+                {{ copied ? m.mapArt.export.copied : m.mapArt.export.copy }}
+              </button>
+            </div>
           </div>
-          <div class="export__command">
-            <code>{{ command }}</code>
-            <button type="button" class="button button--small" @click="copyCommand">
-              <component :is="copied ? PhCheck : PhCopy" :size="16" aria-hidden="true" />
-              {{ copied ? m.mapArt.export.copied : m.mapArt.export.copy }}
-            </button>
-          </div>
-        </div>
+        </StepSection>
       </section>
     </div>
   </main>
@@ -332,14 +353,14 @@ onBeforeUnmount(() => {
 .map-art {
   display: grid;
   gap: 32px;
-  max-width: 1440px;
+  width: min(calc(100% - 32px), 1392px);
   margin: 0 auto;
-  padding: 40px 24px 80px;
+  padding: 40px 0 80px;
 }
 
 .map-art__layout {
   display: grid;
-  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
   align-items: start;
   gap: 20px;
 }
@@ -350,100 +371,100 @@ onBeforeUnmount(() => {
   gap: 16px;
 }
 
-.section {
-  display: grid;
-  gap: 14px;
-  padding: 20px;
-}
-
-.section__title {
-  font-size: 17px;
-  font-weight: 750;
-}
-
-.section__row {
+.control-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }
 
-.section__color {
-  width: 44px;
-  height: 36px;
-  padding: 2px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-control);
-  background: var(--color-surface-raised);
-}
-
-.section__error {
-  font-size: 14px;
+/* 提示条：左侧竖条标出状态，正文用普通文字色，保证可读。 */
+.notice {
+  padding: 8px 12px;
+  border-left: 4px solid var(--notice-color);
+  background: color-mix(in srgb, var(--notice-color) 10%, transparent);
+  font-size: 13px;
   font-weight: 650;
-  color: var(--color-status-error);
 }
 
-.stage__toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 16px;
+.notice--ok {
+  --notice-color: var(--color-status-ok);
 }
 
-.stage__toolbar .section__title {
-  margin-right: auto;
+.notice--caution {
+  --notice-color: var(--color-status-caution);
 }
 
-.stage__zoom {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.notice--error {
+  --notice-color: var(--color-status-error);
 }
 
-.stage__zoom .input {
-  width: auto;
-}
-
-.stage__toggle {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
+/* 空预览：一面还没挂地图的墙。 */
 .stage__empty {
-  padding: 64px 16px;
-  border: 2px dashed var(--color-border);
-  border-radius: var(--radius-control);
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  padding: 56px 16px;
+  border-radius: 8px;
+  background: var(--color-surface-raised);
   color: var(--color-muted);
   text-align: center;
 }
 
+.stage__empty-wall {
+  display: grid;
+  grid-template-columns: repeat(3, 44px);
+  gap: 6px;
+}
+
+.stage__empty-wall > span {
+  height: 44px;
+  border: 2px dashed var(--color-border);
+  border-radius: 3px;
+}
+
+/* 统计像站牌上的信息格：小标签在上，粗体等宽数字在下。 */
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0;
+  border: var(--border-plate);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: opacity var(--duration-feedback) ease;
+}
+
+.stats--working {
+  opacity: 0.55;
 }
 
 .stats div {
-  padding: 10px 12px;
-  border-left: 3px solid var(--color-text);
-  background: var(--color-surface-raised);
+  padding: 10px 14px;
+}
+
+.stats div + div {
+  border-left: var(--border-plate);
 }
 
 .stats dt {
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 700;
   color: var(--color-muted);
 }
 
 .stats dd {
   margin: 0;
-  font-size: 16px;
-  font-weight: 750;
+  font-family: var(--font-fetarute-display);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
+}
+
+.stats__aside {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-muted);
 }
 
 .export__row {
@@ -461,41 +482,99 @@ onBeforeUnmount(() => {
   flex-grow: 3 !important;
 }
 
-.export__subtitle {
-  margin-top: 8px;
-  font-size: 15px;
-  font-weight: 750;
+.export__download {
+  min-height: 40px;
 }
 
-.export__command {
+.export__command-block {
+  display: grid;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.export__subtitle {
+  font-size: 15px;
+  font-weight: 790;
+}
+
+/* 命令行：像游戏聊天栏一样的深色条，复制按钮在右侧。 */
+.terminal {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
-  border-radius: var(--radius-control);
+  padding: 6px 6px 6px 14px;
+  border-radius: 8px;
   background: var(--color-action);
   color: var(--color-action-text);
 }
 
-.export__command code {
+.terminal__line {
   flex: 1 1 auto;
   min-width: 0;
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 14px;
   white-space: nowrap;
+  scrollbar-width: none;
 }
 
-.export__command .button {
+.terminal__copy {
+  display: inline-flex;
   flex: 0 0 auto;
-  border-color: var(--color-action-text);
-  background: transparent;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--color-action-text) 14%, transparent);
   color: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-feedback) ease,
+    transform var(--duration-press) var(--ease-out);
+}
+
+.terminal__copy:active {
+  transform: scale(0.96);
+}
+
+.terminal__copy--done {
+  background: var(--color-status-ok);
+  color: var(--color-status-ok-text);
+}
+
+.terminal__copy:focus-visible {
+  outline-color: var(--color-action-text);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .terminal__copy:not(.terminal__copy--done):hover {
+    background: color-mix(in srgb, var(--color-action-text) 24%, transparent);
+  }
+}
+
+@media (max-width: 1023px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats div:nth-child(3) {
+    border-left: 0;
+  }
+
+  .stats div:nth-child(n + 3) {
+    border-top: var(--border-plate);
+  }
 }
 
 @media (max-width: 900px) {
   .map-art {
-    padding: 28px 12px 64px;
+    width: calc(100% - 16px);
+    padding: 28px 0 64px;
   }
 
   .map-art__layout {

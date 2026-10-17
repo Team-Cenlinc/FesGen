@@ -25,9 +25,9 @@ import { messages as m } from "@/i18n";
 .library {
   display: grid;
   gap: 32px;
-  max-width: 1080px;
+  width: min(calc(100% - 32px), 1392px);
   margin: 0 auto;
-  padding: 48px 24px 80px;
+  padding: 40px 0 80px;
 }
 
 .library__empty {

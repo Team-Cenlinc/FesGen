@@ -102,6 +102,7 @@ export const zhHans = {
       heading: "导出",
       fileName: "文件名",
       download: "下载地图画 PNG",
+      needsSource: "先在“源图”里导入一张图片。",
       command: "ImageFrame 命令",
       commandHint: "把 PNG 上传到图床或 ImageFrame 内置的上传服务，再把链接填进命令。",
       mapName: "地图名称",
