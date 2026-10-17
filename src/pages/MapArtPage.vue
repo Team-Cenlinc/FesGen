@@ -378,27 +378,6 @@ onBeforeUnmount(() => {
   gap: 10px;
 }
 
-/* 提示条：左侧竖条标出状态，正文用普通文字色，保证可读。 */
-.notice {
-  padding: 8px 12px;
-  border-left: 4px solid var(--notice-color);
-  background: color-mix(in srgb, var(--notice-color) 10%, transparent);
-  font-size: 13px;
-  font-weight: 650;
-}
-
-.notice--ok {
-  --notice-color: var(--color-status-ok);
-}
-
-.notice--caution {
-  --notice-color: var(--color-status-caution);
-}
-
-.notice--error {
-  --notice-color: var(--color-status-error);
-}
-
 /* 空预览：一面还没挂地图的墙。 */
 .stage__empty {
   display: grid;

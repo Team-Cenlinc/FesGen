@@ -23,9 +23,20 @@ import FetaruteWordmark from "./FetaruteWordmark.vue";
 
 type Menu = "service" | "exit";
 
+// 编辑某块牌子时仍算在“作品库”里。
 const navItems = [
-  { to: "/", label: m.nav.library, arrow: PhArrowUp },
-  { to: "/map-art", label: m.nav.mapArt, arrow: PhArrowRight },
+  {
+    to: "/",
+    label: m.nav.library,
+    arrow: PhArrowUp,
+    matches: (path: string) => path === "/" || path.startsWith("/sign/"),
+  },
+  {
+    to: "/map-art",
+    label: m.nav.mapArt,
+    arrow: PhArrowRight,
+    matches: (path: string) => path === "/map-art",
+  },
 ] as const;
 
 const exitLinks = [
@@ -100,7 +111,8 @@ onBeforeUnmount(() => {
         :key="item.to"
         :to="item.to"
         class="nav-item"
-        exact-active-class="nav-item--active"
+        :class="{ 'nav-item--active': item.matches(route.path) }"
+        :aria-current="item.matches(route.path) ? 'page' : undefined"
       >
         <span class="nav-item__primary">
           <span class="nav-item__stack">
