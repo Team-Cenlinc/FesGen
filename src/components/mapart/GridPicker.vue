@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import NumberStepper from "@/components/NumberStepper.vue";
+import TypeText from "@/components/TypeText.vue";
 import { messages as m } from "@/i18n";
 import {
   GRID_PRESETS,
@@ -52,7 +53,7 @@ const columns = computed({
             <span v-for="cell in preset.rows * preset.columns" :key="cell" />
           </span>
         </span>
-        <span class="grid-picker__label">{{ gridLabel(preset) }}</span>
+        <span class="grid-picker__label"><TypeText :text="gridLabel(preset)" /></span>
       </button>
     </div>
 
@@ -61,7 +62,7 @@ const columns = computed({
         <span class="field__label">{{ m.mapArt.grid.rows }}</span>
         <NumberStepper v-model="rows" :min="1" :max="MAX_GRID_SIDE" :label="m.mapArt.grid.rows" />
       </div>
-      <span class="grid-picker__times" aria-hidden="true">×</span>
+      <span class="grid-picker__times times-separator" aria-hidden="true">×</span>
       <div class="grid-picker__side">
         <span class="field__label">{{ m.mapArt.grid.columns }}</span>
         <NumberStepper
@@ -71,7 +72,9 @@ const columns = computed({
           :label="m.mapArt.grid.columns"
         />
       </div>
-      <span class="grid-picker__size">{{ pixelSize.width }} × {{ pixelSize.height }}</span>
+      <span class="grid-picker__size">
+        <TypeText :text="`${pixelSize.width} × ${pixelSize.height} px`" />
+      </span>
     </div>
 
     <button
@@ -81,7 +84,9 @@ const columns = computed({
       @click="grid = { ...props.suggested }"
     >
       {{ m.mapArt.grid.suggested }}
-      <span class="grid-picker__suggest-value">{{ gridLabel(props.suggested) }}</span>
+      <span class="grid-picker__suggest-value"
+        ><TypeText :text="gridLabel(props.suggested)"
+      /></span>
     </button>
   </div>
 </template>
@@ -166,9 +171,11 @@ const columns = computed({
   gap: 6px;
 }
 
+/* 乘号在 40px 高的步进器中线上居中。 */
 .grid-picker__times {
-  padding-bottom: 9px;
-  font-weight: 790;
+  display: grid;
+  height: 40px;
+  place-items: center;
 }
 
 .grid-picker__size {
@@ -179,10 +186,6 @@ const columns = computed({
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--color-muted);
-}
-
-.grid-picker__size::after {
-  content: " px";
 }
 
 .grid-picker__suggest {

@@ -281,7 +281,7 @@ const gridSize = computed(() => (props.doc.size.mode === "grid" ? props.doc.size
                   emit('mapArt', { gridForFree: { ...doc.mapArt.gridForFree, rows: $event } })
                 "
               />
-              <span class="tweak-row__unit">×</span>
+              <span class="times-separator" aria-hidden="true">×</span>
               <NumberStepper
                 :model-value="doc.mapArt.gridForFree.columns"
                 :min="1"

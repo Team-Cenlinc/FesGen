@@ -52,6 +52,35 @@ p {
   outline-offset: 2px;
 }
 
+/*
+ * 中西混排的短标签（TypeText）。外层按需设置 --type-cjk-weight、--type-latin-size；
+ * 没设的变量让声明失效，属性回到继承值，所以普通文本不受影响。
+ */
+.type-cjk {
+  font-weight: var(--type-cjk-weight);
+}
+
+.type-latin {
+  font-size: var(--type-latin-size);
+}
+
+/* Noto Sans Display 的 × 高 0.45em、居中在数字中线上；放大到数字的四分之三高，再压回中线。 */
+.type-times {
+  margin-inline: 0.04em;
+  font-size: 1.2em;
+  line-height: 0;
+  vertical-align: -0.06em;
+}
+
+/* 两个步进器之间的乘号（地图格子选择器、编辑器的地图画格子），放大到和步进器里的数字相称。 */
+.times-separator {
+  font-family: var(--font-fetarute-display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-muted);
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

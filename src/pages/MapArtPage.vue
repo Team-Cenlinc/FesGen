@@ -5,6 +5,7 @@ import ColorChip from "@/components/ColorChip.vue";
 import GridPicker from "@/components/mapart/GridPicker.vue";
 import MapArtPreview from "@/components/mapart/MapArtPreview.vue";
 import SourceDropzone from "@/components/mapart/SourceDropzone.vue";
+import TypeText from "@/components/TypeText.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import SegmentedControl from "@/components/SegmentedControl.vue";
 import StepSection from "@/components/StepSection.vue";
@@ -265,7 +266,7 @@ onBeforeUnmount(() => {
           <dl v-if="result" class="stats" :class="{ 'stats--working': working }">
             <div>
               <dt>{{ m.mapArt.stats.size }}</dt>
-              <dd>{{ result.image.width }} × {{ result.image.height }}</dd>
+              <dd><TypeText :text="`${result.image.width} × ${result.image.height}`" /></dd>
             </div>
             <div>
               <dt>{{ m.mapArt.stats.maps }}</dt>

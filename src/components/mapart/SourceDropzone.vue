@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { PhImageSquare } from "@phosphor-icons/vue";
 import { ref } from "vue";
+import TypeText from "@/components/TypeText.vue";
 import { messages as m } from "@/i18n";
 
 /**
@@ -50,7 +51,7 @@ function onDrop(event: DragEvent) {
     <template v-else>
       <div v-if="fileName" class="dropzone__file">
         <p class="dropzone__name">{{ fileName }}</p>
-        <p v-if="detail" class="dropzone__detail">{{ detail }}</p>
+        <p v-if="detail" class="dropzone__detail"><TypeText :text="detail" /></p>
       </div>
       <button
         type="button"

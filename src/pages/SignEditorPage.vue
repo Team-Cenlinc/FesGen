@@ -16,6 +16,7 @@ import SignCanvas from "@/components/editor/SignCanvas.vue";
 import MapArtPreview from "@/components/mapart/MapArtPreview.vue";
 import SegmentedControl from "@/components/SegmentedControl.vue";
 import SwitchToggle from "@/components/SwitchToggle.vue";
+import TypeText from "@/components/TypeText.vue";
 import { useSignEditor } from "@/composables/useSignEditor";
 import { format, messages as m } from "@/i18n";
 import { sizeLabel } from "@/library/labels";
@@ -165,7 +166,9 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeyDown));
         @input="setName"
         @blur="fixName"
       />
-      <span class="editor__meta">{{ style.label }} · {{ sizeLabel(draft.size) }}</span>
+      <span class="editor__meta">
+        <TypeText :text="`${style.label} · ${sizeLabel(draft.size)}`" />
+      </span>
       <span v-if="editor.lastSavedAt.value" class="editor__saved">{{ m.editor.saved }}</span>
       <div class="editor__bar-actions">
         <button

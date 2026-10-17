@@ -11,6 +11,7 @@ import {
 import { nextTick, ref } from "vue";
 import { useRouter } from "vue-router";
 import PageTitle from "@/components/PageTitle.vue";
+import TypeText from "@/components/TypeText.vue";
 import { messages as m } from "@/i18n";
 import { importSignJson } from "@/library/io";
 import { relativeTime, signMeta } from "@/library/labels";
@@ -127,7 +128,9 @@ function finishRename() {
           <RouterLink v-else :to="`/sign/${sign.id}`" class="sign-card__name">{{
             sign.name
           }}</RouterLink>
-          <p class="sign-card__meta">{{ signMeta(sign) }} · {{ relativeTime(sign.updatedAt) }}</p>
+          <p class="sign-card__meta">
+            <TypeText :text="`${signMeta(sign)} · ${relativeTime(sign.updatedAt)}`" />
+          </p>
 
           <div v-if="confirmingDeleteId === sign.id" class="sign-card__actions">
             <button

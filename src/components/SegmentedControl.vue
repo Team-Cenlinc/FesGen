@@ -1,9 +1,11 @@
 <script setup lang="ts" generic="T extends string | number">
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import TypeText from "./TypeText.vue";
 
 /**
  * 互斥选项。选中项是一块反白的牌面，切换时牌面滑到新位置；
  * 用键盘切换时直接跳过去，不播放动画（键盘操作频繁，动画只会显得迟钝）。
+ * 放得下时各项等宽（取最宽的一项），牌面滑动时宽度不跳，“适应 1× 2×”这样中西混排的一组也排得齐。
  */
 const props = withDefaults(
   defineProps<{
@@ -93,7 +95,7 @@ onBeforeUnmount(() => observer?.disconnect());
       :tabindex="model === option.value ? 0 : -1"
       @click="select(option.value)"
     >
-      {{ option.label }}
+      <TypeText :text="option.label" />
     </button>
   </div>
 </template>
@@ -101,7 +103,10 @@ onBeforeUnmount(() => observer?.disconnect());
 <style scoped>
 .segmented {
   position: relative;
-  display: inline-flex;
+  display: inline-grid;
+  /* 放得下时各项等宽；放不下时每项至少保留自己的内容宽，不会把整组撑出容器。 */
+  grid-auto-columns: minmax(max-content, 1fr);
+  grid-auto-flow: column;
   max-width: 100%;
   padding: 3px;
   border: var(--border-plate);
@@ -127,8 +132,10 @@ onBeforeUnmount(() => observer?.disconnect());
   transition: none;
 }
 
+/* 汉字减一点字重、西文和数字放大一点，两种文字在同一组里看起来一样大、一样黑。 */
 .segmented__option {
-  flex: 1 1 auto;
+  --type-cjk-weight: 620;
+  --type-latin-size: 1.075em;
   min-height: 34px;
   padding: 0 14px;
   border: 0;
@@ -136,6 +143,7 @@ onBeforeUnmount(() => observer?.disconnect());
   background: transparent;
   font-size: 14px;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
   white-space: nowrap;
   cursor: pointer;

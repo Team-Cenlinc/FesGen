@@ -2,6 +2,7 @@
 import { PhCheck, PhCopy, PhDownloadSimple, PhX } from "@phosphor-icons/vue";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import SegmentedControl from "@/components/SegmentedControl.vue";
+import TypeText from "@/components/TypeText.vue";
 import { format, messages as m } from "@/i18n";
 import { exportSignJson } from "@/library/io";
 import { gridLabel, gridPixelSize } from "@/mapart/grid";
@@ -159,7 +160,7 @@ onBeforeUnmount(() => {
               :options="scaleOptions"
               :label="m.exporting.scale"
             />
-            <span class="hint">{{ outputSize }}</span>
+            <span class="hint"><TypeText :text="outputSize" /></span>
           </span>
         </div>
         <label v-if="formatChoice === 'jpg'" class="export__row">
@@ -179,12 +180,14 @@ onBeforeUnmount(() => {
       </template>
       <template v-else-if="formatChoice === 'map'">
         <p class="hint">
-          {{
-            format(m.exporting.mapArtHint, {
-              grid: gridLabel(mapGrid),
-              size: `${mapPixels.width} × ${mapPixels.height} px`,
-            })
-          }}
+          <TypeText
+            :text="
+              format(m.exporting.mapArtHint, {
+                grid: gridLabel(mapGrid),
+                size: `${mapPixels.width} × ${mapPixels.height} px`,
+              })
+            "
+          />
         </p>
         <div class="terminal">
           <code class="terminal__line">{{ command }}</code>

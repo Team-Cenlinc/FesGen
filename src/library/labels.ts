@@ -1,11 +1,12 @@
 import { gridLabel } from "@/mapart/grid";
 import { getSignStyle } from "@/signs/registry";
+import { spaceMixedScript } from "@/utils/typeset";
 import type { SignDocument, SignSize } from "@/signs/types";
 
 export function sizeLabel(size: SignSize): string {
   return size.mode === "grid"
     ? `${gridLabel(size.grid)} 地图格`
-    : `${size.width}×${size.height} px`;
+    : `${size.width} × ${size.height} px`;
 }
 
 const relative = new Intl.RelativeTimeFormat("zh-Hans", { numeric: "auto" });
@@ -29,7 +30,8 @@ export function relativeTime(timestamp: number, now = Date.now()): string {
       divisor = size;
     }
   }
-  return relative.format(Math.round(seconds / divisor), unit);
+  // Intl 输出“36分钟前”，按界面文案习惯在数字和汉字之间补空格。
+  return spaceMixedScript(relative.format(Math.round(seconds / divisor), unit));
 }
 
 export function signMeta(sign: SignDocument): string {
