@@ -11,6 +11,7 @@ export const zhHans = {
   app: {
     name: "FesGen",
     tagline: "导视牌生成器",
+    homeLabel: "FesGen 导视牌生成器，返回作品库",
   },
   nav: {
     label: "主导航",
