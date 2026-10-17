@@ -1,0 +1,116 @@
+/*
+ * 界面材料与功能色，取自 Fetarute-Website 的 src/data/palette.ts（interfacePalette）。
+ * 两边属于同一套导视系统，改色时请同步修改网站，不要在这里单独发明新的灰阶。
+ * 界面色只服务于编辑器外壳，不能占用牌子本身的颜色。
+ */
+:root {
+  --palette-canvas: #f0f1f0;
+  --palette-surface: #fafbfa;
+  --palette-surface-raised: #fcfdfc;
+  --palette-text: #1b2022;
+  --palette-muted: #626a6d;
+  --palette-border: #c9ced0;
+  --palette-action: #1b2022;
+  --palette-action-text: #f4f6f5;
+  --palette-status-ok: #0f7a4f;
+  --palette-status-ok-text: #f4f6f5;
+  --palette-status-caution: #9a5d00;
+  --palette-status-caution-text: #f4f6f5;
+  --palette-status-error: #b8443e;
+  --palette-status-error-text: #f4f6f5;
+  --palette-fetarute-info: #0067b1;
+  --palette-fetarute-info-text: #f4f6f5;
+  --palette-fetarute-exit: #f3c742;
+  --palette-fetarute-exit-text: #171b1d;
+  --palette-floating-shadow: 0 0 42px -18px rgb(12 15 16 / 0.35);
+  --palette-feedback-shadow: 0 8px 24px rgb(27 32 34 / 0.14);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-appearance]) {
+    --palette-canvas: #111416;
+    --palette-surface: #1a1e20;
+    --palette-surface-raised: #24292b;
+    --palette-text: #eef0ef;
+    --palette-muted: #b2b8b9;
+    --palette-border: #3d474a;
+    --palette-action: #eef0ef;
+    --palette-action-text: #1b2022;
+    --palette-status-ok: #4fcb8a;
+    --palette-status-ok-text: #1b2022;
+    --palette-status-caution: #f0b84a;
+    --palette-status-caution-text: #1b2022;
+    --palette-status-error: #ff8c84;
+    --palette-status-error-text: #1b2022;
+    --palette-fetarute-info: #155575;
+    --palette-fetarute-info-text: #f4f6f5;
+    --palette-fetarute-exit: #7a5a16;
+    --palette-fetarute-exit-text: #f4f6f5;
+    --palette-floating-shadow: 0 0 58px -20px rgb(0 0 0 / 0.72);
+    --palette-feedback-shadow: 0 8px 24px rgb(0 0 0 / 0.55);
+  }
+}
+
+html[data-appearance="dark"] {
+  --palette-canvas: #111416;
+  --palette-surface: #1a1e20;
+  --palette-surface-raised: #24292b;
+  --palette-text: #eef0ef;
+  --palette-muted: #b2b8b9;
+  --palette-border: #3d474a;
+  --palette-action: #eef0ef;
+  --palette-action-text: #1b2022;
+  --palette-status-ok: #4fcb8a;
+  --palette-status-ok-text: #1b2022;
+  --palette-status-caution: #f0b84a;
+  --palette-status-caution-text: #1b2022;
+  --palette-status-error: #ff8c84;
+  --palette-status-error-text: #1b2022;
+  --palette-fetarute-info: #155575;
+  --palette-fetarute-info-text: #f4f6f5;
+  --palette-fetarute-exit: #7a5a16;
+  --palette-fetarute-exit-text: #f4f6f5;
+  --palette-floating-shadow: 0 0 58px -20px rgb(0 0 0 / 0.72);
+  --palette-feedback-shadow: 0 8px 24px rgb(0 0 0 / 0.55);
+}
+
+:root {
+  /* 英文、数字优先用 Noto Sans Display，未覆盖的中文字符落到 Noto Sans SC，与网站一致。 */
+  --font-fetarute-display: "Noto Sans Display Variable", "Noto Sans Display";
+  --font-fetarute-sans-sc: "Noto Sans SC Variable", "Noto Sans SC";
+  --font-fetarute-ui: var(--font-fetarute-display), var(--font-fetarute-sans-sc), sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --color-background: var(--palette-canvas);
+  --color-surface: var(--palette-surface);
+  --color-surface-raised: var(--palette-surface-raised);
+  --color-text: var(--palette-text);
+  --color-muted: var(--palette-muted);
+  --color-border: var(--palette-border);
+  --color-action: var(--palette-action);
+  --color-action-text: var(--palette-action-text);
+  --color-status-ok: var(--palette-status-ok);
+  --color-status-ok-text: var(--palette-status-ok-text);
+  --color-status-caution: var(--palette-status-caution);
+  --color-status-caution-text: var(--palette-status-caution-text);
+  --color-status-error: var(--palette-status-error);
+  --color-status-error-text: var(--palette-status-error-text);
+  /* 服务台蓝：设置、帮助与语言；出口黄：离开 FesGen 的外部链接。 */
+  --color-service: var(--palette-fetarute-info);
+  --color-service-text: var(--palette-fetarute-info-text);
+  --color-exit: var(--palette-fetarute-exit);
+  --color-exit-text: var(--palette-fetarute-exit-text);
+  --shadow-floating: var(--palette-floating-shadow);
+  --shadow-feedback: var(--palette-feedback-shadow);
+
+  /* 导视牌和内容模块共用的方正小圆角，与网站的 --radius-panel 一致。 */
+  --radius-panel: 10px;
+  --radius-control: 6px;
+  --radius-pill: 999px;
+  /* 灯箱外框使用和网站页头相同的 3px 实线。 */
+  --border-sign: 3px solid var(--color-text);
+
+  --motion-standard: cubic-bezier(0.23, 1, 0.32, 1);
+  --duration-feedback: 150ms;
+  --duration-press: 100ms;
+}

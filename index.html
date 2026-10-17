@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>FesGen</title>
+    <script>
+      // 在首帧前恢复用户选择的外观，避免深色模式下先闪一下浅色。
+      try {
+        const appearance = localStorage.getItem("fesgen.appearance");
+        if (appearance === "light" || appearance === "dark") {
+          document.documentElement.dataset.appearance = appearance;
+        }
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
