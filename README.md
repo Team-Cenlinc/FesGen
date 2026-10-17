@@ -33,8 +33,6 @@ npm run build
 ```
 
 - 技术栈：Vue 3 + Vite + TypeScript + Pinia
-- 重写的功能对齐清单：[docs/feature-parity.md](docs/feature-parity.md)
-- 新版设计决定：[docs/rewrite-decisions.md](docs/rewrite-decisions.md)
 - 地图画核心代码在 `src/mapart/`：Java 版 1.21 地图色板、CIELAB 取色（与 FetaruteTCAddon 站台屏一致）、量化与抖动、格子与适配
 
 ### About Fetarute
