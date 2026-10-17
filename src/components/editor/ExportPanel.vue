@@ -321,6 +321,8 @@ onBeforeUnmount(() => {
 }
 
 .terminal {
+  /* 不换行的命令不参与外层宽度计算，命令行跟着容器宽，过长的部分在行内横向滚动。 */
+  contain: inline-size;
   display: flex;
   align-items: center;
   gap: 12px;

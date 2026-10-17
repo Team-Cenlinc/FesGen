@@ -366,9 +366,11 @@ onBeforeUnmount(() => {
   gap: 20px;
 }
 
+/* 单列轨道写成 minmax(0, 1fr)，内容的最小宽度不会把整列撑出屏幕。 */
 .map-art__controls,
 .map-art__stage {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -468,6 +470,7 @@ onBeforeUnmount(() => {
 
 .export__command-block {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   padding-top: 18px;
   border-top: 1px solid var(--color-border);
@@ -480,6 +483,8 @@ onBeforeUnmount(() => {
 
 /* 命令行：像游戏聊天栏一样的深色条，复制按钮在右侧。 */
 .terminal {
+  /* 不换行的命令不参与外层宽度计算，命令行跟着容器宽，过长的部分在行内横向滚动。 */
+  contain: inline-size;
   display: flex;
   align-items: center;
   gap: 12px;

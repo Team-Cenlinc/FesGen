@@ -17,6 +17,7 @@ defineProps<{ title: string }>();
 .step {
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   padding: 20px;
 }
