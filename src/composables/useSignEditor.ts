@@ -14,8 +14,8 @@ import { gridPixelSize } from "@/mapart/grid";
 import { signThumbnail } from "@/signs/rasterize";
 import { getSignStyle, signPixelSize } from "@/signs/registry";
 import type { RenderTree } from "@/signs/render";
-import type { ModuleTweak, SignDocument } from "@/signs/types";
-import { setAtPath } from "@/signs/values";
+import type { FieldDef, ModuleTweak, SignDocument } from "@/signs/types";
+import { getAtPath, listInsert, listMove, listRemove, setAtPath } from "@/signs/values";
 
 /** 地图画里低于这个字号（像素）的文字会提示可能看不清。 */
 export const SMALL_TEXT_THRESHOLD = 10;
@@ -23,7 +23,7 @@ export const SMALL_TEXT_THRESHOLD = 10;
 type Snapshot = Pick<SignDocument, "name" | "size" | "lighting" | "content" | "tweaks" | "mapArt">;
 
 export interface EditorCheck {
-  kind: "small-text" | "missing-glyphs";
+  kind: "small-text" | "missing-glyphs" | "layout";
   module: string;
   text: string;
 }
@@ -125,6 +125,54 @@ export function useSignEditor(id: string) {
     commit((doc) => {
       const { [moduleId]: _removed, ...rest } = doc.tweaks;
       doc.tweaks = rest;
+    });
+  }
+
+  // —— 列表字段（例如 FTA 的线路）：插入、删除、调整顺序，每次都是一步撤销 ——
+  function listField(path: string): Extract<FieldDef, { type: "list" }> | null {
+    for (const module of style.value?.modules ?? []) {
+      for (const field of module.fields) {
+        if (field.type === "list" && field.path === path) return field;
+      }
+    }
+    return null;
+  }
+
+  function currentList(path: string): unknown[] {
+    const value = draft.value ? getAtPath(toRaw(draft.value.content), path) : null;
+    return Array.isArray(value) ? value : [];
+  }
+
+  function insertListItem(path: string, index: number): boolean {
+    const current = style.value;
+    const doc = draft.value;
+    if (!current || !doc) return false;
+    const item = current.newListItem?.(toRaw(doc.content), path);
+    if (item === undefined) return false;
+    commit((target) => {
+      target.content = setAtPath(
+        toRaw(target.content),
+        path,
+        listInsert(currentList(path), index, item),
+      );
+    });
+    return true;
+  }
+
+  function removeListItem(path: string, index: number): boolean {
+    const list = currentList(path);
+    if (list.length <= (listField(path)?.min ?? 0)) return false;
+    commit((target) => {
+      target.content = setAtPath(toRaw(target.content), path, listRemove(list, index));
+    });
+    return true;
+  }
+
+  function moveListItem(path: string, from: number, to: number) {
+    const list = currentList(path);
+    if (from === to || to < 0 || to >= list.length) return;
+    commit((target) => {
+      target.content = setAtPath(toRaw(target.content), path, listMove(list, from, to));
     });
   }
 
@@ -265,6 +313,9 @@ export function useSignEditor(id: string) {
         text: format(m.editor.missingGlyphs, { module: labelOf(moduleId), chars: chars.join("") }),
       });
     }
+    for (const [moduleId, messages] of Object.entries(layout.warnings ?? {})) {
+      for (const text of messages) result.push({ kind: "layout", module: moduleId, text });
+    }
     for (const [moduleId, size] of Object.entries(layout.minTextSize)) {
       const effective = size * mapScale;
       if (effective < SMALL_TEXT_THRESHOLD) {
@@ -345,6 +396,9 @@ export function useSignEditor(id: string) {
     setTweak,
     resetTweak,
     runAction,
+    insertListItem,
+    removeListItem,
+    moveListItem,
     undo,
     redo,
     canUndo,

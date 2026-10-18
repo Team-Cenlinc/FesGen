@@ -20,8 +20,9 @@ import type {
   SignSize,
   SignStyle,
 } from "@/signs/types";
-import { getAtPath } from "@/signs/values";
+import { getAtPath, isFieldVisible } from "@/signs/values";
 import FieldControl from "./FieldControl.vue";
+import ListField from "./ListField.vue";
 
 /** 属性面板：没选中模块时编辑整块牌子（尺寸、灯光、全局字段、地图画），选中时编辑该模块和它的微调。 */
 const props = defineProps<{
@@ -31,6 +32,10 @@ const props = defineProps<{
   checks: readonly EditorCheck[];
 }>();
 const emit = defineEmits<{
+  select: [id: string | null];
+  listInsert: [path: string, index: number];
+  listRemove: [path: string, index: number];
+  listMove: [path: string, from: number, to: number];
   field: [path: string, value: unknown];
   tweak: [moduleId: string, patch: Partial<ModuleTweak>];
   resetTweak: [moduleId: string];
@@ -40,17 +45,33 @@ const emit = defineEmits<{
   mapArt: [patch: Partial<MapArtSettings>];
 }>();
 
+/** 选中的可能是模块里的列表项，例如 "line-belt#1"：井号前是模块，后面是第几项。 */
+const selectedModuleId = computed(() => props.selected?.split("#")[0] ?? null);
+const activeItem = computed(() => {
+  const index = props.selected?.split("#")[1];
+  return index === undefined ? null : Number(index);
+});
 const module = computed(
-  () => props.style.modules.find((item) => item.id === props.selected) ?? null,
+  () => props.style.modules.find((item) => item.id === selectedModuleId.value) ?? null,
 );
 const region = computed(() => props.style.regions.find((item) => item.id === module.value?.region));
 const tweak = computed(() => (module.value ? tweakOf(props.doc.tweaks, module.value.id) : null));
 const moduleChecks = computed(() =>
-  props.checks.filter((check) => check.module === props.selected),
+  props.checks.filter((check) => check.module === selectedModuleId.value),
 );
 
 function visible(field: ConditionalField): boolean {
-  return !field.visibleWhen || Boolean(getAtPath(props.doc.content, field.visibleWhen));
+  return isFieldVisible(props.doc.content, field.visibleWhen);
+}
+
+function listItems(path: string): unknown[] {
+  const value = getAtPath(props.doc.content, path);
+  return Array.isArray(value) ? value : [];
+}
+
+function selectItem(index: number | null) {
+  if (!module.value) return;
+  emit("select", index === null ? module.value.id : `${module.value.id}#${index}`);
 }
 
 const sizeModeOptions = [
@@ -110,12 +131,25 @@ const gridSize = computed(() => (props.doc.size.mode === "grid" ? props.doc.size
 
       <section class="properties__group">
         <template v-for="field in module.fields" :key="field.path">
-          <FieldControl
-            v-if="visible(field)"
-            :field="field"
-            :value="getAtPath(doc.content, field.path)"
-            @update="emit('field', field.path, $event)"
-          />
+          <template v-if="visible(field)">
+            <ListField
+              v-if="field.type === 'list'"
+              :field="field"
+              :items="listItems(field.path)"
+              :active="activeItem"
+              @select="selectItem"
+              @update="(path, value) => emit('field', path, value)"
+              @insert="emit('listInsert', field.path, $event)"
+              @remove="emit('listRemove', field.path, $event)"
+              @move="(from, to) => emit('listMove', field.path, from, to)"
+            />
+            <FieldControl
+              v-else
+              :field="field"
+              :value="getAtPath(doc.content, field.path)"
+              @update="emit('field', field.path, $event)"
+            />
+          </template>
         </template>
         <div v-if="module.actions?.length" class="properties__actions">
           <button

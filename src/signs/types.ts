@@ -58,9 +58,32 @@ export type FieldDef =
       path: string;
       label: string;
       options: readonly { value: string; label: string }[];
+    }
+  /** 选项多、放不进分段选择时用下拉框。 */
+  | {
+      type: "select";
+      path: string;
+      label: string;
+      options: readonly { value: string; label: string }[];
+    }
+  /**
+   * 列表（例如 FTA 的线路）：可以在任意位置插入、删除、调整顺序。
+   * fields 里的 path 相对于单个列表项；itemTitle 是列表项标题里显示的字段。
+   */
+  | {
+      type: "list";
+      path: string;
+      label: string;
+      itemLabel: string;
+      itemTitle: readonly string[];
+      fields: readonly ConditionalField[];
+      min: number;
     };
 
-/** 字段只在另一个开关打开时出现，例如“第二条色带颜色”。 */
+/**
+ * 字段只在另一个开关打开时出现，例如“第二条色带颜色”。
+ * visibleWhen 写成“path=value”时，表示那个字段等于这个值才出现。
+ */
 export type ConditionalField = FieldDef & { visibleWhen?: string };
 
 export interface ActionDef {
@@ -112,5 +135,9 @@ export interface SignStyle<C> {
   fonts(content: C): FontId[];
   layout(input: LayoutInput<C>): RenderTree;
   applyAction(content: C, actionId: string): C;
+  /** 列表字段新加一项时的默认值（例如新线路取一个还没用过的预设色）。 */
+  newListItem?(content: C, path: string): unknown;
+  /** 作品名默认取什么（导入旧文件时用），例如本站名。 */
+  title?(content: C): string;
   fromLegacy(legacy: Record<string, unknown>): LegacyMigration<C>;
 }

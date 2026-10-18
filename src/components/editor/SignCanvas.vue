@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { PhPlus } from "@phosphor-icons/vue";
 import { computed } from "vue";
 import { messages as m } from "@/i18n";
-import { renderTreeToSvg, type RenderTree } from "@/signs/render";
+import { renderTreeToSvg, type Affordance, type RenderTree } from "@/signs/render";
 import type { Lighting } from "@/signs/types";
 
 /**
@@ -14,19 +15,39 @@ const props = defineProps<{
   selected: string | null;
   labels: Readonly<Record<string, string>>;
 }>();
-const emit = defineEmits<{ select: [id: string | null] }>();
+const emit = defineEmits<{ select: [id: string | null]; action: [affordance: Affordance] }>();
 
 // SVG 只由数字、校验过的颜色和路径数据拼成，不含任何用户输入的原文，可以安全地内联。
 const svg = computed(() => renderTreeToSvg(props.tree, { lighting: props.lighting }));
-const hitAreas = computed(() =>
-  Object.entries(props.tree.modules).map(([id, box]) => ({
+/** 点选区域：先是模块，再是模块里的列表项（例如每段色带），列表项盖在模块上面，点哪段选哪段。 */
+const hitAreas = computed(() => [
+  ...Object.entries(props.tree.modules).map(([id, box]) => ({
     id,
     x: box.x - 3,
     y: box.y - 3,
     width: box.width + 6,
     height: box.height + 6,
   })),
+  ...Object.entries(props.tree.items ?? {}).map(([id, box]) => ({ id, ...box })),
+]);
+
+/**
+ * 牌面快捷按钮：锚点按牌子的百分比换算，按钮本身离锚点的距离用固定的屏幕像素（见样式），
+ * 牌面缩放时按钮跟着锚点走，但不会越缩越远、跑出舞台。
+ */
+const affordances = computed(() =>
+  (props.tree.affordances ?? []).map((item) => ({
+    item,
+    right: `${(1 - item.x / props.tree.width) * 100}%`,
+    top: `${(item.y / props.tree.height) * 100}%`,
+  })),
 );
+
+function labelOf(id: string): string {
+  const [moduleId, index] = id.split("#");
+  const label = props.labels[moduleId!] ?? moduleId!;
+  return index === undefined ? label : `${label} · 第 ${Number(index) + 1} 项`;
+}
 </script>
 
 <template>
@@ -36,6 +57,8 @@ const hitAreas = computed(() =>
       :style="{
         aspectRatio: `${tree.width} / ${tree.height}`,
         maxWidth: `${Math.max(tree.width, 900)}px`,
+        // 竖条、方形牌子按高度收住，整块牌子和下面的按钮不用滚动就能看全。
+        width: `min(100%, calc(62vh * ${tree.width / tree.height}))`,
       }"
       @click.self="emit('select', null)"
     >
@@ -59,9 +82,21 @@ const hitAreas = computed(() =>
           rx="2"
           @click.stop="emit('select', area.id)"
         >
-          <title>{{ labels[area.id] ?? area.id }}</title>
+          <title>{{ labelOf(area.id) }}</title>
         </rect>
       </svg>
+      <button
+        v-for="{ item, right, top } in affordances"
+        :key="item.action"
+        type="button"
+        class="button button--small sign-canvas__affordance"
+        :class="`sign-canvas__affordance--${item.placement}`"
+        :style="{ right, top }"
+        @click.stop="emit('action', item)"
+      >
+        <PhPlus :size="14" weight="bold" aria-hidden="true" />
+        {{ item.label }}
+      </button>
     </div>
   </div>
 </template>
@@ -115,6 +150,21 @@ const hitAreas = computed(() =>
   stroke: var(--color-service);
   stroke-width: 2;
   stroke-dasharray: 6 4;
+}
+
+/*
+ * 牌面快捷按钮（例如“添加线路”）：用和其他按钮一样的小号牌面按钮，带文字，不靠一个孤零零的“+”。
+ * below-end：右边缘对齐锚点，挂在锚点下方 6px；舞台下边留了 40px，放得下 32px 高的按钮。
+ */
+.sign-canvas__affordance {
+  position: absolute;
+  z-index: 1;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.sign-canvas__affordance--below-end {
+  margin-top: 6px;
 }
 
 @media (hover: hover) and (pointer: fine) {

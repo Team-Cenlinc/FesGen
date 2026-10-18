@@ -21,6 +21,7 @@ import { useSignEditor } from "@/composables/useSignEditor";
 import { format, messages as m } from "@/i18n";
 import { sizeLabel } from "@/library/labels";
 import { signToMapArt, type SignMapArt } from "@/signs/rasterize";
+import type { Affordance } from "@/signs/render";
 import type { Lighting, MapArtSettings, ModuleTweak, SignSize } from "@/signs/types";
 
 const props = defineProps<{ id: string }>();
@@ -124,6 +125,33 @@ function setMapArt(patch: Partial<MapArtSettings>) {
 
 function setTweak(moduleId: string, patch: Partial<ModuleTweak>) {
   editor.setTweak(moduleId, patch);
+}
+
+// —— 列表（例如线路）：插入后选中新的一项，删除后回到模块本身 ——
+function selectedModuleId(): string | null {
+  return selected.value?.split("#")[0] ?? null;
+}
+
+function insertListItem(path: string, index: number) {
+  const moduleId = selectedModuleId();
+  if (editor.insertListItem(path, index) && moduleId) selected.value = `${moduleId}#${index}`;
+}
+
+function removeListItem(path: string, index: number) {
+  const moduleId = selectedModuleId();
+  if (editor.removeListItem(path, index) && moduleId) selected.value = moduleId;
+}
+
+function moveListItem(path: string, from: number, to: number) {
+  editor.moveListItem(path, from, to);
+  const moduleId = selectedModuleId();
+  if (moduleId && selected.value === `${moduleId}#${from}`) selected.value = `${moduleId}#${to}`;
+}
+
+/** 牌面上的快捷按钮（例如色带右端的“+”）：执行动作，再选中它指定的元素。 */
+function runAffordance(affordance: Affordance) {
+  editor.runAction(affordance.action);
+  if (affordance.select) selected.value = affordance.select;
 }
 
 // —— 快捷键：撤销、重做、Esc 取消选择。输入框里交给浏览器自己的撤销。 ——
@@ -269,6 +297,7 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeyDown));
             :selected="selected"
             :labels="moduleLabels"
             @select="selected = $event"
+            @action="runAffordance"
           />
           <MapArtPreview
             v-else-if="mapArt"
@@ -291,6 +320,10 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeyDown));
           :doc="draft"
           :selected="selected"
           :checks="checks"
+          @select="selected = $event"
+          @list-insert="insertListItem"
+          @list-remove="removeListItem"
+          @list-move="moveListItem"
           @field="editor.setField"
           @tweak="setTweak"
           @reset-tweak="editor.resetTweak"

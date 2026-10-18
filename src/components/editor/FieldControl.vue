@@ -62,6 +62,19 @@ const emit = defineEmits<{ update: [value: unknown] }>();
       @update:model-value="emit('update', $event)"
     />
   </div>
+
+  <label v-else-if="field.type === 'select'" class="field">
+    <span class="field__label">{{ field.label }}</span>
+    <select
+      class="input"
+      :value="String(value)"
+      @change="emit('update', ($event.target as HTMLSelectElement).value)"
+    >
+      <option v-for="option in field.options" :key="option.value" :value="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </label>
 </template>
 
 <style scoped>

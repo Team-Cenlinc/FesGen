@@ -41,7 +41,7 @@ const regions = computed(() =>
         :key="module.id"
         type="button"
         class="outline__item"
-        :aria-current="selected === module.id ? 'true' : undefined"
+        :aria-current="selected?.split('#')[0] === module.id ? 'true' : undefined"
         @click="emit('select', module.id)"
       >
         <span class="outline__name">{{ module.label }}</span>

@@ -63,6 +63,30 @@ export interface RenderTree {
   missingGlyphs: Record<string, string[]>;
   /** 按主字体汇总的缺字，编辑器据此决定要补哪款补字字体。 */
   missingByPrimary: Partial<Record<FontId, string[]>>;
+  /**
+   * 列表项在输出像素坐标里的范围，键是“模块 id#序号”，例如 "line-belt#1"。
+   * 点牌面上的某一段时选中那一项。
+   */
+  items?: Record<string, BBox>;
+  /** 排版上的问题（例如某段色带放不下站号块），按模块列出，编辑器放进“检查”。 */
+  warnings?: Record<string, string[]>;
+  /** 牌面上的快捷按钮，例如色带右端的“添加线路”。 */
+  affordances?: Affordance[];
+}
+
+/**
+ * 牌面快捷按钮。(x, y) 是锚点（输出像素），按钮画在牌子外面、离锚点固定几个屏幕像素，
+ * 不随牌面缩放挪位置：below-end 是右边缘对齐锚点、放在锚点下方。
+ */
+export interface Affordance {
+  /** 交给样式 applyAction 的动作。 */
+  action: string;
+  label: string;
+  x: number;
+  y: number;
+  placement: "below-end";
+  /** 动作完成后选中的元素，例如新加的线路 "line-belt#3"。 */
+  select?: string;
 }
 
 const IDENTITY_TWEAK: ModuleTweak = { dx: 0, dy: 0, scale: 1, hidden: false };
