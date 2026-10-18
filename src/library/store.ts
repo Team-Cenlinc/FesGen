@@ -41,11 +41,14 @@ export const useLibrary = defineStore("library", () => {
     return source ? add(duplicateSign(source)) : undefined;
   }
 
-  /** 用编辑器里的最新状态覆盖存档。“最近修改”时间由编辑器维护，只更新缩略图时不会改动它。 */
+  /**
+   * 用编辑器里的最新状态覆盖存档。“最近修改”时间由编辑器维护，只更新缩略图时不会改动它。
+   * 只覆盖还在作品库里的牌子：缩略图是异步生成的，牌子在这期间被删掉的话，不能再把它存回来。
+   * 新牌子一律走 add。
+   */
   function save(sign: SignDocument) {
     const index = signs.value.findIndex((item) => item.id === sign.id);
-    if (index === -1) signs.value.push(sign);
-    else signs.value[index] = sign;
+    if (index !== -1) signs.value[index] = sign;
   }
 
   function rename(id: string, name: string) {

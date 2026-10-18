@@ -1,8 +1,10 @@
+import { createPinia, setActivePinia } from "pinia";
 import { describe, expect, it } from "vitest";
 import { kitajukuDefaults } from "@/signs/kitajuku/content";
 import { createSign, duplicateSign, normalizeSignDocument } from "./document";
 import { exportSignJson, importSignJson } from "./io";
 import { readLibrary, writeLibrary } from "./storage";
+import { useLibrary } from "./store";
 
 describe("牌子文档", () => {
   it("新建：默认内容、1×3 地图格、荧光灯", () => {
@@ -131,5 +133,20 @@ describe("作品库存储", () => {
         },
       }),
     ).toBe(false);
+  });
+});
+
+describe("作品库", () => {
+  it("保存只覆盖还在库里的牌子，已删除的不会被存回来", () => {
+    setActivePinia(createPinia());
+    const library = useLibrary();
+    const sign = library.create("kitajuku-dentetsu");
+    library.save({ ...sign, name: "改了" });
+    expect(library.get(sign.id)?.name).toBe("改了");
+    library.remove(sign.id);
+    // 例如缩略图在删除之后才生成完，编辑器拿旧状态来保存。
+    library.save({ ...sign, thumbnail: "data:image/png;base64," });
+    expect(library.get(sign.id)).toBeUndefined();
+    expect(library.signs).toHaveLength(0);
   });
 });
