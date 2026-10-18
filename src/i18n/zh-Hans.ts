@@ -97,6 +97,7 @@ export const zhHans = {
     viewVector: "矢量",
     viewMapArt: "地图画",
     mapArtWorking: "正在生成地图画…",
+    mapArtFailed: "地图画没能生成：{reason}",
     fontsNeeded: "下载字体之后才能显示牌面。",
     downloadFonts: "下载字体",
     properties: "属性",

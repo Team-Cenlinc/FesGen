@@ -80,6 +80,7 @@ const zoom = ref(0);
 const showGrid = ref(true);
 const fitted = shallowRef<RgbaImage | null>(null);
 const result = shallowRef<QuantizedMapArt | null>(null);
+const resultError = ref<string | null>(null);
 const working = ref(false);
 const fileNameOverride = ref<string | null>(null);
 const mapName = ref("fesgen");
@@ -146,11 +147,19 @@ watch([source, grid, fit, paddingKind, paddingHex, dither], async () => {
       : { kind: "transparent" };
   const placement = placeSource(current.size, targetSize.value, fit.value);
   const raster = rasterize(current.bitmap, targetSize.value, placement, padding);
-  fitted.value = raster;
-  const quantized = await quantizeInWorker(raster, dither.value);
-  if (run !== latestRun) return;
-  result.value = quantized;
-  working.value = false;
+  try {
+    const quantized = await quantizeInWorker(raster, dither.value);
+    if (run !== latestRun) return;
+    // 原图和地图画一起换，两种视图看到的始终是同一组参数。
+    fitted.value = raster;
+    result.value = quantized;
+    resultError.value = null;
+  } catch (cause) {
+    if (run !== latestRun) return;
+    resultError.value = cause instanceof Error ? cause.message : String(cause);
+  } finally {
+    if (run === latestRun) working.value = false;
+  }
 });
 
 // 下载按钮始终可点：还没有图时说明原因，而不是给一个灰掉、不知道为什么点不了的按钮。
@@ -290,6 +299,7 @@ onBeforeUnmount(() => {
           <p v-if="working && source" class="visually-hidden" aria-live="polite">
             {{ m.mapArt.preview.working }}
           </p>
+          <p v-if="resultError" class="notice notice--error" role="alert">{{ resultError }}</p>
         </StepSection>
 
         <StepSection :title="m.mapArt.export.heading">

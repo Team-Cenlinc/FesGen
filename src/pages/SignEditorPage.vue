@@ -68,6 +68,7 @@ function cancelFonts() {
 // —— 地图画预览 ——
 const mapArt = shallowRef<SignMapArt | null>(null);
 const mapArtWorking = ref(false);
+const mapArtError = ref<string | null>(null);
 let mapArtRun = 0;
 watch(
   [view, tree, () => draft.value?.lighting, () => draft.value?.size, () => draft.value?.mapArt],
@@ -77,10 +78,19 @@ watch(
     if (view.value !== "map" || !doc || !layout) return;
     const run = ++mapArtRun;
     mapArtWorking.value = true;
-    const result = await signToMapArt(layout, doc.lighting, doc.size, doc.mapArt);
-    if (run !== mapArtRun) return;
-    mapArt.value = result;
-    mapArtWorking.value = false;
+    try {
+      const result = await signToMapArt(layout, doc.lighting, doc.size, doc.mapArt);
+      if (run !== mapArtRun) return;
+      mapArt.value = result;
+      mapArtError.value = null;
+    } catch (cause) {
+      if (run !== mapArtRun) return;
+      mapArtError.value = format(m.editor.mapArtFailed, {
+        reason: cause instanceof Error ? cause.message : String(cause),
+      });
+    } finally {
+      if (run === mapArtRun) mapArtWorking.value = false;
+    }
   },
   { deep: true },
 );
@@ -256,6 +266,9 @@ onBeforeUnmount(() => document.removeEventListener("keydown", onKeyDown));
             {{ m.editor.mapArtWorking }}
           </span>
         </div>
+        <p v-if="view === 'map' && mapArtError" class="notice notice--error" role="alert">
+          {{ mapArtError }}
+        </p>
 
         <div v-if="showFontDialog" class="editor__font-gate">
           <FontDependencyDialog
