@@ -20,8 +20,18 @@ export interface ShapedText {
  * 排版用的文字测量与转路径接口。排版函数只依赖这个接口，
  * 单元测试可以换成等宽的假实现，不必加载几 MB 的字体。
  */
+/** 字形的实际边界，相对起点 x = 0、基线 y = 0（y 向下为正）。 */
+export interface InkBounds {
+  x1: number;
+  x2: number;
+  y1: number;
+  y2: number;
+}
+
 export interface TextShaper {
   measure(stack: FontStack, text: string, size: number): number;
+  /** 按字形而不是按字宽居中时用。没有实现时，调用方退回按字宽计算。 */
+  bounds?(stack: FontStack, text: string, size: number): InkBounds;
   shape(
     stack: FontStack,
     text: string,
@@ -97,5 +107,27 @@ export class OpentypeShaper implements TextShaper {
       cursor += widths[index]!;
     });
     return { d: parts.join(""), width, x: startX, y, missing };
+  }
+
+  bounds(stack: FontStack, text: string, size: number): InkBounds {
+    const box = { x1: 0, x2: 0, y1: 0, y2: 0 };
+    if (!text) return box;
+    let cursor = 0;
+    let first = true;
+    for (const run of this.runs(stack, text).runs) {
+      const bb = run.font.getPath(run.text, cursor, 0, size, { kerning: true }).getBoundingBox();
+      cursor += run.font.getAdvanceWidth(run.text, size, { kerning: true });
+      // 只有空白的一段没有字形，边界是 0，不参与合并。
+      if (bb.x1 === bb.x2 && bb.y1 === bb.y2) continue;
+      if (first) Object.assign(box, { x1: bb.x1, x2: bb.x2, y1: bb.y1, y2: bb.y2 });
+      else {
+        box.x1 = Math.min(box.x1, bb.x1);
+        box.x2 = Math.max(box.x2, bb.x2);
+        box.y1 = Math.min(box.y1, bb.y1);
+        box.y2 = Math.max(box.y2, bb.y2);
+      }
+      first = false;
+    }
+    return box;
   }
 }

@@ -1,9 +1,14 @@
 import notoSansJpBoldUrl from "@expo-google-fonts/noto-sans-jp/700Bold/NotoSansJP_700Bold.ttf?url";
 import notoSansJpRegularUrl from "@expo-google-fonts/noto-sans-jp/400Regular/NotoSansJP_400Regular.ttf?url";
 import notoSansScBoldUrl from "@expo-google-fonts/noto-sans-sc/700Bold/NotoSansSC_700Bold.ttf?url";
+import notoSansScExtraBoldUrl from "@expo-google-fonts/noto-sans-sc/800ExtraBold/NotoSansSC_800ExtraBold.ttf?url";
 import notoSansScRegularUrl from "@expo-google-fonts/noto-sans-sc/400Regular/NotoSansSC_400Regular.ttf?url";
 import notoSansTcBoldUrl from "@expo-google-fonts/noto-sans-tc/700Bold/NotoSansTC_700Bold.ttf?url";
 import notoSansTcRegularUrl from "@expo-google-fonts/noto-sans-tc/400Regular/NotoSansTC_400Regular.ttf?url";
+import notoSansDisplayBoldUrl from "@/assets/fonts/noto-sans-display/NotoSansDisplay-Bold.ttf?url";
+import notoSansDisplayExtraBoldUrl from "@/assets/fonts/noto-sans-display/NotoSansDisplay-ExtraBold.ttf?url";
+import notoSansDisplayMediumUrl from "@/assets/fonts/noto-sans-display/NotoSansDisplay-Medium.ttf?url";
+import notoSansDisplayMediumItalicUrl from "@/assets/fonts/noto-sans-display/NotoSansDisplay-MediumItalic.ttf?url";
 import texGyreHerosBoldUrl from "@/assets/fonts/tex-gyre-heros/texgyreheros-bold.otf?url";
 import texGyreHerosRegularUrl from "@/assets/fonts/tex-gyre-heros/texgyreheros-regular.otf?url";
 import type { FontId } from "./stacks";
@@ -55,6 +60,13 @@ export const FONT_CATALOG: Readonly<Record<FontId, FontAsset>> = {
     approxBytes: 10_549_020,
     license: OFL,
   },
+  "noto-sans-sc-800": {
+    id: "noto-sans-sc-800",
+    label: "Noto Sans SC 特粗（简体中文）",
+    url: notoSansScExtraBoldUrl,
+    approxBytes: 10_544_016,
+    license: OFL,
+  },
   "noto-sans-tc-400": {
     id: "noto-sans-tc-400",
     label: "Noto Sans TC 常规（繁体中文）",
@@ -82,6 +94,34 @@ export const FONT_CATALOG: Readonly<Record<FontId, FontAsset>> = {
     url: texGyreHerosBoldUrl,
     approxBytes: 135_204,
     license: "GUST Font License",
+  },
+  "noto-sans-display-500": {
+    id: "noto-sans-display-500",
+    label: "Noto Sans Display 中等",
+    url: notoSansDisplayMediumUrl,
+    approxBytes: 356_756,
+    license: OFL,
+  },
+  "noto-sans-display-500-italic": {
+    id: "noto-sans-display-500-italic",
+    label: "Noto Sans Display 中等斜体",
+    url: notoSansDisplayMediumItalicUrl,
+    approxBytes: 383_820,
+    license: OFL,
+  },
+  "noto-sans-display-700": {
+    id: "noto-sans-display-700",
+    label: "Noto Sans Display 粗体",
+    url: notoSansDisplayBoldUrl,
+    approxBytes: 356_644,
+    license: OFL,
+  },
+  "noto-sans-display-800": {
+    id: "noto-sans-display-800",
+    label: "Noto Sans Display 特粗",
+    url: notoSansDisplayExtraBoldUrl,
+    approxBytes: 357_296,
+    license: OFL,
   },
 };
 
