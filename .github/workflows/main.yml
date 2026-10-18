@@ -1,29 +1,42 @@
-name: GitHub Actions Build and Deploy
+name: Build and Deploy
+
 on:
   push:
     branches:
       - main
+  pull_request:
+  workflow_dispatch:
+
+# 同一时间只跑一条发布链，避免 gh-pages 分支被两次部署交错覆盖。
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      # 部署步骤要推送 gh-pages 分支；PR 上只检查不部署。
+      contents: write
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
-          
-      - name: Setup Node.js Environment 🏠
-        uses: actions/setup-node@v3
+
+      - uses: actions/setup-node@v7
         with:
-          node-version: 16
-        
-      - name: Install and Build 🔧
-        run: | 
-          yarn install
-          yarn build
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.3
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # check 包含格式、类型、单元测试和生产构建，全部通过才会部署 dist。
+      - run: npm run check
+
+      - name: Deploy to gh-pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          branch: gh-pages
+          folder: dist
+          clean: true

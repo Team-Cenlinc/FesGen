@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta
+      name="theme-color"
+      content="#F0F1F0"
+      media="(prefers-color-scheme: light)"
+      data-color-scheme="light"
+    />
+    <meta
+      name="theme-color"
+      content="#111416"
+      media="(prefers-color-scheme: dark)"
+      data-color-scheme="dark"
+    />
+    <title>FesGen</title>
+    <script>
+      // 在首帧前恢复用户选择的外观，避免深色模式下先闪一下浅色。
+      try {
+        const appearance = localStorage.getItem("fesgen.appearance");
+        if (appearance === "light" || appearance === "dark") {
+          document.documentElement.dataset.appearance = appearance;
+          // 浏览器工具栏也跟着手动外观走；颜色与 useAppearance.ts 的 THEME_COLORS 一致。
+          const color = { light: "#F0F1F0", dark: "#111416" }[appearance];
+          document
+            .querySelectorAll('meta[name="theme-color"]')
+            .forEach((meta) => meta.setAttribute("content", color));
+        }
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

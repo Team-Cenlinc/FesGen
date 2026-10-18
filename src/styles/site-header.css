@@ -1,0 +1,1330 @@
+/*
+ * 页头样式，移植自 Fetarute-Website src/styles/global.css 的 Header 部分（.site-header 起至小屏规则），
+ * 尺寸、动效、交接阶段与网站一致；只把网站字标换成 FesGen 标志，主导航从三项改为两项。
+ * 网站那边改了 Header，这里也要同步。交互逻辑见 src/header/controller.ts。
+ */
+
+.site-header {
+  position: fixed;
+  z-index: 20;
+  top: 20px;
+  left: 50%;
+  display: grid;
+  width: var(--page-width);
+  min-height: clamp(88px, 6.25vw, 96px);
+  transform: translateX(-50%);
+  grid-template-columns:
+    minmax(190px, 1.15fr)
+    minmax(48px, 1.6fr)
+    max-content
+    max-content
+    max-content
+    max-content;
+  align-items: stretch;
+  overflow: visible;
+  background: var(--color-header-surface);
+  transition:
+    width var(--duration-header-layout-expand) var(--motion-header-layout-expand),
+    min-height var(--duration-header-layout-expand) var(--motion-header-layout-expand);
+}
+
+/* 第二个选择器比阅读收束规则更具体，不播放动画的收束也能立刻到位。 */
+html[data-header-layout-initializing] .site-header,
+html[data-header-layout-initializing][data-header-compact]:not([data-header-hover-expanded])
+  .site-header {
+  transition: none;
+}
+
+/* 吸顶后遮住页头上方的空隙，滚动中的内容不会从页头上沿露出来。 */
+.site-header::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -24px;
+  bottom: 100%;
+  left: -24px;
+  height: 20px;
+  background: var(--color-background);
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border: 3px solid var(--color-text);
+  pointer-events: none;
+}
+
+.site-header summary {
+  list-style: none;
+}
+
+.site-header summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-header summary::marker {
+  content: "";
+}
+
+/*
+ * 完整页头的下沿位置（顶边 20px + 页头高度）。正文用它让出页头占的高度，
+ * 吸顶面板用它定位；页面自己的上内边距再负责呼吸距离。
+ */
+:root {
+  --site-header-bottom: calc(20px + clamp(88px, 6.25vw, 96px));
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --site-header-bottom: calc(20px + 76px);
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --site-header-bottom: calc(12px + env(safe-area-inset-top) + 56px);
+  }
+}
+
+.site-header-offset {
+  height: var(--site-header-bottom);
+}
+
+/* —— 品牌：FesGen 标志 + 站名 —— */
+
+.brand {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-inline: clamp(22px, 2.5vw, 38px);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.brand__mark {
+  display: block;
+  width: clamp(36px, 2.8vw, 44px);
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.brand__names {
+  display: grid;
+  gap: 3px;
+  line-height: 1;
+}
+
+.brand__name {
+  font-family: var(--font-fetarute-display);
+  font-size: clamp(24px, 2vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.brand__tagline {
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.brand:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: -3px;
+}
+
+.site-header__spacer {
+  min-width: 0;
+}
+
+/* 小屏把服务台与出口收束为三个独立触发牌；桌面继续使用文字导视牌。 */
+.mobile-header-tools {
+  display: none;
+}
+
+/* —— 主导航：标签 + 方向箭头，下方线路色点；悬停时色点变成从页头底边升起的色带 —— */
+
+.home-nav {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  align-content: center;
+  justify-items: end;
+  /* 以 Header 内侧底边为色带基线；由标题半行高、半行距、色点半高与边框共同反推所需下移量。 */
+  --home-nav-indicator-bottom-offset: calc(
+    clamp(44px, 3.125vw, 48px) - clamp(13.52px, 1.3vw, 18.72px) - clamp(4px, 0.35vw, 5px) -
+      clamp(8px, 0.75vw, 10px) - 3px
+  );
+  color: var(--color-text);
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+/* 紧凑态另用这个纯展示层承载连续色点；完整 Header 不占用网格空间。 */
+.home-nav-compact-signal {
+  display: none;
+}
+
+.home-nav__primary {
+  white-space: nowrap;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(3px, 0.4vw, 6px);
+  transition: transform var(--duration-header-press) var(--motion-header-standard-spatial);
+}
+
+.home-nav__text-stack {
+  display: grid;
+  justify-items: end;
+  gap: clamp(8px, 0.7vw, 10px);
+}
+
+.home-nav__label,
+.service-desk__label,
+.exit-menu__label {
+  font-size: clamp(26px, 2.5vw, 36px);
+  font-weight: 790;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+  transition: transform var(--duration-header-press) var(--motion-header-standard-spatial);
+}
+
+.home-nav__arrow {
+  display: grid;
+  width: clamp(28px, 2.2vw, 34px);
+  height: clamp(28px, 2.2vw, 34px);
+  margin-top: -0.06em;
+  place-items: center;
+}
+
+.home-nav__arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.home-nav__indicator {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: clamp(16px, 1.5vw, 20px);
+  --home-nav-indicator-dot-diameter: clamp(16px, 1.5vw, 20px);
+  --home-nav-indicator-dot-gap: clamp(2px, 0.18vw, 3px);
+  color: var(--home-nav-line-color, var(--color-home-line));
+  overflow: visible;
+}
+
+.home-nav__indicator-dot,
+.home-nav__indicator-band {
+  position: absolute;
+}
+
+/* 色点居中在“标签 + 箭头”整组下方。 */
+.home-nav__indicator-dot {
+  top: 0;
+  right: calc(
+    (
+        100% - clamp(3px, 0.4vw, 6px) - clamp(28px, 2.2vw, 34px) -
+          var(--home-nav-indicator-dot-diameter)
+      ) /
+      2
+  );
+  width: var(--home-nav-indicator-dot-diameter);
+  height: var(--home-nav-indicator-dot-diameter);
+  border-radius: 50%;
+  background: currentColor;
+  transition:
+    opacity var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    transform 180ms var(--motion-header-standard-spatial);
+}
+
+/* 双线路信号：两个并列色点，色带左右各半。 */
+html[data-home-nav-indicator-pattern="double"]
+  .home-nav[data-home-nav-signal="session"]
+  .home-nav__indicator-dot {
+  right: calc(var(--home-nav-indicator-dot-diameter) + var(--home-nav-indicator-dot-gap));
+}
+
+html[data-home-nav-indicator-pattern="double"]
+  .home-nav[data-home-nav-signal="session"]
+  .home-nav__indicator-dot::after {
+  position: absolute;
+  top: 0;
+  left: calc(100% + var(--home-nav-indicator-dot-gap));
+  width: var(--home-nav-indicator-dot-diameter);
+  height: var(--home-nav-indicator-dot-diameter);
+  border-radius: 50%;
+  background: var(--home-nav-line-color-secondary);
+  content: "";
+}
+
+/*
+ * 当前页的色点是实心，其余是同色空心圈。网站导航没有当前页状态，
+ * FesGen 是在几个页面间来回切换的工具，需要从页头看出身在哪一页。
+ */
+.home-nav:not([aria-current="page"]) .home-nav__indicator-dot {
+  background: transparent;
+  box-shadow: inset 0 0 0 3px currentColor;
+}
+
+html[data-home-nav-indicator-pattern="double"]
+  .home-nav[data-home-nav-signal="session"]:not([aria-current="page"])
+  .home-nav__indicator-dot::after {
+  background: transparent;
+  box-shadow: inset 0 0 0 3px var(--home-nav-line-color-secondary);
+}
+
+html[data-home-nav-indicator-pattern="double"]
+  .home-nav[data-home-nav-signal="session"]
+  .home-nav__indicator-band {
+  background: linear-gradient(
+    to right,
+    var(--home-nav-line-color) 0 50%,
+    var(--home-nav-line-color-secondary) 50% 100%
+  );
+}
+
+.home-nav__indicator-band {
+  right: calc(-1 * (clamp(3px, 0.4vw, 6px) + clamp(28px, 2.2vw, 34px)));
+  bottom: 0;
+  left: 0;
+  height: 20px;
+  background: currentColor;
+  opacity: 0;
+  transform: translate3d(0, calc(var(--home-nav-indicator-bottom-offset) + 2px), 0) scaleY(0.35);
+  transform-origin: center bottom;
+  transition:
+    opacity var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    transform 180ms var(--motion-header-standard-spatial);
+}
+
+.home-nav:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: -3px;
+}
+
+.home-nav:active {
+  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+}
+
+.home-nav:active .home-nav__primary {
+  transform: translateY(1px);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .home-nav:hover .home-nav__indicator-dot {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+
+  .home-nav:hover .home-nav__indicator-band {
+    opacity: 1;
+    transform: translate3d(0, var(--home-nav-indicator-bottom-offset), 0) scaleY(1);
+  }
+
+  .exit-menu__summary:hover .exit-menu__arrow,
+  .exit-menu[open] .exit-menu__arrow,
+  .service-desk__summary:hover .service-desk__information,
+  .service-desk[open] .service-desk__information {
+    width: var(--header-direction-affordance-size);
+    margin-inline-start: var(--header-direction-affordance-gap);
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    transition-delay: 0ms;
+  }
+
+  .service-desk__summary:hover,
+  .mobile-header-tool--service .mobile-header-tool__summary:hover {
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+  }
+
+  .exit-menu__summary:hover {
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-nav:focus-visible .home-nav__indicator-dot {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+
+  .home-nav:focus-visible .home-nav__indicator-band {
+    opacity: 1;
+    transform: translate3d(0, var(--home-nav-indicator-bottom-offset), 0) scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-nav__indicator-dot,
+  .home-nav__indicator-band {
+    transition: none;
+  }
+
+  .home-nav:hover .home-nav__indicator-dot,
+  .home-nav:focus-visible .home-nav__indicator-dot {
+    opacity: 0;
+    transform: none;
+  }
+
+  .home-nav:hover .home-nav__indicator-band,
+  .home-nav:focus-visible .home-nav__indicator-band {
+    opacity: 1;
+    transform: translate3d(0, var(--home-nav-indicator-bottom-offset), 0) scaleY(1);
+  }
+}
+
+/* —— 服务台与出口 —— */
+
+.service-desk,
+.exit-menu {
+  position: relative;
+  min-width: 0;
+  align-self: stretch;
+}
+
+.service-desk {
+  background: var(--color-service);
+  color: var(--color-service-text);
+}
+
+.exit-menu {
+  background: var(--color-exit);
+  color: var(--color-exit-text);
+}
+
+/* 紧凑出口牌独立于完整态出口牌，只在阅读模式替代文字导视。 */
+.compact-exit-menu {
+  display: none;
+}
+
+.service-desk__summary,
+.exit-menu__summary {
+  display: grid;
+  min-height: inherit;
+  height: 100%;
+  align-content: center;
+  justify-items: end;
+  gap: 6px;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0 24px;
+  /* 左侧起始留白比文字右缘多 16px，强调相邻导视牌之间的分界。 */
+  padding-inline-start: 40px;
+}
+
+.exit-menu__summary {
+  text-align: right;
+}
+
+.service-desk__summary,
+.mobile-header-tool--service .mobile-header-tool__summary,
+.exit-menu__summary {
+  background-color: transparent;
+  transition: background-color var(--duration-header-standard-effects)
+    var(--motion-header-standard-effects);
+}
+
+.service-desk__direction,
+.exit-menu__direction {
+  --header-direction-affordance-size: clamp(28px, 2.2vw, 34px);
+  --header-direction-affordance-gap: clamp(3px, 0.4vw, 6px);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.service-desk__copy,
+.exit-menu__copy {
+  display: grid;
+  gap: clamp(8px, 0.7vw, 10px);
+  justify-items: end;
+}
+
+.service-desk__marker {
+  display: grid;
+  width: clamp(18px, 1.45vw, 22px);
+  height: clamp(18px, 1.45vw, 22px);
+  flex: 0 0 auto;
+  place-items: center;
+}
+
+.service-desk__marker-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  min-height: clamp(18px, 1.45vw, 22px);
+  transition: transform var(--duration-header-press) var(--motion-header-standard-spatial);
+}
+
+.service-desk__marker svg,
+.service-desk__information svg,
+.exit-menu__arrow svg,
+.appearance-choice__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.exit-menu__primary {
+  display: grid;
+  justify-items: end;
+}
+
+.service-desk__information,
+.exit-menu__arrow {
+  display: grid;
+  width: 0;
+  height: var(--header-direction-affordance-size);
+  margin-inline-start: 0;
+  place-items: center;
+  opacity: 0;
+  overflow: hidden;
+  flex: 0 0 auto;
+  pointer-events: none;
+  transform: translate3d(6px, 0, 0);
+  visibility: hidden;
+  transition:
+    width 180ms var(--motion-header-standard-spatial),
+    margin-inline-start 180ms var(--motion-header-standard-spatial),
+    opacity var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    transform var(--duration-header-standard-effects) var(--motion-header-standard-spatial),
+    visibility 0ms linear 180ms;
+}
+
+.service-desk__information {
+  margin-block-start: -0.06em;
+}
+
+.exit-menu__arrow {
+  margin-block-start: -0.18em;
+}
+
+.exit-menu__hint {
+  font-size: clamp(11px, 0.95vw, 14px);
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+
+@media (min-width: 1024px) {
+  .site-header {
+    /* 完整导视牌也保持桌面工具栏尺度；阅读态仍由后续 compact 规则控制。 */
+    min-height: 76px;
+    --header-stack-gap: 4px;
+    --header-marker-size: 18px;
+  }
+
+  .home-nav {
+    --home-nav-indicator-bottom-offset: calc(
+      38px - clamp(12.48px, 1.04vw, 15.6px) - var(--header-stack-gap) / 2 -
+        var(--header-marker-size) / 2 - 3px
+    );
+  }
+
+  .home-nav__text-stack,
+  .service-desk__copy,
+  .exit-menu__copy {
+    gap: var(--header-stack-gap);
+  }
+
+  .home-nav__indicator {
+    height: var(--header-marker-size);
+    --home-nav-indicator-dot-diameter: var(--header-marker-size);
+  }
+
+  .service-desk__marker {
+    width: var(--header-marker-size);
+    height: var(--header-marker-size);
+  }
+
+  .service-desk__marker-row {
+    min-height: var(--header-marker-size);
+  }
+
+  .exit-menu__hint {
+    line-height: var(--header-marker-size);
+  }
+
+  .home-nav__label,
+  .service-desk__label,
+  .exit-menu__label {
+    font-size: clamp(24px, 2vw, 30px);
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1023px) {
+  /* 三块导视牌的第二行高度不同，微调主标题以锁定同一条可扫读的文字基线。 */
+  .home-nav__label {
+    transform: translateY(0.32px);
+  }
+
+  .exit-menu__label {
+    transform: translateY(-1.98px);
+  }
+}
+
+.service-desk__summary:focus-visible {
+  outline: 3px solid var(--color-service-text);
+  outline-offset: -3px;
+}
+
+.exit-menu__summary:focus-visible {
+  outline: 3px solid var(--color-exit-text);
+  outline-offset: -3px;
+}
+
+.service-desk__summary:focus-visible,
+.service-desk[open] .service-desk__summary,
+.mobile-header-tool--service .mobile-header-tool__summary:focus-visible,
+.mobile-header-tool--service[open] .mobile-header-tool__summary,
+.service-desk__summary:active,
+.mobile-header-tool--service .mobile-header-tool__summary:active,
+.exit-menu__summary:focus-visible,
+.exit-menu[open] .exit-menu__summary,
+.exit-menu__summary:active {
+  background-color: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.service-desk__summary:focus-visible .service-desk__information,
+.service-desk[open] .service-desk__information {
+  width: var(--header-direction-affordance-size);
+  margin-inline-start: var(--header-direction-affordance-gap);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  transition-delay: 0ms;
+}
+
+.service-desk__summary:active .service-desk__copy {
+  transform: translateY(1px);
+}
+
+.exit-menu__summary:active .exit-menu__copy {
+  transform: translateY(1px);
+}
+
+/* —— 下挂菜单：与触发牌同色，从页头底边向下延伸 —— */
+
+.service-desk__menu {
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  right: 0;
+  display: grid;
+  width: min(318px, calc(100vw - 40px));
+  gap: 22px;
+  border: 3px solid color-mix(in srgb, var(--color-text) 92%, transparent);
+  border-top: 0;
+  background: var(--color-service);
+  color: var(--color-service-text);
+  padding: 24px;
+}
+
+.mobile-header-tool__menu,
+.compact-exit-menu__menu,
+.exit-menu__menu {
+  position: absolute;
+  z-index: 3;
+  top: 100%;
+  right: 0;
+  display: grid;
+  width: min(298px, calc(100vw - 24px));
+  gap: 22px;
+  border: 3px solid color-mix(in srgb, currentColor 92%, transparent);
+  border-top: 0;
+  padding: 18px;
+}
+
+.mobile-header-tool--service .mobile-header-tool__menu {
+  background: var(--color-service);
+  color: var(--color-service-text);
+}
+
+.mobile-header-tool--destination .mobile-header-tool__menu,
+.compact-exit-menu__menu {
+  background: var(--color-exit);
+  color: var(--color-exit-text);
+}
+
+.exit-menu__menu {
+  width: min(318px, calc(100vw - 40px));
+  background: var(--color-exit);
+  color: var(--color-exit-text);
+}
+
+.destination-menu__heading {
+  display: grid;
+  gap: 6px;
+}
+
+.destination-menu__heading p {
+  margin: 0;
+  color: color-mix(in srgb, currentColor 78%, transparent);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.35;
+}
+
+.destination-menu__heading-label,
+.destination-menu__group-heading {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-exit-text) 78%, transparent);
+  font-family: var(--font-fetarute-ui);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.destination-menu__external-group {
+  display: grid;
+  gap: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--color-exit-text) 42%, transparent);
+  padding-top: 18px;
+}
+
+.destination-menu__links,
+.destination-menu__external-services {
+  display: grid;
+  gap: 6px;
+}
+
+.destination-menu__link {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 10px;
+  color: color-mix(in srgb, var(--color-exit-text) 82%, transparent);
+  font-size: 15px;
+  font-weight: 730;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    color var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    transform var(--duration-header-press) var(--motion-header-standard-spatial);
+}
+
+.destination-menu__link-label {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.destination-menu__link-icon,
+.destination-menu__link-arrow {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  place-items: center;
+}
+
+.destination-menu__link-icon svg,
+.destination-menu__link-arrow svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.destination-menu__link:hover,
+.destination-menu__link:focus-visible {
+  background: color-mix(in srgb, var(--color-exit-text) 18%, transparent);
+  color: var(--color-exit-text);
+}
+
+.destination-menu__link:focus-visible {
+  outline: 2px solid var(--color-exit-text);
+  outline-offset: -2px;
+}
+
+.destination-menu__link[aria-current="page"] {
+  background: color-mix(in srgb, var(--color-exit-text) 28%, transparent);
+  color: var(--color-exit-text);
+}
+
+.destination-menu__link:active {
+  transform: scale(0.98);
+}
+
+.service-menu__group {
+  display: grid;
+  gap: 12px;
+}
+
+.service-menu__group + .service-menu__group {
+  border-top: 1px solid color-mix(in srgb, var(--color-service-text) 42%, transparent);
+  padding-top: 22px;
+}
+
+.service-menu__heading {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-service-text) 78%, transparent);
+  font-family: var(--font-fetarute-ui);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+/* FesGen 的服务台多了上手指南和关于两段说明文字。 */
+.service-menu__text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.service-menu__meta {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-service-text) 78%, transparent);
+  font-family: var(--font-fetarute-display);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.service-menu__link {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 10px;
+  color: color-mix(in srgb, var(--color-service-text) 82%, transparent);
+  font-size: 15px;
+  font-weight: 730;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    color var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    transform var(--duration-header-press) var(--motion-header-standard-spatial);
+}
+
+.service-menu__link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.service-menu__link:hover,
+.service-menu__link:focus-visible {
+  background: color-mix(in srgb, var(--color-service-text) 18%, transparent);
+  color: var(--color-service-text);
+}
+
+.service-menu__link:focus-visible {
+  outline: 2px solid var(--color-service-text);
+  outline-offset: -2px;
+}
+
+.service-menu__link:active {
+  transform: scale(0.98);
+}
+
+.appearance-options {
+  display: grid;
+  gap: 6px;
+}
+
+.appearance-choice {
+  display: flex;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  color: color-mix(in srgb, var(--color-service-text) 78%, transparent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 730;
+  padding: 0 10px;
+  text-align: left;
+  transition:
+    background-color var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    color var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+    transform var(--duration-header-press) var(--motion-header-standard-spatial);
+}
+
+.appearance-choice__icon {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  place-items: center;
+}
+
+.appearance-choice:hover,
+.appearance-choice:focus-visible {
+  background: color-mix(in srgb, var(--color-service-text) 18%, transparent);
+  color: var(--color-service-text);
+}
+
+.appearance-choice:focus-visible {
+  outline: 2px solid var(--color-service-text);
+  outline-offset: -2px;
+}
+
+.appearance-choice[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--color-service-text) 28%, transparent);
+  color: var(--color-service-text);
+}
+
+.appearance-choice:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .home-nav,
+  .service-desk__summary,
+  .exit-menu__summary,
+  .appearance-choice,
+  .mobile-header-tool__summary,
+  .destination-menu__link,
+  .service-menu__link {
+    transition-property: color, background-color, opacity;
+    transition-duration: var(--duration-header-reduced-feedback);
+    transition-timing-function: linear;
+  }
+
+  .site-header {
+    transition-property: opacity;
+  }
+
+  .home-nav__primary,
+  .home-nav__arrow,
+  .home-nav__indicator,
+  .service-desk__summary > *,
+  .exit-menu__summary > *,
+  .mobile-header-tool__icon {
+    transition-duration: 0ms;
+  }
+
+  .service-desk__information,
+  .exit-menu__arrow {
+    transition:
+      opacity var(--duration-header-reduced-feedback) linear,
+      visibility 0ms linear var(--duration-header-reduced-feedback);
+    transform: none;
+  }
+
+  .service-desk__summary:focus-visible .service-desk__information,
+  .service-desk[open] .service-desk__information {
+    transform: none;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 761px) {
+  .site-header {
+    grid-template-columns: minmax(152px, 1fr) max-content max-content max-content max-content;
+  }
+
+  .site-header__spacer {
+    display: none;
+  }
+
+  .brand {
+    padding-inline: 20px;
+  }
+
+  .brand__tagline {
+    display: none;
+  }
+
+  .home-nav,
+  .service-desk__summary,
+  .exit-menu__summary {
+    padding-inline: 10px;
+  }
+
+  .service-desk__summary,
+  .exit-menu__summary {
+    padding-inline-start: 28px;
+  }
+
+  .home-nav__label,
+  .service-desk__label,
+  .exit-menu__label {
+    font-size: clamp(23px, 3.25vw, 30px);
+  }
+
+  .home-nav__arrow {
+    width: 29px;
+    height: 29px;
+  }
+
+  .exit-menu__hint {
+    font-size: 11px;
+  }
+}
+
+/* —— 阅读收束：桌面精细指针下压成窄条 —— */
+
+@media (min-width: 761px) and (hover: hover) and (pointer: fine) {
+  html[data-header-compact]:not([data-header-hover-expanded]) .site-header {
+    width: min(520px, calc(100% - 40px));
+    min-height: 56px;
+    grid-template-columns: minmax(148px, 1fr) minmax(0, 1fr) max-content 56px 56px;
+    transition:
+      width var(--duration-header-layout-contract) var(--motion-header-layout-contract),
+      min-height var(--duration-header-layout-contract) var(--motion-header-layout-contract);
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .brand {
+    gap: 10px;
+    padding-inline: 18px;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .brand__mark {
+    width: 30px;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .brand__name {
+    font-size: 22px;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .brand__tagline {
+    display: none;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .exit-menu,
+  html[data-header-compact]:not([data-header-hover-expanded]) .home-nav {
+    display: none;
+  }
+
+  /* 中等宽度隐藏了留白格；紧凑网格按五列排，必须把它放回来，否则信号和图标都会错一列。 */
+  html[data-header-compact]:not([data-header-hover-expanded]) .site-header__spacer {
+    display: block;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .home-nav-compact-signal {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    gap: 2px;
+    height: 16px;
+    margin-inline: 18px 24px;
+    pointer-events: none;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .home-nav-compact-signal__route {
+    display: flex;
+    gap: 2px;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .home-nav-compact-signal__dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--home-nav-line-color, var(--color-home-line));
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded])
+    .home-nav-compact-signal__dot--secondary {
+    display: none;
+  }
+
+  html[data-header-compact]:not(
+      [data-header-hover-expanded]
+    )[data-home-nav-indicator-pattern="double"]
+    .home-nav-compact-signal__route[data-home-nav-signal="session"]
+    .home-nav-compact-signal__dot--secondary {
+    display: block;
+    background: var(--home-nav-line-color-secondary);
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .service-desk {
+    min-width: 56px;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .service-desk__summary {
+    min-height: 56px;
+    padding: 0;
+    place-items: center;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .service-desk__direction {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    place-items: center;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .service-desk__copy {
+    display: none;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .service-desk__information {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    transition-delay: 0ms;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .compact-exit-menu {
+    position: relative;
+    display: block;
+    min-width: 56px;
+    align-self: stretch;
+    background: var(--color-exit);
+    color: var(--color-exit-text);
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .compact-exit-menu__summary {
+    display: grid;
+    width: 56px;
+    min-height: 56px;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded])
+    .compact-exit-menu__summary:focus-visible {
+    outline: 3px solid var(--color-exit-text);
+    outline-offset: -3px;
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded])
+    .compact-exit-menu__summary:active
+    .compact-exit-menu__icon {
+    transform: translateY(1px);
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded])
+    .compact-exit-menu[open]
+    .compact-exit-menu__summary {
+    background: color-mix(in srgb, currentColor 10%, transparent);
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .compact-exit-menu__icon {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    transition: transform var(--duration-header-press) var(--motion-header-standard-spatial);
+  }
+
+  html[data-header-compact]:not([data-header-hover-expanded]) .compact-exit-menu__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* 内容先退场、外壳再变形、目标内容最后入场，避免不同密度的文字与图标在同一帧互相覆盖。 */
+  .home-nav__primary,
+  .service-desk__direction,
+  .exit-menu,
+  .home-nav__indicator,
+  .home-nav-compact-signal,
+  .service-desk__information,
+  .compact-exit-menu {
+    transition: opacity var(--duration-header-content-handoff) linear;
+  }
+
+  .home-nav__primary {
+    transition:
+      transform var(--duration-header-press) var(--motion-header-standard-spatial),
+      opacity var(--duration-header-content-handoff) linear;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:not([data-header-content-phase]) .service-desk__information {
+      transition:
+        width 180ms var(--motion-header-standard-spatial),
+        margin-inline-start 180ms var(--motion-header-standard-spatial),
+        opacity var(--duration-header-standard-effects) var(--motion-header-standard-effects),
+        transform var(--duration-header-standard-effects) var(--motion-header-standard-spatial),
+        visibility 0ms linear 180ms;
+    }
+  }
+
+  html[data-header-content-phase="contracting"] .home-nav__primary,
+  html[data-header-content-phase="contracting"] .service-desk__direction,
+  html[data-header-content-phase="contracting"] .exit-menu,
+  html[data-header-content-phase="contracting"] .home-nav-compact-signal,
+  html[data-header-content-phase="contracting"] .compact-exit-menu,
+  html[data-header-content-phase="expanding"] .home-nav__indicator,
+  html[data-header-content-phase="expanding"] .home-nav-compact-signal,
+  html[data-header-content-phase="expanding"] .service-desk__information,
+  html[data-header-content-phase="expanding"] .compact-exit-menu {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  html[data-header-content-phase="compact-entering"]:not([data-header-content-ready])
+    .home-nav__indicator,
+  html[data-header-content-phase="compact-entering"]:not([data-header-content-ready])
+    .home-nav-compact-signal,
+  html[data-header-content-phase="compact-entering"]:not([data-header-content-ready])
+    .service-desk__information,
+  html[data-header-content-phase="compact-entering"]:not([data-header-content-ready])
+    .compact-exit-menu,
+  html[data-header-content-phase="expanded-entering"]:not([data-header-content-ready])
+    .home-nav__primary,
+  html[data-header-content-phase="expanded-entering"]:not([data-header-content-ready])
+    .service-desk__direction,
+  html[data-header-content-phase="expanded-entering"]:not([data-header-content-ready]) .exit-menu {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  html[data-header-content-phase="contracting"] .compact-exit-menu,
+  html[data-header-compact][data-header-content-phase="compact-entering"]:not(
+      [data-header-content-ready]
+    )
+    .compact-exit-menu {
+    position: absolute;
+    inset: 0 0 0 auto;
+    display: block;
+    width: 56px;
+    min-width: 56px;
+    align-self: stretch;
+    visibility: hidden;
+  }
+
+  html[data-header-content-phase="contracting"] .home-nav,
+  html[data-header-content-phase="contracting"] .service-desk__summary,
+  html[data-header-content-phase="expanding"] .home-nav,
+  html[data-header-content-phase="expanding"] .service-desk__summary,
+  html[data-header-content-phase="compact-entering"]:not([data-header-content-ready]) .home-nav,
+  html[data-header-content-phase="compact-entering"]:not([data-header-content-ready])
+    .service-desk__summary,
+  html[data-header-content-phase="expanded-entering"]:not([data-header-content-ready]) .home-nav,
+  html[data-header-content-phase="expanded-entering"]:not([data-header-content-ready])
+    .service-desk__summary {
+    pointer-events: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html[data-header-compact]:not([data-header-hover-expanded]) .compact-exit-menu__summary:hover {
+      background: color-mix(in srgb, currentColor 10%, transparent);
+    }
+  }
+}
+
+/* —— 小屏：品牌 + 三个 44px 触发牌，主导航收进“更多” —— */
+
+@media (max-width: 760px) {
+  .site-header {
+    top: calc(12px + env(safe-area-inset-top));
+    right: calc(12px + env(safe-area-inset-right));
+    left: calc(12px + env(safe-area-inset-left));
+    width: auto;
+    min-height: 56px;
+    transform: none;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .site-header::before {
+    height: calc(12px + env(safe-area-inset-top));
+  }
+
+  .brand {
+    gap: 10px;
+    padding-inline: 16px;
+  }
+
+  .brand__mark {
+    width: 30px;
+  }
+
+  .brand__name {
+    font-size: 22px;
+  }
+
+  .brand__tagline {
+    display: none;
+  }
+
+  .site-header__spacer {
+    display: none;
+  }
+
+  .mobile-header-tools {
+    display: grid;
+    grid-auto-columns: 44px;
+    grid-auto-flow: column;
+    align-self: stretch;
+    gap: 2px;
+    justify-self: end;
+  }
+
+  .mobile-header-tool {
+    position: static;
+    min-width: 0;
+  }
+
+  .mobile-header-tool--service {
+    background: var(--color-service);
+    color: var(--color-service-text);
+  }
+
+  .mobile-header-tool--destination {
+    background: var(--color-exit);
+    color: var(--color-exit-text);
+  }
+
+  .mobile-header-tool__summary {
+    display: grid;
+    width: 44px;
+    height: 100%;
+    min-height: 56px;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .mobile-header-tool__summary:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: -3px;
+  }
+
+  .mobile-header-tool__summary:active .mobile-header-tool__icon {
+    transform: translateY(1px);
+  }
+
+  .mobile-header-tool__icon {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    transition: transform var(--duration-header-press) var(--motion-header-standard-spatial);
+  }
+
+  .mobile-header-tool__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mobile-header-tool__menu {
+    max-height: calc(100svh - 80px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .home-nav,
+  .service-desk,
+  .exit-menu {
+    display: none;
+  }
+}

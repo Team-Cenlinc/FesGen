@@ -1,0 +1,218 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+html[data-appearance="light"] {
+  color-scheme: light;
+}
+
+html[data-appearance="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--font-fetarute-ui);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* 焦点框：2px 文字色实线加 2px 间隙，清楚但不压住控件本身。 */
+:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/*
+ * 中西混排的短标签（TypeText）。外层按需设置 --type-cjk-weight、--type-latin-size；
+ * 没设的变量让声明失效，属性回到继承值，所以普通文本不受影响。
+ */
+.type-cjk {
+  font-weight: var(--type-cjk-weight);
+}
+
+.type-latin {
+  font-size: var(--type-latin-size);
+}
+
+/* Noto Sans Display 的 × 高 0.45em、居中在数字中线上；放大到数字的四分之三高，再压回中线。 */
+.type-times {
+  margin-inline: 0.04em;
+  font-size: 1.2em;
+  line-height: 0;
+  vertical-align: -0.06em;
+}
+
+/* 两个步进器之间的乘号（地图格子选择器、编辑器的地图画格子），放大到和步进器里的数字相称。 */
+.times-separator {
+  font-family: var(--font-fetarute-display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-muted);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/*
+ * 按钮是一块小牌子：2px 牌框，按下时轻微缩小。
+ * 主操作用反白的牌面（文字色底），不占用任何线路色。
+ */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  border: var(--border-plate);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-feedback) ease,
+    color var(--duration-feedback) ease,
+    transform var(--duration-press) var(--ease-out);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.button--primary {
+  background: var(--color-action);
+  border-color: var(--color-action);
+  color: var(--color-action-text);
+}
+
+.button--small {
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background: color-mix(in srgb, var(--color-text) 7%, var(--color-surface));
+  }
+
+  .button--primary:hover {
+    background: color-mix(in srgb, var(--color-action) 84%, var(--color-surface));
+  }
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-muted);
+}
+
+.input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface-raised);
+  transition: border-color var(--duration-feedback) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .input:hover {
+    border-color: color-mix(in srgb, var(--color-text) 45%, var(--color-border));
+  }
+}
+
+/* 输入框聚焦时换成牌框，不另加外圈。 */
+.input:focus-visible {
+  border-color: var(--color-text);
+  outline: 1px solid var(--color-text);
+  outline-offset: 0;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: var(--color-surface);
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+/* 提示条：左侧竖条标出状态，正文用普通文字色，保证可读。 */
+.notice {
+  padding: 8px 12px;
+  border-left: 4px solid var(--notice-color);
+  background: color-mix(in srgb, var(--notice-color) 10%, transparent);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.notice--ok {
+  --notice-color: var(--color-status-ok);
+}
+
+.notice--caution {
+  --notice-color: var(--color-status-caution);
+}
+
+.notice--error {
+  --notice-color: var(--color-status-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:active {
+    transform: none;
+  }
+}
