@@ -237,6 +237,17 @@ describe("FTA 车站牌：排版", () => {
     expect(box.height).toBeGreaterThan(110);
   });
 
+  it("第二语言贴着色带：基线离色带 12，等于中文和第二语言之间的间距", () => {
+    const tree = layout({ ...transfer(), lines: transfer().lines.slice(0, 1) }, 600, 200);
+    const name = tree.modules[M.stationName]!;
+    // 选中框下沿 = 第二语言基线 + 0.14 × 字号（26）。
+    const baseline = name.y + name.height - 0.14 * 26;
+    expect(200 - 46 - baseline).toBeCloseTo(12, 0);
+    // Logo 说明文字和第二语言同一基线，选中框下沿对齐。
+    const logo = tree.modules[M.logo]!;
+    expect(Math.abs(logo.y + logo.height - (name.y + name.height))).toBeLessThan(2);
+  });
+
   it("站号块上下留白相等，边缘落在整像素上", () => {
     for (const [width, height] of [
       [384, 128],

@@ -214,8 +214,10 @@ function layoutStation({
     const capSize = 16;
     const capWidth = caption ? canvas.measure(FTA_FONT.regular, caption, capSize) : 0;
     const regionTop = 16;
-    const enBase = bandY - 16 - 0.22 * 26;
-    const cnBottom = enBase - CAP * 26 - 12;
+    // 第二语言的基线离色带 12，和中文与第二语言之间的间距相同，站名组贴着色带。
+    const nameGap = 12;
+    const enBase = bandY - nameGap;
+    const cnBottom = enBase - CAP * 26 - nameGap;
     const fill = (cnBottom - regionTop) / 0.94;
     const logoH = Math.min(56, Math.max(36, 0.5 * fill));
     const logoW = (logoH * FTA_MARK_WIDTH) / FTA_MARK_HEIGHT;
@@ -430,13 +432,14 @@ function layoutPillar({
   } else {
     // —— 横版：站名组撑满宽度，在线路行上方的区域里上下居中 ——
     const top = 14;
-    const bottom = rowsY - 10;
     const width = dw - 2 * M - (showLogo ? logoW + 10 : 0);
+    // 同站名牌：第二语言基线离线路行的距离等于中文与第二语言之间的间距。
+    const nameGap = 9;
     let enSize = 20;
-    const enBase = bottom - 0.22 * enSize;
+    const enBase = rowsY - nameGap;
     const enWidth = canvas.measure(enFont, c.station.secondary, enSize);
     if (enWidth > width) enSize = Math.max(10 / s, (enSize * width) / enWidth);
-    const cnBottom = enBase - CAP * 20 - 9.2;
+    const cnBottom = enBase - CAP * 20 - nameGap;
     let cnSize = (cnBottom - top) / 0.94;
     const cnWidth = canvas.measure(FTA_FONT.name, c.station.name, cnSize);
     if (cnWidth > width) cnSize = (cnSize * width) / cnWidth;
