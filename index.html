@@ -1,1 +1,43 @@
-<!DOCTYPE html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/FesGen/favicon.ico"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons"><link href="https://cdn.jsdelivr.net/npm/source-sans-pro@3.6.0/source-sans-pro.min.css" rel="stylesheet"><title>FesGen</title><link href="/FesGen/css/app.fd9046cb.css" rel="preload" as="style"><link href="/FesGen/css/chunk-vendors.c80edb67.css" rel="preload" as="style"><link href="/FesGen/js/app.7c6292d7.js" rel="preload" as="script"><link href="/FesGen/js/chunk-vendors.7e9e8753.js" rel="preload" as="script"><link href="/FesGen/css/chunk-vendors.c80edb67.css" rel="stylesheet"><link href="/FesGen/css/app.fd9046cb.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but FesGen doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="/FesGen/js/chunk-vendors.7e9e8753.js"></script><script src="/FesGen/js/app.7c6292d7.js"></script></body></html>
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/FesGen/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/FesGen/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/FesGen/apple-touch-icon.png" />
+    <meta
+      name="theme-color"
+      content="#F0F1F0"
+      media="(prefers-color-scheme: light)"
+      data-color-scheme="light"
+    />
+    <meta
+      name="theme-color"
+      content="#111416"
+      media="(prefers-color-scheme: dark)"
+      data-color-scheme="dark"
+    />
+    <title>FesGen</title>
+    <script>
+      // 在首帧前恢复用户选择的外观，避免深色模式下先闪一下浅色。
+      try {
+        const appearance = localStorage.getItem("fesgen.appearance");
+        if (appearance === "light" || appearance === "dark") {
+          document.documentElement.dataset.appearance = appearance;
+          // 浏览器工具栏也跟着手动外观走；颜色与 useAppearance.ts 的 THEME_COLORS 一致。
+          const color = { light: "#F0F1F0", dark: "#111416" }[appearance];
+          document
+            .querySelectorAll('meta[name="theme-color"]')
+            .forEach((meta) => meta.setAttribute("content", color));
+        }
+      } catch {}
+    </script>
+    <script type="module" crossorigin src="/FesGen/assets/index-DOfI5ryC.js"></script>
+    <link rel="stylesheet" crossorigin href="/FesGen/assets/index-D8fyXeMI.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
