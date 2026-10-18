@@ -7,7 +7,7 @@ import { useCopyText } from "@/composables/useCopyText";
 import { format, messages as m } from "@/i18n";
 import { exportSignJson } from "@/library/io";
 import { gridLabel, gridPixelSize } from "@/mapart/grid";
-import { imageFrameCreateCommand, signImageFrameFallback } from "@/mapart/imageFrame";
+import { imageFrameCreateCommand, signImageFrameName } from "@/mapart/imageFrame";
 import { encodePng } from "@/mapart/raster";
 import { signToBlob, signToMapArt } from "@/signs/rasterize";
 import { renderTreeToSvg, type RenderTree } from "@/signs/render";
@@ -47,9 +47,9 @@ const outputSize = computed(
   () =>
     `${Math.round(props.tree.width * scale.value)} × ${Math.round(props.tree.height * scale.value)} px`,
 );
-// 牌子名多半是汉字，清洗后会是空的；退回带牌子 id 的名字，不同的牌子不会抢同一个地图名。
+// 地图名带上牌子 id，不同的牌子不会抢同一个地图名（见 signImageFrameName）。
 const command = computed(() =>
-  imageFrameCreateCommand(props.doc.name, "", mapGrid.value, signImageFrameFallback(props.doc.id)),
+  imageFrameCreateCommand(signImageFrameName(props.doc.name, props.doc.id), "", mapGrid.value),
 );
 
 async function download() {
