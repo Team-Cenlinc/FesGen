@@ -212,6 +212,7 @@ export const zhHans = {
       imageUrl: "图片链接",
       copy: "复制",
       copied: "已复制",
+      copyFailed: "浏览器不允许访问剪贴板，命令已经选中，按 ⌘C 或 Ctrl+C 复制。",
     },
   },
 } as const;

@@ -3,6 +3,7 @@ import { PhCheck, PhCopy, PhDownloadSimple, PhX } from "@phosphor-icons/vue";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import SegmentedControl from "@/components/SegmentedControl.vue";
 import TypeText from "@/components/TypeText.vue";
+import { useCopyText } from "@/composables/useCopyText";
 import { format, messages as m } from "@/i18n";
 import { exportSignJson } from "@/library/io";
 import { gridLabel, gridPixelSize } from "@/mapart/grid";
@@ -37,7 +38,6 @@ const quality = ref(92);
 const fileName = ref(safeFileName(props.doc.name));
 const busy = ref(false);
 const error = ref<string | null>(null);
-const copied = ref(false);
 
 const mapGrid = computed(() =>
   props.doc.size.mode === "grid" ? props.doc.size.grid : props.doc.mapArt.gridForFree,
@@ -111,12 +111,10 @@ async function download() {
   }
 }
 
-let copiedTimer: ReturnType<typeof setTimeout> | undefined;
-async function copyCommand() {
-  await navigator.clipboard.writeText(command.value);
-  copied.value = true;
-  clearTimeout(copiedTimer);
-  copiedTimer = setTimeout(() => (copied.value = false), 1500);
+const commandLine = ref<HTMLElement>();
+const { copied, failed: copyFailed, copy } = useCopyText();
+function copyCommand() {
+  return copy(command.value, commandLine.value);
 }
 
 function onKeyDown(event: KeyboardEvent) {
@@ -125,7 +123,6 @@ function onKeyDown(event: KeyboardEvent) {
 onMounted(() => document.addEventListener("keydown", onKeyDown));
 onBeforeUnmount(() => {
   document.removeEventListener("keydown", onKeyDown);
-  clearTimeout(copiedTimer);
 });
 </script>
 
@@ -193,7 +190,7 @@ onBeforeUnmount(() => {
           />
         </p>
         <div class="terminal">
-          <code class="terminal__line">{{ command }}</code>
+          <code ref="commandLine" class="terminal__line">{{ command }}</code>
           <button
             type="button"
             class="terminal__copy"
@@ -209,6 +206,9 @@ onBeforeUnmount(() => {
             {{ copied ? m.mapArt.export.copied : m.mapArt.export.copy }}
           </button>
         </div>
+        <p v-if="copyFailed" class="notice notice--caution" role="status">
+          {{ m.mapArt.export.copyFailed }}
+        </p>
       </template>
       <p v-else-if="formatChoice === 'svg'" class="hint">{{ m.exporting.svgHint }}</p>
       <p v-else class="hint">{{ m.exporting.jsonHint }}</p>

@@ -10,6 +10,7 @@ import PageTitle from "@/components/PageTitle.vue";
 import SegmentedControl from "@/components/SegmentedControl.vue";
 import StepSection from "@/components/StepSection.vue";
 import SwitchToggle from "@/components/SwitchToggle.vue";
+import { useCopyText } from "@/composables/useCopyText";
 import { messages as m } from "@/i18n";
 import { hexToRgb, rgbToHex } from "@/mapart/colors";
 import { placeSource, type FitMode } from "@/mapart/fit";
@@ -85,7 +86,6 @@ const working = ref(false);
 const fileNameOverride = ref<string | null>(null);
 const mapName = ref("fesgen");
 const imageUrl = ref("");
-const copied = ref(false);
 const downloadHint = ref(false);
 
 const suggested = computed(() => (source.value ? suggestGrid(source.value.size) : undefined));
@@ -178,16 +178,13 @@ async function download() {
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
-let copiedTimer: ReturnType<typeof setTimeout> | undefined;
-async function copyCommand() {
-  await navigator.clipboard.writeText(command.value);
-  copied.value = true;
-  clearTimeout(copiedTimer);
-  copiedTimer = setTimeout(() => (copied.value = false), 1500);
+const commandLine = ref<HTMLElement>();
+const { copied, failed: copyFailed, copy } = useCopyText();
+function copyCommand() {
+  return copy(command.value, commandLine.value);
 }
 
 onBeforeUnmount(() => {
-  clearTimeout(copiedTimer);
   source.value?.bitmap.close();
 });
 </script>
@@ -337,7 +334,7 @@ onBeforeUnmount(() => {
               </label>
             </div>
             <div class="terminal">
-              <code class="terminal__line">{{ command }}</code>
+              <code ref="commandLine" class="terminal__line">{{ command }}</code>
               <button
                 type="button"
                 class="terminal__copy"
@@ -353,6 +350,9 @@ onBeforeUnmount(() => {
                 {{ copied ? m.mapArt.export.copied : m.mapArt.export.copy }}
               </button>
             </div>
+            <p v-if="copyFailed" class="notice notice--caution" role="status">
+              {{ m.mapArt.export.copyFailed }}
+            </p>
           </div>
         </StepSection>
       </section>
