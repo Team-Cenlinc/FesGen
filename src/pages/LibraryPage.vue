@@ -3,19 +3,20 @@ import {
   PhCopy,
   PhGridNine,
   PhPencilSimple,
-  PhPlus,
   PhStack,
   PhTrash,
   PhUploadSimple,
 } from "@phosphor-icons/vue";
 import { nextTick, ref } from "vue";
 import { useRouter } from "vue-router";
+import CreateSignMenu from "@/components/CreateSignMenu.vue";
 import PageTitle from "@/components/PageTitle.vue";
 import TypeText from "@/components/TypeText.vue";
 import { messages as m } from "@/i18n";
 import { importSignJson } from "@/library/io";
 import { relativeTime, signMeta } from "@/library/labels";
 import { useLibrary } from "@/library/store";
+import type { SignStyleId } from "@/signs/types";
 
 const library = useLibrary();
 const router = useRouter();
@@ -26,8 +27,8 @@ const renamingId = ref<string | null>(null);
 const renameDraft = ref("");
 const confirmingDeleteId = ref<string | null>(null);
 
-function createSign() {
-  const sign = library.create("kitajuku-dentetsu");
+function createSign(style: SignStyleId) {
+  const sign = library.create(style);
   router.push(`/sign/${sign.id}`);
 }
 
@@ -66,10 +67,7 @@ function finishRename() {
     </PageTitle>
 
     <div class="library__toolbar">
-      <button type="button" class="button button--primary" @click="createSign">
-        <PhPlus :size="18" weight="bold" aria-hidden="true" />
-        {{ m.library.create }}
-      </button>
+      <CreateSignMenu @create="createSign" />
       <button type="button" class="button" @click="importInput?.click()">
         <PhUploadSimple :size="18" weight="bold" aria-hidden="true" />
         {{ m.library.import }}
@@ -96,10 +94,7 @@ function finishRename() {
       <h2 class="library__empty-title">{{ m.library.emptyTitle }}</h2>
       <p>{{ m.library.emptyBody }}</p>
       <div class="library__empty-actions">
-        <button type="button" class="button button--primary" @click="createSign">
-          <PhPlus :size="18" weight="bold" aria-hidden="true" />
-          {{ m.library.create }}
-        </button>
+        <CreateSignMenu @create="createSign" />
         <RouterLink to="/map-art" class="button">
           <PhGridNine :size="18" weight="bold" aria-hidden="true" />
           {{ m.library.openMapArt }}
