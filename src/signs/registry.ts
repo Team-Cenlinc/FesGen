@@ -1,10 +1,12 @@
 import { gridPixelSize, type Size } from "@/mapart/grid";
+import { ftaStationStyle } from "./fta/station";
 import { kitajukuStyle } from "./kitajuku";
 import type { SignSize, SignStyle, SignStyleId } from "./types";
 
 /** 所有已实现的样式。加新样式时在这里登记，其余代码只认这张表。 */
 export const SIGN_STYLES: Readonly<Record<SignStyleId, SignStyle<unknown>>> = {
   "kitajuku-dentetsu": kitajukuStyle as SignStyle<unknown>,
+  "FTA-station": ftaStationStyle as SignStyle<unknown>,
 };
 
 export function isSignStyleId(value: unknown): value is SignStyleId {

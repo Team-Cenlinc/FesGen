@@ -78,11 +78,11 @@ describe("导入导出", () => {
     expect(result.ok).toBe(true);
   });
 
-  it("FTA、测试牌和无法识别的文件给出明确提示", () => {
-    const fta = importSignJson(
-      JSON.stringify({ configVersion: "beta-v0.1.1", signStyle: "FTA-station" }),
+  it("FTA 导视牌、测试牌和无法识别的文件给出明确提示", () => {
+    const guide = importSignJson(
+      JSON.stringify({ configVersion: "beta-v0.1.1", signStyle: "FTA-guide" }),
     );
-    expect(fta).toEqual({ ok: false, message: expect.stringContaining("正在重做") });
+    expect(guide).toEqual({ ok: false, message: expect.stringContaining("正在重做") });
     const test = importSignJson(
       JSON.stringify({ configVersion: "beta-v0.1.1", signStyle: "test-sign" }),
     );

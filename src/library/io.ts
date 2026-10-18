@@ -69,9 +69,24 @@ export function importSignJson(text: string, now = Date.now()): ImportResult {
           },
         };
       }
-      case "FTA-station":
+      case "FTA-station": {
+        const style = getSignStyle("FTA-station");
+        const migrated = style.fromLegacy(value);
+        const base = createSign("FTA-station", now);
+        return {
+          ok: true,
+          legacy: true,
+          sign: {
+            ...base,
+            name: style.title?.(migrated.content) || base.name,
+            size: migrated.size,
+            lighting: migrated.lighting,
+            content: migrated.content,
+          },
+        };
+      }
       case "FTA-guide":
-        return { ok: false, message: "FTA 车站牌和导视牌正在重做，暂时还不能导入旧文件。" };
+        return { ok: false, message: "FTA 导视牌正在重做，暂时还不能导入旧文件。" };
       case "test-sign":
         return { ok: false, message: "“测试用”样式已经停用，这个文件没有可以导入的内容。" };
       default:

@@ -4,8 +4,8 @@ import type { FitMode } from "@/mapart/fit";
 import type { MapGrid, Size } from "@/mapart/grid";
 import type { RenderTree } from "./render";
 
-/** 已实现的牌子样式。FTA 两种重做完再加进来。 */
-export type SignStyleId = "kitajuku-dentetsu";
+/** 已实现的牌子样式。FTA 导视牌重做完再加进来。 */
+export type SignStyleId = "kitajuku-dentetsu" | "FTA-station";
 
 /** 灯光效果：通过改背景实现的灯箱美化与仿真。 */
 export type Lighting = "none" | "fluore" | "led";
