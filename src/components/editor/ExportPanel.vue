@@ -6,7 +6,7 @@ import TypeText from "@/components/TypeText.vue";
 import { format, messages as m } from "@/i18n";
 import { exportSignJson } from "@/library/io";
 import { gridLabel, gridPixelSize } from "@/mapart/grid";
-import { imageFrameCreateCommand } from "@/mapart/imageFrame";
+import { imageFrameCreateCommand, signImageFrameFallback } from "@/mapart/imageFrame";
 import { encodePng } from "@/mapart/raster";
 import { signToBlob, signToMapArt } from "@/signs/rasterize";
 import { renderTreeToSvg, type RenderTree } from "@/signs/render";
@@ -47,7 +47,10 @@ const outputSize = computed(
   () =>
     `${Math.round(props.tree.width * scale.value)} × ${Math.round(props.tree.height * scale.value)} px`,
 );
-const command = computed(() => imageFrameCreateCommand(props.doc.name, "", mapGrid.value));
+// 牌子名多半是汉字，清洗后会是空的；退回带牌子 id 的名字，不同的牌子不会抢同一个地图名。
+const command = computed(() =>
+  imageFrameCreateCommand(props.doc.name, "", mapGrid.value, signImageFrameFallback(props.doc.id)),
+);
 
 async function download() {
   busy.value = true;
