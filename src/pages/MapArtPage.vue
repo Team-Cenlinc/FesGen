@@ -34,6 +34,7 @@ import {
   sampleCornerColor,
   type Padding,
 } from "@/mapart/raster";
+import { downloadBlob } from "@/utils/download";
 
 interface Source {
   bitmap: ImageBitmap;
@@ -168,14 +169,10 @@ async function download() {
     downloadHint.value = true;
     return;
   }
-  const blob = await encodePng(result.value.image);
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `${fileName.value.trim() || defaultFileName.value}.png`;
-  link.click();
-  // 立刻回收会让部分浏览器的下载失败，留够时间再释放。
-  setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  downloadBlob(
+    await encodePng(result.value.image),
+    `${fileName.value.trim() || defaultFileName.value}.png`,
+  );
 }
 
 const commandLine = ref<HTMLElement>();

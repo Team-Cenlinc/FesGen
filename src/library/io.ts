@@ -53,26 +53,11 @@ export function importSignJson(text: string, now = Date.now()): ImportResult {
 
   if (value.configVersion === "beta-v0.1.1") {
     switch (value.signStyle) {
-      case "kitajuku-dentetsu": {
-        const migrated = getSignStyle("kitajuku-dentetsu").fromLegacy(value);
-        const base = createSign("kitajuku-dentetsu", now);
-        const content = migrated.content as { station?: { chinese?: string } };
-        return {
-          ok: true,
-          legacy: true,
-          sign: {
-            ...base,
-            name: content.station?.chinese || base.name,
-            size: migrated.size,
-            lighting: migrated.lighting,
-            content: migrated.content,
-          },
-        };
-      }
+      case "kitajuku-dentetsu":
       case "FTA-station": {
-        const style = getSignStyle("FTA-station");
+        const style = getSignStyle(value.signStyle);
         const migrated = style.fromLegacy(value);
-        const base = createSign("FTA-station", now);
+        const base = createSign(value.signStyle, now);
         return {
           ok: true,
           legacy: true,

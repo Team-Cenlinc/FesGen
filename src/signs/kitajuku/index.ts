@@ -126,5 +126,6 @@ export const kitajukuStyle: SignStyle<KitajukuContent> = {
   applyAction(content, actionId) {
     return actionId === SWAP_NEIGHBORS.id ? swapNeighbors(content) : content;
   },
+  title: (content) => content.station.chinese,
   fromLegacy: migrateLegacyKitajuku,
 };
