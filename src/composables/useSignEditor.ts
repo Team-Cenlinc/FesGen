@@ -193,11 +193,21 @@ export function useSignEditor(id: string) {
   const fontsDownloading = ref(false);
   const fontsError = ref<string | null>(null);
 
+  /**
+   * 样式的 fonts() 每次内容变化都会返回一个新数组；按字体编号拼成的字符串来判断，
+   * 只有所需字体真的变了才去查缓存，不会每打一个字就读一次 Cache Storage。
+   */
+  const requiredKey = computed(() => requiredFonts.value.join(","));
+  let fontsRun = 0;
   watch(
-    requiredFonts,
-    async (ids) => {
+    requiredKey,
+    async () => {
+      const run = ++fontsRun;
       fontsChecking.value = true;
-      missingFonts.value = await loadCachedFonts(ids);
+      const missing = await loadCachedFonts(requiredFonts.value);
+      // 连续切换选项时只采用最后一次查询的结果，先发后到的旧结果直接丢掉。
+      if (run !== fontsRun) return;
+      missingFonts.value = missing;
       fontsChecking.value = false;
     },
     { immediate: true },
@@ -272,10 +282,15 @@ export function useSignEditor(id: string) {
   const fallbackToDownload = ref<FontId[]>([]);
   const fallbackDownloading = ref(false);
   const fallbackError = ref<string | null>(null);
+  const fallbackKey = computed(() => fallbackCandidates.value.join(","));
+  let fallbackRun = 0;
   watch(
-    fallbackCandidates,
-    async (ids) => {
-      fallbackToDownload.value = ids.length > 0 ? await loadCachedFonts(ids) : [];
+    fallbackKey,
+    async () => {
+      const run = ++fallbackRun;
+      const ids = fallbackCandidates.value;
+      const toDownload = ids.length > 0 ? await loadCachedFonts(ids) : [];
+      if (run === fallbackRun) fallbackToDownload.value = toDownload;
     },
     { immediate: true },
   );
