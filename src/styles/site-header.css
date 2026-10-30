@@ -263,22 +263,6 @@ html[data-home-nav-indicator-pattern="double"]
   content: "";
 }
 
-/*
- * 当前页的色点是实心，其余是同色空心圈。网站导航没有当前页状态，
- * FesGen 是在几个页面间来回切换的工具，需要从页头看出身在哪一页。
- */
-.home-nav:not([aria-current="page"]) .home-nav__indicator-dot {
-  background: transparent;
-  box-shadow: inset 0 0 0 3px currentColor;
-}
-
-html[data-home-nav-indicator-pattern="double"]
-  .home-nav[data-home-nav-signal="session"]:not([aria-current="page"])
-  .home-nav__indicator-dot::after {
-  background: transparent;
-  box-shadow: inset 0 0 0 3px var(--home-nav-line-color-secondary);
-}
-
 html[data-home-nav-indicator-pattern="double"]
   .home-nav[data-home-nav-signal="session"]
   .home-nav__indicator-band {
