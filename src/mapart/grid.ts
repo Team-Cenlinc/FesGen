@@ -19,6 +19,7 @@ export const GRID_PRESETS: readonly MapGrid[] = [
   { rows: 1, columns: 2 },
   { rows: 1, columns: 3 },
   { rows: 1, columns: 4 },
+  { rows: 2, columns: 1 },
   { rows: 2, columns: 2 },
   { rows: 2, columns: 3 },
   { rows: 2, columns: 4 },
