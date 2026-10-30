@@ -1,4 +1,5 @@
 import { gridPixelSize, type Size } from "@/mapart/grid";
+import { ftaPlatformStyle } from "./fta/platform";
 import { ftaStationStyle } from "./fta/station";
 import { kitajukuStyle } from "./kitajuku";
 import type { SignSize, SignStyle, SignStyleId } from "./types";
@@ -7,6 +8,7 @@ import type { SignSize, SignStyle, SignStyleId } from "./types";
 export const SIGN_STYLES: Readonly<Record<SignStyleId, SignStyle<unknown>>> = {
   "kitajuku-dentetsu": kitajukuStyle as SignStyle<unknown>,
   "FTA-station": ftaStationStyle as SignStyle<unknown>,
+  "FTA-platform": ftaPlatformStyle as SignStyle<unknown>,
 };
 
 export function isSignStyleId(value: unknown): value is SignStyleId {

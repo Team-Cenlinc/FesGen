@@ -39,7 +39,7 @@ export const ADD_LINE_ACTION = "add-line";
 const ITALIC_SKEW = 12;
 
 /** 站号：代号加序号，例如 WS-01。纯数字的一位序号补成两位。 */
-export function stationCode(line: FtaLine): string {
+export function stationCode(line: Pick<FtaLine, "code" | "number">): string {
   const number = /^\d$/.test(line.number) ? `0${line.number}` : line.number;
   if (!line.code) return number;
   if (!number) return line.code;

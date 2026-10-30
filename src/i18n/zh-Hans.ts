@@ -54,7 +54,7 @@ export const zhHans = {
     comingSoon: "FTA 导视牌正在重做，之后会加进来。",
     emptyTitle: "开始做第一块牌子",
     emptyBody:
-      "新建一块北宿电铁站牌或 FTA 车站牌，或者导入旧版 FesGen 导出的 JSON。作品会自动保存在这个浏览器里。",
+      "新建一块北宿电铁站牌、FTA 车站牌或 FTA 站台牌，或者导入旧版 FesGen 导出的 JSON。作品会自动保存在这个浏览器里。",
     openMapArt: "或者先用地图画工具转换现成的图片",
     saveFailed: "作品库没能保存到浏览器，存储空间可能已满。导出 JSON 可以先把牌子另存下来。",
     imported: "已导入",
