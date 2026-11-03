@@ -54,6 +54,12 @@ export function luminance(hex: string): number {
   return rgbLuminance(hexToRgb(hex) ?? 0xffffff);
 }
 
+/** 两种颜色的 WCAG 对比度（1–21）。 */
+export function contrast(a: string, b: string): number {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((p, q) => q - p);
+  return (hi! + 0.05) / (lo! + 0.05);
+}
+
 /**
  * 线路色上的字用深色还是浅色：按线路色吸附到地图色板之后的亮度判断，低于 0.25 用浅色。
  * 不能按原色判断，比如 #E4007F 会被吸成浅粉，按原色选的白字在地图画里就看不见了。
@@ -265,7 +271,8 @@ export class FtaCanvas {
     });
   }
 
-  tree(background: string): RenderTree {
+  /** extra 是额外画在背景层里的色块（例如导视牌的面板底色），开灯光时和底色一起受渐变影响。 */
+  tree(background: string, extra: RenderNode[] = []): RenderTree {
     const root = (children: RenderNode[]): RenderNode[] => [
       { kind: "group", transform: `scale(${fmt(this.s)})`, children },
     ];
@@ -282,6 +289,7 @@ export class FtaCanvas {
           height: this.designHeight,
           fill: background,
         },
+        ...extra,
       ]),
       content: root(this.nodes),
       modules: this.modules,

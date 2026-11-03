@@ -1,5 +1,6 @@
 import { createPinia, setActivePinia } from "pinia";
 import { describe, expect, it } from "vitest";
+import { ftaGuidePanel, type FtaGuideContent } from "@/signs/fta/guide/content";
 import { kitajukuDefaults } from "@/signs/kitajuku/content";
 import { createSign, duplicateSign, normalizeSignDocument } from "./document";
 import { exportSignJson, importSignJson } from "./io";
@@ -55,6 +56,41 @@ describe("导入导出", () => {
     expect(result.sign.size).toEqual(sign.size);
   });
 
+  it("FTA 导视牌往返：面板、图标、自定义颜色、对齐和开关都保留，作品库读写也一样", () => {
+    const sign = createSign("FTA-guide");
+    const content = sign.content as FtaGuideContent;
+    sign.content = {
+      ...content,
+      background: "custom",
+      backgroundColor: "#123456",
+      dividers: false,
+      lineMark: "bar",
+      panels: [
+        ftaGuidePanel({
+          row: "2",
+          kind: "station",
+          tone: "custom",
+          color: "#7F3FB2",
+          align: "end",
+          valign: "bottom",
+          flip: true,
+          stationName: "海西路北",
+        }),
+        ftaGuidePanel({ exits: "A B2", icons: { toilet: true, ticket: true } as never }),
+      ],
+    };
+    sign.tweaks = { panels: { dx: 3, dy: -2, scale: 1.1, hidden: false } };
+    const result = importSignJson(exportSignJson(sign));
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.sign.content).toEqual(sign.content);
+    expect(result.sign.tweaks).toEqual(sign.tweaks);
+    const store = new Map<string, string>();
+    writeLibrary([sign], { setItem: (key, value) => void store.set(key, value) });
+    const [read] = readLibrary({ getItem: (key) => store.get(key) ?? null });
+    expect(read!.content).toEqual(sign.content);
+  });
+
   it("旧版北宿电铁文件迁移成新牌子，名字取本站名", () => {
     const result = importSignJson(
       JSON.stringify({
@@ -84,7 +120,7 @@ describe("导入导出", () => {
     const guide = importSignJson(
       JSON.stringify({ configVersion: "beta-v0.1.1", signStyle: "FTA-guide" }),
     );
-    expect(guide).toEqual({ ok: false, message: expect.stringContaining("正在重做") });
+    expect(guide).toEqual({ ok: false, message: expect.stringContaining("还不能导入") });
     const test = importSignJson(
       JSON.stringify({ configVersion: "beta-v0.1.1", signStyle: "test-sign" }),
     );

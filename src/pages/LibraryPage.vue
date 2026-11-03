@@ -80,7 +80,6 @@ function finishRename() {
         tabindex="-1"
         @change="onImport"
       />
-      <p class="hint">{{ m.library.comingSoon }}</p>
     </div>
 
     <p v-if="notice" class="notice" :class="`notice--${notice.kind}`" role="status">
@@ -188,10 +187,6 @@ function finishRename() {
   flex-wrap: wrap;
   align-items: center;
   gap: 10px 12px;
-}
-
-.library__toolbar .hint {
-  margin-left: 4px;
 }
 
 .library__empty {

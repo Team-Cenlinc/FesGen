@@ -71,7 +71,10 @@ export function importSignJson(text: string, now = Date.now()): ImportResult {
         };
       }
       case "FTA-guide":
-        return { ok: false, message: "FTA 导视牌正在重做，暂时还不能导入旧文件。" };
+        return {
+          ok: false,
+          message: "旧版 FTA 导视牌的结构和新版对不上，还不能导入；请在新版里用模板重新拼一块。",
+        };
       case "test-sign":
         return { ok: false, message: "“测试用”样式已经停用，这个文件没有可以导入的内容。" };
       default:
