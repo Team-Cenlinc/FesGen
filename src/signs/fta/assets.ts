@@ -65,3 +65,25 @@ export const FTA_LINE_PRESETS = [
   "#7F3FB2",
   "#4C7F99",
 ] as const;
+
+/** 新线路的颜色：取还没用过的预设色，都用过了就按线路数轮着取。 */
+export function nextLinePreset(usedColors: readonly string[]): string {
+  const used = new Set(usedColors.map((color) => color.toUpperCase()));
+  return (
+    FTA_LINE_PRESETS.find((preset) => !used.has(preset)) ??
+    FTA_LINE_PRESETS[usedColors.length % FTA_LINE_PRESETS.length]!
+  );
+}
+
+/**
+ * 整块铺满用的底色只能从这几种里选：都是地图色板里的原色，铺满也不会难看。
+ * 线路色不能当底色，因为用户填的线路色可能很刺眼或很脏。站台牌和导视牌共用。
+ */
+export const FTA_BACKGROUNDS = {
+  white: "#FFFFFF",
+  black: "#191919",
+  navy: "#24357D",
+  teal: "#167E86",
+  brick: "#8E3C2E",
+} as const;
+export type FtaBackground = keyof typeof FTA_BACKGROUNDS;

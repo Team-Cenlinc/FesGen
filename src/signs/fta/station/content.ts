@@ -1,7 +1,7 @@
 import { exactGrid } from "@/mapart/grid";
 import type { LegacyMigration, Lighting, SignSize } from "../../types";
 import { asArray, asBoolean, asChoice, asColor, asNumber, asRecord, asString } from "../../values";
-import { FTA_LINE_PRESETS, FTA_OPERATORS, type FtaOperator } from "../assets";
+import { FTA_LINE_PRESETS, FTA_OPERATORS, nextLinePreset, type FtaOperator } from "../assets";
 
 /** 一条经过本站的线路。 */
 export interface FtaLine {
@@ -67,10 +67,7 @@ export function ftaStationDefaults(): FtaStationContent {
 
 /** 新线路：颜色取还没用过的预设色，序号 01，代号和名字留空等用户填。 */
 export function newFtaLine(content: FtaStationContent): FtaLine {
-  const used = new Set(content.lines.map((line) => line.color.toUpperCase()));
-  const color =
-    FTA_LINE_PRESETS.find((preset) => !used.has(preset)) ??
-    FTA_LINE_PRESETS[content.lines.length % FTA_LINE_PRESETS.length]!;
+  const color = nextLinePreset(content.lines.map((line) => line.color));
   return { code: "", number: "01", name: "", secondary: "", color };
 }
 

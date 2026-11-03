@@ -1,6 +1,6 @@
 import type { LegacyMigration } from "../../types";
 import { asArray, asChoice, asColor, asRecord, asString } from "../../values";
-import { FTA_LINE_PRESETS } from "../assets";
+import { FTA_BACKGROUNDS, FTA_LINE_PRESETS, nextLinePreset, type FtaBackground } from "../assets";
 import { migrateLegacyFtaStation } from "../station/content";
 
 /** 一条经过本站的线路。站台牌只写线路主名，没有第二语言。 */
@@ -21,18 +21,9 @@ export interface FtaPlatformLine {
 export type FtaPlatformLook = "axis" | "minimal" | "frame";
 export const FTA_PLATFORM_LOOKS = ["axis", "minimal", "frame"] as const;
 
-/**
- * 底色只能从这几种里选：都是地图色板里的原色，整块铺满也不会难看。
- * 线路色不能当底色，因为用户填的线路色可能很刺眼或很脏。
- */
-export const FTA_PLATFORM_BACKGROUNDS = {
-  white: "#FFFFFF",
-  black: "#191919",
-  navy: "#24357D",
-  teal: "#167E86",
-  brick: "#8E3C2E",
-} as const;
-export type FtaPlatformBackground = keyof typeof FTA_PLATFORM_BACKGROUNDS;
+/** 站台牌的底色：FTA 共用的几种固定色，见 assets.ts。 */
+export const FTA_PLATFORM_BACKGROUNDS = FTA_BACKGROUNDS;
+export type FtaPlatformBackground = FtaBackground;
 const BACKGROUND_IDS = Object.keys(FTA_PLATFORM_BACKGROUNDS) as FtaPlatformBackground[];
 
 /** 版式：自动按宽高比选，横版用于 1×3 这类长条，竖版用于 2×1 这类柱子。 */
@@ -68,10 +59,7 @@ export function ftaPlatformDefaults(): FtaPlatformContent {
 
 /** 新线路：颜色取还没用过的预设色，序号 01，代号和名字留空等用户填。 */
 export function newFtaPlatformLine(content: FtaPlatformContent): FtaPlatformLine {
-  const used = new Set(content.lines.map((line) => line.color.toUpperCase()));
-  const color =
-    FTA_LINE_PRESETS.find((preset) => !used.has(preset)) ??
-    FTA_LINE_PRESETS[content.lines.length % FTA_LINE_PRESETS.length]!;
+  const color = nextLinePreset(content.lines.map((line) => line.color));
   return { code: "", number: "01", name: "", color };
 }
 

@@ -2,7 +2,7 @@ import type { FontId } from "@/fonts/stacks";
 import { fmt, unionBBox, type BBox, type RenderNode, type RenderTree } from "../../render";
 import type { LayoutInput } from "../../types";
 import { FTA_FONT } from "../fonts";
-import { FtaCanvas, inkOn, luminance } from "../kit";
+import { contrast, FtaCanvas, inkOn } from "../kit";
 import { stationCode } from "../station/layout";
 import {
   FTA_PLATFORM_BACKGROUNDS,
@@ -68,11 +68,6 @@ export function layoutFtaPlatform(input: LayoutInput<FtaPlatformContent>): Rende
   return resolvePlatformLayout(content.layout, size.width, size.height) === "vertical"
     ? layoutVertical(input)
     : layoutHorizontal(input);
-}
-
-function contrast(a: string, b: string): number {
-  const [hi, lo] = [luminance(a), luminance(b)].sort((p, q) => q - p);
-  return (hi! + 0.05) / (lo! + 0.05);
 }
 
 interface Ink {
